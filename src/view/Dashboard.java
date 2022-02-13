@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.time.LocalDate;
 
 public class Dashboard extends javax.swing.JFrame {
 
@@ -12,6 +14,25 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setSize(1000, 600);
+        
+        LocalDate now = LocalDate.now();
+        int year = now.getYear();
+        int dia = now.getDayOfMonth();
+        int month = now.getMonthValue();
+        String[] meses = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto"," ;Septiembre"
+            ,"Octubre","Noviembre","Diciemrbre"};
+        jLabel_Fecha.setText("Fecha: "+dia+" de "+meses[month - 1]+" de "+year);
+        
+        Principal p1 = new Principal();
+        p1.setSize(790, 470);
+        p1.setLocation(0,0);
+        
+        jPanel_Content.removeAll();
+        jPanel_Content.add(p1, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+        
+        Btn_Main.setBackground(new java.awt.Color(78,140,121));
         
     }
 
@@ -76,6 +97,9 @@ public class Dashboard extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 Btn_MainMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Btn_MainMousePressed(evt);
             }
         });
         Btn_Main.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -253,7 +277,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Name.setText("Name");
+        jLabel_Name.setText("Neifer Reveron");
         jPanel_Head.add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
 
         jLabel_Type_Account.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
@@ -264,8 +288,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Fecha.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_Fecha.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Fecha.setText("Fecha: 12/02/2022");
-        jPanel_Head.add(jLabel_Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 220, 40));
+        jLabel_Fecha.setText("Fecha:");
+        jPanel_Head.add(jLabel_Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 340, 40));
 
         jPanel_Background.add(jPanel_Head, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 35, 790, 100));
 
@@ -341,7 +365,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void Btn_MainMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMouseEntered
-        
+      
         Btn_Main.setBackground(new java.awt.Color(78,140,121));
         
     }//GEN-LAST:event_Btn_MainMouseEntered
@@ -423,6 +447,10 @@ public class Dashboard extends javax.swing.JFrame {
         Btn_Manage_Phone.setBackground(new java.awt.Color(78,120,121));
         
     }//GEN-LAST:event_Btn_Manage_PhoneMouseExited
+
+    private void Btn_MainMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMousePressed
+        
+    }//GEN-LAST:event_Btn_MainMousePressed
 
     /**
      * @param args the command line arguments

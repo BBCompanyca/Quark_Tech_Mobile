@@ -48,57 +48,57 @@ public class Principal extends javax.swing.JPanel {
         Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         Title.setForeground(new java.awt.Color(240, 240, 240));
         Title.setText("Bienvenido");
-        add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         Text1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         Text1.setForeground(new java.awt.Color(240, 240, 240));
         Text1.setText("Sistema de registro y gestion de información del servicio técnico ");
-        add(Text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        add(Text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));
         jLabel1.setText("del almacén de Quark Tech Mobile.");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(240, 240, 240));
         jLabel2.setText("Esta herramienta le permitirá llevar un control completo y detallado del estatus de los equipos,");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(240, 240, 240));
         jLabel3.setText("tendrá acceso a herramientas especiales para tareas específicas, como lo son:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(240, 240, 240));
         jLabel5.setText("• Registro De Usuarios.");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 190, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 190, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(240, 240, 240));
         jLabel6.setText("• Gestion De Usuarios.");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 170, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 170, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(240, 240, 240));
         jLabel7.setText("• Registro De Clientes.");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 320, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 320, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(240, 240, 240));
         jLabel8.setText("• Gestion De Clientes.");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 330, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 330, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(240, 240, 240));
         jLabel9.setText("• Registro De Equipos.");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 330, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 330, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(240, 240, 240));
         jLabel4.setText("• Gestion De Equipos.");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 330, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 330, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
