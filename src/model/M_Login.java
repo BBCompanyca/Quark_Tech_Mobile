@@ -24,6 +24,10 @@ public class M_Login {
         this.password = password;
     }
 
+    /*
+        Método para conectar con la base de datos y consultar los datos recibidos del controlador
+        para el inicio de sesión
+    */
     public Boolean Login() {
 
         try {
@@ -34,15 +38,8 @@ public class M_Login {
             
             ResultSet rs = pst.executeQuery();
             
-            if (rs.next()) {
-                
-                return true;
-                
-            } else {
-                
-                return false;
-                
-            }
+            //Respuesta de los datos de inicio de sesión...
+            return rs.next();
             
         } catch (SQLException e) {
             
