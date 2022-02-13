@@ -3,17 +3,20 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import model.M_Login;
+import view.Dashboard;
 import view.Login;
 
 public class C_Login implements ActionListener {
 
     private Login view;
     private M_Login model;
+    private Dashboard view_Adm;
 
-    public C_Login(Login view, M_Login model) {
+    public C_Login(Login view, M_Login model, Dashboard view_Adm) {
 
         this.view = view;
         this.model = model;
+        this.view_Adm = view_Adm;
         this.view.jButton_Acceder.addActionListener(this);
 
     }
@@ -39,7 +42,11 @@ public class C_Login implements ActionListener {
                 if (model.Login() == true) {
                     
                     //Respuesta cuando los datos enviados son correctos...
-                    view.jLabel_Anwser.setText("¡Exito!");
+                    view.dispose();
+                    view_Adm.setVisible(true);
+                    view_Adm.jLabel_Type_Account.setText(model.getType_Account());
+                    view_Adm.jLabel_Name.setText(model.getName());
+                    
                     
                 } else {
                     

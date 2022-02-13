@@ -6,8 +6,8 @@ import javax.swing.JOptionPane;
 
 public class M_Login {
 
-    private String username, password;
-
+    private String username, password, name, type_Account;
+    
     public String getUsername() {
         return username;
     }
@@ -24,6 +24,22 @@ public class M_Login {
         this.password = password;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType_Account() {
+        return type_Account;
+    }
+
+    public void setType_Account(String type_Account) {
+        this.type_Account = type_Account;
+    }
+    
     /*
         Método para conectar con la base de datos y consultar los datos recibidos del controlador
         para el inicio de sesión
@@ -39,7 +55,20 @@ public class M_Login {
             ResultSet rs = pst.executeQuery();
             
             //Respuesta de los datos de inicio de sesión...
-            return rs.next();
+            if (rs.next()) {
+                
+                setName(rs.getString("name_user"));
+                setType_Account(rs.getString("type_account"));
+                
+                return true;
+                
+            } else {
+                
+                return false;
+                
+            }
+            
+            
             
         } catch (SQLException e) {
             

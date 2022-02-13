@@ -253,12 +253,12 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Name.setText("Nefer Reverón");
+        jLabel_Name.setText("Name");
         jPanel_Head.add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
 
         jLabel_Type_Account.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_Type_Account.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Type_Account.setText("Administrador");
+        jLabel_Type_Account.setText("Type Account");
         jPanel_Head.add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jLabel_Fecha.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
@@ -486,8 +486,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_Fecha;
-    private javax.swing.JLabel jLabel_Name;
-    private javax.swing.JLabel jLabel_Type_Account;
+    public javax.swing.JLabel jLabel_Name;
+    public javax.swing.JLabel jLabel_Type_Account;
     private javax.swing.JLabel jLabel_background_Down;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel_Background;
