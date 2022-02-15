@@ -6,7 +6,15 @@ import javax.swing.JOptionPane;
 
 public class M_Login {
 
-    private String username, password, name, type_Account;
+    private String username, password, name, type_Account, ID;
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
     
     public String getUsername() {
         return username;
@@ -57,6 +65,7 @@ public class M_Login {
             //Respuesta de los datos de inicio de sesión...
             if (rs.next()) {
                 
+                setID(rs.getString("id_user"));
                 setName(rs.getString("name_user"));
                 setType_Account(rs.getString("type_account"));
                 

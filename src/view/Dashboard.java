@@ -41,6 +41,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel_Background = new javax.swing.JPanel();
+        jLabel_Footer = new javax.swing.JLabel();
         jLabel_background_Down = new javax.swing.JLabel();
         jPanel_Menu = new javax.swing.JPanel();
         Btn_Main = new javax.swing.JPanel();
@@ -73,6 +74,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Name = new javax.swing.JLabel();
         jLabel_Type_Account = new javax.swing.JLabel();
         jLabel_Fecha = new javax.swing.JLabel();
+        jLabel_ID = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel_Exit = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel_Content = new javax.swing.JPanel();
@@ -82,6 +85,12 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel_Background.setBackground(new java.awt.Color(9, 53, 69));
         jPanel_Background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel_Footer.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
+        jLabel_Footer.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Footer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Footer.setText("Creado Por @BBCompany.ca");
+        jPanel_Background.add(jLabel_Footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 1000, -1));
 
         jLabel_background_Down.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_background_Down.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Vectors .png"))); // NOI18N
@@ -122,6 +131,9 @@ public class Dashboard extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 Btn_Register_UserMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Btn_Register_UserMousePressed(evt);
             }
         });
         Btn_Register_User.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -277,8 +289,8 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Name.setText("Neifer Reveron");
-        jPanel_Head.add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
+        jLabel_Name.setText("name");
+        jPanel_Head.add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 55, -1, -1));
 
         jLabel_Type_Account.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_Type_Account.setForeground(new java.awt.Color(240, 240, 240));
@@ -289,7 +301,17 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Fecha.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Fecha.setText("Fecha:");
-        jPanel_Head.add(jLabel_Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 340, 40));
+        jPanel_Head.add(jLabel_Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 340, 40));
+
+        jLabel_ID.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel_ID.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_ID.setText("N°");
+        jPanel_Head.add(jLabel_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 55, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel3.setText("ID User:");
+        jPanel_Head.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 55, -1, -1));
 
         jPanel_Background.add(jPanel_Head, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 35, 790, 100));
 
@@ -327,10 +349,10 @@ public class Dashboard extends javax.swing.JFrame {
         );
         jPanel_ContentLayout.setVerticalGroup(
             jPanel_ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 370, Short.MAX_VALUE)
         );
 
-        jPanel_Background.add(jPanel_Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 135, 790, 470));
+        jPanel_Background.add(jPanel_Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 135, 790, 370));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -452,6 +474,20 @@ public class Dashboard extends javax.swing.JFrame {
         
     }//GEN-LAST:event_Btn_MainMousePressed
 
+    private void Btn_Register_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_UserMousePressed
+        
+        //Método para llamar a la interfaz de registrar usuarios...
+        Register_User p1 = new Register_User();
+        p1.setSize(790, 370);
+        p1.setLocation(0,0);
+        
+        jPanel_Content.removeAll();
+        jPanel_Content.add(p1, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+        
+    }//GEN-LAST:event_Btn_Register_UserMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -507,6 +543,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -514,6 +551,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_Fecha;
+    private javax.swing.JLabel jLabel_Footer;
+    public javax.swing.JLabel jLabel_ID;
     public javax.swing.JLabel jLabel_Name;
     public javax.swing.JLabel jLabel_Type_Account;
     private javax.swing.JLabel jLabel_background_Down;

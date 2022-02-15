@@ -36,16 +36,16 @@ public class C_Login implements ActionListener {
                 //Envío de los datos de inicio de sesión y respuesta del modelo...
                 model.setUsername(view.jTextField_Username.getText().trim());
                 model.setPassword(view.jPasswordField_Password.getText().trim());
-                model.Login();
                 
                 //Respuesta del modelo con los datos enviados de inicio de sesión...
-                if (model.Login() == true) {
+                if (model.Login()) {
                     
                     //Respuesta cuando los datos enviados son correctos...
                     view.dispose();
                     view_Adm.setVisible(true);
                     view_Adm.jLabel_Type_Account.setText(model.getType_Account());
                     view_Adm.jLabel_Name.setText(model.getName());
+                    view_Adm.jLabel_ID.setText(model.getID());
                     
                     
                 } else {
