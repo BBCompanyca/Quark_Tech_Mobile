@@ -29,7 +29,7 @@ public class Principal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Title = new javax.swing.JLabel();
+        Title_Welcome = new javax.swing.JLabel();
         Text1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -45,10 +45,10 @@ public class Principal extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(790, 470));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        Title.setForeground(new java.awt.Color(240, 240, 240));
-        Title.setText("Bienvenido");
-        add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        Title_Welcome.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        Title_Welcome.setForeground(new java.awt.Color(240, 240, 240));
+        Title_Welcome.setText("Bienvenido");
+        add(Title_Welcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         Text1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         Text1.setForeground(new java.awt.Color(240, 240, 240));
@@ -104,7 +104,7 @@ public class Principal extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Text1;
-    private javax.swing.JLabel Title;
+    public javax.swing.JLabel Title_Welcome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

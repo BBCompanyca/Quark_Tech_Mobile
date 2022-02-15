@@ -4,6 +4,7 @@ import controller.C_Login;
 import model.M_Login;
 import view.Dashboard;
 import view.Login;
+import view.Principal;
 
 public class Main {
     public static void main (String args[]){
