@@ -134,7 +134,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Ususarios");
+        jLabel5.setText("Usuarios");
         Btn_Users.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -409,7 +409,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void Btn_UsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_UsersMousePressed
 
         //Método para llamar a la interfaz de registrar usuarios...
-        Register_User p1 = new Register_User();
+        Users p1 = new Users();
         p1.setSize(790, 370);
         p1.setLocation(0, 0);
 
