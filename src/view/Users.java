@@ -1,18 +1,30 @@
 package view;
 
 import clases.TextPrompt;
+import java.sql.*;
+import clases.BD_Connection;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-public class Users extends javax.swing.JPanel {
+public final class Users extends javax.swing.JPanel {
+
+    public static int ID;
+
+    DefaultTableModel model = new DefaultTableModel();
 
     public Users() {
         initComponents();
-        
-        //Objeto para el PlayHolders del jTexttField buscar usuarios...
-        TextPrompt search_user = new TextPrompt("Ingrese el nombre del usuario", jTextField_Search_User);
-        
+
+        //Objeto para el PlayHolders del jTextField buscar usuarios...
+        TextPrompt search_user = new TextPrompt("Ingrese algún parametro", jTextField_Search_User);
+
+        //Método para obtener la lista de usuarios...
+        getUsers();
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -54,6 +66,11 @@ public class Users extends javax.swing.JPanel {
                 jTextField_Search_UserActionPerformed(evt);
             }
         });
+        jTextField_Search_User.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_Search_UserKeyPressed(evt);
+            }
+        });
         add(jTextField_Search_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 590, 30));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 590, 10));
 
@@ -69,24 +86,24 @@ public class Users extends javax.swing.JPanel {
         jTable_User.setForeground(new java.awt.Color(240, 240, 240));
         jTable_User.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Nombre De Usuario", "Dirección", "Permisos De"
+                "ID", "Nombre", "Nombre De Usuario", "Dirección", "Permisos De", "Estatus"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -94,7 +111,7 @@ public class Users extends javax.swing.JPanel {
             }
         });
         jTable_User.setGridColor(new java.awt.Color(240, 240, 240));
-        jTable_User.getTableHeader().setReorderingAllowed(false);
+        jTable_User.setSelectionBackground(new java.awt.Color(9, 53, 69));
         jScrollPane.setViewportView(jTable_User);
         if (jTable_User.getColumnModel().getColumnCount() > 0) {
             jTable_User.getColumnModel().getColumn(0).setResizable(false);
@@ -104,9 +121,14 @@ public class Users extends javax.swing.JPanel {
             jTable_User.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 690, 203));
+        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 750, 203));
 
         jButton_Search_User.setText("Buscar");
+        jButton_Search_User.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_Search_UserMousePressed(evt);
+            }
+        });
         add(jButton_Search_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 80, 30));
 
         jButton_New_User.setText("NUEVO");
@@ -117,7 +139,7 @@ public class Users extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_UserMousePressed
-        
+
     }//GEN-LAST:event_jTextField_Search_UserMousePressed
 
     private void jTextField_Search_UserMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_UserMouseReleased
@@ -127,6 +149,142 @@ public class Users extends javax.swing.JPanel {
     private void jTextField_Search_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_Search_UserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_Search_UserActionPerformed
+
+    private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
+
+        String search = jTextField_Search_User.getText().trim();
+        String query = "";
+
+        if (search.equals("")) {
+
+            query = "select id_user, name_user, username, direction, type_account, status from user";
+
+        } else {
+
+            query = "select id_user, name_user, username, direction, type_account, status from user "
+                    + "where id_user = '" + search + "' or name_user = '" + search + "' or "
+                    + "username = '" + search + "' or direction = '" + search + "' or type_account = '" 
+                    + search + "' or status = '" + search + "'";
+
+        }
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement(query);
+
+            ResultSet rs = pst.executeQuery();
+
+            //Diseño de la tabla...
+            jTable_User = new JTable(model);
+            jScrollPane.setViewportView(jTable_User);
+
+            model.setColumnCount(0);
+            model.setRowCount(0);
+
+            model.addColumn("ID");
+            model.addColumn("Nombre");
+            model.addColumn("Nombre De Usuario");
+            model.addColumn("Dirección");
+            model.addColumn("Permisos De");
+            model.addColumn("Estatus");
+
+            while (rs.next()) {
+
+                Object[] fila = new Object[6];
+                for (int i = 0; i < 6; i++) {
+
+                    fila[i] = rs.getObject(i + 1);
+
+                }
+
+                model.addRow(fila);
+
+            }
+
+            jTextField_Search_User.setText("");
+            jTextField_Search_User.requestFocus();
+            cn.close();
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al filtrar el usuario! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al filtrar el usuario!", "¡Error!",
+                    JOptionPane.OK_CANCEL_OPTION);
+
+        }
+
+    }//GEN-LAST:event_jButton_Search_UserMousePressed
+
+    private void jTextField_Search_UserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_Search_UserKeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            String search = jTextField_Search_User.getText().trim();
+            String query = "";
+
+            if (search.equals("")) {
+
+                query = "select id_user, name_user, username, direction, type_account, status from user";
+
+            } else {
+
+                query = "select id_user, name_user, username, direction, type_account, status from user "
+                        + "where id_user = '" + search + "' or name_user = '" + search + "' or "
+                        + "username = '" + search + "' or direction = '" + search + "' or type_account = '"
+                        + search + "' or status = '" + search + "'";
+
+            }
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(query);
+
+                ResultSet rs = pst.executeQuery();
+
+                //Diseño de la tabla...
+                jTable_User = new JTable(model);
+                jScrollPane.setViewportView(jTable_User);
+
+                model.setColumnCount(0);
+                model.setRowCount(0);
+
+                model.addColumn("ID");
+                model.addColumn("Nombre");
+                model.addColumn("Nombre De Usuario");
+                model.addColumn("Dirección");
+                model.addColumn("Permisos De");
+                model.addColumn("Estatus");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[6];
+                    for (int i = 0; i < 6; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+                jTextField_Search_User.setText("");
+                jTextField_Search_User.requestFocus();
+                cn.close();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al filtrar el usuario! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al filtrar el usuario!", "¡Error!",
+                        JOptionPane.OK_CANCEL_OPTION);
+
+            }
+
+        }
+
+    }//GEN-LAST:event_jTextField_Search_UserKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -140,4 +298,52 @@ public class Users extends javax.swing.JPanel {
     private javax.swing.JTable jTable_User;
     private javax.swing.JTextField jTextField_Search_User;
     // End of variables declaration//GEN-END:variables
+
+    private void getUsers() {
+
+        try {
+
+            //Conexión a la BD para consultar la lista de los usuarios...
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select id_user, name_user, username, direction, type_account, status from user");
+
+            ResultSet rs = pst.executeQuery();
+
+            //Diseño de la tabla...
+            jTable_User = new JTable(model);
+            jScrollPane.setViewportView(jTable_User);
+
+            model.addColumn("ID");
+            model.addColumn("Nombre");
+            model.addColumn("Nombre De Usuario");
+            model.addColumn("Dirección");
+            model.addColumn("Permisos De");
+            model.addColumn("Estatus");
+
+            while (rs.next()) {
+
+                Object[] fila = new Object[6];
+                for (int i = 0; i < 6; i++) {
+
+                    fila[i] = rs.getObject(i + 1);
+
+                }
+
+                model.addRow(fila);
+
+            }
+
+            cn.close();
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al consultar la lista de usuarios! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de usuarios!", "¡Error!",
+                    JOptionPane.OK_CANCEL_OPTION);
+
+        }
+
+    }
+
 }
