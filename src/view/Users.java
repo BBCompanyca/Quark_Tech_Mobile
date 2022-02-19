@@ -147,6 +147,16 @@ public final class Users extends javax.swing.JPanel {
         add(jButton_New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 100, 35));
 
         jButton_Update_User.setText("MODIFICAR");
+        jButton_Update_User.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_Update_UserMousePressed(evt);
+            }
+        });
+        jButton_Update_User.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Update_UserActionPerformed(evt);
+            }
+        });
         add(jButton_Update_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 100, 35));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -316,6 +326,23 @@ public final class Users extends javax.swing.JPanel {
     private void jButton_New_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_New_UserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_New_UserActionPerformed
+
+    private void jButton_Update_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Update_UserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_Update_UserActionPerformed
+
+    private void jButton_Update_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_UserMousePressed
+        
+        Update_User pl = new Update_User();
+        pl.setSize(790, 370);
+        pl.setLocation(0, 0);
+        
+        jPanel_Content.removeAll();
+        jPanel_Content.add(pl, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+        
+    }//GEN-LAST:event_jButton_Update_UserMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -269,10 +269,11 @@
     <Component class="javax.swing.JComboBox" name="jComboBox_Permission">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="4">
             <StringItem index="0" value="..."/>
             <StringItem index="1" value="Administrador"/>
-            <StringItem index="2" value="Tecnico"/>
+            <StringItem index="2" value="Gerente"/>
+            <StringItem index="3" value="Tecnico"/>
           </StringArray>
         </Property>
       </Properties>

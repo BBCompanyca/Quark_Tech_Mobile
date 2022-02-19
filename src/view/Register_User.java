@@ -117,7 +117,7 @@ public class Register_User extends javax.swing.JPanel {
         jLabel_Permission.setText("Permisos De:");
         add(jLabel_Permission, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, -1));
 
-        jComboBox_Permission.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Administrador", "Tecnico" }));
+        jComboBox_Permission.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Administrador", "Gerente", "Tecnico" }));
         jComboBox_Permission.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_PermissionActionPerformed(evt);
