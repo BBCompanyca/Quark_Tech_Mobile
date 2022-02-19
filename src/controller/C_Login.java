@@ -24,7 +24,7 @@ public class C_Login implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == view.jButton_Acceder) {
+       /* if (e.getSource() == view.jButton_Acceder) {
 
             //Validación de que los campos de texto no estén vacios.
             if (view.jTextField_Username.getText().equals("") || view.jPasswordField_Password.getText().equals("")) {
@@ -46,6 +46,7 @@ public class C_Login implements ActionListener {
                     view_Adm.jLabel_Type_Account.setText(model.getType_Account());
                     view_Adm.jLabel_Name.setText(model.getName());
                     view_Adm.jLabel_ID.setText(model.getID());
+                    view_Adm.jLabel_Username.setText(model.getUsername());
                     
                     
                 } else {
@@ -60,7 +61,7 @@ public class C_Login implements ActionListener {
 
             }
 
-        }
+        } */
 
     }
 

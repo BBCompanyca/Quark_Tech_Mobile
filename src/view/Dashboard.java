@@ -1,11 +1,13 @@
 package view;
 
+import model.M_Login;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.time.LocalDate;
 
 public class Dashboard extends javax.swing.JFrame {
 
+    M_Login m_login = new M_Login();
     
     public Dashboard() {
         initComponents();
@@ -79,6 +81,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Exit = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel_Content = new javax.swing.JPanel();
+        jLabel_Username = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -354,6 +357,12 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel_Background.add(jPanel_Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 135, 790, 370));
 
+        jLabel_Username.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Username.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Username.setText("Username");
+        jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 2, 750, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -555,6 +564,7 @@ public class Dashboard extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel_ID;
     public javax.swing.JLabel jLabel_Name;
     public javax.swing.JLabel jLabel_Type_Account;
+    public javax.swing.JLabel jLabel_Username;
     private javax.swing.JLabel jLabel_background_Down;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel_Background;

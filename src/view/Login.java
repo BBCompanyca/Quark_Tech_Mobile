@@ -1,12 +1,14 @@
 package view;
 
-import clases.TextPrompt;
+import java.sql.*;
+import clases.BD_Connection;
 import java.awt.Color;
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
+    
+    public static String user;
+    public String pass;
 
     public Login() {
         initComponents();
@@ -91,6 +93,12 @@ public class Login extends javax.swing.JFrame {
         jButton_Acceder.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton_Acceder.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Login btn ligth.png"))); // NOI18N
         jButton_Acceder.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Login btn ligth.png"))); // NOI18N
+        jButton_Acceder.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Login btn ligth.png"))); // NOI18N
+        jButton_Acceder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_AccederMousePressed(evt);
+            }
+        });
         jPanel_Background.add(jButton_Acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 220, 60));
 
         jLabel_Backgound_Down.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -152,6 +160,61 @@ public class Login extends javax.swing.JFrame {
         System.exit(0);
         
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton_AccederMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_AccederMousePressed
+        
+        //Obtención de los datos ingresados por el usuario...
+        user = jTextField_Username.getText().trim();
+        pass = jPasswordField_Password.getText().trim();
+        
+        //Validación de que todos los campos estén llenos.
+        if (!user.equals("") && !pass.equals("")) {
+            
+            try {
+                
+                //Conexión a la base de datos para consultar los datos del usuario...
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select username, password from user where username = '" + user + "' and password = '" + pass + "'");
+                
+                ResultSet rs = pst.executeQuery();
+                
+                if (rs.next()) {
+                    
+                    //Si encuentra los valores cierra la ventana de login y abre la ventanta principal...
+                    this.dispose();
+                    Dashboard window = new Dashboard();
+                    window.setVisible(true);
+                    
+                } else {
+                    
+                    //Si no encuentra los valores dejará un mensaje y limpiará los campos...
+                    jLabel_Anwser.setText("¡Datos de acceso incorrectos!");
+                    
+                    jTextField_Username.setText("");
+                    jTextField_Username.requestFocus();
+                    jPasswordField_Password.setText("");
+                    
+                }
+                
+                cn.close();
+                
+            } catch (SQLException e) {
+                
+                //Mensaje de error para alertar que algo no funciona en el Login...
+                System.err.println("¡Error en el botón de acceder! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error en el boton acceder!");
+                
+            } 
+            
+        } else {
+            
+            //Mensaje en dado caso que alguno de los campos esté vacio...
+            jLabel_Anwser.setText("¡Debes llenar todos los campos!");
+            
+        }
+        
+    }//GEN-LAST:event_jButton_AccederMousePressed
 
     /**
      * @param args the command line arguments

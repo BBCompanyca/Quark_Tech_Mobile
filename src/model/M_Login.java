@@ -68,6 +68,7 @@ public class M_Login {
                 setID(rs.getString("id_user"));
                 setName(rs.getString("name_user"));
                 setType_Account(rs.getString("type_account"));
+                setUsername(this.username);
                 
                 return true;
                 
