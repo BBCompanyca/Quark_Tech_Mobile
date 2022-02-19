@@ -1,40 +1,37 @@
 package view;
 
-import model.M_Login;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.time.LocalDate;
+import java.sql.*;
+import clases.BD_Connection;
+import javax.swing.JOptionPane;
 
 public class Dashboard extends javax.swing.JFrame {
 
-    M_Login m_login = new M_Login();
+    String user;
     
     public Dashboard() {
         initComponents();
-        
+
         //Diseño de la insterfaz...
         setLocationRelativeTo(null);
         setResizable(false);
         setSize(1000, 600);
         
-        LocalDate now = LocalDate.now();
-        int year = now.getYear();
-        int dia = now.getDayOfMonth();
-        int month = now.getMonthValue();
-        String[] meses = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto"," ;Septiembre"
-            ,"Octubre","Noviembre","Diciemrbre"};
-        jLabel_Fecha.setText("Fecha: "+dia+" de "+meses[month - 1]+" de "+year);
+        //Nombre de usuario que ha iniciado sesión...
+        user = Login.user; 
+
+        //Los siguientes metodos están al final de está clase...
         
-        Principal p1 = new Principal();
-        p1.setSize(790, 470);
-        p1.setLocation(0,0);
+        //Método para obtener la fecha actual...
+        Date();
         
-        jPanel_Content.removeAll();
-        jPanel_Content.add(p1, BorderLayout.CENTER);
-        jPanel_Content.revalidate();
-        jPanel_Content.repaint();
-        
-        Btn_Main.setBackground(new java.awt.Color(78,140,121));
+        //Método para llamar al panel con que se va a iniciar la aplicación...
+        PanelStart();
+
+        //Método para consultar la información del usuario que ha iniciado sesión...
+        BD_Consult();
         
     }
 
@@ -396,105 +393,105 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void Btn_MainMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMouseEntered
-      
-        Btn_Main.setBackground(new java.awt.Color(78,140,121));
-        
+
+        Btn_Main.setBackground(new java.awt.Color(78, 140, 121));
+
     }//GEN-LAST:event_Btn_MainMouseEntered
 
     private void Btn_MainMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMouseExited
-        
-        Btn_Main.setBackground(new java.awt.Color(78,120,121));
-        
+
+        Btn_Main.setBackground(new java.awt.Color(78, 120, 121));
+
     }//GEN-LAST:event_Btn_MainMouseExited
 
     private void Btn_Register_UserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_UserMouseEntered
-        
-        Btn_Register_User.setBackground(new java.awt.Color(78,140,121));
-        
+
+        Btn_Register_User.setBackground(new java.awt.Color(78, 140, 121));
+
     }//GEN-LAST:event_Btn_Register_UserMouseEntered
 
     private void Btn_Register_UserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_UserMouseExited
-        
-        Btn_Register_User.setBackground(new java.awt.Color(78,120,121));
-        
+
+        Btn_Register_User.setBackground(new java.awt.Color(78, 120, 121));
+
     }//GEN-LAST:event_Btn_Register_UserMouseExited
 
     private void Btn_Manage_UserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_UserMouseEntered
-        
-        Btn_Manage_User.setBackground(new java.awt.Color(78,140,121));
-        
+
+        Btn_Manage_User.setBackground(new java.awt.Color(78, 140, 121));
+
     }//GEN-LAST:event_Btn_Manage_UserMouseEntered
 
     private void Btn_Manage_UserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_UserMouseExited
-        
-        Btn_Manage_User.setBackground(new java.awt.Color(78,120,121));
-        
+
+        Btn_Manage_User.setBackground(new java.awt.Color(78, 120, 121));
+
     }//GEN-LAST:event_Btn_Manage_UserMouseExited
 
     private void Btn_Register_ClientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_ClientMouseEntered
-        
-        Btn_Register_Client.setBackground(new java.awt.Color(78,140,121));
-        
+
+        Btn_Register_Client.setBackground(new java.awt.Color(78, 140, 121));
+
     }//GEN-LAST:event_Btn_Register_ClientMouseEntered
 
     private void Btn_Register_ClientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_ClientMouseExited
-        
-        Btn_Register_Client.setBackground(new java.awt.Color(78,120,121));
-        
+
+        Btn_Register_Client.setBackground(new java.awt.Color(78, 120, 121));
+
     }//GEN-LAST:event_Btn_Register_ClientMouseExited
 
     private void Btn_Manage_ClientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_ClientMouseEntered
-        
-        Btn_Manage_Client.setBackground(new java.awt.Color(78,140,121));
-        
+
+        Btn_Manage_Client.setBackground(new java.awt.Color(78, 140, 121));
+
     }//GEN-LAST:event_Btn_Manage_ClientMouseEntered
 
     private void Btn_Manage_ClientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_ClientMouseExited
-        
-        Btn_Manage_Client.setBackground(new java.awt.Color(78,120,121));
-        
+
+        Btn_Manage_Client.setBackground(new java.awt.Color(78, 120, 121));
+
     }//GEN-LAST:event_Btn_Manage_ClientMouseExited
 
     private void Btn_Register_PhoneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_PhoneMouseEntered
-        
-        Btn_Register_Phone.setBackground(new java.awt.Color(78,140,121));
-        
+
+        Btn_Register_Phone.setBackground(new java.awt.Color(78, 140, 121));
+
     }//GEN-LAST:event_Btn_Register_PhoneMouseEntered
 
     private void Btn_Register_PhoneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_PhoneMouseExited
-        
-        Btn_Register_Phone.setBackground(new java.awt.Color(78,120,121));
-        
+
+        Btn_Register_Phone.setBackground(new java.awt.Color(78, 120, 121));
+
     }//GEN-LAST:event_Btn_Register_PhoneMouseExited
 
     private void Btn_Manage_PhoneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_PhoneMouseEntered
-    
-        Btn_Manage_Phone.setBackground(new java.awt.Color(78,140,121));
-        
+
+        Btn_Manage_Phone.setBackground(new java.awt.Color(78, 140, 121));
+
     }//GEN-LAST:event_Btn_Manage_PhoneMouseEntered
 
     private void Btn_Manage_PhoneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_PhoneMouseExited
-        
-        Btn_Manage_Phone.setBackground(new java.awt.Color(78,120,121));
-        
+
+        Btn_Manage_Phone.setBackground(new java.awt.Color(78, 120, 121));
+
     }//GEN-LAST:event_Btn_Manage_PhoneMouseExited
 
     private void Btn_MainMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMousePressed
-        
+
     }//GEN-LAST:event_Btn_MainMousePressed
 
     private void Btn_Register_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_UserMousePressed
-        
+
         //Método para llamar a la interfaz de registrar usuarios...
         Register_User p1 = new Register_User();
         p1.setSize(790, 370);
-        p1.setLocation(0,0);
-        
+        p1.setLocation(0, 0);
+
         jPanel_Content.removeAll();
         jPanel_Content.add(p1, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
-        
+
     }//GEN-LAST:event_Btn_Register_UserMousePressed
 
     /**
@@ -574,4 +571,70 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Menu;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    //Método para obtener la fecha actual...
+    public void Date() {
+
+        LocalDate now = LocalDate.now();
+        int year = now.getYear();
+        int dia = now.getDayOfMonth();
+        int month = now.getMonthValue();
+        String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", " ;Septiembre",
+             "Octubre", "Noviembre", "Diciemrbre"};
+        jLabel_Fecha.setText("Fecha: " + dia + " de " + meses[month - 1] + " de " + year);
+
+    }
+
+    //Método para llamar al panel con que se va a iniciar la aplicación...
+    public void PanelStart() {
+
+        Principal p1 = new Principal();
+        p1.setSize(790, 470);
+        p1.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(p1, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+        Btn_Main.setBackground(new java.awt.Color(78, 140, 121));
+
+    }
+    
+    //Método para consultar la información del usuario que inició sesión...
+    public void BD_Consult(){
+        
+        try {
+            
+            //Conexión y consulta a la BD...
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select id_user, name_user, type_account from user where username = '" + user + "'");
+            
+            ResultSet rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                
+                //Llenado de los campos con la información del usuario...
+                jLabel_Username.setText(user);
+                jLabel_Type_Account.setText(rs.getString("type_account"));
+                jLabel_Name.setText(rs.getString("name_user"));
+                jLabel_ID.setText(rs.getString("id_user"));
+                
+            }
+            
+            cn.close();
+            
+        } catch (SQLException e) {
+            
+            //Alerta de que algo no funciona en la consulta de la información del usuario...
+            System.err.println("¡Error al consultar la información del usuario! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del usuario!", "¡Error!", 
+                    JOptionPane.OK_CANCEL_OPTION);
+            
+        }
+    
+              
+        
+    }
 }
