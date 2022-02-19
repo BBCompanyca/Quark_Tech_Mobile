@@ -29,7 +29,7 @@ public class Dashboard extends javax.swing.JFrame {
         
         //Método para llamar al panel con que se va a iniciar la aplicación...
         PanelStart();
-
+        
         //Método para consultar la información del usuario que ha iniciado sesión...
         BD_Consult();
         
@@ -46,27 +46,21 @@ public class Dashboard extends javax.swing.JFrame {
         Btn_Main = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        Btn_Register_User = new javax.swing.JPanel();
+        Btn_Users = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        Btn_Manage_User = new javax.swing.JPanel();
+        Btn_Clients = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        Btn_Register_Client = new javax.swing.JPanel();
+        Btn_Equipos = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        Btn_Manage_Client = new javax.swing.JPanel();
+        Btn_About_Me = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        Btn_Register_Phone = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        Btn_Manage_Phone = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jPanel_Head = new javax.swing.JPanel();
@@ -122,30 +116,30 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-outline.png"))); // NOI18N
         Btn_Main.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel_Menu.add(Btn_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 210, 50));
+        jPanel_Menu.add(Btn_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 210, 50));
 
-        Btn_Register_User.setBackground(new java.awt.Color(78, 120, 121));
-        Btn_Register_User.addMouseListener(new java.awt.event.MouseAdapter() {
+        Btn_Users.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_Users.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_Register_UserMouseEntered(evt);
+                Btn_UsersMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_Register_UserMouseExited(evt);
+                Btn_UsersMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                Btn_Register_UserMousePressed(evt);
+                Btn_UsersMousePressed(evt);
             }
         });
-        Btn_Register_User.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Btn_Users.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Registrar Usuario");
-        Btn_Register_User.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
+        jLabel5.setText("Ususarios");
+        Btn_Users.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_24px.png"))); // NOI18N
-        Btn_Register_User.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+        Btn_Users.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
         jPanel7.setBackground(new java.awt.Color(78, 120, 121));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -159,119 +153,75 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_24px.png"))); // NOI18N
         jPanel7.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        Btn_Register_User.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 50));
+        Btn_Users.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 50));
 
-        jPanel_Menu.add(Btn_Register_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 210, 50));
+        jPanel_Menu.add(Btn_Users, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 210, 50));
 
-        Btn_Manage_User.setBackground(new java.awt.Color(78, 120, 121));
-        Btn_Manage_User.addMouseListener(new java.awt.event.MouseAdapter() {
+        Btn_Clients.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_Clients.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_Manage_UserMouseEntered(evt);
+                Btn_ClientsMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_Manage_UserMouseExited(evt);
+                Btn_ClientsMouseExited(evt);
             }
         });
-        Btn_Manage_User.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Btn_Clients.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Gestionar Usuario");
-        Btn_Manage_User.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
+        jLabel6.setText("Clientes");
+        Btn_Clients.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/account-multiple.png"))); // NOI18N
-        Btn_Manage_User.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+        Btn_Clients.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel_Menu.add(Btn_Manage_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 210, 50));
+        jPanel_Menu.add(Btn_Clients, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 210, 50));
 
-        Btn_Register_Client.setBackground(new java.awt.Color(78, 120, 121));
-        Btn_Register_Client.addMouseListener(new java.awt.event.MouseAdapter() {
+        Btn_Equipos.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_Equipos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_Register_ClientMouseEntered(evt);
+                Btn_EquiposMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_Register_ClientMouseExited(evt);
+                Btn_EquiposMouseExited(evt);
             }
         });
-        Btn_Register_Client.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Btn_Equipos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/client_24px.png"))); // NOI18N
-        Btn_Register_Client.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cell_phone_24px.png"))); // NOI18N
+        Btn_Equipos.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Registrar Cliente");
-        Btn_Register_Client.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
+        jLabel10.setText("Equipos");
+        Btn_Equipos.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
-        jPanel_Menu.add(Btn_Register_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 210, 50));
+        jPanel_Menu.add(Btn_Equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 210, 50));
 
-        Btn_Manage_Client.setBackground(new java.awt.Color(78, 120, 121));
-        Btn_Manage_Client.addMouseListener(new java.awt.event.MouseAdapter() {
+        Btn_About_Me.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_About_Me.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_Manage_ClientMouseEntered(evt);
+                Btn_About_MeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_Manage_ClientMouseExited(evt);
+                Btn_About_MeMouseExited(evt);
             }
         });
-        Btn_Manage_Client.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Btn_About_Me.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Gestionar Cliente");
-        Btn_Manage_Client.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
+        jLabel11.setText("Acerca De");
+        Btn_About_Me.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/management_client_24px.png"))); // NOI18N
-        Btn_Manage_Client.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+        Btn_About_Me.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel_Menu.add(Btn_Manage_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 210, 50));
-
-        Btn_Register_Phone.setBackground(new java.awt.Color(78, 120, 121));
-        Btn_Register_Phone.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_Register_PhoneMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_Register_PhoneMouseExited(evt);
-            }
-        });
-        Btn_Register_Phone.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Registrar Equipo");
-        Btn_Register_Phone.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
-
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cell_phone_24px.png"))); // NOI18N
-        Btn_Register_Phone.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
-
-        jPanel_Menu.add(Btn_Register_Phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 210, 50));
-
-        Btn_Manage_Phone.setBackground(new java.awt.Color(78, 120, 121));
-        Btn_Manage_Phone.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_Manage_PhoneMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_Manage_PhoneMouseExited(evt);
-            }
-        });
-        Btn_Manage_Phone.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Gestionar Equipo");
-        Btn_Manage_Phone.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
-
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/smartphones_24px.png"))); // NOI18N
-        Btn_Manage_Phone.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
-
-        jPanel_Menu.add(Btn_Manage_Phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 210, 50));
+        jPanel_Menu.add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 210, 50));
 
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 5));
         jPanel_Menu.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 190, 20));
@@ -282,7 +232,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel1.setText("Quark Tech Mobile");
         jPanel_Menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 190, 30));
 
-        jPanel_Background.add(jPanel_Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 540));
+        jPanel_Background.add(jPanel_Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
 
         jPanel_Head.setBackground(new java.awt.Color(78, 109, 121));
         jPanel_Head.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -358,7 +308,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Username.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Username.setText("Username");
-        jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 2, 750, 30));
+        jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 2, 755, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -404,83 +354,59 @@ public class Dashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Btn_MainMouseExited
 
-    private void Btn_Register_UserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_UserMouseEntered
+    private void Btn_UsersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_UsersMouseEntered
 
-        Btn_Register_User.setBackground(new java.awt.Color(78, 140, 121));
+        Btn_Users.setBackground(new java.awt.Color(78, 140, 121));
 
-    }//GEN-LAST:event_Btn_Register_UserMouseEntered
+    }//GEN-LAST:event_Btn_UsersMouseEntered
 
-    private void Btn_Register_UserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_UserMouseExited
+    private void Btn_UsersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_UsersMouseExited
 
-        Btn_Register_User.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_Users.setBackground(new java.awt.Color(78, 120, 121));
 
-    }//GEN-LAST:event_Btn_Register_UserMouseExited
+    }//GEN-LAST:event_Btn_UsersMouseExited
 
-    private void Btn_Manage_UserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_UserMouseEntered
+    private void Btn_ClientsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ClientsMouseEntered
 
-        Btn_Manage_User.setBackground(new java.awt.Color(78, 140, 121));
+        Btn_Clients.setBackground(new java.awt.Color(78, 140, 121));
 
-    }//GEN-LAST:event_Btn_Manage_UserMouseEntered
+    }//GEN-LAST:event_Btn_ClientsMouseEntered
 
-    private void Btn_Manage_UserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_UserMouseExited
+    private void Btn_ClientsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ClientsMouseExited
 
-        Btn_Manage_User.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_Clients.setBackground(new java.awt.Color(78, 120, 121));
 
-    }//GEN-LAST:event_Btn_Manage_UserMouseExited
+    }//GEN-LAST:event_Btn_ClientsMouseExited
 
-    private void Btn_Register_ClientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_ClientMouseEntered
+    private void Btn_EquiposMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMouseEntered
 
-        Btn_Register_Client.setBackground(new java.awt.Color(78, 140, 121));
+        Btn_Equipos.setBackground(new java.awt.Color(78, 140, 121));
 
-    }//GEN-LAST:event_Btn_Register_ClientMouseEntered
+    }//GEN-LAST:event_Btn_EquiposMouseEntered
 
-    private void Btn_Register_ClientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_ClientMouseExited
+    private void Btn_EquiposMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMouseExited
 
-        Btn_Register_Client.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_Equipos.setBackground(new java.awt.Color(78, 120, 121));
 
-    }//GEN-LAST:event_Btn_Register_ClientMouseExited
+    }//GEN-LAST:event_Btn_EquiposMouseExited
 
-    private void Btn_Manage_ClientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_ClientMouseEntered
+    private void Btn_About_MeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMouseEntered
 
-        Btn_Manage_Client.setBackground(new java.awt.Color(78, 140, 121));
+        Btn_About_Me.setBackground(new java.awt.Color(78, 140, 121));
 
-    }//GEN-LAST:event_Btn_Manage_ClientMouseEntered
+    }//GEN-LAST:event_Btn_About_MeMouseEntered
 
-    private void Btn_Manage_ClientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_ClientMouseExited
+    private void Btn_About_MeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMouseExited
 
-        Btn_Manage_Client.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_About_Me.setBackground(new java.awt.Color(78, 120, 121));
 
-    }//GEN-LAST:event_Btn_Manage_ClientMouseExited
-
-    private void Btn_Register_PhoneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_PhoneMouseEntered
-
-        Btn_Register_Phone.setBackground(new java.awt.Color(78, 140, 121));
-
-    }//GEN-LAST:event_Btn_Register_PhoneMouseEntered
-
-    private void Btn_Register_PhoneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_PhoneMouseExited
-
-        Btn_Register_Phone.setBackground(new java.awt.Color(78, 120, 121));
-
-    }//GEN-LAST:event_Btn_Register_PhoneMouseExited
-
-    private void Btn_Manage_PhoneMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_PhoneMouseEntered
-
-        Btn_Manage_Phone.setBackground(new java.awt.Color(78, 140, 121));
-
-    }//GEN-LAST:event_Btn_Manage_PhoneMouseEntered
-
-    private void Btn_Manage_PhoneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Manage_PhoneMouseExited
-
-        Btn_Manage_Phone.setBackground(new java.awt.Color(78, 120, 121));
-
-    }//GEN-LAST:event_Btn_Manage_PhoneMouseExited
+    }//GEN-LAST:event_Btn_About_MeMouseExited
 
     private void Btn_MainMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMousePressed
 
     }//GEN-LAST:event_Btn_MainMousePressed
 
-    private void Btn_Register_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Register_UserMousePressed
+    private void Btn_UsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_UsersMousePressed
 
         //Método para llamar a la interfaz de registrar usuarios...
         Register_User p1 = new Register_User();
@@ -492,7 +418,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 
-    }//GEN-LAST:event_Btn_Register_UserMousePressed
+    }//GEN-LAST:event_Btn_UsersMousePressed
 
     /**
      * @param args the command line arguments
@@ -530,21 +456,15 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Btn_About_Me;
+    private javax.swing.JPanel Btn_Clients;
+    private javax.swing.JPanel Btn_Equipos;
     private javax.swing.JPanel Btn_Main;
-    private javax.swing.JPanel Btn_Manage_Client;
-    private javax.swing.JPanel Btn_Manage_Phone;
-    private javax.swing.JPanel Btn_Manage_User;
-    private javax.swing.JPanel Btn_Register_Client;
-    private javax.swing.JPanel Btn_Register_Phone;
-    private javax.swing.JPanel Btn_Register_User;
+    private javax.swing.JPanel Btn_Users;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
