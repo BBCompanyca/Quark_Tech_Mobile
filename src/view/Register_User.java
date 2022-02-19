@@ -8,18 +8,18 @@ import javax.swing.JOptionPane;
 
 public class Register_User extends javax.swing.JPanel {
 
+    String username_user = "";
+
     public Register_User() {
         initComponents();
+
+        username_user = Login.user;
 
         //Objetos para el PlayHolder de los jTextField... 
         TextPrompt name = new TextPrompt("Ingrese el nombre de usuario", jTextField_Name);
         TextPrompt telephone = new TextPrompt("Ingrese el N° de télefono", jTextField_Telephone);
         TextPrompt username = new TextPrompt("Ingrese el nombre de usuario", jTextField_Username);
         TextPrompt password = new TextPrompt("Ingrese la contraseña", jPasswordField_Password);
-        
-        Dashboard value = new Dashboard();
-        
-        JOptionPane.showMessageDialog(null, "El ID es: " + value.jLabel_Username.getText());
 
     }
 
@@ -54,7 +54,7 @@ public class Register_User extends javax.swing.JPanel {
         add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
         jTextField_Name.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Name.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Name.setBorder(null);
@@ -62,7 +62,7 @@ public class Register_User extends javax.swing.JPanel {
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 220, -1));
 
         jTextField_Telephone.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Telephone.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Telephone.setBorder(null);
@@ -80,7 +80,7 @@ public class Register_User extends javax.swing.JPanel {
         add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
 
         jTextField_Username.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Username.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jTextField_Username.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jTextField_Username.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Username.setBorder(null);
@@ -94,7 +94,7 @@ public class Register_User extends javax.swing.JPanel {
         add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 220, -1));
 
         jPasswordField_Password.setBackground(new java.awt.Color(9, 53, 69));
-        jPasswordField_Password.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jPasswordField_Password.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jPasswordField_Password.setForeground(new java.awt.Color(240, 240, 240));
         jPasswordField_Password.setBorder(null);
         add(jPasswordField_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 220, 30));
@@ -154,19 +154,14 @@ public class Register_User extends javax.swing.JPanel {
         //Variables para validar que los campos de textos no esten vacios...
         int flag = 0, flag_two = 0, flag_tree = 0;
 
-        Dashboard value = new Dashboard();
-        
-        String name, telephone, username, password, permission, direction, username_user;
+        String name, telephone, username, password, permission, direction;
 
         name = jTextField_Name.getText().trim();
         telephone = jTextField_Telephone.getText().trim();
         username = jTextField_Username.getText().trim();
         password = jPasswordField_Password.getText().trim();
-        username_user = value.jLabel_Username.getText().trim();
         permission = jComboBox_Permission.getSelectedItem().toString();
         direction = jComboBox_Direction.getSelectedItem().toString();
-        
-        jLabel_Name.setText(username_user);
 
         if (name.equals("")) {
 
@@ -285,12 +280,21 @@ public class Register_User extends javax.swing.JPanel {
                                 pst2.setString(10, "Activo");
                                 pst2.executeUpdate();
 
-                                //Pintar();
-                                //Limpiar();
-                                
-                                JOptionPane.showMessageDialog(null, "Registro Exitoso.", "Exito", 
+                                Pintar();
+                                Limpiar();
+
+                                JOptionPane.showMessageDialog(null, "Registro Exitoso.", "Exito",
                                         JOptionPane.INFORMATION_MESSAGE);
 
+                                jLabel_Name.setForeground(new java.awt.Color(240,240,240));
+                                jLabel_Telephone.setForeground(new java.awt.Color(240,240,240));
+                                jLabel_Username.setForeground(new java.awt.Color(240,240,240));
+                                jLabel_Password.setForeground(new java.awt.Color(240,240,240));
+                                jLabel_Permission.setForeground(new java.awt.Color(240,240,240));
+                                jLabel_Direction.setForeground(new java.awt.Color(240,240,240));
+
+                                jTextField_Name.requestFocus();
+                                
                                 cn2.close();
 
                             } catch (SQLException e) {
@@ -355,4 +359,27 @@ public class Register_User extends javax.swing.JPanel {
     public javax.swing.JTextField jTextField_Telephone;
     public javax.swing.JTextField jTextField_Username;
     // End of variables declaration//GEN-END:variables
+
+    private void Pintar() {
+
+        jLabel_Name.setForeground(Color.GREEN);
+        jLabel_Telephone.setForeground(Color.GREEN);
+        jLabel_Username.setForeground(Color.GREEN);
+        jLabel_Password.setForeground(Color.GREEN);
+        jLabel_Permission.setForeground(Color.GREEN);
+        jLabel_Direction.setForeground(Color.GREEN);
+
+    }
+
+    private void Limpiar() {
+
+        jTextField_Name.setText("");
+        jTextField_Username.setText("");
+        jTextField_Telephone.setText("");
+        jPasswordField_Password.setText("");
+        jComboBox_Permission.setSelectedIndex(0);
+        jComboBox_Direction.setSelectedIndex(0);
+
+    }
+
 }

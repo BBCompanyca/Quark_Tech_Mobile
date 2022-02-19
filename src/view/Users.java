@@ -3,10 +3,12 @@ package view;
 import clases.TextPrompt;
 import java.sql.*;
 import clases.BD_Connection;
+import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import static view.Dashboard.jPanel_Content;
 
 public final class Users extends javax.swing.JPanel {
 
@@ -132,6 +134,16 @@ public final class Users extends javax.swing.JPanel {
         add(jButton_Search_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 80, 30));
 
         jButton_New_User.setText("NUEVO");
+        jButton_New_User.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_New_UserMousePressed(evt);
+            }
+        });
+        jButton_New_User.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_New_UserActionPerformed(evt);
+            }
+        });
         add(jButton_New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 100, 35));
 
         jButton_Update_User.setText("MODIFICAR");
@@ -285,6 +297,25 @@ public final class Users extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jTextField_Search_UserKeyPressed
+
+    private void jButton_New_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_New_UserMousePressed
+        
+        //Método para llamar a la interfaz de registrar usuarios...
+        Register_User pl = new Register_User();
+        pl.setSize(790, 370);
+        pl.setLocation(0, 0);
+        pl.jTextField_Name.requestFocus();
+        
+        jPanel_Content.removeAll();
+        jPanel_Content.add(pl, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+        
+    }//GEN-LAST:event_jButton_New_UserMousePressed
+
+    private void jButton_New_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_New_UserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_New_UserActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

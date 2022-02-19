@@ -408,7 +408,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void Btn_UsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_UsersMousePressed
 
-        //Método para llamar a la interfaz de registrar usuarios...
+        //Método para llamar a la interfaz de usuarios...
         Users p1 = new Users();
         p1.setSize(790, 370);
         p1.setLocation(0, 0);
@@ -485,7 +485,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_background_Down;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel_Background;
-    private javax.swing.JPanel jPanel_Content;
+    public static javax.swing.JPanel jPanel_Content;
     private javax.swing.JPanel jPanel_Exit;
     private javax.swing.JPanel jPanel_Head;
     private javax.swing.JPanel jPanel_Menu;
