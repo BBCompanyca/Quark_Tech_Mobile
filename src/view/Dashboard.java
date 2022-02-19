@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 public class Dashboard extends javax.swing.JFrame {
 
     String user;
+    int xMouse, yMouse;
     
     public Dashboard() {
         initComponents();
@@ -308,6 +309,16 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Username.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Username.setText("Username");
+        jLabel_Username.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel_UsernameMouseDragged(evt);
+            }
+        });
+        jLabel_Username.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel_UsernameMousePressed(evt);
+            }
+        });
         jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 2, 755, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -419,6 +430,21 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Content.repaint();
 
     }//GEN-LAST:event_Btn_UsersMousePressed
+
+    private void jLabel_UsernameMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_UsernameMouseDragged
+        
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x-xMouse,y-yMouse);
+        
+    }//GEN-LAST:event_jLabel_UsernameMouseDragged
+
+    private void jLabel_UsernameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_UsernameMousePressed
+        
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+        
+    }//GEN-LAST:event_jLabel_UsernameMousePressed
 
     /**
      * @param args the command line arguments

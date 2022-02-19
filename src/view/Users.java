@@ -77,6 +77,11 @@ public final class Users extends javax.swing.JPanel {
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 590, 10));
 
         jButton_Delete_User.setText("BORRAR");
+        jButton_Delete_User.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_Delete_UserMousePressed(evt);
+            }
+        });
         add(jButton_Delete_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, 100, 35));
 
         jScrollPane.setBackground(new java.awt.Color(9, 53, 69));
@@ -185,7 +190,7 @@ public final class Users extends javax.swing.JPanel {
 
             query = "select id_user, name_user, username, direction, type_account, status from user "
                     + "where id_user = '" + search + "' or name_user = '" + search + "' or "
-                    + "username = '" + search + "' or direction = '" + search + "' or type_account = '" 
+                    + "username = '" + search + "' or direction = '" + search + "' or type_account = '"
                     + search + "' or status = '" + search + "'";
 
         }
@@ -309,18 +314,18 @@ public final class Users extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField_Search_UserKeyPressed
 
     private void jButton_New_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_New_UserMousePressed
-        
+
         //Método para llamar a la interfaz de registrar usuarios...
         Register_User pl = new Register_User();
         pl.setSize(790, 370);
         pl.setLocation(0, 0);
         pl.jTextField_Name.requestFocus();
-        
+
         jPanel_Content.removeAll();
         jPanel_Content.add(pl, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
-        
+
     }//GEN-LAST:event_jButton_New_UserMousePressed
 
     private void jButton_New_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_New_UserActionPerformed
@@ -332,17 +337,73 @@ public final class Users extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_Update_UserActionPerformed
 
     private void jButton_Update_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_UserMousePressed
-        
-        Update_User pl = new Update_User();
-        pl.setSize(790, 370);
-        pl.setLocation(0, 0);
-        
-        jPanel_Content.removeAll();
-        jPanel_Content.add(pl, BorderLayout.CENTER);
-        jPanel_Content.revalidate();
-        jPanel_Content.repaint();
-        
+
+        int fila_point = jTable_User.getSelectedRow();
+        int columna_punt = 0;
+
+        if (fila_point > -1) {
+
+            ID = (int) model.getValueAt(fila_point, columna_punt);
+
+            Update_User pl = new Update_User();
+            pl.setSize(790, 370);
+            pl.setLocation(0, 0);
+
+            jPanel_Content.removeAll();
+            jPanel_Content.add(pl, BorderLayout.CENTER);
+            jPanel_Content.revalidate();
+            jPanel_Content.repaint();
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un usuario!", "",
+                    JOptionPane.OK_OPTION);
+
+        }
+
     }//GEN-LAST:event_jButton_Update_UserMousePressed
+
+    private void jButton_Delete_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_UserMousePressed
+
+        int fila_point = jTable_User.getSelectedRow();
+        int columa_point = 0;
+
+        if (fila_point > -1) {
+
+            ID = (int) jTable_User.getValueAt(fila_point, columa_point);
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "delete from user where id_user = '" + ID + "'");
+
+                pst.executeUpdate();
+
+                model.setRowCount(0);
+                model.setColumnCount(0);
+                getUsers();
+
+                JOptionPane.showMessageDialog(null, "Usuario eliminado.");
+
+                cn.close();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al eliminar el usuario! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
+                        JOptionPane.OK_CANCEL_OPTION);
+
+            }
+
+        } else {
+            
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un usuario!", "¡Acceso Denegado!", 
+                    JOptionPane.WARNING_MESSAGE);
+            
+        }
+
+    }//GEN-LAST:event_jButton_Delete_UserMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
