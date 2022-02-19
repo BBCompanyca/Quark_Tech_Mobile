@@ -6,17 +6,17 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-    
+
     public static String user;
     public String pass;
 
     public Login() {
         initComponents();
-        
+
         setLocationRelativeTo(null);
         setResizable(false);
         setSize(700, 500);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -144,76 +144,98 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
-        
+
         jPanel_Exit.setBackground(Color.red);
-        
+
     }//GEN-LAST:event_jLabel4MouseEntered
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
-        
+
         jPanel_Exit.setBackground(new java.awt.Color(9, 53, 69));
-        
+
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        
+
         System.exit(0);
-        
+
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jButton_AccederMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_AccederMousePressed
-        
+
         //Obtención de los datos ingresados por el usuario...
         user = jTextField_Username.getText().trim();
         pass = jPasswordField_Password.getText().trim();
-        
+        String type_account = "", status = "";
+
         //Validación de que todos los campos estén llenos.
         if (!user.equals("") && !pass.equals("")) {
-            
+
             try {
-                
+
                 //Conexión a la base de datos para consultar los datos del usuario...
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select username, password from user where username = '" + user + "' and password = '" + pass + "'");
-                
+                        "select type_account, status from user where username = '" + user + "' and password = '" + pass + "'");
+
                 ResultSet rs = pst.executeQuery();
-                
+
                 if (rs.next()) {
-                    
-                    //Si encuentra los valores cierra la ventana de login y abre la ventanta principal...
-                    this.dispose();
-                    Dashboard window = new Dashboard();
-                    window.setVisible(true);
-                    
+
+                    status = rs.getString("status");
+                    type_account = rs.getString("type_account");
+
+                    //Condicional para validar que el usuario esté activo...
+                    if (status.equals("Activo")) {
+
+                        //Condicional para validar el tipo de cuenta que tiene el usuario...
+                        if (type_account.equals("Administrador")) {
+
+                            this.dispose();
+                            Dashboard window = new Dashboard();
+                            window.setVisible(true);
+
+                        }
+
+                    } else {
+
+                        //Si el usuario está inactivo dejará un mensaje y limpiará los campos...
+                        jLabel_Anwser.setText("¡Usuario inactivo! contacte a un Administrador.");
+
+                        jTextField_Username.setText("");
+                        jTextField_Username.requestFocus();
+                        jPasswordField_Password.setText("");
+
+                    }
+
                 } else {
-                    
+
                     //Si no encuentra los valores dejará un mensaje y limpiará los campos...
                     jLabel_Anwser.setText("¡Datos de acceso incorrectos!");
-                    
+
                     jTextField_Username.setText("");
                     jTextField_Username.requestFocus();
                     jPasswordField_Password.setText("");
-                    
+
                 }
-                
+
                 cn.close();
-                
+
             } catch (SQLException e) {
-                
+
                 //Mensaje de error para alertar que algo no funciona en el Login...
                 System.err.println("¡Error en el botón de acceder! " + e);
                 JOptionPane.showMessageDialog(null, "¡Error en el boton acceder!");
-                
-            } 
-            
+
+            }
+
         } else {
-            
+
             //Mensaje en dado caso que alguno de los campos esté vacio...
             jLabel_Anwser.setText("¡Debes llenar todos los campos!");
-            
+
         }
-        
+
     }//GEN-LAST:event_jButton_AccederMousePressed
 
     /**

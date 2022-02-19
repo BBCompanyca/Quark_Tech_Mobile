@@ -271,7 +271,7 @@ public class Register_User extends javax.swing.JPanel {
 
                                 Connection cn2 = BD_Connection.connection();
                                 PreparedStatement pst2 = cn2.prepareStatement(
-                                        "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                        "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                                 pst2.setInt(1, 0);
                                 pst2.setString(2, name);
@@ -282,6 +282,7 @@ public class Register_User extends javax.swing.JPanel {
                                 pst2.setString(7, permission);
                                 pst2.setString(8, username_user);
                                 pst2.setString(9, "");
+                                pst2.setString(10, "Activo");
                                 pst2.executeUpdate();
 
                                 //Pintar();
