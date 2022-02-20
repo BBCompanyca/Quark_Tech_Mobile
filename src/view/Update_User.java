@@ -10,6 +10,7 @@ import static view.Dashboard.jPanel_Content;
 
 public class Update_User extends javax.swing.JPanel {
 
+    public static String name_user;
     int ID;
     String username_login;
 
@@ -51,6 +52,7 @@ public class Update_User extends javax.swing.JPanel {
         jLabel_Direction = new javax.swing.JLabel();
         jButton_Update = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel_Title = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -58,58 +60,58 @@ public class Update_User extends javax.swing.JPanel {
         jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Name.setText("Nombre:");
-        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 55, -1, -1));
+        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         jTextField_Name.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setBorder(null);
         jTextField_Name.setCaretColor(new java.awt.Color(240, 240, 240));
-        add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 240, 30));
+        add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 240, 30));
 
         jTextField_Telephone.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setBorder(null);
         jTextField_Telephone.setCaretColor(new java.awt.Color(240, 240, 240));
-        add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 240, 30));
+        add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 240, 30));
 
         jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Status.setText("Estatus:");
-        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, -1, -1));
+        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, -1, -1));
 
         jTextField_Username.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Username.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Username.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Username.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Username.setBorder(null);
         jTextField_Username.setCaretColor(new java.awt.Color(240, 240, 240));
-        add(jTextField_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 240, 30));
+        add(jTextField_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 240, 30));
 
         jLabel_Username.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Username.setText("Nombre De Usuario:");
-        add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 55, -1, -1));
+        add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(240, 240, 240));
         jLabel4.setText("Modificado Por:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 145, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, -1));
 
         jTextField_Last_Modification.setEditable(false);
         jTextField_Last_Modification.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Last_Modification.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Last_Modification.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Last_Modification.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Last_Modification.setBorder(null);
         jTextField_Last_Modification.setCaretColor(new java.awt.Color(240, 240, 240));
-        add(jTextField_Last_Modification, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 240, 30));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 240, -1));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 240, -1));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 240, -1));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 240, -1));
+        add(jTextField_Last_Modification, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 240, 30));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 240, -1));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 240, -1));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 240, -1));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 240, -1));
 
         jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Administrador", "Gerente", "Tecnico" }));
-        add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 265, 110, -1));
+        add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 110, -1));
 
         jComboBox_Direction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Almacen", "Caricuao", "City Market" }));
         jComboBox_Direction.addActionListener(new java.awt.event.ActionListener() {
@@ -117,25 +119,25 @@ public class Update_User extends javax.swing.JPanel {
                 jComboBox_DirectionActionPerformed(evt);
             }
         });
-        add(jComboBox_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 265, 100, -1));
+        add(jComboBox_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 290, 100, -1));
 
         jComboBox_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 265, -1, -1));
+        add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
 
         jLabel_Telephono.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Telephono.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Telephono.setText("Teléfono:");
-        add(jLabel_Telephono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 145, -1, -1));
+        add(jLabel_Telephono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
         jLabel_Type_Account.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Type_Account.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Type_Account.setText("Permisos De:");
-        add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
         jLabel_Direction.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Direction.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Direction.setText("Dirección:");
-        add(jLabel_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 240, -1, -1));
+        add(jLabel_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 270, -1, -1));
 
         jButton_Update.setText("Modificar");
         jButton_Update.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,10 +145,21 @@ public class Update_User extends javax.swing.JPanel {
                 jButton_UpdateMousePressed(evt);
             }
         });
-        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 250, 140, 40));
+        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 280, 140, 40));
 
         jButton2.setText("Contraseña");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 140, 40));
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 140, 40));
+
+        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Title.setText("jLabel1");
+        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 790, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox_DirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_DirectionActionPerformed
@@ -199,7 +212,7 @@ public class Update_User extends javax.swing.JPanel {
 
         }
 
-        if (type_account.equals("")) {
+        if (type_account.equals("...")) {
 
             flag_two++;
             jLabel_Type_Account.setForeground(Color.red);
@@ -210,7 +223,7 @@ public class Update_User extends javax.swing.JPanel {
 
         }
 
-        if (direction.equals("")) {
+        if (direction.equals("...")) {
 
             flag_tree++;
             jLabel_Direction.setForeground(Color.red);
@@ -270,26 +283,10 @@ public class Update_User extends javax.swing.JPanel {
                                 pst2.setString(7, status);
                                 pst2.executeUpdate();
 
-                                jLabel_Direction.setForeground(Color.GREEN);
-                                jLabel_Name.setForeground(Color.GREEN);
-                                jLabel_Status.setForeground(Color.GREEN);
-                                jLabel_Telephono.setForeground(Color.GREEN);
-                                jLabel_Type_Account.setForeground(Color.GREEN);
-                                jLabel_Username.setForeground(Color.GREEN);
-                                jLabel4.setForeground(Color.GREEN);
-
-                                jTextField_Name.setText("");
-                                jTextField_Telephone.setText("");
-                                jTextField_Username.setText("");
-                                jTextField_Last_Modification.setText("");
-                                jComboBox_Status.setSelectedIndex(0);
-                                jComboBox_Direction.setSelectedIndex(0);
-                                jComboBox_Type_Account.setSelectedIndex(0);
-
                                 JOptionPane.showMessageDialog(null, "Modificación exitosa.");
-                                
+
                                 cn2.close();
-                                
+
                                 NextWindow();
 
                             } catch (SQLException e) {
@@ -333,6 +330,19 @@ public class Update_User extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton_UpdateMousePressed
 
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+        
+        Reset_Password pl = new Reset_Password();
+        pl.setSize(790, 370);
+        pl.setLocation(0, 0);
+        
+        jPanel_Content.removeAll();
+        jPanel_Content.add(pl, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+        
+    }//GEN-LAST:event_jButton2MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
@@ -345,6 +355,7 @@ public class Update_User extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_Name;
     private javax.swing.JLabel jLabel_Status;
     private javax.swing.JLabel jLabel_Telephono;
+    private javax.swing.JLabel jLabel_Title;
     private javax.swing.JLabel jLabel_Type_Account;
     private javax.swing.JLabel jLabel_Username;
     private javax.swing.JSeparator jSeparator1;
@@ -371,6 +382,9 @@ public class Update_User extends javax.swing.JPanel {
 
             if (rs.next()) {
 
+                name_user = rs.getString("name_user");
+                
+                jLabel_Title.setText("Modificar La Información Del Usuario - " + rs.getString("name_user"));
                 jTextField_Name.setText(rs.getString("name_user"));
                 jTextField_Telephone.setText(rs.getString("telephone"));
                 jTextField_Username.setText(rs.getString("username"));
@@ -392,18 +406,41 @@ public class Update_User extends javax.swing.JPanel {
         }
 
     }
-    
-    private void NextWindow(){
-        
+
+    //Método para limpar los campos de texto...
+    private void ClearCamps() {
+
+        jLabel_Direction.setForeground(Color.GREEN);
+        jLabel_Name.setForeground(Color.GREEN);
+        jLabel_Status.setForeground(Color.GREEN);
+        jLabel_Telephono.setForeground(Color.GREEN);
+        jLabel_Type_Account.setForeground(Color.GREEN);
+        jLabel_Username.setForeground(Color.GREEN);
+        jLabel4.setForeground(Color.GREEN);
+
+        jLabel_Title.setText("");
+        jTextField_Name.setText("");
+        jTextField_Telephone.setText("");
+        jTextField_Username.setText("");
+        jTextField_Last_Modification.setText("");
+        jComboBox_Status.setSelectedIndex(0);
+        jComboBox_Direction.setSelectedIndex(0);
+        jComboBox_Type_Account.setSelectedIndex(0);
+
+    }
+
+    //Método para volver a la interfaz de users...
+    private void NextWindow() {
+
         Users pl = new Users();
         pl.setSize(970, 370);
         pl.setLocation(0, 0);
-        
+
         jPanel_Content.removeAll();
         jPanel_Content.add(pl, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
-        
+
     }
 
 }

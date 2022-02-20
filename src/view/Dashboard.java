@@ -11,7 +11,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     String user;
     int xMouse, yMouse;
-    
+
     public Dashboard() {
         initComponents();
 
@@ -19,21 +19,20 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setSize(1000, 600);
-        
+
         //Nombre de usuario que ha iniciado sesión...
-        user = Login.user; 
+        user = Login.user;
 
         //Los siguientes metodos están al final de está clase...
-        
         //Método para obtener la fecha actual...
         Date();
-        
+
         //Método para llamar al panel con que se va a iniciar la aplicación...
         PanelStart();
-        
+
         //Método para consultar la información del usuario que ha iniciado sesión...
         BD_Consult();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -432,18 +431,18 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_UsersMousePressed
 
     private void jLabel_UsernameMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_UsernameMouseDragged
-        
+
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        this.setLocation(x-xMouse,y-yMouse);
-        
+        this.setLocation(x - xMouse, y - yMouse);
+
     }//GEN-LAST:event_jLabel_UsernameMouseDragged
 
     private void jLabel_UsernameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_UsernameMousePressed
-        
+
         xMouse = evt.getX();
         yMouse = evt.getY();
-        
+
     }//GEN-LAST:event_jLabel_UsernameMousePressed
 
     /**
@@ -526,7 +525,7 @@ public class Dashboard extends javax.swing.JFrame {
         int dia = now.getDayOfMonth();
         int month = now.getMonthValue();
         String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", " ;Septiembre",
-             "Octubre", "Noviembre", "Diciemrbre"};
+            "Octubre", "Noviembre", "Diciemrbre"};
         jLabel_Fecha.setText("Fecha: " + dia + " de " + meses[month - 1] + " de " + year);
 
     }
@@ -546,41 +545,39 @@ public class Dashboard extends javax.swing.JFrame {
         Btn_Main.setBackground(new java.awt.Color(78, 140, 121));
 
     }
-    
+
     //Método para consultar la información del usuario que inició sesión...
-    public void BD_Consult(){
-        
+    public void BD_Consult() {
+
         try {
-            
+
             //Conexión y consulta a la BD...
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select id_user, name_user, type_account from user where username = '" + user + "'");
-            
+
             ResultSet rs = pst.executeQuery();
-            
+
             if (rs.next()) {
-                
+
                 //Llenado de los campos con la información del usuario...
                 jLabel_Username.setText(user);
                 jLabel_Type_Account.setText(rs.getString("type_account"));
                 jLabel_Name.setText(rs.getString("name_user"));
                 jLabel_ID.setText(rs.getString("id_user"));
-                
+
             }
-            
+
             cn.close();
-            
+
         } catch (SQLException e) {
-            
+
             //Alerta de que algo no funciona en la consulta de la información del usuario...
             System.err.println("¡Error al consultar la información del usuario! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del usuario!", "¡Error!", 
+            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del usuario!", "¡Error!",
                     JOptionPane.OK_CANCEL_OPTION);
-            
+
         }
-    
-              
-        
+
     }
 }

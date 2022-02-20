@@ -154,14 +154,12 @@ public class Register_User extends javax.swing.JPanel {
         //Variables para validar que los campos de textos no esten vacios...
         int flag = 0, flag_two = 0, flag_tree = 0;
 
-        String name, telephone, username, password, permission, direction;
-
-        name = jTextField_Name.getText().trim();
-        telephone = jTextField_Telephone.getText().trim();
-        username = jTextField_Username.getText().trim();
-        password = jPasswordField_Password.getText().trim();
-        permission = jComboBox_Permission.getSelectedItem().toString();
-        direction = jComboBox_Direction.getSelectedItem().toString();
+        String name = jTextField_Name.getText().trim();
+        String telephone = jTextField_Telephone.getText().trim();
+        String username = jTextField_Username.getText().trim();
+        String password = jPasswordField_Password.getText().trim();
+        String permission = jComboBox_Permission.getSelectedItem().toString();
+        String direction = jComboBox_Direction.getSelectedItem().toString();
 
         if (name.equals("")) {
 
@@ -280,20 +278,13 @@ public class Register_User extends javax.swing.JPanel {
                                 pst2.setString(10, "Activo");
                                 pst2.executeUpdate();
 
-                                Pintar();
-                                Limpiar();
+                                PintarDeVerdejTextField();
+                                VaciarCamposDeTextos();
 
                                 JOptionPane.showMessageDialog(null, "Registro Exitoso.", "Exito",
                                         JOptionPane.INFORMATION_MESSAGE);
 
-                                jLabel_Name.setForeground(new java.awt.Color(240,240,240));
-                                jLabel_Telephone.setForeground(new java.awt.Color(240,240,240));
-                                jLabel_Username.setForeground(new java.awt.Color(240,240,240));
-                                jLabel_Password.setForeground(new java.awt.Color(240,240,240));
-                                jLabel_Permission.setForeground(new java.awt.Color(240,240,240));
-                                jLabel_Direction.setForeground(new java.awt.Color(240,240,240));
-
-                                jTextField_Name.requestFocus();
+                                PintarDeRojojTextField();
                                 
                                 cn2.close();
 
@@ -360,7 +351,7 @@ public class Register_User extends javax.swing.JPanel {
     public javax.swing.JTextField jTextField_Username;
     // End of variables declaration//GEN-END:variables
 
-    private void Pintar() {
+    private void PintarDeVerdejTextField() {
 
         jLabel_Name.setForeground(Color.GREEN);
         jLabel_Telephone.setForeground(Color.GREEN);
@@ -370,8 +361,19 @@ public class Register_User extends javax.swing.JPanel {
         jLabel_Direction.setForeground(Color.GREEN);
 
     }
+    
+    private void PintarDeRojojTextField() {
 
-    private void Limpiar() {
+        jLabel_Name.setForeground(Color.red);
+        jLabel_Telephone.setForeground(Color.red);
+        jLabel_Username.setForeground(Color.red);
+        jLabel_Password.setForeground(Color.red);
+        jLabel_Permission.setForeground(Color.red);
+        jLabel_Direction.setForeground(Color.red);
+
+    }
+
+    private void VaciarCamposDeTextos() {
 
         jTextField_Name.setText("");
         jTextField_Username.setText("");
@@ -379,6 +381,8 @@ public class Register_User extends javax.swing.JPanel {
         jPasswordField_Password.setText("");
         jComboBox_Permission.setSelectedIndex(0);
         jComboBox_Direction.setSelectedIndex(0);
+        
+        jTextField_Name.requestFocus();
 
     }
 

@@ -176,7 +176,7 @@ public class Login extends javax.swing.JFrame {
                 //Conexión a la base de datos para consultar los datos del usuario...
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select type_account, status from user where username = '" + user + "' and password = '" + pass + "'");
+                        "select username, type_account, status from user where username = '" + user + "' and password = '" + pass + "'");
 
                 ResultSet rs = pst.executeQuery();
 
@@ -184,6 +184,7 @@ public class Login extends javax.swing.JFrame {
 
                     status = rs.getString("status");
                     type_account = rs.getString("type_account");
+                    user = rs.getString("username");
 
                     //Condicional para validar que el usuario esté activo...
                     if (status.equals("Activo")) {

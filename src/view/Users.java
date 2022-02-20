@@ -392,7 +392,7 @@ public final class Users extends javax.swing.JPanel {
 
                 System.err.println("¡Error al eliminar el usuario! " + e);
                 JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
-                        JOptionPane.OK_CANCEL_OPTION);
+                        JOptionPane.OK_OPTION);
 
             }
 
