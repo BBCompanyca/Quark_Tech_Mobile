@@ -3,48 +3,51 @@ package view;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.TextPrompt;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import static view.Dashboard.jPanel_Content;
 
 public class Reset_Password extends javax.swing.JPanel {
 
     int ID;
     String name_user;
-    
+
     public Reset_Password() {
         initComponents();
-        
+
         ID = Users.ID;
         name_user = Update_User.name_user;
-        
+
         //Titulo del panel...
         jLabel_Title.setText("Restaurar La Contraseña Del Usuario - " + name_user);
-        
+
         //Objetos para el PlayHolders de los campos de texto...
         TextPrompt password = new TextPrompt("Ingrese la contraseña", jPasswordField_Password);
         TextPrompt PasswordConfirm = new TextPrompt("Confirme la contraseña", jPasswordField_ConfirmPassword);
-        
+
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabel_newPass = new javax.swing.JLabel();
         jPasswordField_ConfirmPassword = new javax.swing.JPasswordField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel_confirmPass = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        jButton_Restart = new javax.swing.JButton();
         jLabel_Title = new javax.swing.JLabel();
         jPasswordField_Password = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel1.setText("Contraseña:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
+        jLabel_newPass.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        jLabel_newPass.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_newPass.setText("Contraseña:");
+        add(jLabel_newPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
 
         jPasswordField_ConfirmPassword.setBackground(new java.awt.Color(9, 53, 69));
         jPasswordField_ConfirmPassword.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -57,20 +60,25 @@ public class Reset_Password extends javax.swing.JPanel {
         });
         add(jPasswordField_ConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 250, 30));
 
-        jLabel2.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel2.setText("Confirmar contraseña:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
+        jLabel_confirmPass.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        jLabel_confirmPass.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_confirmPass.setText("Confirmar contraseña:");
+        add(jLabel_confirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 250, 10));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 250, 10));
 
-        jButton1.setText("Restaurar");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 190, 40));
+        jButton_Restart.setText("Restaurar");
+        jButton_Restart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_RestartMousePressed(evt);
+            }
+        });
+        add(jButton_Restart, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 190, 40));
 
         jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Title.setText("Restaurar contraseña usuario - Neifer Reveron");
+        jLabel_Title.setText("Restaurar contraseña usuario - Name");
         add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 790, 50));
 
         jPasswordField_Password.setBackground(new java.awt.Color(9, 53, 69));
@@ -93,15 +101,97 @@ public class Reset_Password extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField_PasswordActionPerformed
 
+    private void jButton_RestartMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RestartMousePressed
+
+        int flag = 0;
+
+        //Get values of password...
+        String newPass = jPasswordField_Password.getText().trim();
+        String confirmPass = jPasswordField_ConfirmPassword.getText().trim();
+
+        //Validate the camp not is null...
+        if (newPass.equals("")) {
+
+            flag++;
+            jLabel_newPass.setForeground(Color.red);
+
+        } else {
+
+            jLabel_newPass.setForeground(new java.awt.Color(240, 240, 240));
+
+        }
+
+        //Validate the camp not is null...
+        if (confirmPass.equals("")) {
+
+            flag++;
+            jLabel_confirmPass.setForeground(Color.red);
+
+        } else {
+
+            jLabel_confirmPass.setForeground(new java.awt.Color(240, 240, 240));
+
+        }
+        
+        if (flag == 0) {
+            
+            try {
+                
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement("update user set password = ? where id_user = '" + ID + "'");
+                
+                pst.setString(1, newPass);
+                pst.executeUpdate();
+                
+                jPasswordField_Password.setText("");
+                jPasswordField_ConfirmPassword.setText("");
+                
+                jLabel_newPass.setForeground(Color.GREEN);
+                jLabel_confirmPass.setForeground(Color.GREEN);
+                
+                JOptionPane.showMessageDialog(null, "Contraseña restaurada.", "¡Exito!", JOptionPane.INFORMATION_MESSAGE);
+                
+                cn.close();
+                
+                nextWindow();
+                
+            } catch (SQLException e) {
+                
+                System.err.println("¡Error al modificar la contraseña! " + e);
+                JOptionPane.showMessageDialog(null, "Error al modificar la contraseña", "¡Error!", JOptionPane.OK_OPTION);
+            } 
+            
+        } else {
+            
+            JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "!Acceso Denegado!", JOptionPane.WARNING_MESSAGE);
+            
+        }
+
+    }//GEN-LAST:event_jButton_RestartMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButton_Restart;
     private javax.swing.JLabel jLabel_Title;
+    private javax.swing.JLabel jLabel_confirmPass;
+    private javax.swing.JLabel jLabel_newPass;
     private javax.swing.JPasswordField jPasswordField_ConfirmPassword;
     private javax.swing.JPasswordField jPasswordField_Password;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
+
+    private void nextWindow(){
+        
+        Users window = new Users();
+        window.setSize(790, 370);
+        window.setLocation(0, 0);
+        
+        jPanel_Content.removeAll();
+        jPanel_Content.add(window, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+        
+    }
+
 }
