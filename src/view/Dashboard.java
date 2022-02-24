@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.sql.*;
 import clases.BD_Connection;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class Dashboard extends javax.swing.JFrame {
 
@@ -165,6 +166,9 @@ public class Dashboard extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 Btn_ClientsMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Btn_ClientsMousePressed(evt);
+            }
         });
         Btn_Clients.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -187,6 +191,9 @@ public class Dashboard extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 Btn_EquiposMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Btn_EquiposMousePressed(evt);
+            }
         });
         Btn_Equipos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -208,6 +215,9 @@ public class Dashboard extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 Btn_About_MeMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Btn_About_MeMousePressed(evt);
             }
         });
         Btn_About_Me.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -354,65 +364,127 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void Btn_MainMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMouseEntered
 
-        Btn_Main.setBackground(new java.awt.Color(78, 140, 121));
+        if (Btn_Main.getBackground().getRGB() == -11634567) {
+
+            setColor(Btn_Main);
+
+        }
+
 
     }//GEN-LAST:event_Btn_MainMouseEntered
 
     private void Btn_MainMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMouseExited
 
-        Btn_Main.setBackground(new java.awt.Color(78, 120, 121));
+        if (Btn_Users.getBackground().getRGB() != -11634567 || Btn_Clients.getBackground().getRGB() != -11634567
+                || Btn_Equipos.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
+
+            resetColor(Btn_Main);
+
+        }
 
     }//GEN-LAST:event_Btn_MainMouseExited
 
     private void Btn_UsersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_UsersMouseEntered
 
-        Btn_Users.setBackground(new java.awt.Color(78, 140, 121));
+        if (Btn_Users.getBackground().getRGB() == -11634567) {
+
+            setColor(Btn_Users);
+
+        }
 
     }//GEN-LAST:event_Btn_UsersMouseEntered
 
     private void Btn_UsersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_UsersMouseExited
 
-        Btn_Users.setBackground(new java.awt.Color(78, 120, 121));
+        if (Btn_Main.getBackground().getRGB() != -11634567 || Btn_Clients.getBackground().getRGB() != -11634567
+                || Btn_Equipos.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
+
+            resetColor(Btn_Users);
+
+        }
 
     }//GEN-LAST:event_Btn_UsersMouseExited
 
     private void Btn_ClientsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ClientsMouseEntered
 
-        Btn_Clients.setBackground(new java.awt.Color(78, 140, 121));
+        if (Btn_Clients.getBackground().getRGB() == -11634567) {
+
+            setColor(Btn_Clients);
+
+        }
 
     }//GEN-LAST:event_Btn_ClientsMouseEntered
 
     private void Btn_ClientsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ClientsMouseExited
 
-        Btn_Clients.setBackground(new java.awt.Color(78, 120, 121));
+        if (Btn_Users.getBackground().getRGB() != -11634567 || Btn_Main.getBackground().getRGB() != -11634567
+                || Btn_Equipos.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
+
+            resetColor(Btn_Clients);
+
+        }
 
     }//GEN-LAST:event_Btn_ClientsMouseExited
 
     private void Btn_EquiposMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMouseEntered
 
-        Btn_Equipos.setBackground(new java.awt.Color(78, 140, 121));
+        if (Btn_Equipos.getBackground().getRGB() == -11634567) {
+
+            setColor(Btn_Equipos);
+
+        }
 
     }//GEN-LAST:event_Btn_EquiposMouseEntered
 
     private void Btn_EquiposMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMouseExited
 
-        Btn_Equipos.setBackground(new java.awt.Color(78, 120, 121));
+        if (Btn_Users.getBackground().getRGB() != -11634567 || Btn_Main.getBackground().getRGB() != -11634567
+                || Btn_Clients.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
+
+            resetColor(Btn_Equipos);
+
+        }
 
     }//GEN-LAST:event_Btn_EquiposMouseExited
 
     private void Btn_About_MeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMouseEntered
 
-        Btn_About_Me.setBackground(new java.awt.Color(78, 140, 121));
+        if (Btn_About_Me.getBackground().getRGB() == -11634567) {
+
+            setColor(Btn_About_Me);
+
+        }
 
     }//GEN-LAST:event_Btn_About_MeMouseEntered
 
     private void Btn_About_MeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMouseExited
 
-        Btn_About_Me.setBackground(new java.awt.Color(78, 120, 121));
+        if (Btn_Users.getBackground().getRGB() != -11634567 || Btn_Main.getBackground().getRGB() != -11634567
+                || Btn_Clients.getBackground().getRGB() != -11634567 || Btn_Equipos.getBackground().getRGB() != -11634567) {
+
+            resetColor(Btn_About_Me);
+
+        }
 
     }//GEN-LAST:event_Btn_About_MeMouseExited
 
     private void Btn_MainMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMousePressed
+
+        //Método para llamar a la interfaz de usuarios...
+        Principal p1 = new Principal();
+        p1.setSize(790, 370);
+        p1.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(p1, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+        setColor(Btn_Main);
+        resetColor(Btn_Users);
+        resetColor(Btn_Clients);
+        resetColor(Btn_Equipos);
+        resetColor(Btn_About_Me);
 
     }//GEN-LAST:event_Btn_MainMousePressed
 
@@ -427,6 +499,12 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Content.add(p1, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
+
+        resetColor(Btn_Main);
+        setColor(Btn_Users);
+        resetColor(Btn_Clients);
+        resetColor(Btn_Equipos);
+        resetColor(Btn_About_Me);
 
     }//GEN-LAST:event_Btn_UsersMousePressed
 
@@ -444,6 +522,36 @@ public class Dashboard extends javax.swing.JFrame {
         yMouse = evt.getY();
 
     }//GEN-LAST:event_jLabel_UsernameMousePressed
+
+    private void Btn_ClientsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ClientsMousePressed
+
+        resetColor(Btn_Main);
+        resetColor(Btn_Users);
+        setColor(Btn_Clients);
+        resetColor(Btn_Equipos);
+        resetColor(Btn_About_Me);
+
+    }//GEN-LAST:event_Btn_ClientsMousePressed
+
+    private void Btn_EquiposMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMousePressed
+
+        resetColor(Btn_Main);
+        resetColor(Btn_Users);
+        resetColor(Btn_Clients);
+        setColor(Btn_Equipos);
+        resetColor(Btn_About_Me);
+
+    }//GEN-LAST:event_Btn_EquiposMousePressed
+
+    private void Btn_About_MeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMousePressed
+
+        resetColor(Btn_Main);
+        resetColor(Btn_Users);
+        resetColor(Btn_Clients);
+        resetColor(Btn_Equipos);
+        setColor(Btn_About_Me);
+
+    }//GEN-LAST:event_Btn_About_MeMousePressed
 
     /**
      * @param args the command line arguments
@@ -578,6 +686,17 @@ public class Dashboard extends javax.swing.JFrame {
                     JOptionPane.OK_CANCEL_OPTION);
 
         }
+    }
+
+    private void setColor(JPanel panel) {
+
+        panel.setBackground(new Color(78, 140, 121));
+
+    }
+
+    private void resetColor(JPanel panel) {
+
+        panel.setBackground(new Color(78, 120, 121));
 
     }
 }
