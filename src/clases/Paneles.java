@@ -7,6 +7,7 @@ import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
 import view.Principal;
+import view.Reset_Password;
 import view.Users;
 
 public class Paneles {
@@ -35,6 +36,19 @@ public class Paneles {
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 
+    }
+    
+    public void PanelResetPassword(){
+        
+        Reset_Password pl = new Reset_Password();
+        pl.setSize(790, 370);
+        pl.setLocation(0, 0);
+        
+        jPanel_Content.removeAll();
+        jPanel_Content.add(pl, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+        
     }
 
     public void PanelMenu_Mod_Admin() {

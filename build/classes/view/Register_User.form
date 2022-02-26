@@ -230,7 +230,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="240" y="280" width="-1" height="-1"/>
+          <AbsoluteConstraints x="220" y="280" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -246,7 +246,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="240" y="250" width="-1" height="-1"/>
+          <AbsoluteConstraints x="220" y="250" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -269,11 +269,12 @@
     <Component class="javax.swing.JComboBox" name="jComboBox_Permission">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="5">
             <StringItem index="0" value="..."/>
-            <StringItem index="1" value="Administrador"/>
-            <StringItem index="2" value="Gerente"/>
-            <StringItem index="3" value="Tecnico"/>
+            <StringItem index="1" value="Moderador"/>
+            <StringItem index="2" value="Administrador"/>
+            <StringItem index="3" value="Vendedor"/>
+            <StringItem index="4" value="Tecnico"/>
           </StringArray>
         </Property>
       </Properties>

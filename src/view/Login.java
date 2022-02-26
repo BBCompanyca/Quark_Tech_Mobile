@@ -9,6 +9,7 @@ public class Login extends javax.swing.JFrame {
 
     public static String user;
     public static String type_account;
+    public static String direction;
     public String pass;
 
     public Login() {
@@ -177,7 +178,7 @@ public class Login extends javax.swing.JFrame {
                 //Conexión a la base de datos para consultar los datos del usuario...
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select username, password, type_account, status from user where username = '" + user2 + "' and password = '" + pass2 + "'");
+                        "select username, password, direction, type_account, status from user where username = '" + user2 + "' and password = '" + pass2 + "'");
 
                 ResultSet rs = pst.executeQuery();
 
@@ -187,6 +188,7 @@ public class Login extends javax.swing.JFrame {
                     type_account = rs.getString("type_account");
                     user = rs.getString("username");
                     pass = rs.getString("password");
+                    direction = rs.getString("direction");
 
                     if (user.equals(user2) && pass.equals(pass2)) {
 

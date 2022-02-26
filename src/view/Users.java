@@ -13,11 +13,15 @@ import static view.Dashboard.jPanel_Content;
 public final class Users extends javax.swing.JPanel {
 
     public static int ID;
+    String direction, type_Account;
 
     DefaultTableModel model = new DefaultTableModel();
 
     public Users() {
         initComponents();
+
+        direction = Login.direction;
+        type_Account = Login.type_account;
 
         //Objeto para el PlayHolders del jTextField buscar usuarios...
         TextPrompt search_user = new TextPrompt("Ingrese algún parametro", jTextField_Search_User);
@@ -397,10 +401,10 @@ public final class Users extends javax.swing.JPanel {
             }
 
         } else {
-            
-            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un usuario!", "¡Acceso Denegado!", 
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un usuario!", "¡Acceso Denegado!",
                     JOptionPane.WARNING_MESSAGE);
-            
+
         }
 
     }//GEN-LAST:event_jButton_Delete_UserMousePressed
@@ -420,46 +424,95 @@ public final class Users extends javax.swing.JPanel {
 
     private void getUsers() {
 
-        try {
+        if (type_Account.equals("Moderador")) {
 
-            //Conexión a la BD para consultar la lista de los usuarios...
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select id_user, name_user, username, direction, type_account, status from user");
+            try {
 
-            ResultSet rs = pst.executeQuery();
+                //Conexión a la BD para consultar la lista de los usuarios para administradores...
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select id_user, name_user, username, direction, type_account, status from user");
 
-            //Diseño de la tabla...
-            jTable_User = new JTable(model);
-            jScrollPane.setViewportView(jTable_User);
+                ResultSet rs = pst.executeQuery();
 
-            model.addColumn("ID");
-            model.addColumn("Nombre");
-            model.addColumn("Nombre De Usuario");
-            model.addColumn("Dirección");
-            model.addColumn("Permisos De");
-            model.addColumn("Estatus");
+                //Diseño de la tabla...
+                jTable_User = new JTable(model);
+                jScrollPane.setViewportView(jTable_User);
 
-            while (rs.next()) {
+                model.addColumn("ID");
+                model.addColumn("Nombre");
+                model.addColumn("Nombre De Usuario");
+                model.addColumn("Dirección");
+                model.addColumn("Permisos De");
+                model.addColumn("Estatus");
 
-                Object[] fila = new Object[6];
-                for (int i = 0; i < 6; i++) {
+                while (rs.next()) {
 
-                    fila[i] = rs.getObject(i + 1);
+                    Object[] fila = new Object[6];
+                    for (int i = 0; i < 6; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
 
                 }
 
-                model.addRow(fila);
+                cn.close();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la lista de usuarios! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de usuarios!", "¡Error!",
+                        JOptionPane.OK_CANCEL_OPTION);
 
             }
 
-            cn.close();
+        } else {
 
-        } catch (SQLException e) {
+            try {
 
-            System.err.println("¡Error al consultar la lista de usuarios! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de usuarios!", "¡Error!",
-                    JOptionPane.OK_CANCEL_OPTION);
+                //Conexión a la BD para consultar la lista de los usuarios para administradores...
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select id_user, name_user, username, type_account, status from user where direction = '"
+                        + direction + "'");
+
+                ResultSet rs = pst.executeQuery();
+
+                //Diseño de la tabla...
+                jTable_User = new JTable(model);
+                jScrollPane.setViewportView(jTable_User);
+
+                model.addColumn("ID");
+                model.addColumn("Nombre");
+                model.addColumn("Nombre De Usuario");
+                model.addColumn("Permisos De");
+                model.addColumn("Estatus");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[5];
+                    for (int i = 0; i < 5; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+                cn.close();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la lista de usuarios! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de usuarios!", "¡Error!",
+                        JOptionPane.OK_CANCEL_OPTION);
+
+            }
 
         }
 
