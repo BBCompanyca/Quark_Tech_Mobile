@@ -1,12 +1,13 @@
 package view;
 
-import java.awt.BorderLayout;
+import clases.Paneles;
 import java.awt.Color;
 import javax.swing.JPanel;
-import static view.Dashboard.jPanel_Content;
 
 public class Menu_Seller extends javax.swing.JPanel {
 
+    Paneles paneles = new Paneles();
+    
     public Menu_Seller() {
         initComponents();
     }
@@ -194,14 +195,7 @@ public class Menu_Seller extends javax.swing.JPanel {
     private void Btn_MainMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMousePressed
 
         //Método para llamar a la interfaz principal...
-        Principal p1 = new Principal();
-        p1.setSize(790, 370);
-        p1.setLocation(0, 0);
-
-        jPanel_Content.removeAll();
-        jPanel_Content.add(p1, BorderLayout.CENTER);
-        jPanel_Content.revalidate();
-        jPanel_Content.repaint();
+        paneles.PanelMain();
 
         setColor(Btn_Main);
         resetColor(Btn_Clients);
@@ -232,6 +226,8 @@ public class Menu_Seller extends javax.swing.JPanel {
 
     private void Btn_ClientsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ClientsMousePressed
 
+        paneles.PanelClients();
+        
         resetColor(Btn_Main);
         setColor(Btn_Clients);
         resetColor(Btn_Equipos);

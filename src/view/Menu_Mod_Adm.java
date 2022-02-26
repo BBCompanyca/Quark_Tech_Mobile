@@ -338,6 +338,8 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
 
     private void Btn_ClientsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ClientsMousePressed
 
+        paneles.PanelClients();
+        
         resetColor(Btn_Main);
         resetColor(Btn_Users);
         setColor(Btn_Clients);

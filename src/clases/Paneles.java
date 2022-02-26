@@ -1,12 +1,14 @@
 package clases;
 
 import java.awt.BorderLayout;
+import view.Clients;
 import static view.Dashboard.jPanel_Content;
 import static view.Dashboard.jPanel_Content_Menu;
 import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
 import view.Principal;
+import view.Register_Client;
 import view.Reset_Password;
 import view.Users;
 
@@ -15,7 +17,7 @@ public class Paneles {
     public void PanelMain() {
 
         Principal main = new Principal();
-        main.setSize(790, 470);
+        main.setSize(790, 370);
         main.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -28,7 +30,7 @@ public class Paneles {
     public void PanelUsers() {
 
         Users users = new Users();
-        users.setSize(790, 470);
+        users.setSize(790, 370);
         users.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -37,18 +39,44 @@ public class Paneles {
         jPanel_Content.repaint();
 
     }
-    
-    public void PanelResetPassword(){
+
+    public void PanelClients() {
+
+        Clients clients = new Clients();
+        clients.setSize(790, 370);
+        clients.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(clients, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
         
+    }
+
+    public void PanelRegisterClient() {
+
+        Register_Client register_client = new Register_Client();
+        register_client.setSize(790, 370);
+        register_client.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(register_client, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+
+    public void PanelResetPassword() {
+
         Reset_Password pl = new Reset_Password();
         pl.setSize(790, 370);
         pl.setLocation(0, 0);
-        
+
         jPanel_Content.removeAll();
         jPanel_Content.add(pl, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
-        
+
     }
 
     public void PanelMenu_Mod_Admin() {

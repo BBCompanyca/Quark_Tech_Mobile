@@ -8,13 +8,14 @@ import javax.swing.JOptionPane;
 
 public class Register_User extends javax.swing.JPanel {
 
-    String username_user, type_Account;
+    String username_user, type_Account, direction_login;
 
     public Register_User() {
         initComponents();
 
         username_user = Login.user;
         type_Account = Login.type_account;
+        direction_login = Login.direction;
 
         //Objetos para el PlayHolder de los jTextField... 
         TextPrompt name = new TextPrompt("Ingrese el nombre de usuario", jTextField_Name);
@@ -154,88 +155,257 @@ public class Register_User extends javax.swing.JPanel {
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
-        //Variables para validar que los campos de textos no esten vacios...
-        int flag = 0, flag_two = 0, flag_tree = 0;
+        String name, telephone, username, password, permission, direction;
 
-        String name = jTextField_Name.getText().trim();
-        String telephone = jTextField_Telephone.getText().trim();
-        String username = jTextField_Username.getText().trim();
-        String password = jPasswordField_Password.getText().trim();
-        String permission = jComboBox_Permission.getSelectedItem().toString();
-        String direction = jComboBox_Direction.getSelectedItem().toString();
+        if (type_Account.equals("Moderador")) {
 
-        if (name.equals("")) {
+            //Variables para validar que los campos de textos no esten vacios...
+            int flag = 0, flag_two = 0, flag_tree = 0;
 
-            jLabel_Name.setForeground(Color.red);
-            flag++;
+            name = jTextField_Name.getText().trim();
+            telephone = jTextField_Telephone.getText().trim();
+            username = jTextField_Username.getText().trim();
+            password = jPasswordField_Password.getText().trim();
+            permission = jComboBox_Permission.getSelectedItem().toString();
+            direction = jComboBox_Direction.getSelectedItem().toString();
+
+            if (name.equals("")) {
+
+                jLabel_Name.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
+
+            }
+
+            if (telephone.equals("")) {
+
+                jLabel_Telephone.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_Telephone.setForeground(new java.awt.Color(240, 240, 240));
+
+            }
+
+            if (username.equals("")) {
+
+                jLabel_Username.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
+
+            }
+
+            if (password.equals("")) {
+
+                jLabel_Password.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_Password.setForeground(new java.awt.Color(240, 240, 240));
+
+            }
+
+            if (permission.equals("...")) {
+
+                jLabel_Permission.setForeground(Color.red);
+                flag_two++;
+
+            } else {
+
+                jLabel_Permission.setForeground(new java.awt.Color(240, 240, 240));
+
+            }
+
+            if (direction.equals("...")) {
+
+                jLabel_Direction.setForeground(Color.red);
+                flag_tree++;
+
+            } else {
+
+                jLabel_Direction.setForeground(new java.awt.Color(240, 240, 240));
+
+            }
+
+            //Condición para validar que los campos esten llenos...
+            if (flag == 0) {
+                //Condicion para validar que se haya seleccionado algún permiso...
+                if (flag_two == 0) {
+                    //Condición para validar que se haya seleccionado alguna dirección...
+                    if (flag_tree == 0) {
+
+                        //Algoritmo para validar que el nombre usuario sea valido...
+                        try {
+
+                            Connection cn = BD_Connection.connection();
+                            PreparedStatement pst = cn.prepareStatement(
+                                    "select username from user where username = '" + username + "'");
+
+                            ResultSet rs = pst.executeQuery();
+
+                            if (rs.next()) {
+
+                                jLabel_Username.setForeground(Color.red);
+
+                                JOptionPane.showMessageDialog(null, "¡Nombre de usuario no disponible!", "!Acceso Denegado!",
+                                        JOptionPane.OK_OPTION);
+
+                                jTextField_Username.setText("");
+                                jTextField_Username.requestFocus();
+
+                                cn.close();
+
+                            } else {
+
+                                cn.close();
+
+                                //Algoritmo para registrar el usario...
+                                try {
+
+                                    Connection cn2 = BD_Connection.connection();
+                                    PreparedStatement pst2 = cn2.prepareStatement(
+                                            "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                                    pst2.setInt(1, 0);
+                                    pst2.setString(2, name);
+                                    pst2.setString(3, username);
+                                    pst2.setString(4, password);
+                                    pst2.setString(5, telephone);
+                                    pst2.setString(6, direction);
+                                    pst2.setString(7, permission);
+                                    pst2.setString(8, username_user);
+                                    pst2.setString(9, "");
+                                    pst2.setString(10, "Activo");
+                                    pst2.executeUpdate();
+
+                                    PintarDeVerdejTextField();
+                                    VaciarCamposDeTextos();
+
+                                    JOptionPane.showMessageDialog(null, "Registro Exitoso.", "Exito",
+                                            JOptionPane.INFORMATION_MESSAGE);
+
+                                    resetColorjTextField();
+
+                                    cn2.close();
+
+                                } catch (SQLException e) {
+
+                                    System.err.println("¡Error al registrar usuario! " + e);
+
+                                    JOptionPane.showMessageDialog(null, "¡Error al registrar usuario!", "!Error!",
+                                            JOptionPane.OK_OPTION);
+
+                                }
+                            }
+
+                        } catch (SQLException e) {
+
+                            System.err.println("¡Error al validar el nombre de usuario! " + e);
+
+                            JOptionPane.showMessageDialog(null, "¡Error al validar el nombre de usuario!", "!Error!",
+                                    JOptionPane.OK_OPTION);
+
+                        }
+
+                    } else {
+
+                        JOptionPane.showMessageDialog(null, "¡Debes seleccionar alguna dirección!", "!Acceso Denegado!",
+                                JOptionPane.WARNING_MESSAGE);
+
+                    }
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "¡Debes seleccionar algún permiso!", "!Acceso Denegado!",
+                            JOptionPane.WARNING_MESSAGE);
+
+                }
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "!Acceso Denegado!",
+                        JOptionPane.WARNING_MESSAGE);
+
+            }
 
         } else {
 
-            jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
+            //Variables para validar que los campos de textos no esten vacios...
+            int flag = 0, flag_two = 0, flag_tree = 0;
 
-        }
+            name = jTextField_Name.getText().trim();
+            telephone = jTextField_Telephone.getText().trim();
+            username = jTextField_Username.getText().trim();
+            password = jPasswordField_Password.getText().trim();
+            permission = jComboBox_Permission.getSelectedItem().toString();
 
-        if (telephone.equals("")) {
+            if (name.equals("")) {
 
-            jLabel_Telephone.setForeground(Color.red);
-            flag++;
+                jLabel_Name.setForeground(Color.red);
+                flag++;
 
-        } else {
+            } else {
 
-            jLabel_Telephone.setForeground(new java.awt.Color(240, 240, 240));
+                jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
 
-        }
+            }
 
-        if (username.equals("")) {
+            if (telephone.equals("")) {
 
-            jLabel_Username.setForeground(Color.red);
-            flag++;
+                jLabel_Telephone.setForeground(Color.red);
+                flag++;
 
-        } else {
+            } else {
 
-            jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
+                jLabel_Telephone.setForeground(new java.awt.Color(240, 240, 240));
 
-        }
+            }
 
-        if (password.equals("")) {
+            if (username.equals("")) {
 
-            jLabel_Password.setForeground(Color.red);
-            flag++;
+                jLabel_Username.setForeground(Color.red);
+                flag++;
 
-        } else {
+            } else {
 
-            jLabel_Password.setForeground(new java.awt.Color(240, 240, 240));
+                jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
 
-        }
+            }
 
-        if (permission.equals("...")) {
+            if (password.equals("")) {
 
-            jLabel_Permission.setForeground(Color.red);
-            flag_two++;
+                jLabel_Password.setForeground(Color.red);
+                flag++;
 
-        } else {
+            } else {
 
-            jLabel_Permission.setForeground(new java.awt.Color(240, 240, 240));
+                jLabel_Password.setForeground(new java.awt.Color(240, 240, 240));
 
-        }
+            }
 
-        if (direction.equals("...")) {
+            if (permission.equals("...")) {
 
-            jLabel_Direction.setForeground(Color.red);
-            flag_tree++;
+                jLabel_Permission.setForeground(Color.red);
+                flag_two++;
 
-        } else {
+            } else {
 
-            jLabel_Direction.setForeground(new java.awt.Color(240, 240, 240));
+                jLabel_Permission.setForeground(new java.awt.Color(240, 240, 240));
 
-        }
+            }
 
-        //Condición para validar que los campos esten llenos...
-        if (flag == 0) {
-            //Condicion para validar que se haya seleccionado algún permiso...
-            if (flag_two == 0) {
-                //Condición para validar que se haya seleccionado alguna dirección...
-                if (flag_tree == 0) {
+            //Condición para validar que los campos esten llenos...
+            if (flag == 0) {
+                //Condicion para validar que se haya seleccionado algún permiso...
+                if (flag_two == 0) {
 
                     //Algoritmo para validar que el nombre usuario sea valido...
                     try {
@@ -274,7 +444,7 @@ public class Register_User extends javax.swing.JPanel {
                                 pst2.setString(3, username);
                                 pst2.setString(4, password);
                                 pst2.setString(5, telephone);
-                                pst2.setString(6, direction);
+                                pst2.setString(6, direction_login);
                                 pst2.setString(7, permission);
                                 pst2.setString(8, username_user);
                                 pst2.setString(9, "");
@@ -312,22 +482,17 @@ public class Register_User extends javax.swing.JPanel {
 
                 } else {
 
-                    JOptionPane.showMessageDialog(null, "¡Debes seleccionar alguna dirección!", "!Acceso Denegado!",
+                    JOptionPane.showMessageDialog(null, "¡Debes seleccionar algún permiso!", "!Acceso Denegado!",
                             JOptionPane.WARNING_MESSAGE);
 
                 }
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "¡Debes seleccionar algún permiso!", "!Acceso Denegado!",
+                JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "!Acceso Denegado!",
                         JOptionPane.WARNING_MESSAGE);
 
             }
-
-        } else {
-
-            JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "!Acceso Denegado!",
-                    JOptionPane.WARNING_MESSAGE);
 
         }
 

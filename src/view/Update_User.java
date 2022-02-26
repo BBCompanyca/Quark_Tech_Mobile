@@ -297,7 +297,7 @@ public class Update_User extends javax.swing.JPanel {
 
                                 cn2.close();
 
-                                NextWindow();
+                                paneles.PanelUsers();
 
                             } catch (SQLException e) {
 
@@ -494,7 +494,7 @@ public class Update_User extends javax.swing.JPanel {
             jLabel_Type_Account.setText("Permisos De:");
             add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
 
-            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Vendedor", "Tecnico"}));
+            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Moderador", "Administrador","Vendedor", "Tecnico"}));
             add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
             jComboBox_Type_Account.setSelectedItem(type_Account_this);
             jComboBox_Type_Account.setEnabled(true);
@@ -534,7 +534,7 @@ public class Update_User extends javax.swing.JPanel {
             jComboBox_Status.setSelectedItem(status_this);
             jComboBox_Status.setEnabled(false);
 
-        }
+        } 
     }
 
     //Método para limpar los campos de texto...
@@ -556,20 +556,6 @@ public class Update_User extends javax.swing.JPanel {
         jComboBox_Status.setSelectedIndex(0);
         jComboBox_Direction.setSelectedIndex(0);
         jComboBox_Type_Account.setSelectedIndex(0);
-
-    }
-
-    //Método para volver a la interfaz de users...
-    private void NextWindow() {
-
-        Users pl = new Users();
-        pl.setSize(970, 370);
-        pl.setLocation(0, 0);
-
-        jPanel_Content.removeAll();
-        jPanel_Content.add(pl, BorderLayout.CENTER);
-        jPanel_Content.revalidate();
-        jPanel_Content.repaint();
 
     }
 
