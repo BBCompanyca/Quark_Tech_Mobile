@@ -3,6 +3,7 @@ package view;
 import clases.TextPrompt;
 import java.sql.*;
 import clases.BD_Connection;
+import clases.Paneles;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -14,6 +15,8 @@ public final class Users extends javax.swing.JPanel {
 
     public static int ID;
     String direction, type_Account;
+    
+    Paneles paneles = new Paneles();
 
     DefaultTableModel model = new DefaultTableModel();
 
@@ -320,15 +323,7 @@ public final class Users extends javax.swing.JPanel {
     private void jButton_New_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_New_UserMousePressed
 
         //Método para llamar a la interfaz de registrar usuarios...
-        Register_User pl = new Register_User();
-        pl.setSize(790, 370);
-        pl.setLocation(0, 0);
-        pl.jTextField_Name.requestFocus();
-
-        jPanel_Content.removeAll();
-        jPanel_Content.add(pl, BorderLayout.CENTER);
-        jPanel_Content.revalidate();
-        jPanel_Content.repaint();
+        paneles.PanelRegisterUser();
 
     }//GEN-LAST:event_jButton_New_UserMousePressed
 
@@ -349,14 +344,7 @@ public final class Users extends javax.swing.JPanel {
 
             ID = (int) model.getValueAt(fila_point, columna_punt);
 
-            Update_User pl = new Update_User();
-            pl.setSize(790, 370);
-            pl.setLocation(0, 0);
-
-            jPanel_Content.removeAll();
-            jPanel_Content.add(pl, BorderLayout.CENTER);
-            jPanel_Content.revalidate();
-            jPanel_Content.repaint();
+            paneles.PanelUsers();
 
         } else {
 

@@ -9,6 +9,7 @@ import view.Menu_Seller;
 import view.Menu_Tecnico;
 import view.Principal;
 import view.Register_Client;
+import view.Register_User;
 import view.Reset_Password;
 import view.Users;
 
@@ -38,6 +39,19 @@ public class Paneles {
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 
+    }
+    
+    public void PanelRegisterUser(){
+        
+        Register_User registerUsers = new Register_User();
+        registerUsers.setSize(790, 370);
+        registerUsers.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(registerUsers, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+        
     }
 
     public void PanelClients() {
