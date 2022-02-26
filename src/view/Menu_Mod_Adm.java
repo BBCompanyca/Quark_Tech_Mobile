@@ -1,12 +1,13 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
-import static view.Dashboard.jPanel_Content;
+import clases.Paneles;
 
 public class Menu_Mod_Adm extends javax.swing.JPanel {
 
+    Paneles paneles = new Paneles();
+    
     public Menu_Mod_Adm() {
         initComponents();
     }
@@ -267,15 +268,8 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
 
     private void Btn_MainMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMousePressed
 
-        //Método para llamar a la interfaz principal...
-        Principal p1 = new Principal();
-        p1.setSize(790, 370);
-        p1.setLocation(0, 0);
-
-        jPanel_Content.removeAll();
-        jPanel_Content.add(p1, BorderLayout.CENTER);
-        jPanel_Content.revalidate();
-        jPanel_Content.repaint();
+        //Instancia para llamar a la interfaz principal...
+        paneles.PanelMain();
 
         setColor(Btn_Main);
         resetColor(Btn_Users);
@@ -310,14 +304,7 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
     private void Btn_UsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_UsersMousePressed
 
         //Método para llamar a la interfaz de usuarios...
-        Users p1 = new Users();
-        p1.setSize(790, 370);
-        p1.setLocation(0, 0);
-
-        jPanel_Content.removeAll();
-        jPanel_Content.add(p1, BorderLayout.CENTER);
-        jPanel_Content.revalidate();
-        jPanel_Content.repaint();
+        paneles.PanelUsers();
 
         resetColor(Btn_Main);
         setColor(Btn_Users);

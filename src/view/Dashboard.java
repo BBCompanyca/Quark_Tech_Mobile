@@ -6,8 +6,12 @@ import java.time.LocalDate;
 import java.sql.*;
 import clases.BD_Connection;
 import javax.swing.JOptionPane;
+import clases.Paneles;
 
 public class Dashboard extends javax.swing.JFrame {
+    
+    //Objeto para llamar a la clase que tiene todo los paneles...
+    Paneles paneles = new Paneles();
 
     String user, type_Account;
     int xMouse, yMouse;
@@ -28,8 +32,8 @@ public class Dashboard extends javax.swing.JFrame {
         //Método para obtener la fecha actual...
         Date();
 
-        //Método para llamar al panel con que se va a iniciar la aplicación...
-        PanelStart();
+        //Instancia para llamar al panel con que se va a iniciar la aplicación...
+        paneles.PanelMain();
 
         //Método para llamar al menu correspondiente a quien inició sesión...
         PanelMenuStart();
@@ -258,7 +262,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_background_Down;
     private javax.swing.JPanel jPanel_Background;
     public static javax.swing.JPanel jPanel_Content;
-    private javax.swing.JPanel jPanel_Content_Menu;
+    public static javax.swing.JPanel jPanel_Content_Menu;
     private javax.swing.JPanel jPanel_Exit;
     private javax.swing.JPanel jPanel_Head;
     // End of variables declaration//GEN-END:variables
@@ -283,14 +287,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             if (type_Account.equals("Moderador") || type_Account.equals("Administrador")) {
 
-                Menu_Mod_Adm menu = new Menu_Mod_Adm();
-                menu.setSize(210, 600);
-                menu.setLocation(0, 0);
-
-                jPanel_Content_Menu.removeAll();
-                jPanel_Content_Menu.add(menu, BorderLayout.CENTER);
-                jPanel_Content_Menu.revalidate();
-                jPanel_Content_Menu.repaint();
+                paneles.PanelMenu_Mod_Admin();
 
             }
 
@@ -304,14 +301,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             if (type_Account.equals("Vendedor")) {
 
-                Menu_Seller menu = new Menu_Seller();
-                menu.setSize(210, 600);
-                menu.setLocation(0, 0);
-
-                jPanel_Content_Menu.removeAll();
-                jPanel_Content_Menu.add(menu, BorderLayout.CENTER);
-                jPanel_Content_Menu.revalidate();
-                jPanel_Content_Menu.repaint();
+                paneles.PanelMenu_Seller();
 
             }
 
@@ -325,14 +315,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             if (type_Account.equals("Tecnico")) {
 
-                Menu_Tecnico menu = new Menu_Tecnico();
-                menu.setSize(210, 600);
-                menu.setLocation(0, 0);
-
-                jPanel_Content_Menu.removeAll();
-                jPanel_Content_Menu.add(menu, BorderLayout.CENTER);
-                jPanel_Content_Menu.revalidate();
-                jPanel_Content_Menu.repaint();
+                paneles.PanelMenu_Tecnico();
 
             }
 
@@ -341,20 +324,6 @@ public class Dashboard extends javax.swing.JFrame {
             System.out.println(e);
 
         }
-
-    }
-
-    //Método para llamar al panel con que se va a iniciar la aplicación...
-    private void PanelStart() {
-
-        Principal p1 = new Principal();
-        p1.setSize(790, 470);
-        p1.setLocation(0, 0);
-
-        jPanel_Content.removeAll();
-        jPanel_Content.add(p1, BorderLayout.CENTER);
-        jPanel_Content.revalidate();
-        jPanel_Content.repaint();
 
     }
 
