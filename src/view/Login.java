@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
 
     public static String user;
+    public static String type_account;
     public String pass;
 
     public Login() {
@@ -166,7 +167,7 @@ public class Login extends javax.swing.JFrame {
         //Obtención de los datos ingresados por el usuario...
         user = jTextField_Username.getText().trim();
         pass = jPasswordField_Password.getText().trim();
-        String type_account = "", status = "";
+        String status = "";
 
         //Validación de que todos los campos estén llenos.
         if (!user.equals("") && !pass.equals("")) {
@@ -189,14 +190,9 @@ public class Login extends javax.swing.JFrame {
                     //Condicional para validar que el usuario esté activo...
                     if (status.equals("Activo")) {
 
-                        //Condicional para validar el tipo de cuenta que tiene el usuario...
-                        if (type_account.equals("Administrador")) {
-
                             this.dispose();
                             Dashboard window = new Dashboard();
                             window.setVisible(true);
-
-                        }
 
                     } else {
 
