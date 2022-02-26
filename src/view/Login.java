@@ -165,19 +165,19 @@ public class Login extends javax.swing.JFrame {
     private void jButton_AccederMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_AccederMousePressed
 
         //Obtención de los datos ingresados por el usuario...
-        user = jTextField_Username.getText().trim();
-        pass = jPasswordField_Password.getText().trim();
+        String user2 = jTextField_Username.getText().trim();
+        String pass2 = jPasswordField_Password.getText().trim();
         String status = "";
 
         //Validación de que todos los campos estén llenos.
-        if (!user.equals("") && !pass.equals("")) {
+        if (!user2.equals("") && !pass2.equals("")) {
 
             try {
 
                 //Conexión a la base de datos para consultar los datos del usuario...
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select username, type_account, status from user where username = '" + user + "' and password = '" + pass + "'");
+                        "select username, password, type_account, status from user where username = '" + user2 + "' and password = '" + pass2 + "'");
 
                 ResultSet rs = pst.executeQuery();
 
@@ -186,18 +186,32 @@ public class Login extends javax.swing.JFrame {
                     status = rs.getString("status");
                     type_account = rs.getString("type_account");
                     user = rs.getString("username");
+                    pass = rs.getString("password");
 
-                    //Condicional para validar que el usuario esté activo...
-                    if (status.equals("Activo")) {
+                    if (user.equals(user2) && pass.equals(pass2)) {
+
+                        //Condicional para validar que el usuario esté activo...
+                        if (status.equals("Activo")) {
 
                             this.dispose();
                             Dashboard window = new Dashboard();
                             window.setVisible(true);
 
+                        } else {
+
+                            //Si el usuario está inactivo dejará un mensaje y limpiará los campos...
+                            jLabel_Anwser.setText("¡Usuario inactivo! contacte a un Administrador.");
+
+                            jTextField_Username.setText("");
+                            jTextField_Username.requestFocus();
+                            jPasswordField_Password.setText("");
+
+                        }
+
                     } else {
 
-                        //Si el usuario está inactivo dejará un mensaje y limpiará los campos...
-                        jLabel_Anwser.setText("¡Usuario inactivo! contacte a un Administrador.");
+                        //Si los valores no son exactamente iguales...
+                        jLabel_Anwser.setText("¡Datos de acceso incorrectos!");
 
                         jTextField_Username.setText("");
                         jTextField_Username.requestFocus();
