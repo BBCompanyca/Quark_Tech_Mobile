@@ -494,7 +494,7 @@ public class Update_User extends javax.swing.JPanel {
             jLabel_Type_Account.setText("Permisos De:");
             add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
 
-            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Moderador", "Administrador","Vendedor", "Tecnico"}));
+            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Vendedor", "Tecnico"}));
             add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
             jComboBox_Type_Account.setSelectedItem(type_Account_this);
             jComboBox_Type_Account.setEnabled(true);

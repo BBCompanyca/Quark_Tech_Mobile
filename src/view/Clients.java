@@ -2,6 +2,7 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
+import clases.Paneles;
 import clases.TextPrompt;
 import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
@@ -11,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 public class Clients extends javax.swing.JPanel {
 
     DefaultTableModel model = new DefaultTableModel();
+    
+    Paneles paneles = new Paneles();
 
     String type_Account, direction;
     public static int ID;
@@ -24,7 +27,7 @@ public class Clients extends javax.swing.JPanel {
         TextPrompt search = new TextPrompt("Ingrese algún parametro", jTextField_Search_Client);
 
         getClients();
-
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -379,6 +382,8 @@ public class Clients extends javax.swing.JPanel {
 
     private void jButton_New_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_New_ClientMousePressed
 
+        paneles.PanelRegisterClient();
+        
     }//GEN-LAST:event_jButton_New_ClientMousePressed
 
     private void jButton_New_ClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_New_ClientActionPerformed

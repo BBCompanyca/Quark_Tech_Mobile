@@ -344,7 +344,7 @@ public final class Users extends javax.swing.JPanel {
 
             ID = (int) model.getValueAt(fila_point, columna_punt);
 
-            paneles.PanelUsers();
+            paneles.PanelUpdateUser();
 
         } else {
 
