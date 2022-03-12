@@ -4,12 +4,13 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.Paneles;
 import clases.TextPrompt;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class Update_Client extends javax.swing.JPanel {
 
     Paneles paneles = new Paneles();
-
+    
     public Update_Client() {
         initComponents();
 
@@ -33,7 +34,7 @@ public class Update_Client extends javax.swing.JPanel {
 
         jButton1 = new javax.swing.JButton();
         jLabel_Title = new javax.swing.JLabel();
-        jLabel_Name1 = new javax.swing.JLabel();
+        jLabel_Name = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jTextField_Name = new javax.swing.JTextField();
         jLabel_Telephone = new javax.swing.JLabel();
@@ -42,7 +43,7 @@ public class Update_Client extends javax.swing.JPanel {
         jLabel_CI = new javax.swing.JLabel();
         jTextField_Ci = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel_Name = new javax.swing.JLabel();
+        jLabel_Direction_Client = new javax.swing.JLabel();
         jTextField_Direction_Client = new javax.swing.JTextField();
         jTextField_Last_Modification = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -74,10 +75,10 @@ public class Update_Client extends javax.swing.JPanel {
         jLabel_Title.setText("jLabel1");
         add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 790, 30));
 
-        jLabel_Name1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_Name1.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Name1.setText("Nombre:");
-        add(jLabel_Name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
+        jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Name.setText("Nombre:");
+        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 220, -1));
 
         jTextField_Name.setBackground(new java.awt.Color(9, 53, 69));
@@ -113,10 +114,10 @@ public class Update_Client extends javax.swing.JPanel {
         add(jTextField_Ci, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 220, 30));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 220, -1));
 
-        jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Name.setText("Dirección:");
-        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, -1, -1));
+        jLabel_Direction_Client.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Direction_Client.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Direction_Client.setText("Dirección:");
+        add(jLabel_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, -1, -1));
 
         jTextField_Direction_Client.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Direction_Client.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -164,6 +165,165 @@ public class Update_Client extends javax.swing.JPanel {
 
     private void jButton_UpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_UpdateMousePressed
 
+        int flag = 0, flag_two = 0;
+        String name, telephone, ci, direction_client, direction_shop;
+
+        if (Login.type_account.equals("Moderador")) {
+
+            name = jTextField_Name.getText().trim();
+            telephone = jTextField_Telephone.getText().trim();
+            ci = jTextField_Ci.getText().trim();
+            direction_client = jTextField_Direction_Client.getText().trim();
+            direction_shop = jComboBox_Direction_Shop.getSelectedItem().toString();
+
+            if (name.equals("")) {
+
+                jLabel_Name.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_Name.setForeground(new Color(240, 240, 240));
+
+            }
+
+            if (telephone.equals("")) {
+
+                jLabel_Telephone.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_Telephone.setForeground(new Color(240, 240, 240));
+
+            }
+
+            if (ci.equals("")) {
+
+                jLabel_CI.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_CI.setForeground(new Color(240, 240, 240));
+
+            }
+
+            if (direction_client.equals("")) {
+
+                jLabel_Direction_Client.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_Direction_Client.setForeground(new Color(240, 240, 240));
+
+            }
+
+            if (direction_shop.equals("...")) {
+
+                jLabel_Direction_Shop.setForeground(Color.red);
+                flag_two++;
+
+            } else {
+
+                jLabel_Direction_Shop.setForeground(new Color(240, 240, 240));
+
+            }
+
+            if (flag == 0) {
+
+                if (flag_two == 0) {
+
+                    try {
+
+                        Connection cn = BD_Connection.connection();
+                        PreparedStatement pst = cn.prepareStatement(
+                                "select cedula_client from client where cedula_client = '" + ci
+                                + "' and direction_tienda = '" + direction_shop + "' and not id_client = '" + Clients.ID + "'");
+
+                        ResultSet rs = pst.executeQuery();
+
+                        if (rs.next()) {
+
+                            jLabel_CI.setForeground(Color.red);
+
+                            JOptionPane.showMessageDialog(null, "¡Ya existe un cliente registrado con este número de C.I!",
+                                    "¡Acceso Denegado", JOptionPane.WARNING_MESSAGE);
+
+                            jTextField_Ci.setText("");
+                            jTextField_Ci.requestFocus();
+
+                            cn.close();
+
+                        } else {
+
+                            cn.close();
+
+                            try {
+
+                                Connection cn2 = BD_Connection.connection();
+                                PreparedStatement pst2 = cn2.prepareStatement(
+                                        "update client set name_client = ?, telephone_client = ?, cedula_client = ?, "
+                                        + "direction_client = ?, direction_tienda = ?, last_modification = ? "
+                                        + "where id_client = '" + Clients.ID + "'");
+
+                                pst2.setString(1, name);
+                                pst2.setString(2, telephone);
+                                pst2.setString(3, ci);
+                                pst2.setString(4, direction_client);
+                                pst2.setString(5, direction_shop);
+                                pst2.setString(6, Login.user);
+
+                                pst2.executeUpdate();
+
+                                paintCampTextGreen();
+
+                                cleanCampText();
+
+                                JOptionPane.showMessageDialog(null, "Modificación exitosa.", "¡Exito!",
+                                        JOptionPane.INFORMATION_MESSAGE);
+
+                                cn2.close();
+
+                                paneles.PanelClients();
+
+                            } catch (SQLException e) {
+
+                                System.err.println("¡Error al modificar la información del cliente! " + e);
+                                JOptionPane.showMessageDialog(null, "¡Error al modificar la información del cliente!", "¡Error!",
+                                        JOptionPane.OK_OPTION);
+
+                            }
+
+                        }
+
+                    } catch (SQLException e) {
+
+                        System.err.println("¡Error al consultar la cédula del cliente! " + e);
+                        JOptionPane.showMessageDialog(null, "¡Error al consultar la cédula del cliente!", "¡Error!",
+                                JOptionPane.OK_OPTION);
+
+                    }
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "¡Debes seleccionar alguna tienda!", "¡Acceso Denegado!",
+                            JOptionPane.WARNING_MESSAGE);
+
+                }
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "¡Acceso Denegado!",
+                        JOptionPane.WARNING_MESSAGE);
+
+            }
+
+        } else {
+
+            //Algoritmo por si no es moderador...
+        }
 
     }//GEN-LAST:event_jButton_UpdateMousePressed
 
@@ -174,7 +334,7 @@ public class Update_Client extends javax.swing.JPanel {
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
 
         paneles.PanelClients();
-        
+
     }//GEN-LAST:event_jButton1MousePressed
 
 
@@ -184,9 +344,9 @@ public class Update_Client extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox_Direction_Shop;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_CI;
+    private javax.swing.JLabel jLabel_Direction_Client;
     private javax.swing.JLabel jLabel_Direction_Shop;
     private javax.swing.JLabel jLabel_Name;
-    private javax.swing.JLabel jLabel_Name1;
     private javax.swing.JLabel jLabel_Telephone;
     private javax.swing.JLabel jLabel_Title;
     private javax.swing.JSeparator jSeparator1;
@@ -200,6 +360,30 @@ public class Update_Client extends javax.swing.JPanel {
     public javax.swing.JTextField jTextField_Name;
     public javax.swing.JTextField jTextField_Telephone;
     // End of variables declaration//GEN-END:variables
+
+    //Método para pintar de verde los campos de Texto...
+    private void paintCampTextGreen() {
+
+        jLabel_Name.setForeground(Color.GREEN);
+        jLabel_Telephone.setForeground(Color.GREEN);
+        jLabel_CI.setForeground(Color.GREEN);
+        jLabel_Direction_Client.setForeground(Color.GREEN);
+        jLabel4.setForeground(Color.GREEN);
+        jLabel_Direction_Shop.setForeground(Color.GREEN);
+
+    }
+
+    //Método para limpiar los campos de Texto...
+    private void cleanCampText() {
+
+        jTextField_Name.setText("");
+        jTextField_Telephone.setText("");
+        jTextField_Ci.setText("");
+        jTextField_Direction_Client.setText("");
+        jTextField_Last_Modification.setText(Login.user);
+        jComboBox_Direction_Shop.setSelectedIndex(0);
+
+    }
 
     //Método para consultar el tipo de acceso del usuario...
     private void getValue_typeAccountUser() {
