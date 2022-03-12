@@ -348,7 +348,7 @@ public final class Users extends javax.swing.JPanel {
 
         } else {
 
-            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un usuario!", "",
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un usuario!", "¡Acceso Denegado!",
                     JOptionPane.OK_OPTION);
 
         }
@@ -391,7 +391,7 @@ public final class Users extends javax.swing.JPanel {
         } else {
 
             JOptionPane.showMessageDialog(null, "¡Debes seleccionar un usuario!", "¡Acceso Denegado!",
-                    JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.OK_OPTION);
 
         }
 

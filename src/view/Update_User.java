@@ -4,10 +4,8 @@ import clases.TextPrompt;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.Paneles;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import static view.Dashboard.jPanel_Content;
 
 public class Update_User extends javax.swing.JPanel {
 
@@ -26,7 +24,7 @@ public class Update_User extends javax.swing.JPanel {
         username_login = Login.user;
         type_Account = Login.type_account;
 
-        TextPrompt name = new TextPrompt("Ingrese el nombre de usuario", jTextField_Name);
+        TextPrompt name = new TextPrompt("Ingrese el nombre", jTextField_Name);
         TextPrompt username = new TextPrompt("Ingrese el nombre de usuario", jTextField_Username);
         TextPrompt telephone = new TextPrompt("Ingrese el número de teléfono", jTextField_Telephone);
 

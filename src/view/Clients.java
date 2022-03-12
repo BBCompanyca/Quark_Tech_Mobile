@@ -2,6 +2,7 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
+import clases.Paneles;
 import clases.TextPrompt;
 import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
@@ -11,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 public class Clients extends javax.swing.JPanel {
 
     DefaultTableModel model = new DefaultTableModel();
+    
+    Paneles paneles = new Paneles();
 
     String type_Account, direction;
     public static int ID;
@@ -123,6 +126,7 @@ public class Clients extends javax.swing.JPanel {
         add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 750, 203));
 
         jButton_New_Client.setText("NUEVO");
+        jButton_New_Client.setFocusPainted(false);
         jButton_New_Client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_New_ClientMousePressed(evt);
@@ -136,6 +140,7 @@ public class Clients extends javax.swing.JPanel {
         add(jButton_New_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 100, 35));
 
         jButton_Update_Client.setText("MODIFICAR");
+        jButton_Update_Client.setFocusPainted(false);
         jButton_Update_Client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_Update_ClientMousePressed(evt);
@@ -149,6 +154,7 @@ public class Clients extends javax.swing.JPanel {
         add(jButton_Update_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 100, 35));
 
         jButton_Delete_Client.setText("BORRAR");
+        jButton_Delete_Client.setFocusPainted(false);
         jButton_Delete_Client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_Delete_ClientMousePressed(evt);
@@ -387,6 +393,21 @@ public class Clients extends javax.swing.JPanel {
 
     private void jButton_Update_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_ClientMousePressed
 
+        int fila_point = jTable_Client.getSelectedRow();
+        int columna_punt = 0;
+
+        if (fila_point > -1) {
+
+            ID = (int) model.getValueAt(fila_point, columna_punt);
+
+            paneles.PanelUpdateClient();
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un cliente!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
 
     }//GEN-LAST:event_jButton_Update_ClientMousePressed
 
