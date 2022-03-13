@@ -4,18 +4,16 @@ import clases.TextPrompt;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.Paneles;
-import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import static view.Dashboard.jPanel_Content;
 
 public final class Users extends javax.swing.JPanel {
 
     public static int ID;
-    String direction, type_Account;
-    
+    String direction, type_Account, permission;
+
     Paneles paneles = new Paneles();
 
     DefaultTableModel model = new DefaultTableModel();
@@ -344,7 +342,7 @@ public final class Users extends javax.swing.JPanel {
 
             ID = (int) model.getValueAt(fila_point, columna_punt);
 
-            paneles.PanelUsers();
+            paneles.PanelUpadteUser();
 
         } else {
 
@@ -358,32 +356,60 @@ public final class Users extends javax.swing.JPanel {
     private void jButton_Delete_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_UserMousePressed
 
         int fila_point = jTable_User.getSelectedRow();
-        int columa_point = 0;
+        int columna_point = 0;
 
         if (fila_point > -1) {
 
-            ID = (int) jTable_User.getValueAt(fila_point, columa_point);
+            ID = (int) jTable_User.getValueAt(fila_point, columna_point);
 
-            try {
+            if (Login.type_account.equals("Moderador")) {
 
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement(
-                        "delete from user where id_user = '" + ID + "'");
+                permission = (String) jTable_User.getValueAt(fila_point, 4);
 
-                pst.executeUpdate();
+            } else {
 
-                model.setRowCount(0);
-                model.setColumnCount(0);
-                getUsers();
+                permission = (String) jTable_User.getValueAt(fila_point, 3);
 
-                JOptionPane.showMessageDialog(null, "Usuario eliminado.");
+            }
 
-                cn.close();
+            if (ID != Login.ID_User) {
 
-            } catch (SQLException e) {
+                if (!Login.type_account.equals(permission) && permission.equals("Moderador")  || Login.type_account.equals(permission)) {
 
-                System.err.println("¡Error al eliminar el usuario! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
+                    JOptionPane.showMessageDialog(null, "¡No tienes permisos para eliminar esta cuenta!", "¡Acceso Denegado!",
+                            JOptionPane.OK_OPTION);
+
+                } else {
+
+                    try {
+
+                        Connection cn = BD_Connection.connection();
+                        PreparedStatement pst = cn.prepareStatement(
+                                "delete from user where id_user = '" + ID + "'");
+
+                        pst.executeUpdate();
+
+                        model.setRowCount(0);
+                        model.setColumnCount(0);
+                        getUsers();
+
+                        JOptionPane.showMessageDialog(null, "Usuario eliminado.");
+
+                        cn.close();
+
+                    } catch (SQLException e) {
+
+                        System.err.println("¡Error al eliminar el usuario! " + e);
+                        JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
+                                JOptionPane.OK_OPTION);
+
+                    }
+
+                }
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "¡No puedes eliminar tú cuenta!", "¡Acceso Denegado!",
                         JOptionPane.OK_OPTION);
 
             }

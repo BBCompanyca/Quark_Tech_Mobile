@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class Update_Client extends javax.swing.JPanel {
 
     Paneles paneles = new Paneles();
-    
+
     public Update_Client() {
         initComponents();
 
@@ -323,6 +323,134 @@ public class Update_Client extends javax.swing.JPanel {
         } else {
 
             //Algoritmo por si no es moderador...
+            name = jTextField_Name.getText().trim();
+            telephone = jTextField_Telephone.getText().trim();
+            ci = jTextField_Ci.getText().trim();
+            direction_client = jTextField_Direction_Client.getText().trim();
+
+            if (name.equals("")) {
+
+                jLabel_Name.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_Name.setForeground(new Color(240, 240, 240));
+
+            }
+
+            if (telephone.equals("")) {
+
+                jLabel_Telephone.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_Telephone.setForeground(new Color(240, 240, 240));
+
+            }
+
+            if (ci.equals("")) {
+
+                jLabel_CI.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_CI.setForeground(new Color(240, 240, 240));
+
+            }
+
+            if (direction_client.equals("")) {
+
+                jLabel_Direction_Client.setForeground(Color.red);
+                flag++;
+
+            } else {
+
+                jLabel_Direction_Client.setForeground(new Color(240, 240, 240));
+
+            }
+
+            if (flag == 0) {
+
+                try {
+
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(
+                            "select cedula_client from client where cedula_client = '" + ci
+                            + "' and direction_tienda = '" + Login.direction + "' and not id_client = '" + Clients.ID + "'");
+
+                    ResultSet rs = pst.executeQuery();
+
+                    if (rs.next()) {
+
+                        jLabel_CI.setForeground(Color.red);
+
+                        JOptionPane.showMessageDialog(null, "¡Ya existe un cliente registrado con este número de C.I!",
+                                "¡Acceso Denegado", JOptionPane.WARNING_MESSAGE);
+
+                        jTextField_Ci.setText("");
+                        jTextField_Ci.requestFocus();
+
+                        cn.close();
+
+                    } else {
+
+                        cn.close();
+
+                        try {
+
+                            Connection cn2 = BD_Connection.connection();
+                            PreparedStatement pst2 = cn2.prepareStatement(
+                                    "update client set name_client = ?, telephone_client = ?, cedula_client = ?, "
+                                    + "direction_client = ?, direction_tienda = ?, last_modification = ? "
+                                    + "where id_client = '" + Clients.ID + "'");
+
+                            pst2.setString(1, name);
+                            pst2.setString(2, telephone);
+                            pst2.setString(3, ci);
+                            pst2.setString(4, direction_client);
+                            pst2.setString(5, Login.direction);
+                            pst2.setString(6, Login.user);
+
+                            pst2.executeUpdate();
+
+                            paintCampTextGreen();
+
+                            cleanCampText();
+
+                            JOptionPane.showMessageDialog(null, "Modificación exitosa.", "¡Exito!",
+                                    JOptionPane.INFORMATION_MESSAGE);
+
+                            cn2.close();
+
+                            paneles.PanelClients();
+
+                        } catch (SQLException e) {
+
+                            System.err.println("¡Error al modificar la información del cliente! " + e);
+                            JOptionPane.showMessageDialog(null, "¡Error al modificar la información del cliente!", "¡Error!",
+                                    JOptionPane.OK_OPTION);
+
+                        }
+
+                    }
+
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al consultar la cédula del cliente! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al consultar la cédula del cliente!", "¡Error!",
+                            JOptionPane.OK_OPTION);
+
+                }
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "¡Acceso Denegado!",
+                        JOptionPane.WARNING_MESSAGE);
+
+            }
         }
 
     }//GEN-LAST:event_jButton_UpdateMousePressed

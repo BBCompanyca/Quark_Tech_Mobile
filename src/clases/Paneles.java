@@ -12,6 +12,7 @@ import view.Register_Client;
 import view.Register_User;
 import view.Reset_Password;
 import view.Update_Client;
+import view.Update_User;
 import view.Users;
 
 public class Paneles {
@@ -50,6 +51,19 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(registerUsers, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+        
+    }
+    
+    public void PanelUpadteUser(){
+        
+        Update_User updateUsers = new Update_User();
+        updateUsers.setSize(790, 370);
+        updateUsers.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(updateUsers, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
         
