@@ -146,6 +146,7 @@
     <Component class="javax.swing.JButton" name="jButton_New_Client">
       <Properties>
         <Property name="text" type="java.lang.String" value="NUEVO"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton_New_ClientMousePressed"/>
@@ -160,6 +161,7 @@
     <Component class="javax.swing.JButton" name="jButton_Update_Client">
       <Properties>
         <Property name="text" type="java.lang.String" value="MODIFICAR"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton_Update_ClientMousePressed"/>
@@ -174,6 +176,7 @@
     <Component class="javax.swing.JButton" name="jButton_Delete_Client">
       <Properties>
         <Property name="text" type="java.lang.String" value="BORRAR"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton_Delete_ClientMousePressed"/>

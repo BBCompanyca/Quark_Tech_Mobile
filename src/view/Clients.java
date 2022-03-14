@@ -15,14 +15,10 @@ public class Clients extends javax.swing.JPanel {
     
     Paneles paneles = new Paneles();
 
-    String type_Account, direction;
     public static int ID;
 
     public Clients() {
         initComponents();
-
-        type_Account = Login.type_account;
-        direction = Login.direction;
 
         TextPrompt search = new TextPrompt("Ingrese algún parametro", jTextField_Search_Client);
 
@@ -126,6 +122,7 @@ public class Clients extends javax.swing.JPanel {
         add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 750, 203));
 
         jButton_New_Client.setText("NUEVO");
+        jButton_New_Client.setFocusPainted(false);
         jButton_New_Client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_New_ClientMousePressed(evt);
@@ -139,6 +136,7 @@ public class Clients extends javax.swing.JPanel {
         add(jButton_New_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 100, 35));
 
         jButton_Update_Client.setText("MODIFICAR");
+        jButton_Update_Client.setFocusPainted(false);
         jButton_Update_Client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_Update_ClientMousePressed(evt);
@@ -152,6 +150,7 @@ public class Clients extends javax.swing.JPanel {
         add(jButton_Update_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 100, 35));
 
         jButton_Delete_Client.setText("BORRAR");
+        jButton_Delete_Client.setFocusPainted(false);
         jButton_Delete_Client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_Delete_ClientMousePressed(evt);
@@ -179,22 +178,22 @@ public class Clients extends javax.swing.JPanel {
             String search = jTextField_Search_Client.getText().trim();
             String query = "";
 
-            if (search.equals("") && !type_Account.equals("Moderador")) {
+            if (search.equals("") && !Login.type_account.equals("Moderador")) {
 
                 query = "select id_client, name_client, telephone_client, cedula_client, registered_by from client where direction_tienda = '"
-                        + direction + "'";
+                        + Login.direction + "'";
 
-            } else if (!search.equals("") && !type_Account.equals("Moderador")) {
+            } else if (!search.equals("") && Login.type_account.equals("Moderador")) {
 
-                query = "select id_client, name_client, telephone_client, cedula_client, registered_by from client where id_client = '" + search + "' and direction_tienda = '" + direction + "' "
-                        + "or name_client = '" + search + "' and direction_tienda = '" + direction + "' or telephone_client = '"
-                        + search + "' and direction_tienda = '" + direction + "' or registered_by = '" + search + "' and direction_tienda = '" + direction + "' or cedula_client = '" + search + "' and direction_tienda = '" + direction + "'";
+                query = "select id_client, name_client, telephone_client, cedula_client, registered_by from client where id_client = '" + search + "' and direction_tienda = '" + Login.direction + "' "
+                        + "or name_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or telephone_client = '"
+                        + search + "' and direction_tienda = '" + Login.direction + "' or registered_by = '" + search + "' and direction_tienda = '" + Login.direction + "' or cedula_client = '" + search + "' and direction_tienda = '" + Login.direction + "'";
 
-            } else if (search.equals("") && type_Account.equals("Moderador")) {
+            } else if (search.equals("") && Login.type_account.equals("Moderador")) {
 
                 query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client";
 
-            } else if (!search.equals("") && type_Account.equals("Moderador")) {
+            } else if (!search.equals("") && Login.type_account.equals("Moderador")) {
 
                 query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client where "
                         + "id_client = '" + search + "' or name_client = '" + search + "' or telephone_client = '"
@@ -216,7 +215,7 @@ public class Clients extends javax.swing.JPanel {
                 jTable_Client = new JTable(model);
                 jScrollPane.setViewportView(jTable_Client);
 
-                if (type_Account.equals("Moderador")) {
+                if (Login.type_account.equals("Moderador")) {
 
                     model.addColumn("ID");
                     model.addColumn("Nombre");
@@ -283,22 +282,22 @@ public class Clients extends javax.swing.JPanel {
         String search = jTextField_Search_Client.getText().trim();
         String query = "";
 
-        if (search.equals("") && !type_Account.equals("Moderador")) {
+        if (search.equals("") && !Login.type_account.equals("Moderador")) {
 
             query = "select id_client, name_client, telephone_client, cedula_client, registered_by from client where direction_tienda = '"
-                    + direction + "'";
+                    + Login.direction + "'";
 
-        } else if (!search.equals("") && !type_Account.equals("Moderador")) {
+        } else if (!search.equals("") && !Login.type_account.equals("Moderador")) {
 
-            query = "select id_client, name_client, telephone_client, cedula_client, registered_by from client where id_client = '" + search + "' and direction_tienda = '" + direction + "' "
-                    + "or name_client = '" + search + "' and direction_tienda = '" + direction + "' or telephone_client = '"
-                    + search + "' and direction_tienda = '" + direction + "' or registered_by = '" + search + "' and direction_tienda = '" + direction + "' or cedula_client = '" + search + "' and direction_tienda = '" + direction + "'";
+            query = "select id_client, name_client, telephone_client, cedula_client, registered_by from client where id_client = '" + search + "' and direction_tienda = '" + Login.direction + "' "
+                    + "or name_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or telephone_client = '"
+                    + search + "' and direction_tienda = '" + Login.direction + "' or registered_by = '" + search + "' and direction_tienda = '" + Login.direction + "' or cedula_client = '" + search + "' and direction_tienda = '" + Login.direction + "'";
 
-        } else if (search.equals("") && type_Account.equals("Moderador")) {
+        } else if (search.equals("") && Login.type_account.equals("Moderador")) {
 
             query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client";
 
-        } else if (!search.equals("") && type_Account.equals("Moderador")) {
+        } else if (!search.equals("") && Login.type_account.equals("Moderador")) {
 
             query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client where "
                     + "id_client = '" + search + "' or name_client = '" + search + "' or telephone_client = '"
@@ -320,7 +319,7 @@ public class Clients extends javax.swing.JPanel {
             jTable_Client = new JTable(model);
             jScrollPane.setViewportView(jTable_Client);
 
-            if (type_Account.equals("Moderador")) {
+            if (Login.type_account.equals("Moderador")) {
 
                 model.addColumn("ID");
                 model.addColumn("Nombre");
@@ -392,6 +391,21 @@ public class Clients extends javax.swing.JPanel {
 
     private void jButton_Update_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_ClientMousePressed
 
+        int fila_point = jTable_Client.getSelectedRow();
+        int columna_punt = 0;
+
+        if (fila_point > -1) {
+
+            ID = (int) model.getValueAt(fila_point, columna_punt);
+
+            paneles.PanelUpdateClient();
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un cliente!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
 
     }//GEN-LAST:event_jButton_Update_ClientMousePressed
 
@@ -419,7 +433,7 @@ public class Clients extends javax.swing.JPanel {
 
     private void getClients() {
 
-        if (type_Account.equals("Moderador")) {
+        if (Login.type_account.equals("Moderador")) {
 
             try {
 
@@ -468,8 +482,8 @@ public class Clients extends javax.swing.JPanel {
 
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select id_client, name_client, telephone_client, registered_by from client where direction_tienda = '"
-                        + direction + "'");
+                        "select id_client, name_client, telephone_client, cedula_client, registered_by from client where direction_tienda = '"
+                        + Login.direction + "'");
 
                 ResultSet rs = pst.executeQuery();
 
@@ -479,12 +493,13 @@ public class Clients extends javax.swing.JPanel {
                 model.addColumn("ID");
                 model.addColumn("Nombre");
                 model.addColumn("Teléfono");
+                model.addColumn("Cédula");
                 model.addColumn("Registrado Por");
 
                 while (rs.next()) {
 
-                    Object[] fila = new Object[4];
-                    for (int i = 0; i < 4; i++) {
+                    Object[] fila = new Object[5];
+                    for (int i = 0; i < 5; i++) {
 
                         fila[i] = rs.getObject(i + 1);
 
