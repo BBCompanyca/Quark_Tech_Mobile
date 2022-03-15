@@ -4,7 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
 
-public class ValidateCamp {
+public class FormatText {
 
     //Método para validar el numero de telefono...
     public void ValidateNumber(JTextField a) {

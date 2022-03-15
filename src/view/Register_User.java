@@ -5,10 +5,13 @@ import clases.BD_Connection;
 import clases.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import clases.FormatText;
 
 public class Register_User extends javax.swing.JPanel {
 
     String username_user, type_Account, direction_login;
+    
+    FormatText formatText = new FormatText();
 
     public Register_User() {
         initComponents();
@@ -18,10 +21,14 @@ public class Register_User extends javax.swing.JPanel {
         direction_login = Login.direction;
 
         //Objetos para el PlayHolder de los jTextField... 
-        TextPrompt name = new TextPrompt("Ingrese el nombre de usuario", jTextField_Name);
+        TextPrompt name = new TextPrompt("Ingrese el nombre", jTextField_Name);
         TextPrompt telephone = new TextPrompt("Ingrese el N° de télefono", jTextField_Telephone);
         TextPrompt username = new TextPrompt("Ingrese el nombre de usuario", jTextField_Username);
         TextPrompt password = new TextPrompt("Ingrese la contraseña", jPasswordField_Password);
+        
+        formatText.ValidateName(jTextField_Name);
+        formatText.ValidateUsername(jTextField_Username);
+        formatText.ValidateNumber(jTextField_Telephone);
 
         validatePermission();
 
@@ -58,7 +65,7 @@ public class Register_User extends javax.swing.JPanel {
         add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
         jTextField_Name.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Name.setBorder(null);
@@ -66,7 +73,7 @@ public class Register_User extends javax.swing.JPanel {
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 220, -1));
 
         jTextField_Telephone.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Telephone.setBorder(null);
@@ -84,7 +91,7 @@ public class Register_User extends javax.swing.JPanel {
         add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
 
         jTextField_Username.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Username.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Username.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Username.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Username.setBorder(null);
@@ -98,7 +105,7 @@ public class Register_User extends javax.swing.JPanel {
         add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 220, -1));
 
         jPasswordField_Password.setBackground(new java.awt.Color(9, 53, 69));
-        jPasswordField_Password.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jPasswordField_Password.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jPasswordField_Password.setForeground(new java.awt.Color(240, 240, 240));
         jPasswordField_Password.setBorder(null);
         add(jPasswordField_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 220, 30));
