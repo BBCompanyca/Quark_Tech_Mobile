@@ -414,24 +414,22 @@ public class Update_User extends javax.swing.JPanel {
 
     private void ValidateUpdate() {
 
-        if (!type_Account.equals(type_Account_this) && type_Account_this.equals("Moderador")) {
+        //El usuario seleccionado es el que inició sesión y su cuenta es Moderador...
+        if (Login.type_account.equals(type_Account_this) && Login.ID_User == Users.ID && Login.type_account.equals("Moderador")) {
 
-            jTextField_Name.setEditable(false);
-            jTextField_Telephone.setEditable(false);
-            jTextField_Username.setEditable(false);
+            jComboBox_Direction.setEnabled(false);
+            jComboBox_Status.setEnabled(false);
+            jComboBox_Type_Account.setEnabled(false);
+
+            //El usuario seleccionado es el que inició sesión y su cuenta es Administrador...    
+        } else if (Login.type_account.equals(type_Account_this) && Login.ID_User == Users.ID && Login.type_account.equals("Administrador")) {
+
+            jComboBox_Direction.setEnabled(false);
+            jComboBox_Status.setEnabled(false);
+            jComboBox_Type_Account.setEnabled(false);
 
             jLabel_Direction.setVisible(false);
             jComboBox_Direction.setVisible(false);
-
-            jLabel_Type_Account.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-            jLabel_Type_Account.setForeground(new java.awt.Color(240, 240, 240));
-            jLabel_Type_Account.setText("Permisos De:");
-            add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
-
-            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Moderador", "Administrador", "Vendedor", "Tecnico"}));
-            add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
-            jComboBox_Type_Account.setSelectedItem(type_Account_this);
-            jComboBox_Type_Account.setEnabled(false);
 
             jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
             jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
@@ -440,52 +438,6 @@ public class Update_User extends javax.swing.JPanel {
 
             jComboBox_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Activo", "Inactivo"}));
             add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
-            jComboBox_Status.setSelectedItem(status_this);
-            jComboBox_Status.setEnabled(false);
-
-            jButton_Update.setVisible(false);
-            jButton_RestartPassword.setVisible(false);
-
-            jLabel_Title.setText("Información Del Usuario - " + name_user);
-
-        } else if (type_Account.equals(type_Account_this) && !username_login.equals(username_this)) {
-
-            jTextField_Name.setEditable(false);
-            jTextField_Telephone.setEditable(false);
-            jTextField_Username.setEditable(false);
-
-            jLabel_Direction.setVisible(false);
-            jComboBox_Direction.setVisible(false);
-
-            jLabel_Type_Account.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-            jLabel_Type_Account.setForeground(new java.awt.Color(240, 240, 240));
-            jLabel_Type_Account.setText("Permisos De:");
-            add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
-
-            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Moderador", "Administrador", "Vendedor", "Tecnico"}));
-            add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
-            jComboBox_Type_Account.setSelectedItem(type_Account_this);
-            jComboBox_Type_Account.setEnabled(false);
-
-            jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-            jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
-            jLabel_Status.setText("Estatus:");
-            add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
-
-            jComboBox_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Activo", "Inactivo"}));
-            add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
-            jComboBox_Status.setSelectedItem(status_this);
-            jComboBox_Status.setEnabled(false);
-
-            jButton_Update.setVisible(false);
-            jButton_RestartPassword.setVisible(false);
-
-            jLabel_Title.setText("Información Del Usuario - " + name_user);
-
-        } else if (!type_Account.equals(type_Account_this) && !type_Account_this.equals("Moderador")) {
-
-            jLabel_Direction.setVisible(false);
-            jComboBox_Direction.setVisible(false);
 
             jLabel_Type_Account.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
             jLabel_Type_Account.setForeground(new java.awt.Color(240, 240, 240));
@@ -494,8 +446,37 @@ public class Update_User extends javax.swing.JPanel {
 
             jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Vendedor", "Tecnico"}));
             add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
-            jComboBox_Type_Account.setSelectedItem(type_Account_this);
-            jComboBox_Type_Account.setEnabled(true);
+            
+            //Mismos permisos y diferente ID... Es la cuenta de otro usuario.
+        } else if (Login.type_account.equals(type_Account_this) && Login.ID_User != Users.ID) {
+
+            jComboBox_Direction.setEnabled(false);
+            jComboBox_Status.setEnabled(false);
+            jComboBox_Type_Account.setEnabled(false);
+
+            jTextField_Name.setEditable(false);
+            jTextField_Telephone.setEditable(false);
+            jTextField_Username.setEditable(false);
+
+            jButton_Update.setEnabled(false);
+            jButton_RestartPassword.setEnabled(false);
+
+            //Permisos diferentes, el usuario que inició sesión es adminsitrador y el usuario seleccionado es moderador...    
+        } else if (Login.type_account.equals("Administrador") && type_Account_this.equals("Moderador")) {
+
+            jComboBox_Direction.setEnabled(false);
+            jComboBox_Status.setEnabled(false);
+            jComboBox_Type_Account.setEnabled(false);
+
+            jTextField_Name.setEditable(false);
+            jTextField_Telephone.setEditable(false);
+            jTextField_Username.setEditable(false);
+
+            jButton_Update.setEnabled(false);
+            jButton_RestartPassword.setEnabled(false);
+
+            jLabel_Direction.setVisible(false);
+            jComboBox_Direction.setVisible(false);
 
             jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
             jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
@@ -504,23 +485,19 @@ public class Update_User extends javax.swing.JPanel {
 
             jComboBox_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Activo", "Inactivo"}));
             add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
-            jComboBox_Status.setSelectedItem(status_this);
-            jComboBox_Status.setEnabled(true);
-
-        } else if (username_login.equals(username_this)) {
-
-            jLabel_Direction.setVisible(false);
-            jComboBox_Direction.setVisible(false);
 
             jLabel_Type_Account.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
             jLabel_Type_Account.setForeground(new java.awt.Color(240, 240, 240));
             jLabel_Type_Account.setText("Permisos De:");
             add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
 
-            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Moderador", "Administrador", "Vendedor", "Tecnico"}));
+            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Vendedor", "Tecnico"}));
             add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
-            jComboBox_Type_Account.setSelectedItem(type_Account_this);
-            jComboBox_Type_Account.setEnabled(false);
+
+        } else if (Login.type_account.equals("Administrador") && type_Account_this.equals("Vendedor") || type_Account_this.equals("Tecnico")) {
+
+            jLabel_Direction.setVisible(false);
+            jComboBox_Direction.setVisible(false);
 
             jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
             jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
@@ -529,10 +506,17 @@ public class Update_User extends javax.swing.JPanel {
 
             jComboBox_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Activo", "Inactivo"}));
             add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
-            jComboBox_Status.setSelectedItem(status_this);
-            jComboBox_Status.setEnabled(false);
 
-        } 
+            jLabel_Type_Account.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+            jLabel_Type_Account.setForeground(new java.awt.Color(240, 240, 240));
+            jLabel_Type_Account.setText("Permisos De:");
+            add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+
+            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Vendedor", "Tecnico"}));
+            add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
+
+        }
+
     }
 
     //Método para limpar los campos de texto...
