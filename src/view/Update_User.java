@@ -3,6 +3,7 @@ package view;
 import clases.TextPrompt;
 import java.sql.*;
 import clases.BD_Connection;
+import clases.FormatText;
 import clases.Paneles;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -11,6 +12,9 @@ public class Update_User extends javax.swing.JPanel {
 
     //Objeto para llamar los paneles...
     Paneles paneles = new Paneles();
+    
+    //Objeto para darle formato a los campos de texto.
+    FormatText formattext = new FormatText();
 
     public static String name_user;
     String username_login, username_this, type_Account, type_Account_this, status_this;
@@ -33,6 +37,11 @@ public class Update_User extends javax.swing.JPanel {
 
         //Método para validar los permisos de modificar la información...
         ValidateUpdate();
+        
+        //Intancia para darle formato a los campos de texto...
+        formattext.ValidateName(jTextField_Name);
+        formattext.ValidateNumber(jTextField_Telephone);
+        formattext.ValidateUsername(jTextField_Username);
 
     }
 

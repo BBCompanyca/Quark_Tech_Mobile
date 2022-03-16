@@ -2,11 +2,15 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
+import clases.FormatText;
 import clases.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class Register_Client extends javax.swing.JPanel {
+    
+    //Objeto para darle formato a los campos de texto.
+    FormatText formattext = new FormatText();
 
     public Register_Client() {
         initComponents();
@@ -14,8 +18,14 @@ public class Register_Client extends javax.swing.JPanel {
         TextPrompt name = new TextPrompt("Ingrese el nombre", jTextField_Name);
         TextPrompt telephone = new TextPrompt("Ingrese el N° de teléfono", jTextField_Telephone);
         TextPrompt ci = new TextPrompt("Ingrese el N° de cédula", jTextField_CI);
-
+        TextPrompt direction = new TextPrompt("Ingrese la dirección", jTextField_Direction_Client);
+        
         validateType_Account();
+        
+        //Instacia para darle formato a los campos de texto...
+        formattext.ValidateName(jTextField_Name);
+        formattext.ValidateNumber(jTextField_Telephone);
+        formattext.ValidateCI(jTextField_CI);
 
     }
 
@@ -43,7 +53,7 @@ public class Register_Client extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextField_Direction_Client.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Direction_Client.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Direction_Client.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Direction_Client.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Direction_Client.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Direction_Client.setBorder(null);
@@ -56,7 +66,7 @@ public class Register_Client extends javax.swing.JPanel {
         add(jLabel_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, -1));
 
         jTextField_Name.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Name.setBorder(null);
@@ -70,14 +80,14 @@ public class Register_Client extends javax.swing.JPanel {
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 220, -1));
 
         jTextField_Telephone.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Telephone.setBorder(null);
         add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 220, 30));
 
         jTextField_CI.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_CI.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_CI.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_CI.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_CI.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_CI.setBorder(null);
@@ -430,35 +440,15 @@ public class Register_Client extends javax.swing.JPanel {
 
         if (Login.type_account.equals("Moderador")) {
 
-            jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_dark.png"))); // NOI18N
-            jButton_Register.setBorder(null);
-            jButton_Register.setBorderPainted(false);
-            jButton_Register.setContentAreaFilled(false);
-            jButton_Register.setFocusPainted(false);
-            jButton_Register.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            jButton_Register.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_ligth.png"))); // NOI18N
-            jButton_Register.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_ligth.png"))); // NOI18N
             add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 190, 60));
 
-            jLabel_Direction_Shop.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-            jLabel_Direction_Shop.setForeground(new java.awt.Color(240, 240, 240));
-            jLabel_Direction_Shop.setText("Dirección:");
             add(jLabel_Direction_Shop, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, -1, -1));
 
-            jComboBox_Direction_Shop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Almacen", "Caricuao", "City Market"}));
             add(jComboBox_Direction_Shop, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, -1, -1));
 
         } else {
 
-            jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_dark.png"))); // NOI18N
-            jButton_Register.setBorder(null);
-            jButton_Register.setBorderPainted(false);
-            jButton_Register.setContentAreaFilled(false);
-            jButton_Register.setFocusPainted(false);
-            jButton_Register.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            jButton_Register.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_ligth.png"))); // NOI18N
-            jButton_Register.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_ligth.png"))); // NOI18N
-            add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 190, 60));
+           add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 190, 60));
 
             jLabel_Direction_Shop.setVisible(false);
             jComboBox_Direction_Shop.setVisible(false);
