@@ -2,6 +2,7 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
+import clases.FormatText;
 import clases.Paneles;
 import clases.TextPrompt;
 import java.awt.Color;
@@ -10,6 +11,8 @@ import javax.swing.JOptionPane;
 public class Update_Client extends javax.swing.JPanel {
 
     Paneles paneles = new Paneles();
+
+    FormatText formattext = new FormatText();
 
     public Update_Client() {
         initComponents();
@@ -26,6 +29,11 @@ public class Update_Client extends javax.swing.JPanel {
         //Método para consultar la información del cliente...
         getInformation_Client();
 
+        formattext.ValidateName(jTextField_Name);
+        formattext.ValidateName(jTextField_Direction_Client);
+        formattext.ValidateNumber(jTextField_Telephone);
+        formattext.ValidateCI(jTextField_Ci);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -257,8 +265,6 @@ public class Update_Client extends javax.swing.JPanel {
                             cn.close();
 
                         } else {
-
-                            cn.close();
 
                             try {
 
