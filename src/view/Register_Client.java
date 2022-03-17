@@ -22,6 +22,8 @@ public class Register_Client extends javax.swing.JPanel {
         
         validateType_Account();
         
+        validateAddressRegister();
+        
         //Instacia para darle formato a los campos de texto...
         formattext.ValidateName(jTextField_Name);
         formattext.ValidateNumber(jTextField_Telephone);
@@ -465,6 +467,19 @@ public class Register_Client extends javax.swing.JPanel {
 
         }
 
+    }
+    
+    private void validateAddressRegister(){
+        
+        if (Consult_Cl_Client.flag == 1) {
+            
+            jTextField_Name.requestFocus();
+            
+            jTextField_CI.setText(Consult_Cl_Client.ci_client);
+            jTextField_CI.setEditable(false);
+            
+        }
+        
     }
 
     private void PintarDeVerdejTextField() {
