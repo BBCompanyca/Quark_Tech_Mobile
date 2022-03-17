@@ -13,6 +13,7 @@ import view.Principal;
 import view.Register_Client;
 import view.Register_User;
 import view.Reset_Password;
+import view.TabletConsultClient;
 import view.Update_Client;
 import view.Update_User;
 import view.Users;
@@ -144,6 +145,19 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(consutl_ci_client, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    public void TabletConsultClient() {
+
+        TabletConsultClient tableconsultclient = new TabletConsultClient();
+        tableconsultclient.setSize(790, 370);
+        tableconsultclient.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(tableconsultclient, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

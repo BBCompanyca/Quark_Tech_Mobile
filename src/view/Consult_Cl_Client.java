@@ -5,11 +5,8 @@ import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
 import clases.TextPrompt;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dialog;
 import javax.swing.JOptionPane;
-import static view.Dashboard.jPanel_Content;
 
 public class Consult_Cl_Client extends javax.swing.JPanel {
 
@@ -93,8 +90,8 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                         ResultSet rs = pst.executeQuery();
 
                         if (rs.next()) {
-
-                            JOptionPane.showMessageDialog(null, "Panel de registro de equipo");
+                            
+                            paneles.TabletConsultClient();
 
                         } else {
 
@@ -137,7 +134,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                             cn.close();
                             
-                            JOptionPane.showMessageDialog(null, "Panel de registro de equipo");
+                            paneles.TabletConsultClient();
 
                         } else {
                             
