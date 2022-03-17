@@ -2,6 +2,7 @@ package clases;
 
 import java.awt.BorderLayout;
 import view.Clients;
+import view.Consult_Cl_Client;
 import static view.Dashboard.jPanel_Content;
 import static view.Dashboard.jPanel_Content_Menu;
 import view.Equipos;
@@ -130,6 +131,19 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(equipos, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    public void PanelConsulCient() {
+
+        Consult_Cl_Client consutl_ci_client = new Consult_Cl_Client();
+        consutl_ci_client.setSize(790, 370);
+        consutl_ci_client.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(consutl_ci_client, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 
