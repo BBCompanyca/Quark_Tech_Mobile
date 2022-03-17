@@ -2,6 +2,7 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
+import clases.FormatText;
 import clases.Paneles;
 import clases.TextPrompt;
 import java.awt.Color;
@@ -10,6 +11,8 @@ import javax.swing.JOptionPane;
 public class Update_Client extends javax.swing.JPanel {
 
     Paneles paneles = new Paneles();
+
+    FormatText formattext = new FormatText();
 
     public Update_Client() {
         initComponents();
@@ -25,6 +28,11 @@ public class Update_Client extends javax.swing.JPanel {
 
         //Método para consultar la información del cliente...
         getInformation_Client();
+
+        formattext.ValidateName(jTextField_Name);
+        formattext.ValidateName(jTextField_Direction_Client);
+        formattext.ValidateNumber(jTextField_Telephone);
+        formattext.ValidateCI(jTextField_Ci);
 
     }
 
@@ -258,22 +266,26 @@ public class Update_Client extends javax.swing.JPanel {
 
                         } else {
 
-                            cn.close();
-
                             try {
+
+                                String unformat_telephone = formattext.unFormatText(telephone);
+                                String unformat_ci = formattext.unFormatText(ci);
 
                                 Connection cn2 = BD_Connection.connection();
                                 PreparedStatement pst2 = cn2.prepareStatement(
-                                        "update client set name_client = ?, telephone_client = ?, cedula_client = ?, "
+                                        "update client set name_client = ?, telephone_client = ?, unformat_telephone_client = ?, "
+                                        + "cedula_client = ?, unformat_cedula_client = ?,"
                                         + "direction_client = ?, direction_tienda = ?, last_modification = ? "
                                         + "where id_client = '" + Clients.ID + "'");
 
                                 pst2.setString(1, name);
                                 pst2.setString(2, telephone);
-                                pst2.setString(3, ci);
-                                pst2.setString(4, direction_client);
-                                pst2.setString(5, direction_shop);
-                                pst2.setString(6, Login.user);
+                                pst2.setString(3, unformat_telephone);
+                                pst2.setString(4, ci);
+                                pst2.setString(5, unformat_ci);
+                                pst2.setString(6, direction_client);
+                                pst2.setString(7, direction_shop);
+                                pst2.setString(8, Login.user);
 
                                 pst2.executeUpdate();
 
@@ -401,18 +413,24 @@ public class Update_Client extends javax.swing.JPanel {
 
                         try {
 
+                            String unformat_telephone = formattext.unFormatText(telephone);
+                            String unformat_ci = formattext.unFormatText(ci);
+
                             Connection cn2 = BD_Connection.connection();
                             PreparedStatement pst2 = cn2.prepareStatement(
-                                    "update client set name_client = ?, telephone_client = ?, cedula_client = ?, "
+                                    "update client set name_client = ?, telephone_client = ?, unformat_telephone_client = ?, "
+                                    + "cedula_client = ?, unformat_cedula_client = ?,"
                                     + "direction_client = ?, direction_tienda = ?, last_modification = ? "
                                     + "where id_client = '" + Clients.ID + "'");
 
                             pst2.setString(1, name);
                             pst2.setString(2, telephone);
-                            pst2.setString(3, ci);
-                            pst2.setString(4, direction_client);
-                            pst2.setString(5, Login.direction);
-                            pst2.setString(6, Login.user);
+                            pst2.setString(3, unformat_telephone);
+                            pst2.setString(4, ci);
+                            pst2.setString(5, unformat_ci);
+                            pst2.setString(6, direction_client);
+                            pst2.setString(7, Login.direction);
+                            pst2.setString(8, Login.user);
 
                             pst2.executeUpdate();
 

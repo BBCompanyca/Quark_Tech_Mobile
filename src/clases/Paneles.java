@@ -2,8 +2,10 @@ package clases;
 
 import java.awt.BorderLayout;
 import view.Clients;
+import view.Consult_Cl_Client;
 import static view.Dashboard.jPanel_Content;
 import static view.Dashboard.jPanel_Content_Menu;
+import view.Equipos;
 import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
@@ -11,6 +13,7 @@ import view.Principal;
 import view.Register_Client;
 import view.Register_User;
 import view.Reset_Password;
+import view.TabletConsultClient;
 import view.Update_Client;
 import view.Update_User;
 import view.Users;
@@ -57,7 +60,7 @@ public class Paneles {
     }
     
     public void PanelUpadteUser(){
-        
+       
         Update_User updateUsers = new Update_User();
         updateUsers.setSize(790, 370);
         updateUsers.setLocation(0, 0);
@@ -116,6 +119,45 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(pl, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    public void PanelEquipos() {
+
+        Equipos equipos = new Equipos();
+        equipos.setSize(790, 370);
+        equipos.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(equipos, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    public void PanelConsulCient() {
+
+        Consult_Cl_Client consutl_ci_client = new Consult_Cl_Client();
+        consutl_ci_client.setSize(790, 370);
+        consutl_ci_client.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(consutl_ci_client, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    public void TabletConsultClient() {
+
+        TabletConsultClient tableconsultclient = new TabletConsultClient();
+        tableconsultclient.setSize(790, 370);
+        tableconsultclient.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(tableconsultclient, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 
