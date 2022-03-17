@@ -2,12 +2,9 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import static view.Clients.ID;
 
 public class TabletConsultClient extends javax.swing.JPanel {
 
