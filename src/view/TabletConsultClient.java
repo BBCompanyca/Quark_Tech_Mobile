@@ -2,22 +2,24 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import static view.Clients.ID;
 
 public class TabletConsultClient extends javax.swing.JPanel {
-    
+
     DefaultTableModel model = new DefaultTableModel();
 
     public TabletConsultClient() {
         initComponents();
-        
+
         getClients();
         
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,6 +42,11 @@ public class TabletConsultClient extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable_Client.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable_ClientKeyPressed(evt);
+            }
+        });
         jScrollPane.setViewportView(jTable_Client);
 
         add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 750, 260));
@@ -49,6 +56,12 @@ public class TabletConsultClient extends javax.swing.JPanel {
         jLabel1.setText("Cliente:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 50));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable_ClientKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_ClientKeyPressed
+
+        
+
+    }//GEN-LAST:event_jTable_ClientKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -66,7 +79,7 @@ public class TabletConsultClient extends javax.swing.JPanel {
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client "
-                                + "where cedula_client = '" + Consult_Cl_Client.ci_client + "'");
+                        + "where cedula_client = '" + Consult_Cl_Client.ci_client + "'");
 
                 ResultSet rs = pst.executeQuery();
 
@@ -149,5 +162,5 @@ public class TabletConsultClient extends javax.swing.JPanel {
         }
 
     }
-    
+
 }

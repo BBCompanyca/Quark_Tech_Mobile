@@ -6,6 +6,7 @@ import clases.FormatText;
 import clases.Paneles;
 import clases.TextPrompt;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class Consult_Cl_Client extends javax.swing.JPanel {
@@ -68,6 +69,11 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
         jTextField_CI_Client.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_CI_Client.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_CI_Client.setBorder(null);
+        jTextField_CI_Client.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_CI_ClientKeyPressed(evt);
+            }
+        });
         add(jTextField_CI_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 250, 30));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -90,7 +96,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                         ResultSet rs = pst.executeQuery();
 
                         if (rs.next()) {
-                            
+
                             paneles.TabletConsultClient();
 
                         } else {
@@ -125,19 +131,19 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                         Connection cn = BD_Connection.connection();
                         PreparedStatement pst = cn.prepareStatement(
-                                "select cedula_client from client where cedula_client = '" + ci_client + "' and direction_tienda = '" 
-                                        + Login.direction + "'");
+                                "select cedula_client from client where cedula_client = '" + ci_client + "' and direction_tienda = '"
+                                + Login.direction + "'");
 
                         ResultSet rs = pst.executeQuery();
 
                         if (rs.next()) {
 
                             cn.close();
-                            
+
                             paneles.TabletConsultClient();
 
                         } else {
-                            
+
                             cn.close();
 
                             int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
@@ -193,6 +199,129 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
     private void jButton_ConsultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConsultActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_ConsultActionPerformed
+
+    private void jTextField_CI_ClientKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_CI_ClientKeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            ci_client = jTextField_CI_Client.getText().trim();
+
+            if (!ci_client.equals("")) {
+
+                if (jTextField_CI_Client.getText().length() == 10) {
+
+                    if (Login.type_account.equals("Moderador")) {
+
+                        try {
+
+                            Connection cn = BD_Connection.connection();
+                            PreparedStatement pst = cn.prepareStatement(
+                                    "select cedula_client from client where cedula_client = '" + ci_client + "'");
+
+                            ResultSet rs = pst.executeQuery();
+
+                            if (rs.next()) {
+
+                                paneles.TabletConsultClient();
+
+                            } else {
+
+                                int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
+                                        "Selección", JOptionPane.OK_CANCEL_OPTION);
+
+                                if (question == 0) {
+
+                                    flag = 1;
+
+                                    paneles.PanelRegisterClient();
+
+                                } else {
+
+                                    paneles.PanelConsulCient();
+
+                                }
+
+                            }
+
+                        } catch (SQLException e) {
+
+                            System.err.println("¡Error al consultar la C.I del cliente! " + e);
+                            JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I del cliente!", "¡Error!", JOptionPane.OK_OPTION);
+
+                        }
+
+                    } else {
+
+                        try {
+
+                            Connection cn = BD_Connection.connection();
+                            PreparedStatement pst = cn.prepareStatement(
+                                    "select cedula_client from client where cedula_client = '" + ci_client + "' and direction_tienda = '"
+                                    + Login.direction + "'");
+
+                            ResultSet rs = pst.executeQuery();
+
+                            if (rs.next()) {
+
+                                cn.close();
+
+                                paneles.TabletConsultClient();
+
+                            } else {
+
+                                cn.close();
+
+                                int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
+                                        "Selección", JOptionPane.OK_CANCEL_OPTION);
+
+                                if (question == 0) {
+
+                                    flag = 1;
+
+                                    paneles.PanelRegisterClient();
+
+                                } else {
+
+                                    paneles.PanelConsulCient();
+
+                                }
+
+                            }
+
+                        } catch (SQLException e) {
+
+                            System.err.println("¡Error al consultar la C.I del cliente! " + e);
+                            JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I del cliente!", "¡Error!", JOptionPane.OK_OPTION);
+
+                        }
+
+                    }
+
+                } else {
+
+                    jLabel_CI_Client.setForeground(Color.red);
+
+                    JOptionPane.showMessageDialog(null, "¡Error de formato!", "¡Error!", JOptionPane.WARNING_MESSAGE);
+
+                    jTextField_CI_Client.setText("");
+                    jTextField_CI_Client.requestFocus();
+
+                }
+
+            } else {
+
+                jLabel_CI_Client.setForeground(Color.red);
+
+                JOptionPane.showMessageDialog(null, "¡Debes llenar el campo!", "¡Acceso Denegado!", JOptionPane.WARNING_MESSAGE);
+
+                jTextField_CI_Client.setText("");
+                jTextField_CI_Client.requestFocus();
+
+            }
+
+        }
+
+    }//GEN-LAST:event_jTextField_CI_ClientKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
