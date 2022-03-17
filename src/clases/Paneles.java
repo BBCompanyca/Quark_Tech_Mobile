@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import view.Clients;
 import static view.Dashboard.jPanel_Content;
 import static view.Dashboard.jPanel_Content_Menu;
+import view.Equipos;
 import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
@@ -116,6 +117,19 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(pl, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    public void PanelEquipos() {
+
+        Equipos equipos = new Equipos();
+        equipos.setSize(790, 370);
+        equipos.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(equipos, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 
