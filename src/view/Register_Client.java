@@ -234,19 +234,24 @@ public class Register_Client extends javax.swing.JPanel {
                             cn.close();
 
                             try {
+                                
+                                String unformat_telphone = formattext.unFormatText(telephone);
+                                String unformat_ci = formattext.unFormatText(ci);
 
                                 Connection cn2 = BD_Connection.connection();
                                 PreparedStatement pst2 = cn2.prepareStatement(
-                                        "insert into client values(?, ?, ?, ?, ?, ?, ?, ?)");
+                                        "insert into client values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                                 pst2.setInt(1, 0);
                                 pst2.setString(2, name);
                                 pst2.setString(3, telephone);
-                                pst2.setString(4, ci);
-                                pst2.setString(5, direction_client);
-                                pst2.setString(6, direction_shop);
-                                pst2.setString(7, Login.user);
-                                pst2.setString(8, "");
+                                pst2.setString(4, unformat_telphone);
+                                pst2.setString(5, ci);
+                                pst2.setString(6, unformat_ci);
+                                pst2.setString(7, direction_client);
+                                pst2.setString(8, direction_shop);
+                                pst2.setString(9, Login.user);
+                                pst2.setString(10, "");
 
                                 pst2.executeUpdate();
 
@@ -366,19 +371,24 @@ public class Register_Client extends javax.swing.JPanel {
                             cn.close();
 
                             try {
+                                
+                                String unformat_telphone = formattext.unFormatText(telephone);
+                                String unformat_ci = formattext.unFormatText(ci);
 
                                 Connection cn2 = BD_Connection.connection();
                                 PreparedStatement pst2 = cn2.prepareStatement(
-                                        "insert into client values(?, ?, ?, ?, ?, ?, ?, ?)");
+                                        "insert into client values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                                 pst2.setInt(1, 0);
                                 pst2.setString(2, name);
                                 pst2.setString(3, telephone);
-                                pst2.setString(4, ci);
-                                pst2.setString(5, direction_client);
-                                pst2.setString(6, Login.direction);
-                                pst2.setString(7, Login.user);
-                                pst2.setString(8, "");
+                                pst2.setString(4, unformat_telphone);
+                                pst2.setString(5, ci);
+                                pst2.setString(6, unformat_ci);
+                                pst2.setString(7, direction_client);
+                                pst2.setString(8, Login.direction);
+                                pst2.setString(9, Login.user);
+                                pst2.setString(10, "");
 
                                 pst2.executeUpdate();
 

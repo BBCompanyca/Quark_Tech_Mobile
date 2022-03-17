@@ -187,10 +187,13 @@ public class Clients extends javax.swing.JPanel {
 
                 } else {
 
-                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client "
+                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, "
+                            + "registered_by from client "
                             + "where id_client = '" + search + "' or name_client = '" + search + "' or "
                             + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
-                            + "direction_tienda = '" + search + "' or registered_by = '" + search + "'";
+                            + "direction_tienda = '" + search + "' or registered_by = '" + search + "' or "
+                            + "unformat_telephone_client = '" + search + "' or "
+                            + "unformat_cedula_client = '" + search + "'";
 
                 }
 
@@ -210,7 +213,9 @@ public class Clients extends javax.swing.JPanel {
                             + "name_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
                             + "telephone_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
                             + "cedula_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                            + "registered_by = '" + search + "' and direction_tienda = '" + Login.direction + "'";
+                            + "registered_by = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
+                            + "unformat_telephone_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
+                            + "unformat_cedula_client = '" + search + "' and direction_tienda = '" + Login.direction + "'";
 
                 }
 
@@ -333,10 +338,13 @@ public class Clients extends javax.swing.JPanel {
 
             } else {
 
-                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client "
+                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, "
+                        + "registered_by from client "
                         + "where id_client = '" + search + "' or name_client = '" + search + "' or "
                         + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
-                        + "direction_tienda = '" + search + "' or registered_by = '" + search + "'";
+                        + "direction_tienda = '" + search + "' or registered_by = '" + search + "' or "
+                        + "unformat_telephone_client = '" + search + "' or "
+                        + "unformat_cedula_client = '" + search + "'";
 
             }
 
@@ -356,7 +364,9 @@ public class Clients extends javax.swing.JPanel {
                         + "name_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
                         + "telephone_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
                         + "cedula_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                        + "registered_by = '" + search + "' and direction_tienda = '" + Login.direction + "'";
+                        + "registered_by = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
+                        + "unformat_telephone_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
+                        + "unformat_cedula_client = '" + search + "' and direction_tienda = '" + Login.direction + "'";
 
             }
 

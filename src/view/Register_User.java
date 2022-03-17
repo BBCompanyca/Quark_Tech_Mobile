@@ -10,7 +10,7 @@ import clases.FormatText;
 public class Register_User extends javax.swing.JPanel {
 
     String username_user, type_Account, direction_login;
-    
+
     FormatText formatText = new FormatText();
 
     public Register_User() {
@@ -25,7 +25,7 @@ public class Register_User extends javax.swing.JPanel {
         TextPrompt telephone = new TextPrompt("Ingrese el N° de télefono", jTextField_Telephone);
         TextPrompt username = new TextPrompt("Ingrese el nombre de usuario", jTextField_Username);
         TextPrompt password = new TextPrompt("Ingrese la contraseña", jPasswordField_Password);
-        
+
         formatText.ValidateName(jTextField_Name);
         formatText.ValidateUsername(jTextField_Username);
         formatText.ValidateNumber(jTextField_Telephone);
@@ -162,7 +162,7 @@ public class Register_User extends javax.swing.JPanel {
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
-        String name, telephone, username, password, permission, direction;
+        String name, telephone, unformat_telphone, username, password, permission, direction;
 
         if (type_Account.equals("Moderador")) {
 
@@ -277,20 +277,23 @@ public class Register_User extends javax.swing.JPanel {
                                 //Algoritmo para registrar el usario...
                                 try {
 
+                                    unformat_telphone = formatText.unFormatText(telephone);
+
                                     Connection cn2 = BD_Connection.connection();
                                     PreparedStatement pst2 = cn2.prepareStatement(
-                                            "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                            "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                                     pst2.setInt(1, 0);
                                     pst2.setString(2, name);
                                     pst2.setString(3, username);
                                     pst2.setString(4, password);
                                     pst2.setString(5, telephone);
-                                    pst2.setString(6, direction);
-                                    pst2.setString(7, permission);
-                                    pst2.setString(8, username_user);
-                                    pst2.setString(9, "");
-                                    pst2.setString(10, "Activo");
+                                    pst2.setString(6, unformat_telphone);
+                                    pst2.setString(7, direction);
+                                    pst2.setString(8, permission);
+                                    pst2.setString(9, username_user);
+                                    pst2.setString(10, "");
+                                    pst2.setString(11, "Activo");
                                     pst2.executeUpdate();
 
                                     PintarDeVerdejTextField();
@@ -442,20 +445,24 @@ public class Register_User extends javax.swing.JPanel {
                             //Algoritmo para registrar el usario...
                             try {
 
+                                unformat_telphone = formatText.unFormatText(telephone);
+                                System.out.println(unformat_telphone);
+
                                 Connection cn2 = BD_Connection.connection();
                                 PreparedStatement pst2 = cn2.prepareStatement(
-                                        "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                        "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                                 pst2.setInt(1, 0);
                                 pst2.setString(2, name);
                                 pst2.setString(3, username);
                                 pst2.setString(4, password);
                                 pst2.setString(5, telephone);
-                                pst2.setString(6, direction_login);
-                                pst2.setString(7, permission);
-                                pst2.setString(8, username_user);
-                                pst2.setString(9, "");
-                                pst2.setString(10, "Activo");
+                                pst2.setString(6, unformat_telphone);
+                                pst2.setString(7, direction_login);
+                                pst2.setString(8, permission);
+                                pst2.setString(9, username_user);
+                                pst2.setString(10, "");
+                                pst2.setString(11, "Activo");
                                 pst2.executeUpdate();
 
                                 PintarDeVerdejTextField();

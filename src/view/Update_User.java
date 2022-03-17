@@ -285,19 +285,23 @@ public class Update_User extends javax.swing.JPanel {
                             cn.close();
 
                             try {
+                                
+                                String unformat_telephone_user = formattext.unFormatText(telephone);
 
                                 Connection cn2 = BD_Connection.connection();
                                 PreparedStatement pst2 = cn2.prepareStatement(
-                                        "update user set name_user = ?, telephone = ?, username = ?, last_modification = ?, "
-                                        + "direction = ?, type_account = ?, status = ? where id_user = '" + ID + "'");
+                                        "update user set name_user = ?, telephone = ?, unformat_telephone_user = ?, "
+                                        + "username = ?, last_modification = ?, direction = ?, type_account = ?, status = ? "
+                                        + "where id_user = '" + ID + "'");
 
                                 pst2.setString(1, name);
                                 pst2.setString(2, telephone);
-                                pst2.setString(3, username);
-                                pst2.setString(4, username_login);
-                                pst2.setString(5, direction);
-                                pst2.setString(6, type_account);
-                                pst2.setString(7, status);
+                                pst2.setString(3, unformat_telephone_user);
+                                pst2.setString(4, username);
+                                pst2.setString(5, username_login);
+                                pst2.setString(6, direction);
+                                pst2.setString(7, type_account);
+                                pst2.setString(8, status);
                                 pst2.executeUpdate();
 
                                 ClearCamps();
