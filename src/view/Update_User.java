@@ -472,8 +472,8 @@ public class Update_User extends javax.swing.JPanel {
             jTextField_Telephone.setEditable(false);
             jTextField_Username.setEditable(false);
 
-            jButton_Update.setEnabled(false);
-            jButton_RestartPassword.setEnabled(false);
+            jButton_Update.setVisible(false);
+            jButton_RestartPassword.setVisible(false);
 
             //Permisos diferentes, el usuario que inició sesión es adminsitrador y el usuario seleccionado es moderador...    
         } else if (Login.type_account.equals("Administrador") && type_Account_this.equals("Moderador")) {
@@ -484,8 +484,8 @@ public class Update_User extends javax.swing.JPanel {
             jTextField_Telephone.setEditable(false);
             jTextField_Username.setEditable(false);
 
-            jButton_Update.setEnabled(false);
-            jButton_RestartPassword.setEnabled(false);
+            jButton_Update.setVisible(false);
+            jButton_RestartPassword.setVisible(false);;
 
             jLabel_Direction.setVisible(false);
             jComboBox_Direction.setVisible(false);
