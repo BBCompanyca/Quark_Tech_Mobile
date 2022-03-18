@@ -210,90 +210,41 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                 if (jTextField_CI_Client.getText().length() == 10) {
 
-                    if (Login.type_account.equals("Moderador")) {
+                    try {
 
-                        try {
+                        Connection cn = BD_Connection.connection();
+                        PreparedStatement pst = cn.prepareStatement(
+                                "select cedula_client from client where cedula_client = '" + ci_client + "'");
 
-                            Connection cn = BD_Connection.connection();
-                            PreparedStatement pst = cn.prepareStatement(
-                                    "select cedula_client from client where cedula_client = '" + ci_client + "'");
+                        ResultSet rs = pst.executeQuery();
 
-                            ResultSet rs = pst.executeQuery();
+                        if (rs.next()) {
 
-                            if (rs.next()) {
+                            paneles.TabletConsultClient();
 
-                                paneles.TabletConsultClient();
+                        } else {
 
-                            } else {
+                            int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
+                                    "Selección", JOptionPane.OK_CANCEL_OPTION);
 
-                                int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
-                                        "Selección", JOptionPane.OK_CANCEL_OPTION);
+                            if (question == 0) {
 
-                                if (question == 0) {
+                                flag = 1;
 
-                                    flag = 1;
-
-                                    paneles.PanelRegisterClient();
-
-                                } else {
-
-                                    paneles.PanelConsulCient();
-
-                                }
-
-                            }
-
-                        } catch (SQLException e) {
-
-                            System.err.println("¡Error al consultar la C.I del cliente! " + e);
-                            JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I del cliente!", "¡Error!", JOptionPane.OK_OPTION);
-
-                        }
-
-                    } else {
-
-                        try {
-
-                            Connection cn = BD_Connection.connection();
-                            PreparedStatement pst = cn.prepareStatement(
-                                    "select cedula_client from client where cedula_client = '" + ci_client + "' and direction_tienda = '"
-                                    + Login.direction + "'");
-
-                            ResultSet rs = pst.executeQuery();
-
-                            if (rs.next()) {
-
-                                cn.close();
-
-                                paneles.TabletConsultClient();
+                                paneles.PanelRegisterClient();
 
                             } else {
 
-                                cn.close();
-
-                                int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
-                                        "Selección", JOptionPane.OK_CANCEL_OPTION);
-
-                                if (question == 0) {
-
-                                    flag = 1;
-
-                                    paneles.PanelRegisterClient();
-
-                                } else {
-
-                                    paneles.PanelConsulCient();
-
-                                }
+                                paneles.PanelConsulCient();
 
                             }
 
-                        } catch (SQLException e) {
-
-                            System.err.println("¡Error al consultar la C.I del cliente! " + e);
-                            JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I del cliente!", "¡Error!", JOptionPane.OK_OPTION);
-
                         }
+
+                    } catch (SQLException e) {
+
+                        System.err.println("¡Error al consultar la C.I del cliente! " + e);
+                        JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I del cliente!", "¡Error!", JOptionPane.OK_OPTION);
 
                     }
 

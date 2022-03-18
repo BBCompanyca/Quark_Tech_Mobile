@@ -3,10 +3,12 @@ package clases;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
+import sun.security.util.Length;
 
 public class FormatText {
 
     char d;
+    int count = 0;
 
     //Método para validar el numero de telefono...
     public void ValidateNumber(JTextField a) {
@@ -55,13 +57,35 @@ public class FormatText {
 
                 char c = e.getKeyChar();
 
+                count++;
+
                 if (!Character.isDigit(c) || a.getText().length() == 10) {
 
                     e.consume();
 
                 }
+                
+               /* if (a.getText().length() == 0) {
+                    
+                    count = 0;
+                    
+                }
 
-                if (a.getText().length() == 2 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE
+                for (int i = a.getText().length(); i != 0; i--) {
+
+                    if (count == 3) {
+
+                        String point = a.getText();
+
+                        a.setText(point + ".");
+
+                        count = 0;
+
+                    }
+
+                } */
+
+                 if (a.getText().length() == 2 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE
                         || a.getText().length() == 6 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE) {
 
                     String point = a.getText();
@@ -69,7 +93,6 @@ public class FormatText {
                     a.setText(point + ".");
 
                 }
-
             }
 
         });
@@ -86,19 +109,19 @@ public class FormatText {
 
                 char c = e.getKeyChar();
 
-                if (!Character.isLetter(c) && c != ' ' 
+                if (!Character.isLetter(c) && c != ' '
                         || a.getText().length() == 0 && !Character.isLetter(c) && c == ' ') {
 
                     e.consume();
 
                 }
-                
+
                 if (d == ' ' && c == ' ') {
-                    
+
                     e.consume();
-                    
+
                 }
-                
+
                 d = c;
 
             }
@@ -128,7 +151,7 @@ public class FormatText {
         });
 
     }
-    
+
     public String unFormatText(String cadena) {
 
         String newCadena = "";
