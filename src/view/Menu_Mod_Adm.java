@@ -347,6 +347,9 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
         resetColor(Btn_Reportes);
         resetColor(Btn_Estadisticas);
         resetColor(Btn_About_Me);
+        
+        Consult_Cl_Client.flag = 0;
+        
     }//GEN-LAST:event_Btn_ClientsMousePressed
 
     private void Btn_EquiposMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMouseEntered

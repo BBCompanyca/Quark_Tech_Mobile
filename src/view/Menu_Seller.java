@@ -233,6 +233,9 @@ public class Menu_Seller extends javax.swing.JPanel {
         resetColor(Btn_Equipos);
         resetColor(Btn_Reportes);
         resetColor(Btn_About_Me);
+        
+        Consult_Cl_Client.flag = 0;
+        
     }//GEN-LAST:event_Btn_ClientsMousePressed
 
     private void Btn_EquiposMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMouseEntered
