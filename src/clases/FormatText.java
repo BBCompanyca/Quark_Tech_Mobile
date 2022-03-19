@@ -2,8 +2,9 @@ package clases;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Calendar;
 import javax.swing.JTextField;
-import sun.security.util.Length;
+import static view.Register_Equipo.jLabel_garantia;
 
 public class FormatText {
 
@@ -64,8 +65,8 @@ public class FormatText {
                     e.consume();
 
                 }
-                
-               /* if (a.getText().length() == 0) {
+
+                /* if (a.getText().length() == 0) {
                     
                     count = 0;
                     
@@ -84,8 +85,7 @@ public class FormatText {
                     }
 
                 } */
-
-                 if (a.getText().length() == 2 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE
+                if (a.getText().length() == 2 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE
                         || a.getText().length() == 6 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE) {
 
                     String point = a.getText();
@@ -152,6 +152,7 @@ public class FormatText {
 
     }
 
+    //Método para quitar el formato a los campos de texto...
     public String unFormatText(String cadena) {
 
         String newCadena = "";

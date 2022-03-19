@@ -11,6 +11,7 @@ import view.Menu_Seller;
 import view.Menu_Tecnico;
 import view.Principal;
 import view.Register_Client;
+import view.Register_Equipo;
 import view.Register_User;
 import view.Reset_Password;
 import view.TabletConsultClient;
@@ -158,6 +159,19 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(tableconsultclient, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    public void PanelRegisterEquipo() {
+
+        Register_Equipo register_equipo = new Register_Equipo();
+        register_equipo.setSize(790, 370);
+        register_equipo.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(register_equipo, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

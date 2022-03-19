@@ -115,7 +115,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                                 if (question == 0) {
 
-                                    JOptionPane.showMessageDialog(null, "Funciona...");
+                                    paneles.PanelRegisterEquipo();
 
                                 } else {
 

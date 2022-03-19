@@ -3,6 +3,7 @@ package view;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
+import clases.Paneles;
 import clases.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -11,6 +12,8 @@ public class Register_Client extends javax.swing.JPanel {
 
     //Objeto para darle formato a los campos de texto.
     FormatText formattext = new FormatText();
+    
+    Paneles paneles = new Paneles();
 
     public Register_Client() {
         initComponents();
@@ -225,6 +228,16 @@ public class Register_Client extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Registro exitoso.", "¡Exito!", JOptionPane.INFORMATION_MESSAGE);
 
                         resetColorjTextField();
+                        
+                        if (Consult_Cl_Client.flag == 1) {
+                            
+                            paneles.PanelRegisterEquipo();
+                            
+                        } else {
+                            
+                            paneles.PanelClients();
+                            
+                        }
 
                     } catch (SQLException e) {
 
@@ -248,7 +261,6 @@ public class Register_Client extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "¡Acceso Denegado!",
                     JOptionPane.WARNING_MESSAGE);
 
-            //}
         }
 
     }//GEN-LAST:event_jButton_RegisterMousePressed
