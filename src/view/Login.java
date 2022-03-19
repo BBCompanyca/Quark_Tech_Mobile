@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
+    public static int ID_User;
     public static String user;
     public static String type_account;
     public static String direction;
@@ -168,7 +169,7 @@ public class Login extends javax.swing.JFrame {
         //Obtención de los datos ingresados por el usuario...
         String user2 = jTextField_Username.getText().trim();
         String pass2 = jPasswordField_Password.getText().trim();
-        String status = "";
+        String status;
 
         //Validación de que todos los campos estén llenos.
         if (!user2.equals("") && !pass2.equals("")) {
@@ -178,12 +179,13 @@ public class Login extends javax.swing.JFrame {
                 //Conexión a la base de datos para consultar los datos del usuario...
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select username, password, direction, type_account, status from user where username = '" + user2 + "' and password = '" + pass2 + "'");
+                        "select id_user, username, password, direction, type_account, status from user where username = '" + user2 + "' and password = '" + pass2 + "'");
 
                 ResultSet rs = pst.executeQuery();
 
                 if (rs.next()) {
 
+                    ID_User = rs.getInt("id_user");
                     status = rs.getString("status");
                     type_account = rs.getString("type_account");
                     user = rs.getString("username");
@@ -248,6 +250,8 @@ public class Login extends javax.swing.JFrame {
             jLabel_Anwser.setText("¡Debes llenar todos los campos!");
 
         }
+        
+        
 
     }//GEN-LAST:event_jButton_AccederMousePressed
 

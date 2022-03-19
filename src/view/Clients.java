@@ -1,12 +1,34 @@
 package view;
 
+import java.sql.*;
+import clases.BD_Connection;
+import clases.Paneles;
+import clases.TextPrompt;
+import com.sun.glass.events.KeyEvent;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import static view.Users.ID;
+
 public class Clients extends javax.swing.JPanel {
+
+    DefaultTableModel model = new DefaultTableModel();
+
+    Paneles paneles = new Paneles();
+
+    public static int ID;
 
     public Clients() {
         initComponents();
+
+        TextPrompt search = new TextPrompt("Ingrese algún parametro", jTextField_Search_Client);
+
+        getClients();
+
+        validatePermissions();
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -85,7 +107,7 @@ public class Clients extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Dirección", "Tienda", "Registrado Por"
+                "ID", "Nombre", "Teléfono", "Tienda", "Registrado Por"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -103,6 +125,7 @@ public class Clients extends javax.swing.JPanel {
         add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 750, 203));
 
         jButton_New_Client.setText("NUEVO");
+        jButton_New_Client.setFocusPainted(false);
         jButton_New_Client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_New_ClientMousePressed(evt);
@@ -116,6 +139,7 @@ public class Clients extends javax.swing.JPanel {
         add(jButton_New_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 100, 35));
 
         jButton_Update_Client.setText("MODIFICAR");
+        jButton_Update_Client.setFocusPainted(false);
         jButton_Update_Client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_Update_ClientMousePressed(evt);
@@ -129,6 +153,7 @@ public class Clients extends javax.swing.JPanel {
         add(jButton_Update_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 100, 35));
 
         jButton_Delete_Client.setText("BORRAR");
+        jButton_Delete_Client.setFocusPainted(false);
         jButton_Delete_Client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_Delete_ClientMousePressed(evt);
@@ -151,15 +176,302 @@ public class Clients extends javax.swing.JPanel {
 
     private void jTextField_Search_ClientKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_Search_ClientKeyPressed
 
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            int flag = 0;
+            String search = jTextField_Search_Client.getText().trim();
+            String query = "";
+
+            if (Login.type_account.equals("Moderador")) {
+
+                if (search.equals("")) {
+
+                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client";
+
+                } else {
+
+                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, "
+                            + "registered_by from client "
+                            + "where id_client = '" + search + "' or name_client = '" + search + "' or "
+                            + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
+                            + "direction_tienda = '" + search + "' or registered_by = '" + search + "' or "
+                            + "unformat_telephone_client = '" + search + "' or "
+                            + "unformat_cedula_client = '" + search + "'";
+
+                }
+
+            } else {
+
+                flag++;
+
+                if (search.equals("")) {
+
+                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client";
+
+                } else {
+
+                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client "
+                            + "where id_client = '" + search + "' or name_client = '" + search + "' or "
+                            + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
+                            + "direction_tienda = '" + search + "' or unformat_telephone_client = '" + search + "' or "
+                            + "unformat_cedula_client = '" + search + "'";
+
+                }
+
+            }
+
+            if (flag == 0) {
+
+                try {
+
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(query);
+
+                    ResultSet rs = pst.executeQuery();
+
+                    model.setColumnCount(0);
+                    model.setRowCount(0);
+
+                    jTable_Client = new JTable(model);
+                    jScrollPane.setViewportView(jTable_Client);
+
+                    model.addColumn("ID");
+                    model.addColumn("Nombre");
+                    model.addColumn("Teléfono");
+                    model.addColumn("Cédula");
+                    model.addColumn("Tienda");
+                    model.addColumn("Registrado Por");
+
+                    jTable_Client.setEditingRow(0);
+
+                    while (rs.next()) {
+
+                        Object[] fila = new Object[6];
+                        for (int i = 0; i < 6; i++) {
+
+                            fila[i] = rs.getObject(i + 1);
+
+                        }
+
+                        model.addRow(fila);
+
+                    }
+
+                    cn.close();
+
+                    jTextField_Search_Client.setText("");
+                    jTextField_Search_Client.requestFocus();
+
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al consultar la lista de clientes! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
+                            JOptionPane.OK_OPTION);
+
+                }
+
+            } else {
+
+                try {
+
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(query);
+
+                    ResultSet rs = pst.executeQuery();
+
+                    model.setColumnCount(0);
+                    model.setRowCount(0);
+
+                    jTable_Client = new JTable(model);
+                    jScrollPane.setViewportView(jTable_Client);
+
+                    model.addColumn("ID");
+                    model.addColumn("Nombre");
+                    model.addColumn("Teléfono");
+                    model.addColumn("Cédula");
+                    model.addColumn("Tienda");
+
+                    while (rs.next()) {
+
+                        Object[] fila = new Object[5];
+                        for (int i = 0; i < 5; i++) {
+
+                            fila[i] = rs.getObject(i + 1);
+
+                        }
+
+                        model.addRow(fila);
+
+                    }
+
+                    cn.close();
+
+                    jTextField_Search_Client.setText("");
+                    jTextField_Search_Client.requestFocus();
+
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al consultar la lista de clientes! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
+                            JOptionPane.OK_OPTION);
+
+                }
+
+            }
+
+        }
+
     }//GEN-LAST:event_jTextField_Search_ClientKeyPressed
 
     private void jButton_Search_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_ClientMousePressed
 
-       
+        int flag = 0;
+        String search = jTextField_Search_Client.getText().trim();
+        String query = "";
+
+        if (Login.type_account.equals("Moderador")) {
+
+            if (search.equals("")) {
+
+                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client";
+
+            } else {
+
+                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, "
+                        + "registered_by from client "
+                        + "where id_client = '" + search + "' or name_client = '" + search + "' or "
+                        + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
+                        + "direction_tienda = '" + search + "' or registered_by = '" + search + "' or "
+                        + "unformat_telephone_client = '" + search + "' or "
+                        + "unformat_cedula_client = '" + search + "'";
+
+            }
+
+        } else {
+
+            flag++;
+
+            if (search.equals("")) {
+
+                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client";
+
+            } else {
+
+                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client "
+                        + "where id_client = '" + search + "' or name_client = '" + search + "' or "
+                        + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
+                        + "direction_tienda = '" + search + "' or unformat_telephone_client = '" + search + "' or "
+                        + "unformat_cedula_client = '" + search + "'";
+
+            }
+
+        }
+
+        if (flag == 0) {
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(query);
+
+                ResultSet rs = pst.executeQuery();
+
+                model.setColumnCount(0);
+                model.setRowCount(0);
+
+                jTable_Client = new JTable(model);
+                jScrollPane.setViewportView(jTable_Client);
+
+                model.addColumn("ID");
+                model.addColumn("Nombre");
+                model.addColumn("Teléfono");
+                model.addColumn("Cédula");
+                model.addColumn("Tienda");
+                model.addColumn("Registrado Por");
+
+                jTable_Client.setEditingRow(0);
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[6];
+                    for (int i = 0; i < 6; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+                cn.close();
+
+                jTextField_Search_Client.setText("");
+                jTextField_Search_Client.requestFocus();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la lista de clientes! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
+                        JOptionPane.OK_OPTION);
+
+            }
+
+        } else {
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(query);
+
+                ResultSet rs = pst.executeQuery();
+
+                model.setColumnCount(0);
+                model.setRowCount(0);
+
+                jTable_Client = new JTable(model);
+                jScrollPane.setViewportView(jTable_Client);
+
+                model.addColumn("ID");
+                model.addColumn("Nombre");
+                model.addColumn("Teléfono");
+                model.addColumn("Cédula");
+                model.addColumn("Tienda");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[5];
+                    for (int i = 0; i < 5; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+                cn.close();
+
+                jTextField_Search_Client.setText("");
+                jTextField_Search_Client.requestFocus();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la lista de clientes! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
+                        JOptionPane.OK_OPTION);
+
+            }
+
+        }
+
+
     }//GEN-LAST:event_jButton_Search_ClientMousePressed
 
     private void jButton_New_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_New_ClientMousePressed
+
+        paneles.PanelRegisterClient();
 
     }//GEN-LAST:event_jButton_New_ClientMousePressed
 
@@ -169,7 +481,22 @@ public class Clients extends javax.swing.JPanel {
 
     private void jButton_Update_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_ClientMousePressed
 
-        
+        int fila_point = jTable_Client.getSelectedRow();
+        int columna_punt = 0;
+
+        if (fila_point > -1) {
+
+            ID = (int) model.getValueAt(fila_point, columna_punt);
+
+            paneles.PanelUpdateClient();
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un cliente!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
+
     }//GEN-LAST:event_jButton_Update_ClientMousePressed
 
     private void jButton_Update_ClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Update_ClientActionPerformed
@@ -178,7 +505,55 @@ public class Clients extends javax.swing.JPanel {
 
     private void jButton_Delete_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_ClientMousePressed
 
-       
+        int fila_point = jTable_Client.getSelectedRow();
+        int columna_point = 0;
+
+        if (fila_point > -1) {
+
+            int value = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este cliente?", "¡Selección!", 
+                    JOptionPane.YES_NO_OPTION);
+
+            if (value == 0) {
+
+                try {
+
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(
+                            "delete from client where id_client = '" + ID + "'");
+
+                    pst.executeUpdate();
+
+                    model.setRowCount(0);
+                    model.setColumnCount(0);
+                    getClients();
+
+                    JOptionPane.showMessageDialog(null, "Cliente eliminado.");
+
+                    cn.close();
+
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al eliminar el usuario! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
+                            JOptionPane.OK_OPTION);
+
+                }
+
+            } else {
+
+                model.setRowCount(0);
+                model.setColumnCount(0);
+                getClients();
+
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un cliente!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
+
     }//GEN-LAST:event_jButton_Delete_ClientMousePressed
 
 
@@ -193,4 +568,110 @@ public class Clients extends javax.swing.JPanel {
     private javax.swing.JTable jTable_Client;
     private javax.swing.JTextField jTextField_Search_Client;
     // End of variables declaration//GEN-END:variables
+
+    private void validatePermissions() {
+
+        if (Login.type_account.equals("Vendedor")) {
+
+            jButton_Delete_Client.setEnabled(false);
+            jButton_Delete_Client.setVisible(false);
+
+            add(jButton_New_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 100, 35));
+            add(jButton_Update_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, 100, 35));
+
+        }
+
+    }
+
+    private void getClients() {
+
+        if (Login.type_account.equals("Moderador")) {
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client");
+
+                ResultSet rs = pst.executeQuery();
+
+                jTable_Client = new JTable(model);
+                jScrollPane.setViewportView(jTable_Client);
+
+                model.addColumn("ID");
+                model.addColumn("Nombre");
+                model.addColumn("Teléfono");
+                model.addColumn("Cédula");
+                model.addColumn("Tienda");
+                model.addColumn("Registrado Por");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[6];
+                    for (int i = 0; i < 6; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+                cn.close();
+
+            } catch (SQLException e) {
+
+                System.out.println("¡Error al consultar la lista de clientes! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
+                        JOptionPane.OK_OPTION);
+
+            }
+
+        } else {
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client");
+
+                ResultSet rs = pst.executeQuery();
+
+                jTable_Client = new JTable(model);
+                jScrollPane.setViewportView(jTable_Client);
+
+                model.addColumn("ID");
+                model.addColumn("Nombre");
+                model.addColumn("Teléfono");
+                model.addColumn("Cédula");
+                model.addColumn("Tienda");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[5];
+                    for (int i = 0; i < 5; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+                cn.close();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la lista de clientes! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
+                        JOptionPane.OK_OPTION);
+
+            }
+
+        }
+
+    }
+
 }

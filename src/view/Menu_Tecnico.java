@@ -1,11 +1,14 @@
 package view;
 
+import clases.Paneles;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import static view.Dashboard.jPanel_Content;
 
 public class Menu_Tecnico extends javax.swing.JPanel {
+    
+    Paneles paneles = new Paneles();
 
     public Menu_Tecnico() {
         initComponents();
@@ -168,6 +171,9 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         setColor(Btn_Equipos);
         resetColor(Btn_About_Me);
         resetColor(Btn_Historial);
+        
+        paneles.PanelEquipos();
+                
     }//GEN-LAST:event_Btn_EquiposMousePressed
 
     private void Btn_About_MeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMouseEntered

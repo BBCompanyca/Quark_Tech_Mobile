@@ -3,17 +3,18 @@ package view;
 import clases.TextPrompt;
 import java.sql.*;
 import clases.BD_Connection;
-import java.awt.BorderLayout;
+import clases.Paneles;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import static view.Dashboard.jPanel_Content;
 
 public final class Users extends javax.swing.JPanel {
 
     public static int ID;
-    String direction, type_Account;
+    String direction, type_Account, permission;
+
+    Paneles paneles = new Paneles();
 
     DefaultTableModel model = new DefaultTableModel();
 
@@ -183,19 +184,44 @@ public final class Users extends javax.swing.JPanel {
 
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
+        int flag = 0;
         String search = jTextField_Search_User.getText().trim();
         String query = "";
 
-        if (search.equals("")) {
+        if (Login.type_account.equals("Moderador")) {
 
-            query = "select id_user, name_user, username, direction, type_account, status from user";
+            if (search.equals("")) {
+
+                query = "select id_user, name_user, username, direction, type_account, status from user";
+
+            } else {
+
+                query = "select id_user, name_user, username, direction, type_account, status from user "
+                        + "where id_user = '" + search + "' or name_user = '" + search + "' or "
+                        + "username = '" + search + "' or direction = '" + search + "' or type_account = '"
+                        + search + "' or status = '" + search + "'";
+
+            }
 
         } else {
 
-            query = "select id_user, name_user, username, direction, type_account, status from user "
-                    + "where id_user = '" + search + "' or name_user = '" + search + "' or "
-                    + "username = '" + search + "' or direction = '" + search + "' or type_account = '"
-                    + search + "' or status = '" + search + "'";
+            flag++;
+
+            if (search.equals("")) {
+
+                query = "select id_user, name_user, username, type_account, status from user "
+                        + "where direction = '" + Login.direction + "'";
+
+            } else {
+
+                query = "select id_user, name_user, username, type_account, status from user "
+                        + "where id_user = '" + search + "' and direction = '" + Login.direction + "' or "
+                        + "name_user = '" + search + "' and direction = '" + Login.direction + "' or "
+                        + "username = '" + search + "' and direction = '" + Login.direction + "' or "
+                        + "type_account = '" + search + "' and direction = '" + Login.direction + "' or "
+                        + "status = '" + search + "' and direction = '" + Login.direction + "'";
+
+            }
 
         }
 
@@ -213,23 +239,48 @@ public final class Users extends javax.swing.JPanel {
             model.setColumnCount(0);
             model.setRowCount(0);
 
-            model.addColumn("ID");
-            model.addColumn("Nombre");
-            model.addColumn("Nombre De Usuario");
-            model.addColumn("Dirección");
-            model.addColumn("Permisos De");
-            model.addColumn("Estatus");
+            if (flag == 0) {
 
-            while (rs.next()) {
+                model.addColumn("ID");
+                model.addColumn("Nombre");
+                model.addColumn("Nombre De Usuario");
+                model.addColumn("Dirección");
+                model.addColumn("Permisos De");
+                model.addColumn("Estatus");
 
-                Object[] fila = new Object[6];
-                for (int i = 0; i < 6; i++) {
+                while (rs.next()) {
 
-                    fila[i] = rs.getObject(i + 1);
+                    Object[] fila = new Object[6];
+                    for (int i = 0; i < 6; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
 
                 }
 
-                model.addRow(fila);
+            } else {
+
+                model.addColumn("ID");
+                model.addColumn("Nombre");
+                model.addColumn("Nombre De Usuario");
+                model.addColumn("Permisos De");
+                model.addColumn("Estatus");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[5];
+                    for (int i = 0; i < 5; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
 
             }
 
@@ -251,19 +302,44 @@ public final class Users extends javax.swing.JPanel {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
+            int flag = 0;
             String search = jTextField_Search_User.getText().trim();
             String query = "";
 
-            if (search.equals("")) {
+            if (Login.type_account.equals("Moderador")) {
 
-                query = "select id_user, name_user, username, direction, type_account, status from user";
+                if (search.equals("")) {
+
+                    query = "select id_user, name_user, username, direction, type_account, status from user";
+
+                } else {
+
+                    query = "select id_user, name_user, username, direction, type_account, status from user "
+                            + "where id_user = '" + search + "' or name_user = '" + search + "' or "
+                            + "username = '" + search + "' or direction = '" + search + "' or type_account = '"
+                            + search + "' or status = '" + search + "'";
+
+                }
 
             } else {
 
-                query = "select id_user, name_user, username, direction, type_account, status from user "
-                        + "where id_user = '" + search + "' or name_user = '" + search + "' or "
-                        + "username = '" + search + "' or direction = '" + search + "' or type_account = '"
-                        + search + "' or status = '" + search + "'";
+                flag++;
+
+                if (search.equals("")) {
+
+                    query = "select id_user, name_user, username, type_account, status from user "
+                            + "where direction = '" + Login.direction + "'";
+
+                } else {
+
+                    query = "select id_user, name_user, username, type_account, status from user "
+                            + "where id_user = '" + search + "' and direction = '" + Login.direction + "' or "
+                            + "name_user = '" + search + "' and direction = '" + Login.direction + "' or "
+                            + "username = '" + search + "' and direction = '" + Login.direction + "' or "
+                            + "type_account = '" + search + "' and direction = '" + Login.direction + "' or "
+                            + "status = '" + search + "' and direction = '" + Login.direction + "'";
+
+                }
 
             }
 
@@ -281,23 +357,48 @@ public final class Users extends javax.swing.JPanel {
                 model.setColumnCount(0);
                 model.setRowCount(0);
 
-                model.addColumn("ID");
-                model.addColumn("Nombre");
-                model.addColumn("Nombre De Usuario");
-                model.addColumn("Dirección");
-                model.addColumn("Permisos De");
-                model.addColumn("Estatus");
+                if (flag == 0) {
 
-                while (rs.next()) {
+                    model.addColumn("ID");
+                    model.addColumn("Nombre");
+                    model.addColumn("Nombre De Usuario");
+                    model.addColumn("Dirección");
+                    model.addColumn("Permisos De");
+                    model.addColumn("Estatus");
 
-                    Object[] fila = new Object[6];
-                    for (int i = 0; i < 6; i++) {
+                    while (rs.next()) {
 
-                        fila[i] = rs.getObject(i + 1);
+                        Object[] fila = new Object[6];
+                        for (int i = 0; i < 6; i++) {
+
+                            fila[i] = rs.getObject(i + 1);
+
+                        }
+
+                        model.addRow(fila);
 
                     }
 
-                    model.addRow(fila);
+                } else {
+
+                    model.addColumn("ID");
+                    model.addColumn("Nombre");
+                    model.addColumn("Nombre De Usuario");
+                    model.addColumn("Permisos De");
+                    model.addColumn("Estatus");
+
+                    while (rs.next()) {
+
+                        Object[] fila = new Object[5];
+                        for (int i = 0; i < 5; i++) {
+
+                            fila[i] = rs.getObject(i + 1);
+
+                        }
+
+                        model.addRow(fila);
+
+                    }
 
                 }
 
@@ -320,15 +421,7 @@ public final class Users extends javax.swing.JPanel {
     private void jButton_New_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_New_UserMousePressed
 
         //Método para llamar a la interfaz de registrar usuarios...
-        Register_User pl = new Register_User();
-        pl.setSize(790, 370);
-        pl.setLocation(0, 0);
-        pl.jTextField_Name.requestFocus();
-
-        jPanel_Content.removeAll();
-        jPanel_Content.add(pl, BorderLayout.CENTER);
-        jPanel_Content.revalidate();
-        jPanel_Content.repaint();
+        paneles.PanelRegisterUser();
 
     }//GEN-LAST:event_jButton_New_UserMousePressed
 
@@ -349,18 +442,11 @@ public final class Users extends javax.swing.JPanel {
 
             ID = (int) model.getValueAt(fila_point, columna_punt);
 
-            Update_User pl = new Update_User();
-            pl.setSize(790, 370);
-            pl.setLocation(0, 0);
-
-            jPanel_Content.removeAll();
-            jPanel_Content.add(pl, BorderLayout.CENTER);
-            jPanel_Content.revalidate();
-            jPanel_Content.repaint();
+            paneles.PanelUpadteUser();
 
         } else {
 
-            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un usuario!", "",
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un usuario!", "¡Acceso Denegado!",
                     JOptionPane.OK_OPTION);
 
         }
@@ -370,32 +456,60 @@ public final class Users extends javax.swing.JPanel {
     private void jButton_Delete_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_UserMousePressed
 
         int fila_point = jTable_User.getSelectedRow();
-        int columa_point = 0;
+        int columna_point = 0;
 
         if (fila_point > -1) {
 
-            ID = (int) jTable_User.getValueAt(fila_point, columa_point);
+            ID = (int) jTable_User.getValueAt(fila_point, columna_point);
 
-            try {
+            if (Login.type_account.equals("Moderador")) {
 
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement(
-                        "delete from user where id_user = '" + ID + "'");
+                permission = (String) jTable_User.getValueAt(fila_point, 4);
 
-                pst.executeUpdate();
+            } else {
 
-                model.setRowCount(0);
-                model.setColumnCount(0);
-                getUsers();
+                permission = (String) jTable_User.getValueAt(fila_point, 3);
 
-                JOptionPane.showMessageDialog(null, "Usuario eliminado.");
+            }
 
-                cn.close();
+            if (ID != Login.ID_User) {
 
-            } catch (SQLException e) {
+                if (!Login.type_account.equals(permission) && permission.equals("Moderador") || Login.type_account.equals(permission)) {
 
-                System.err.println("¡Error al eliminar el usuario! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
+                    JOptionPane.showMessageDialog(null, "¡No tienes permisos para eliminar esta cuenta!", "¡Acceso Denegado!",
+                            JOptionPane.OK_OPTION);
+
+                } else {
+
+                    try {
+
+                        Connection cn = BD_Connection.connection();
+                        PreparedStatement pst = cn.prepareStatement(
+                                "delete from user where id_user = '" + ID + "'");
+
+                        pst.executeUpdate();
+
+                        model.setRowCount(0);
+                        model.setColumnCount(0);
+                        getUsers();
+
+                        JOptionPane.showMessageDialog(null, "Usuario eliminado.");
+
+                        cn.close();
+
+                    } catch (SQLException e) {
+
+                        System.err.println("¡Error al eliminar el usuario! " + e);
+                        JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
+                                JOptionPane.OK_OPTION);
+
+                    }
+
+                }
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "¡No puedes eliminar tú cuenta!", "¡Acceso Denegado!",
                         JOptionPane.OK_OPTION);
 
             }
@@ -403,7 +517,7 @@ public final class Users extends javax.swing.JPanel {
         } else {
 
             JOptionPane.showMessageDialog(null, "¡Debes seleccionar un usuario!", "¡Acceso Denegado!",
-                    JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.OK_OPTION);
 
         }
 

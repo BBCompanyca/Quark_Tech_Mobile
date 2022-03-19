@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import clases.Paneles;
 
 public class Dashboard extends javax.swing.JFrame {
-    
+
     //Objeto para llamar a la clase que tiene todo los paneles...
     Paneles paneles = new Paneles();
 
@@ -59,12 +59,18 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Exit = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel_Content = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel_Username = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         jPanel_Background.setBackground(new java.awt.Color(9, 53, 69));
+        jPanel_Background.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel_BackgroundMouseDragged(evt);
+            }
+        });
         jPanel_Background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_Footer.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
@@ -78,6 +84,11 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Background.add(jLabel_background_Down, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 1000, 90));
 
         jPanel_Content_Menu.setBackground(new java.awt.Color(42, 104, 100));
+        jPanel_Content_Menu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel_Content_MenuMousePressed(evt);
+            }
+        });
         jPanel_Content_Menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel_Background.add(jPanel_Content_Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
 
@@ -151,6 +162,18 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel_Background.add(jPanel_Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 135, 790, 370));
 
+        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel1MouseDragged(evt);
+            }
+        });
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
+        jPanel_Background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 30));
+
         jLabel_Username.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Username.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -165,7 +188,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jLabel_UsernameMousePressed(evt);
             }
         });
-        jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 2, 755, 30));
+        jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 2, 750, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,18 +224,38 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jLabel_UsernameMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_UsernameMouseDragged
 
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xMouse, y - yMouse);
 
     }//GEN-LAST:event_jLabel_UsernameMouseDragged
 
     private void jLabel_UsernameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_UsernameMousePressed
 
+
+    }//GEN-LAST:event_jLabel_UsernameMousePressed
+
+    private void jPanel_Content_MenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_Content_MenuMousePressed
+
+
+    }//GEN-LAST:event_jPanel_Content_MenuMousePressed
+
+    private void jPanel_BackgroundMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_BackgroundMouseDragged
+
+
+    }//GEN-LAST:event_jPanel_BackgroundMouseDragged
+
+    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
+
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+
+    }//GEN-LAST:event_jLabel1MouseDragged
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+
         xMouse = evt.getX();
         yMouse = evt.getY();
 
-    }//GEN-LAST:event_jLabel_UsernameMousePressed
+    }//GEN-LAST:event_jLabel1MousePressed
 
     /**
      * @param args the command line arguments
@@ -250,6 +293,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_Fecha;

@@ -1,24 +1,44 @@
 package view;
 
+import java.sql.*;
 import clases.BD_Connection;
+import clases.FormatText;
+import clases.Paneles;
 import clases.TextPrompt;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 
 public class Register_Client extends javax.swing.JPanel {
+
+    //Objeto para darle formato a los campos de texto.
+    FormatText formattext = new FormatText();
     
+    Paneles paneles = new Paneles();
+
     public Register_Client() {
         initComponents();
-        
+
         TextPrompt name = new TextPrompt("Ingrese el nombre", jTextField_Name);
         TextPrompt telephone = new TextPrompt("Ingrese el N° de teléfono", jTextField_Telephone);
         TextPrompt ci = new TextPrompt("Ingrese el N° de cédula", jTextField_CI);
-        
+        TextPrompt direction = new TextPrompt("Ingrese la dirección", jTextField_Direction_Client);
+
+        validateAddressRegister();
+
+        //Instacia para darle formato a los campos de texto...
+        formattext.ValidateName(jTextField_Name);
+        formattext.ValidateNumber(jTextField_Telephone);
+        formattext.ValidateCI(jTextField_CI);
+
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel_Name = new javax.swing.JLabel();
+        jTextField_Direction_Client = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel_Direction_Client = new javax.swing.JLabel();
         jTextField_Name = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel_Telephone = new javax.swing.JLabel();
@@ -27,21 +47,27 @@ public class Register_Client extends javax.swing.JPanel {
         jTextField_CI = new javax.swing.JTextField();
         jLabel_CI = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea_Direction = new javax.swing.JTextArea();
-        jLabel_Name1 = new javax.swing.JLabel();
+        jLabel_Name = new javax.swing.JLabel();
         jButton_Register = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Name.setText("Dirección:");
-        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, -1));
+        jTextField_Direction_Client.setBackground(new java.awt.Color(9, 53, 69));
+        jTextField_Direction_Client.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jTextField_Direction_Client.setForeground(new java.awt.Color(240, 240, 240));
+        jTextField_Direction_Client.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField_Direction_Client.setBorder(null);
+        add(jTextField_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 220, 30));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 220, -1));
+
+        jLabel_Direction_Client.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Direction_Client.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Direction_Client.setText("Dirección:");
+        add(jLabel_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, -1));
 
         jTextField_Name.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Name.setBorder(null);
@@ -55,14 +81,14 @@ public class Register_Client extends javax.swing.JPanel {
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 220, -1));
 
         jTextField_Telephone.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Telephone.setBorder(null);
         add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 220, 30));
 
         jTextField_CI.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_CI.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_CI.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_CI.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_CI.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_CI.setBorder(null);
@@ -70,35 +96,19 @@ public class Register_Client extends javax.swing.JPanel {
 
         jLabel_CI.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_CI.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_CI.setText("Correo:");
+        jLabel_CI.setText("C.I:");
         add(jLabel_CI, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 220, -1));
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane1.setHorizontalScrollBar(null);
-
-        jTextArea_Direction.setBackground(new java.awt.Color(9, 53, 69));
-        jTextArea_Direction.setColumns(20);
-        jTextArea_Direction.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTextArea_Direction.setForeground(new java.awt.Color(240, 240, 240));
-        jTextArea_Direction.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-        jScrollPane1.setViewportView(jTextArea_Direction);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 340, 150));
-
-        jLabel_Name1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_Name1.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Name1.setText("Nombre:");
-        add(jLabel_Name1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
+        jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Name.setText("Nombre:");
+        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
         jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_dark.png"))); // NOI18N
         jButton_Register.setBorder(null);
         jButton_Register.setBorderPainted(false);
         jButton_Register.setContentAreaFilled(false);
-        jButton_Register.setFocusPainted(false);
-        jButton_Register.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton_Register.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_ligth.png"))); // NOI18N
         jButton_Register.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_ligth.png"))); // NOI18N
         jButton_Register.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,28 +116,212 @@ public class Register_Client extends javax.swing.JPanel {
                 jButton_RegisterMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, 190, 60));
+        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 190, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
-        
+        int flag = 0, flag_two = 0;
+
+        String name, telephone, ci, direction_client, direction_shop;
+
+        name = jTextField_Name.getText().trim();
+        telephone = jTextField_Telephone.getText().trim();
+        ci = jTextField_CI.getText().trim();
+        direction_client = jTextField_Direction_Client.getText().trim();
+
+        if (name.equals("")) {
+
+            jLabel_Name.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_Name.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (telephone.equals("")) {
+
+            jLabel_Telephone.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_Telephone.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (ci.equals("")) {
+
+            jLabel_CI.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_CI.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (direction_client.equals("")) {
+
+            jLabel_Direction_Client.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_Direction_Client.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (flag == 0) {
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select cedula_client from client where cedula_client = '" + ci + "'");
+
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()) {
+
+                    jLabel_CI.setForeground(Color.red);
+
+                    JOptionPane.showMessageDialog(null, "¡Ya existe un cliente con este Número de Cédula!", "¡Acceso Denegado!",
+                            JOptionPane.OK_OPTION);
+
+                    jTextField_CI.setText("");
+                    jTextField_CI.requestFocus();
+
+                    cn.close();
+
+                } else {
+
+                    cn.close();
+
+                    try {
+
+                        String unformat_telphone = formattext.unFormatText(telephone);
+                        String unformat_ci = formattext.unFormatText(ci);
+
+                        Connection cn2 = BD_Connection.connection();
+                        PreparedStatement pst2 = cn2.prepareStatement(
+                                "insert into client values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                        pst2.setInt(1, 0);
+                        pst2.setString(2, name);
+                        pst2.setString(3, telephone);
+                        pst2.setString(4, unformat_telphone);
+                        pst2.setString(5, ci);
+                        pst2.setString(6, unformat_ci);
+                        pst2.setString(7, direction_client);
+                        pst2.setString(8, Login.direction);
+                        pst2.setString(9, Login.user);
+                        pst2.setString(10, "");
+
+                        pst2.executeUpdate();
+
+                        PintarDeVerdejTextField();
+                        VaciarCamposDeTextos();
+
+                        JOptionPane.showMessageDialog(null, "Registro exitoso.", "¡Exito!", JOptionPane.INFORMATION_MESSAGE);
+
+                        resetColorjTextField();
+                        
+                        if (Consult_Cl_Client.flag == 1) {
+                            
+                            paneles.PanelRegisterEquipo();
+                            
+                        } else {
+                            
+                            paneles.PanelClients();
+                            
+                        }
+
+                    } catch (SQLException e) {
+
+                        System.err.println("¡Error al registrar cliente! " + e);
+                        JOptionPane.showMessageDialog(null, "¡Error al registrar cliente!", "¡Acceso Denegado!",
+                                JOptionPane.OK_OPTION);
+
+                    }
+
+                }
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la C.I Del cliente! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I Del cliente!", "¡Acceso Denegado!",
+                        JOptionPane.OK_OPTION);
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "¡Acceso Denegado!",
+                    JOptionPane.WARNING_MESSAGE);
+
+        }
+
     }//GEN-LAST:event_jButton_RegisterMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Register;
     private javax.swing.JLabel jLabel_CI;
+    private javax.swing.JLabel jLabel_Direction_Client;
     private javax.swing.JLabel jLabel_Name;
-    private javax.swing.JLabel jLabel_Name1;
     private javax.swing.JLabel jLabel_Telephone;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextArea jTextArea_Direction;
+    private javax.swing.JSeparator jSeparator4;
     public javax.swing.JTextField jTextField_CI;
+    public javax.swing.JTextField jTextField_Direction_Client;
     public javax.swing.JTextField jTextField_Name;
     public javax.swing.JTextField jTextField_Telephone;
     // End of variables declaration//GEN-END:variables
+
+    private void validateAddressRegister() {
+
+        if (Consult_Cl_Client.flag == 1) {
+
+            jTextField_Name.requestFocus();
+
+            jTextField_CI.setText(Consult_Cl_Client.ci_client);
+            jTextField_CI.setEditable(false);
+
+        }
+
+    }
+
+    private void PintarDeVerdejTextField() {
+
+        jLabel_Name.setForeground(Color.GREEN);
+        jLabel_Telephone.setForeground(Color.GREEN);
+        jLabel_CI.setForeground(Color.GREEN);
+        jLabel_Direction_Client.setForeground(Color.GREEN);
+
+    }
+
+    private void resetColorjTextField() {
+
+        jLabel_Name.setForeground(new Color(240, 240, 240));
+        jLabel_Telephone.setForeground(new Color(240, 240, 240));
+        jLabel_CI.setForeground(new Color(240, 240, 240));
+        jLabel_Direction_Client.setForeground(new Color(240, 240, 240));
+
+    }
+
+    private void VaciarCamposDeTextos() {
+
+        jTextField_Name.setText("");
+        jTextField_Telephone.setText("");
+        jTextField_CI.setText("");
+        jTextField_Direction_Client.setText("");
+
+        jTextField_Name.requestFocus();
+
+    }
+
 }
