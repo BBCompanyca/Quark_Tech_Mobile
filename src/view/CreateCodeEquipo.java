@@ -3,6 +3,7 @@ package view;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
+import clases.Paneles;
 import clases.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -11,20 +12,19 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
 
     FormatText formatText = new FormatText();
     
-    
-    
+    Paneles paneles = new Paneles();
+
     public CreateCodeEquipo() {
         initComponents();
-        
+
         TextPrompt brand = new TextPrompt("Ej. Alcatel 1", jTextField_Brand);
         TextPrompt model = new TextPrompt("Ej. 5033EP", jTextField_Model);
         TextPrompt color = new TextPrompt("Ej. Negro", jTextField_Color);
         TextPrompt capacity = new TextPrompt("Ej. 2/32GB", jTextField_Capacity);
         TextPrompt dayWarranty = new TextPrompt("Ej. 90", jTextField_DayWarranty);
         TextPrompt code = new TextPrompt("Ej. 0101ALC2/32-A", jTextField_Code);
-        
-        //formatText.ValidateBrand(jTextField_Brand);
-        
+
+        formatText.ValidateCapacityEquipo(jTextField_Capacity);
     }
 
     @SuppressWarnings("unchecked")
@@ -196,7 +196,7 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
         if (capacity.equals("")) {
 
             capacity = "N/A";
-            
+
         } else {
 
             jLabel_Capacity.setForeground(new Color(240, 240, 240));
@@ -283,8 +283,12 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
 
                                 PaintGreen();
 
+                                CleanCamp();
+                                
                                 JOptionPane.showMessageDialog(null, "¡Equipo registrado con exito!", "!Exito!",
                                         JOptionPane.INFORMATION_MESSAGE);
+                                
+                                paneles.PanelEquipos();
 
                             } catch (SQLException e) {
 

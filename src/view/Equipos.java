@@ -5,6 +5,7 @@ import clases.BD_Connection;
 import clases.TextPrompt;
 import clases.Paneles;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public final class Equipos extends javax.swing.JPanel {
@@ -33,7 +34,7 @@ public final class Equipos extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jButton_Delete_User = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
-        jTable_User = new javax.swing.JTable();
+        jTable_Equipo = new javax.swing.JTable();
         jButton_Search_User = new javax.swing.JButton();
         jButton_New_User = new javax.swing.JButton();
         jButton_Update_User = new javax.swing.JButton();
@@ -85,10 +86,10 @@ public final class Equipos extends javax.swing.JPanel {
         jScrollPane.setBorder(null);
         jScrollPane.setForeground(new java.awt.Color(240, 240, 240));
 
-        jTable_User.setBackground(new java.awt.Color(9, 53, 69));
-        jTable_User.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTable_User.setForeground(new java.awt.Color(240, 240, 240));
-        jTable_User.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Equipo.setBackground(new java.awt.Color(9, 53, 69));
+        jTable_Equipo.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jTable_Equipo.setForeground(new java.awt.Color(240, 240, 240));
+        jTable_Equipo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -114,15 +115,15 @@ public final class Equipos extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable_User.setGridColor(new java.awt.Color(240, 240, 240));
-        jTable_User.setSelectionBackground(new java.awt.Color(9, 53, 69));
-        jScrollPane.setViewportView(jTable_User);
-        if (jTable_User.getColumnModel().getColumnCount() > 0) {
-            jTable_User.getColumnModel().getColumn(0).setResizable(false);
-            jTable_User.getColumnModel().getColumn(1).setResizable(false);
-            jTable_User.getColumnModel().getColumn(2).setResizable(false);
-            jTable_User.getColumnModel().getColumn(3).setResizable(false);
-            jTable_User.getColumnModel().getColumn(4).setResizable(false);
+        jTable_Equipo.setGridColor(new java.awt.Color(240, 240, 240));
+        jTable_Equipo.setSelectionBackground(new java.awt.Color(9, 53, 69));
+        jScrollPane.setViewportView(jTable_Equipo);
+        if (jTable_Equipo.getColumnModel().getColumnCount() > 0) {
+            jTable_Equipo.getColumnModel().getColumn(0).setResizable(false);
+            jTable_Equipo.getColumnModel().getColumn(1).setResizable(false);
+            jTable_Equipo.getColumnModel().getColumn(2).setResizable(false);
+            jTable_Equipo.getColumnModel().getColumn(3).setResizable(false);
+            jTable_Equipo.getColumnModel().getColumn(4).setResizable(false);
         }
 
         add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 750, 203));
@@ -217,7 +218,7 @@ public final class Equipos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable_User;
+    private javax.swing.JTable jTable_Equipo;
     private javax.swing.JTextField jTextField_Search_User;
     // End of variables declaration//GEN-END:variables
 
@@ -230,6 +231,9 @@ public final class Equipos extends javax.swing.JPanel {
                     "select code, brand, model, color, day_warranty from equipo");
 
             ResultSet rs = pst.executeQuery();
+            
+            jTable_Equipo = new JTable(model);
+            jScrollPane.setViewportView(jTable_Equipo);
 
             model.addColumn("Código");
             model.addColumn("Marca");

@@ -2,9 +2,7 @@ package clases;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Calendar;
 import javax.swing.JTextField;
-import static view.Register_Equipo.jLabel_garantia;
 
 public class FormatText {
 
@@ -166,8 +164,8 @@ public class FormatText {
         return newCadena;
     }
 
-    //Método para validar la marca del equipo...
-    public void ValidateBrand(JTextField a) {
+    //Método para validar el formato de la capacidad del equipo...
+    public void ValidateCapacityEquipo(JTextField a) {
 
         a.addKeyListener(new KeyAdapter() {
 
@@ -176,9 +174,23 @@ public class FormatText {
 
                 char c = e.getKeyChar();
 
-                if (!Character.isLetter(c) && c != ' ') {
+                if (!Character.isDigit(c) || a.getText().length() == 4) {
 
                     e.consume();
+
+                }
+
+                if (a.getText().length() == 0 && c == ' ') {
+
+                    e.consume();
+
+                }
+
+                if (a.getText().length() == 1 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE) {
+
+                    String point = a.getText();
+
+                    a.setText(point + "/");
 
                 }
 

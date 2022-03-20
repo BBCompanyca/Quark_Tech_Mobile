@@ -50,8 +50,8 @@ public final class Warranty extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Equipos");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 100, 30));
+        jLabel1.setText("Garantías");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 110, 30));
 
         jTextField_Search_User.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Search_User.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
