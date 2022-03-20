@@ -115,6 +115,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                                 if (question == 0) {
 
+                                    Register_Warranty.flag = 0;
                                     paneles.PanelRegisterEquipo();
 
                                 } else {
@@ -227,6 +228,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                                     if (question == 0) {
 
+                                        Register_Warranty.flag = 0;
                                         paneles.PanelRegisterEquipo();
 
                                     } else {

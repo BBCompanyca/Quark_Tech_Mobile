@@ -2,6 +2,7 @@ package clases;
 
 import java.awt.BorderLayout;
 import view.Clients;
+import view.CodeEquipos;
 import view.Consult_Cl_Client;
 import view.CreateCodeEquipo;
 import static view.Dashboard.jPanel_Content;
@@ -134,6 +135,19 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(equipos, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    public void PanelCodeEquipos() {
+
+        CodeEquipos CodeEquipos = new CodeEquipos();
+        CodeEquipos.setSize(790, 370);
+        CodeEquipos.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(CodeEquipos, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

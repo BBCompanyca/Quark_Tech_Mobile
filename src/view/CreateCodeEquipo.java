@@ -274,7 +274,7 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
                                 pst3.setString(3, brand);
                                 pst3.setString(4, model);
                                 pst3.setString(5, color);
-                                pst3.setString(6, capacity);
+                                pst3.setString(6, capacity + "GB");
                                 pst3.setString(7, daywarranty);
                                 pst3.setString(8, Login.user);
                                 pst3.setString(9, "");
