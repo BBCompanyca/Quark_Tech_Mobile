@@ -3,6 +3,7 @@ package view;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
+import clases.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -10,8 +11,17 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
 
     FormatText formatText = new FormatText();
     
+    
+    
     public CreateCodeEquipo() {
         initComponents();
+        
+        TextPrompt brand = new TextPrompt("Ej. Alcatel 1", jTextField_Brand);
+        TextPrompt model = new TextPrompt("Ej. 5033EP", jTextField_Model);
+        TextPrompt color = new TextPrompt("Ej. Negro", jTextField_Color);
+        TextPrompt capacity = new TextPrompt("Ej. 2/32GB", jTextField_Capacity);
+        TextPrompt dayWarranty = new TextPrompt("Ej. 90", jTextField_DayWarranty);
+        TextPrompt code = new TextPrompt("Ej. 0101ALC2/32-A", jTextField_Code);
         
         //formatText.ValidateBrand(jTextField_Brand);
         
@@ -54,62 +64,62 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
         jLabel_Brand.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Brand.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Brand.setText("Marca:");
-        add(jLabel_Brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+        add(jLabel_Brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
         jTextField_Brand.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Brand.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Brand.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Brand.setBorder(null);
-        add(jTextField_Brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 220, 30));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 220, 10));
+        add(jTextField_Brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 100, 30));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 100, 10));
 
         jTextField_Model.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Model.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Model.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Model.setBorder(null);
-        add(jTextField_Model, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 220, 30));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 220, 10));
+        add(jTextField_Model, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 100, 30));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 100, 10));
 
         jLabel_Model.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Model.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Model.setText("Modelo:");
-        add(jLabel_Model, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 220, 10));
+        add(jLabel_Model, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 100, 10));
 
         jTextField_Color.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Color.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Color.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Color.setBorder(null);
-        add(jTextField_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 220, 30));
+        add(jTextField_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 100, 30));
 
         jLabel_Color.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Color.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Color.setText("Color:");
-        add(jLabel_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 100, 10));
+        add(jLabel_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 100, 10));
 
         jTextField_Capacity.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Capacity.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Capacity.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Capacity.setBorder(null);
-        add(jTextField_Capacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 100, 30));
+        add(jTextField_Capacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 100, 30));
 
         jLabel_Capacity.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Capacity.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Capacity.setText("Capacidad:");
-        add(jLabel_Capacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, -1, -1));
-        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 220, 10));
+        add(jLabel_Capacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
+        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 150, 10));
 
         jTextField_Code.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Code.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Code.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Code.setBorder(null);
-        add(jTextField_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, 220, 30));
+        add(jTextField_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, 150, 30));
 
         jLabel_Code.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Code.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Code.setText("Codigo:");
-        add(jLabel_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, -1, -1));
+        add(jLabel_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, -1, -1));
 
         jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_dark.png"))); // NOI18N
         jButton_Register.setBorder(null);
@@ -122,19 +132,19 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
                 jButton_RegisterMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, 190, 60));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 135, 10));
+        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 190, 60));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 100, 10));
 
         jTextField_DayWarranty.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_DayWarranty.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_DayWarranty.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_DayWarranty.setBorder(null);
-        add(jTextField_DayWarranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, 135, 30));
+        add(jTextField_DayWarranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 100, 30));
 
         jLabel_day_warranty.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_day_warranty.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_day_warranty.setText("Días de garantía:");
-        add(jLabel_day_warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, -1, -1));
+        add(jLabel_day_warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
@@ -185,9 +195,8 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
 
         if (capacity.equals("")) {
 
-            jLabel_Capacity.setForeground(Color.red);
-            flag++;
-
+            capacity = "N/A";
+            
         } else {
 
             jLabel_Capacity.setForeground(new Color(240, 240, 240));
@@ -235,7 +244,7 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
                     try {
 
                         Connection cn2 = BD_Connection.connection();
-                        PreparedStatement pst2 = cn2.prepareStatement("select code from equipo where = '" + code + "'");
+                        PreparedStatement pst2 = cn2.prepareStatement("select code from equipo where code = '" + code + "'");
 
                         ResultSet rs2 = pst2.executeQuery();
 

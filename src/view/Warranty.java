@@ -1,26 +1,31 @@
 package view;
 
+import clases.TextPrompt;
 import java.sql.*;
 import clases.BD_Connection;
-import clases.TextPrompt;
 import clases.Paneles;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public final class Equipos extends javax.swing.JPanel {
+public final class Warranty extends javax.swing.JPanel {
+
+    public static int ID;
+    String direction, type_Account, permission;
 
     Paneles paneles = new Paneles();
 
     DefaultTableModel model = new DefaultTableModel();
 
-    public Equipos() {
+    public Warranty() {
         initComponents();
+
+        direction = Login.direction;
+        type_Account = Login.type_account;
 
         //Objeto para el PlayHolders del jTextField buscar usuarios...
         TextPrompt search_user = new TextPrompt("Ingrese algún parametro", jTextField_Search_User);
-        
-        //Método para llenar la tabla de equipos...
-        getEquipos();
 
     }
 
@@ -90,24 +95,24 @@ public final class Equipos extends javax.swing.JPanel {
         jTable_User.setForeground(new java.awt.Color(240, 240, 240));
         jTable_User.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Marca", "Modelo", "Color", "Dias De Garantías"
+                "ID", "Nombre", "Nombre De Usuario", "Dirección", "Permisos De", "Estatus"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -148,7 +153,7 @@ public final class Equipos extends javax.swing.JPanel {
         });
         add(jButton_New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 100, 35));
 
-        jButton_Update_User.setText("Modificar");
+        jButton_Update_User.setText("PRELIMINAR");
         jButton_Update_User.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_Update_UserMousePressed(evt);
@@ -176,17 +181,18 @@ public final class Equipos extends javax.swing.JPanel {
 
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
-
+        
     }//GEN-LAST:event_jButton_Search_UserMousePressed
 
     private void jTextField_Search_UserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_Search_UserKeyPressed
 
+        
 
     }//GEN-LAST:event_jTextField_Search_UserKeyPressed
 
     private void jButton_New_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_New_UserMousePressed
 
-        paneles.PanelCreateCodeEquipo();
+        paneles.PanelConsulCient();
 
     }//GEN-LAST:event_jButton_New_UserMousePressed
 
@@ -200,11 +206,12 @@ public final class Equipos extends javax.swing.JPanel {
 
     private void jButton_Update_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_UserMousePressed
 
-
+       
     }//GEN-LAST:event_jButton_Update_UserMousePressed
 
     private void jButton_Delete_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_UserMousePressed
 
+        
 
     }//GEN-LAST:event_jButton_Delete_UserMousePressed
 
@@ -221,45 +228,6 @@ public final class Equipos extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField_Search_User;
     // End of variables declaration//GEN-END:variables
 
-    private void getEquipos() {
-
-        try {
-
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select code, brand, model, color, day_warranty from equipo");
-
-            ResultSet rs = pst.executeQuery();
-
-            model.addColumn("Código");
-            model.addColumn("Marca");
-            model.addColumn("Modelo");
-            model.addColumn("Color");
-            model.addColumn("Días de garantías");
-
-            while (rs.next()) {
-                Object[] fila = new Object[5];
-
-                for (int i = 0; i < 5; i++) {
-
-                    fila[i] = rs.getObject(i + 1);
-
-                }
-
-                model.addRow(fila);
-
-            }
-
-            cn.close();
-
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al consultar la lista de equipos! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de equipos!", "¡Error!",
-                    JOptionPane.OK_OPTION);
-
-        }
-
-    }
+    
 
 }
