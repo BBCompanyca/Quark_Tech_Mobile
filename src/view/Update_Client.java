@@ -2,6 +2,7 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
+import clases.FormatText;
 import clases.Paneles;
 import clases.TextPrompt;
 import java.awt.Color;
@@ -10,6 +11,8 @@ import javax.swing.JOptionPane;
 public class Update_Client extends javax.swing.JPanel {
 
     Paneles paneles = new Paneles();
+
+    FormatText formattext = new FormatText();
 
     public Update_Client() {
         initComponents();
@@ -20,11 +23,13 @@ public class Update_Client extends javax.swing.JPanel {
         TextPrompt ci = new TextPrompt("Ingrese el número de C.I", jTextField_Ci);
         TextPrompt direction__client = new TextPrompt("Ingrese la dirección del cliente", jTextField_Direction_Client);
 
-        //Método para consultar el tipo de acceso del usuario...
-        getValue_typeAccountUser();
-
         //Método para consultar la información del cliente...
         getInformation_Client();
+
+        formattext.ValidateName(jTextField_Name);
+        formattext.ValidateName(jTextField_Direction_Client);
+        formattext.ValidateNumber(jTextField_Telephone);
+        formattext.ValidateCI(jTextField_Ci);
 
     }
 
@@ -50,8 +55,6 @@ public class Update_Client extends javax.swing.JPanel {
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jButton_Update = new javax.swing.JButton();
-        jComboBox_Direction_Shop = new javax.swing.JComboBox<>();
-        jLabel_Direction_Shop = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -147,317 +150,152 @@ public class Update_Client extends javax.swing.JPanel {
                 jButton_UpdateMousePressed(evt);
             }
         });
-        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 140, 40));
-
-        jComboBox_Direction_Shop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Almacen", "Caricuao", "City Market" }));
-        jComboBox_Direction_Shop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_Direction_ShopActionPerformed(evt);
-            }
-        });
-        add(jComboBox_Direction_Shop, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 100, -1));
-
-        jLabel_Direction_Shop.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_Direction_Shop.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Direction_Shop.setText("Dirección:");
-        add(jLabel_Direction_Shop, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, -1, -1));
+        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_UpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_UpdateMousePressed
 
         int flag = 0, flag_two = 0;
-        String name, telephone, ci, direction_client, direction_shop;
+        String name, telephone, ci, direction_client;
 
-        if (Login.type_account.equals("Moderador")) {
+        //Algoritmo por si no es moderador...
+        name = jTextField_Name.getText().trim();
+        telephone = jTextField_Telephone.getText().trim();
+        ci = jTextField_Ci.getText().trim();
+        direction_client = jTextField_Direction_Client.getText().trim();
 
-            name = jTextField_Name.getText().trim();
-            telephone = jTextField_Telephone.getText().trim();
-            ci = jTextField_Ci.getText().trim();
-            direction_client = jTextField_Direction_Client.getText().trim();
-            direction_shop = jComboBox_Direction_Shop.getSelectedItem().toString();
+        if (name.equals("")) {
 
-            if (name.equals("")) {
+            jLabel_Name.setForeground(Color.red);
+            flag++;
 
-                jLabel_Name.setForeground(Color.red);
-                flag++;
+        } else {
 
-            } else {
+            jLabel_Name.setForeground(new Color(240, 240, 240));
 
-                jLabel_Name.setForeground(new Color(240, 240, 240));
+        }
 
-            }
+        if (telephone.equals("")) {
 
-            if (telephone.equals("")) {
+            jLabel_Telephone.setForeground(Color.red);
+            flag++;
 
-                jLabel_Telephone.setForeground(Color.red);
-                flag++;
+        } else {
 
-            } else {
+            jLabel_Telephone.setForeground(new Color(240, 240, 240));
 
-                jLabel_Telephone.setForeground(new Color(240, 240, 240));
+        }
 
-            }
+        if (ci.equals("")) {
 
-            if (ci.equals("")) {
+            jLabel_CI.setForeground(Color.red);
+            flag++;
 
-                jLabel_CI.setForeground(Color.red);
-                flag++;
+        } else {
 
-            } else {
+            jLabel_CI.setForeground(new Color(240, 240, 240));
 
-                jLabel_CI.setForeground(new Color(240, 240, 240));
+        }
 
-            }
+        if (direction_client.equals("")) {
 
-            if (direction_client.equals("")) {
+            jLabel_Direction_Client.setForeground(Color.red);
+            flag++;
 
-                jLabel_Direction_Client.setForeground(Color.red);
-                flag++;
+        } else {
 
-            } else {
+            jLabel_Direction_Client.setForeground(new Color(240, 240, 240));
 
-                jLabel_Direction_Client.setForeground(new Color(240, 240, 240));
+        }
 
-            }
+        if (flag == 0) {
 
-            if (direction_shop.equals("...")) {
+            try {
 
-                jLabel_Direction_Shop.setForeground(Color.red);
-                flag_two++;
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select cedula_client from client where cedula_client = '" + ci + "' and not id_client = '"
+                        + Clients.ID + "'");
 
-            } else {
+                ResultSet rs = pst.executeQuery();
 
-                jLabel_Direction_Shop.setForeground(new Color(240, 240, 240));
+                if (rs.next()) {
 
-            }
+                    jLabel_CI.setForeground(Color.red);
 
-            if (flag == 0) {
+                    JOptionPane.showMessageDialog(null, "¡Ya existe un cliente registrado con este número de C.I!",
+                            "¡Acceso Denegado", JOptionPane.WARNING_MESSAGE);
 
-                if (flag_two == 0) {
+                    jTextField_Ci.setText("");
+                    jTextField_Ci.requestFocus();
+
+                    cn.close();
+
+                } else {
+
+                    cn.close();
 
                     try {
 
-                        Connection cn = BD_Connection.connection();
-                        PreparedStatement pst = cn.prepareStatement(
-                                "select cedula_client from client where cedula_client = '" + ci
-                                + "' and direction_tienda = '" + direction_shop + "' and not id_client = '" + Clients.ID + "'");
+                        String unformat_telephone = formattext.unFormatText(telephone);
+                        String unformat_ci = formattext.unFormatText(ci);
 
-                        ResultSet rs = pst.executeQuery();
+                        Connection cn2 = BD_Connection.connection();
+                        PreparedStatement pst2 = cn2.prepareStatement(
+                                "update client set name_client = ?, telephone_client = ?, unformat_telephone_client = ?, "
+                                + "cedula_client = ?, unformat_cedula_client = ?,"
+                                + "direction_client = ?, direction_tienda = ?, last_modification = ? "
+                                + "where id_client = '" + Clients.ID + "'");
 
-                        if (rs.next()) {
+                        pst2.setString(1, name);
+                        pst2.setString(2, telephone);
+                        pst2.setString(3, unformat_telephone);
+                        pst2.setString(4, ci);
+                        pst2.setString(5, unformat_ci);
+                        pst2.setString(6, direction_client);
+                        pst2.setString(7, Login.direction);
+                        pst2.setString(8, Login.user);
 
-                            jLabel_CI.setForeground(Color.red);
+                        pst2.executeUpdate();
 
-                            JOptionPane.showMessageDialog(null, "¡Ya existe un cliente registrado con este número de C.I!",
-                                    "¡Acceso Denegado", JOptionPane.WARNING_MESSAGE);
+                        paintCampTextGreen();
 
-                            jTextField_Ci.setText("");
-                            jTextField_Ci.requestFocus();
+                        cleanCampText();
 
-                            cn.close();
+                        JOptionPane.showMessageDialog(null, "Modificación exitosa.", "¡Exito!",
+                                JOptionPane.INFORMATION_MESSAGE);
 
-                        } else {
+                        cn2.close();
 
-                            cn.close();
-
-                            try {
-
-                                Connection cn2 = BD_Connection.connection();
-                                PreparedStatement pst2 = cn2.prepareStatement(
-                                        "update client set name_client = ?, telephone_client = ?, cedula_client = ?, "
-                                        + "direction_client = ?, direction_tienda = ?, last_modification = ? "
-                                        + "where id_client = '" + Clients.ID + "'");
-
-                                pst2.setString(1, name);
-                                pst2.setString(2, telephone);
-                                pst2.setString(3, ci);
-                                pst2.setString(4, direction_client);
-                                pst2.setString(5, direction_shop);
-                                pst2.setString(6, Login.user);
-
-                                pst2.executeUpdate();
-
-                                paintCampTextGreen();
-
-                                cleanCampText();
-
-                                JOptionPane.showMessageDialog(null, "Modificación exitosa.", "¡Exito!",
-                                        JOptionPane.INFORMATION_MESSAGE);
-
-                                cn2.close();
-
-                                paneles.PanelClients();
-
-                            } catch (SQLException e) {
-
-                                System.err.println("¡Error al modificar la información del cliente! " + e);
-                                JOptionPane.showMessageDialog(null, "¡Error al modificar la información del cliente!", "¡Error!",
-                                        JOptionPane.OK_OPTION);
-
-                            }
-
-                        }
+                        paneles.PanelClients();
 
                     } catch (SQLException e) {
 
-                        System.err.println("¡Error al consultar la cédula del cliente! " + e);
-                        JOptionPane.showMessageDialog(null, "¡Error al consultar la cédula del cliente!", "¡Error!",
+                        System.err.println("¡Error al modificar la información del cliente! " + e);
+                        JOptionPane.showMessageDialog(null, "¡Error al modificar la información del cliente!", "¡Error!",
                                 JOptionPane.OK_OPTION);
 
                     }
 
-                } else {
-
-                    JOptionPane.showMessageDialog(null, "¡Debes seleccionar alguna tienda!", "¡Acceso Denegado!",
-                            JOptionPane.WARNING_MESSAGE);
-
                 }
 
-            } else {
+            } catch (SQLException e) {
 
-                JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "¡Acceso Denegado!",
-                        JOptionPane.WARNING_MESSAGE);
+                System.err.println("¡Error al consultar la cédula del cliente! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la cédula del cliente!", "¡Error!",
+                        JOptionPane.OK_OPTION);
 
             }
 
         } else {
 
-            //Algoritmo por si no es moderador...
-            name = jTextField_Name.getText().trim();
-            telephone = jTextField_Telephone.getText().trim();
-            ci = jTextField_Ci.getText().trim();
-            direction_client = jTextField_Direction_Client.getText().trim();
+            JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "¡Acceso Denegado!",
+                    JOptionPane.WARNING_MESSAGE);
 
-            if (name.equals("")) {
-
-                jLabel_Name.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Name.setForeground(new Color(240, 240, 240));
-
-            }
-
-            if (telephone.equals("")) {
-
-                jLabel_Telephone.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Telephone.setForeground(new Color(240, 240, 240));
-
-            }
-
-            if (ci.equals("")) {
-
-                jLabel_CI.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_CI.setForeground(new Color(240, 240, 240));
-
-            }
-
-            if (direction_client.equals("")) {
-
-                jLabel_Direction_Client.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Direction_Client.setForeground(new Color(240, 240, 240));
-
-            }
-
-            if (flag == 0) {
-
-                try {
-
-                    Connection cn = BD_Connection.connection();
-                    PreparedStatement pst = cn.prepareStatement(
-                            "select cedula_client from client where cedula_client = '" + ci
-                            + "' and direction_tienda = '" + Login.direction + "' and not id_client = '" + Clients.ID + "'");
-
-                    ResultSet rs = pst.executeQuery();
-
-                    if (rs.next()) {
-
-                        jLabel_CI.setForeground(Color.red);
-
-                        JOptionPane.showMessageDialog(null, "¡Ya existe un cliente registrado con este número de C.I!",
-                                "¡Acceso Denegado", JOptionPane.WARNING_MESSAGE);
-
-                        jTextField_Ci.setText("");
-                        jTextField_Ci.requestFocus();
-
-                        cn.close();
-
-                    } else {
-
-                        cn.close();
-
-                        try {
-
-                            Connection cn2 = BD_Connection.connection();
-                            PreparedStatement pst2 = cn2.prepareStatement(
-                                    "update client set name_client = ?, telephone_client = ?, cedula_client = ?, "
-                                    + "direction_client = ?, direction_tienda = ?, last_modification = ? "
-                                    + "where id_client = '" + Clients.ID + "'");
-
-                            pst2.setString(1, name);
-                            pst2.setString(2, telephone);
-                            pst2.setString(3, ci);
-                            pst2.setString(4, direction_client);
-                            pst2.setString(5, Login.direction);
-                            pst2.setString(6, Login.user);
-
-                            pst2.executeUpdate();
-
-                            paintCampTextGreen();
-
-                            cleanCampText();
-
-                            JOptionPane.showMessageDialog(null, "Modificación exitosa.", "¡Exito!",
-                                    JOptionPane.INFORMATION_MESSAGE);
-
-                            cn2.close();
-
-                            paneles.PanelClients();
-
-                        } catch (SQLException e) {
-
-                            System.err.println("¡Error al modificar la información del cliente! " + e);
-                            JOptionPane.showMessageDialog(null, "¡Error al modificar la información del cliente!", "¡Error!",
-                                    JOptionPane.OK_OPTION);
-
-                        }
-
-                    }
-
-                } catch (SQLException e) {
-
-                    System.err.println("¡Error al consultar la cédula del cliente! " + e);
-                    JOptionPane.showMessageDialog(null, "¡Error al consultar la cédula del cliente!", "¡Error!",
-                            JOptionPane.OK_OPTION);
-
-                }
-
-            } else {
-
-                JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "¡Acceso Denegado!",
-                        JOptionPane.WARNING_MESSAGE);
-
-            }
         }
 
-    }//GEN-LAST:event_jButton_UpdateMousePressed
 
-    private void jComboBox_Direction_ShopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_Direction_ShopActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_Direction_ShopActionPerformed
+    }//GEN-LAST:event_jButton_UpdateMousePressed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
 
@@ -469,11 +307,9 @@ public class Update_Client extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_Update;
-    private javax.swing.JComboBox<String> jComboBox_Direction_Shop;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_CI;
     private javax.swing.JLabel jLabel_Direction_Client;
-    private javax.swing.JLabel jLabel_Direction_Shop;
     private javax.swing.JLabel jLabel_Name;
     private javax.swing.JLabel jLabel_Telephone;
     private javax.swing.JLabel jLabel_Title;
@@ -497,7 +333,6 @@ public class Update_Client extends javax.swing.JPanel {
         jLabel_CI.setForeground(Color.GREEN);
         jLabel_Direction_Client.setForeground(Color.GREEN);
         jLabel4.setForeground(Color.GREEN);
-        jLabel_Direction_Shop.setForeground(Color.GREEN);
 
     }
 
@@ -509,22 +344,6 @@ public class Update_Client extends javax.swing.JPanel {
         jTextField_Ci.setText("");
         jTextField_Direction_Client.setText("");
         jTextField_Last_Modification.setText(Login.user);
-        jComboBox_Direction_Shop.setSelectedIndex(0);
-
-    }
-
-    //Método para consultar el tipo de acceso del usuario...
-    private void getValue_typeAccountUser() {
-
-        if (!Login.type_account.equals("Moderador")) {
-
-            jButton_Update.setText("Modificar");
-            add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, 140, 40));
-
-            jLabel_Direction_Shop.setVisible(false);
-            jComboBox_Direction_Shop.setVisible(false);
-
-        }
 
     }
 
@@ -546,7 +365,6 @@ public class Update_Client extends javax.swing.JPanel {
                 jTextField_Ci.setText(rs.getString("cedula_client"));
                 jTextField_Direction_Client.setText(rs.getString("direction_client"));
                 jTextField_Last_Modification.setText(rs.getString("last_modification"));
-                jComboBox_Direction_Shop.setSelectedItem(rs.getString("direction_tienda"));
 
             }
 
