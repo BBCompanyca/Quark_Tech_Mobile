@@ -13,7 +13,7 @@ import view.Menu_Seller;
 import view.Menu_Tecnico;
 import view.Principal;
 import view.Register_Client;
-import view.Register_Equipo;
+import view.Register_Warranty;
 import view.Register_User;
 import view.Reset_Password;
 import view.Update_Client;
@@ -180,7 +180,7 @@ public class Paneles {
 
     public void PanelRegisterEquipo() {
 
-        Register_Equipo register_equipo = new Register_Equipo();
+        Register_Warranty register_equipo = new Register_Warranty();
         register_equipo.setSize(790, 370);
         register_equipo.setLocation(0, 0);
 

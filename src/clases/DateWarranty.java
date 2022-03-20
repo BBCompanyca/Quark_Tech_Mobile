@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JTextField;
-import static view.Register_Equipo.jLabel_garantia;
+import static view.Register_Warranty.jLabel_garantia;
 
 public class DateWarranty {
     
