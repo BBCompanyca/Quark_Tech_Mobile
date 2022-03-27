@@ -18,10 +18,10 @@ public class Register_Client extends javax.swing.JPanel {
     public Register_Client() {
         initComponents();
 
-        TextPrompt name = new TextPrompt("Ingrese el nombre", jTextField_Name);
-        TextPrompt telephone = new TextPrompt("Ingrese el N° de teléfono", jTextField_Telephone);
-        TextPrompt ci = new TextPrompt("Ingrese el N° de cédula", jTextField_CI);
-        TextPrompt direction = new TextPrompt("Ingrese la dirección", jTextField_Direction_Client);
+        TextPrompt name = new TextPrompt("Ej. Carlos Perez", jTextField_Name);
+        TextPrompt telephone = new TextPrompt("Ej. 0414 - 589.56.41", jTextField_Telephone);
+        TextPrompt ci = new TextPrompt("Ej. 24.458.526", jTextField_CI);
+        TextPrompt direction = new TextPrompt("Ej. Las Mercedes", jTextField_Direction_Client);
 
         validateAddressRegister();
 
@@ -231,7 +231,7 @@ public class Register_Client extends javax.swing.JPanel {
                         
                         if (Consult_Cl_Client.flag == 1) {
                             
-                            paneles.PanelRegisterEquipo();
+                            paneles.PanelRegisterWarranty();
                             
                         } else {
                             

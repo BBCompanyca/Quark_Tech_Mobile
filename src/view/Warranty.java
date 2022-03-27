@@ -1,12 +1,7 @@
 package view;
 
 import clases.TextPrompt;
-import java.sql.*;
-import clases.BD_Connection;
 import clases.Paneles;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public final class Warranty extends javax.swing.JPanel {

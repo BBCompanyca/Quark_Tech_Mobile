@@ -193,7 +193,7 @@ public class CodeEquipos extends javax.swing.JPanel {
 
                     code = (String) jTable_Equipo.getValueAt(fila_point, columna_point);
 
-                    paneles.PanelRegisterEquipo();
+                    paneles.PanelRegisterWarranty();
 
                 }
 
