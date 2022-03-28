@@ -28,9 +28,9 @@ public class Update_User extends javax.swing.JPanel {
         username_login = Login.user;
         type_Account = Login.type_account;
 
-        TextPrompt name = new TextPrompt("Ingrese el nombre", jTextField_Name);
-        TextPrompt username = new TextPrompt("Ingrese el nombre de usuario", jTextField_Username);
-        TextPrompt telephone = new TextPrompt("Ingrese el número de teléfono", jTextField_Telephone);
+        TextPrompt name = new TextPrompt("Ej. Carlos Perez", jTextField_Name);
+        TextPrompt username = new TextPrompt("Ej. ADMIN", jTextField_Username);
+        TextPrompt telephone = new TextPrompt("Ej. 0414 - 589.56.41", jTextField_Telephone);
 
         //Método para consultar la información del usuario...
         getInformationUser();

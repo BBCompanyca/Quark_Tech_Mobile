@@ -46,6 +46,29 @@ public class FormatText {
 
     }
 
+    public String ValidateCI2(String ci) {
+
+        String aux = "";
+        int count = 0;
+
+        for (int i = ci.length() - 1; i >= 0; i--) {
+            if (count == 3) {
+
+                aux = ci.charAt(i) + "." + aux;
+                count = 1;
+
+            } else {
+
+                aux = ci.charAt(i) + aux;
+                count++;
+
+            }
+        }
+
+        return aux;
+
+    }
+
     //Método para validar el numero de cédula...
     public void ValidateCI(JTextField a) {
 
@@ -58,37 +81,9 @@ public class FormatText {
 
                 count++;
 
-                if (!Character.isDigit(c) || a.getText().length() == 10) {
+                if (!Character.isDigit(c)) {
 
                     e.consume();
-
-                }
-
-                /* if (a.getText().length() == 0) {
-                    
-                    count = 0;
-                    
-                }
-
-                for (int i = a.getText().length(); i != 0; i--) {
-
-                    if (count == 3) {
-
-                        String point = a.getText();
-
-                        a.setText(point + ".");
-
-                        count = 0;
-
-                    }
-
-                } */
-                if (a.getText().length() == 2 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE
-                        || a.getText().length() == 6 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE) {
-
-                    String point = a.getText();
-
-                    a.setText(point + ".");
 
                 }
             }

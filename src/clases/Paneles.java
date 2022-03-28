@@ -23,6 +23,7 @@ import view.Users;
 
 public class Paneles {
 
+    //Panel que se inicia cuando abre el sistema...
     public void PanelMain() {
 
         Principal main = new Principal();
@@ -36,6 +37,7 @@ public class Paneles {
 
     }
 
+    //Panel con la tabla de los usuarios registrados...
     public void PanelUsers() {
 
         Users users = new Users();
@@ -49,6 +51,7 @@ public class Paneles {
 
     }
 
+    //Panel para registrar a nuevos usuarios...
     public void PanelRegisterUser() {
 
         Register_User registerUsers = new Register_User();
@@ -62,6 +65,7 @@ public class Paneles {
 
     }
 
+    //Panel para módificiar la información de los usuarios...
     public void PanelUpadteUser() {
 
         Update_User updateUsers = new Update_User();
@@ -75,6 +79,7 @@ public class Paneles {
 
     }
 
+    //Panel con la tabla de los clientes registrados...
     public void PanelClients() {
 
         Clients clients = new Clients();
@@ -88,6 +93,7 @@ public class Paneles {
 
     }
 
+    //Panel para registrar nuevos clientes...
     public void PanelRegisterClient() {
 
         Register_Client register_client = new Register_Client();
@@ -101,6 +107,7 @@ public class Paneles {
 
     }
 
+    //Panel para módificar la información de los clientes...
     public void PanelUpdateClient() {
 
         Update_Client update_client = new Update_Client();
@@ -114,6 +121,7 @@ public class Paneles {
 
     }
 
+    //Panel para módificar las contraseñas de los usuarios...
     public void PanelResetPassword() {
 
         Reset_Password pl = new Reset_Password();
@@ -127,6 +135,7 @@ public class Paneles {
 
     }
 
+    //Panel con la tabla de los equipos registrados en el sistema...
     public void PanelEquipos() {
 
         Equipos equipos = new Equipos();
@@ -140,6 +149,7 @@ public class Paneles {
 
     }
     
+    //Panel con la tabla de los equipos...
     public void PanelCodeEquipos() {
 
         CodeEquipos CodeEquipos = new CodeEquipos();
@@ -153,6 +163,7 @@ public class Paneles {
 
     }
     
+    //Panel para registrar nuevos equipos...
     public void PanelCreateCodeEquipo() {
 
         CreateCodeEquipo createCodeEquipo = new CreateCodeEquipo();
@@ -166,6 +177,7 @@ public class Paneles {
 
     } 
 
+    //Panel para consultar el N° de C.I del cliente...
     public void PanelConsulCient() {
 
         Consult_Cl_Client consutl_ci_client = new Consult_Cl_Client();
@@ -179,6 +191,7 @@ public class Paneles {
 
     }
     
+    //Panel con la tabla de las garantías...
     public void PanelWarranty() {
 
         Warranty warranty = new Warranty();
@@ -192,7 +205,8 @@ public class Paneles {
 
     }
 
-    public void PanelRegisterEquipo() {
+    //Panel para registrar una nueva garantía...
+    public void PanelRegisterWarranty() {
 
         Register_Warranty register_equipo = new Register_Warranty();
         register_equipo.setSize(790, 370);
@@ -205,6 +219,7 @@ public class Paneles {
 
     }
 
+    //Panel con el menú de MOD y ADM...
     public void PanelMenu_Mod_Admin() {
 
         Menu_Mod_Adm menu = new Menu_Mod_Adm();
@@ -218,6 +233,7 @@ public class Paneles {
 
     }
 
+    //Panel con el menú para los vendedores...
     public void PanelMenu_Seller() {
 
         Menu_Seller menu = new Menu_Seller();
@@ -231,6 +247,7 @@ public class Paneles {
 
     }
 
+    //Panel con el menú para los técnicos...
     public void PanelMenu_Tecnico() {
 
         Menu_Tecnico menu = new Menu_Tecnico();

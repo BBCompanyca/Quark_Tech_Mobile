@@ -12,23 +12,22 @@ public class Register_Client extends javax.swing.JPanel {
 
     //Objeto para darle formato a los campos de texto.
     FormatText formattext = new FormatText();
-    
+
     Paneles paneles = new Paneles();
 
     public Register_Client() {
         initComponents();
 
-        TextPrompt name = new TextPrompt("Ingrese el nombre", jTextField_Name);
-        TextPrompt telephone = new TextPrompt("Ingrese el N° de teléfono", jTextField_Telephone);
-        TextPrompt ci = new TextPrompt("Ingrese el N° de cédula", jTextField_CI);
-        TextPrompt direction = new TextPrompt("Ingrese la dirección", jTextField_Direction_Client);
+        TextPrompt name = new TextPrompt("Ej. Carlos Perez", jTextField_Name);
+        TextPrompt telephone = new TextPrompt("Ej. 0414 - 589.56.41", jTextField_Telephone);
+        TextPrompt ci = new TextPrompt("Ej. 24.458.526", jTextField_CI);
+        TextPrompt direction = new TextPrompt("Ej. Las Mercedes", jTextField_Direction_Client);
 
         validateAddressRegister();
 
         //Instacia para darle formato a los campos de texto...
         formattext.ValidateName(jTextField_Name);
         formattext.ValidateNumber(jTextField_Telephone);
-        formattext.ValidateCI(jTextField_CI);
 
     }
 
@@ -121,9 +120,9 @@ public class Register_Client extends javax.swing.JPanel {
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
-        int flag = 0, flag_two = 0;
+        int flag = 0;
 
-        String name, telephone, ci, direction_client, direction_shop;
+        String name, telephone, ci, direction_client;
 
         name = jTextField_Name.getText().trim();
         telephone = jTextField_Telephone.getText().trim();
@@ -203,7 +202,6 @@ public class Register_Client extends javax.swing.JPanel {
                     try {
 
                         String unformat_telphone = formattext.unFormatText(telephone);
-                        String unformat_ci = formattext.unFormatText(ci);
 
                         Connection cn2 = BD_Connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
@@ -213,8 +211,8 @@ public class Register_Client extends javax.swing.JPanel {
                         pst2.setString(2, name);
                         pst2.setString(3, telephone);
                         pst2.setString(4, unformat_telphone);
-                        pst2.setString(5, ci);
-                        pst2.setString(6, unformat_ci);
+                        pst2.setString(5, formattext.ValidateCI2(ci));
+                        pst2.setString(6, ci);
                         pst2.setString(7, direction_client);
                         pst2.setString(8, Login.direction);
                         pst2.setString(9, Login.user);
@@ -228,15 +226,15 @@ public class Register_Client extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Registro exitoso.", "¡Exito!", JOptionPane.INFORMATION_MESSAGE);
 
                         resetColorjTextField();
-                        
+
                         if (Consult_Cl_Client.flag == 1) {
-                            
-                            paneles.PanelRegisterEquipo();
-                            
+
+                            paneles.PanelRegisterWarranty();
+
                         } else {
-                            
+
                             paneles.PanelClients();
-                            
+
                         }
 
                     } catch (SQLException e) {

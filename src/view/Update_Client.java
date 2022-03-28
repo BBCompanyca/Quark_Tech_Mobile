@@ -18,10 +18,10 @@ public class Update_Client extends javax.swing.JPanel {
         initComponents();
 
         //Objetos para el PlayHolders de los campos de textos...
-        TextPrompt name = new TextPrompt("Ingrese el nombre", jTextField_Name);
-        TextPrompt telephone = new TextPrompt("Ingrese el número de teléfono", jTextField_Telephone);
-        TextPrompt ci = new TextPrompt("Ingrese el número de C.I", jTextField_Ci);
-        TextPrompt direction__client = new TextPrompt("Ingrese la dirección del cliente", jTextField_Direction_Client);
+        TextPrompt name = new TextPrompt("Ej. Carlos Perez", jTextField_Name);
+        TextPrompt telephone = new TextPrompt("Ej. 0414 - 589.56.41", jTextField_Telephone);
+        TextPrompt ci = new TextPrompt("Ej. 24.458.526", jTextField_Ci);
+        TextPrompt direction__client = new TextPrompt("Ej. Las Mercedes", jTextField_Direction_Client);
 
         //Método para consultar la información del cliente...
         getInformation_Client();

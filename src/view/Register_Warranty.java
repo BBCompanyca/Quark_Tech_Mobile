@@ -5,7 +5,6 @@ import clases.BD_Connection;
 import clases.DateWarranty;
 import clases.FormatText;
 import clases.Paneles;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 public class Register_Warranty extends javax.swing.JPanel {
@@ -25,11 +24,11 @@ public class Register_Warranty extends javax.swing.JPanel {
     public Register_Warranty() {
         initComponents();
 
+        //Método para obtener la información del equipo...
         getInformationEquipo();
 
+        //Método para validar la dirección de la interfaz...
         validateAddress();
-
-        CalculateDayWarranty();
 
     }
 
@@ -214,13 +213,16 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     private void jButton_Search_CodeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_CodeMousePressed
 
+        //Si presiona el boton para seleccionar un equipo se guardará la información de la interfaz...
         serial = jTextField_Serial.getText().trim();
         falla = jTextField_Falla.getText().trim();
         numOrden = jTextField_NumOrden.getText().trim();
         recibided = jTextArea_Recibido.getText().trim();
 
+        //Variable bandera para saber de donde se está abriendo la interfaz...
         flag = 1;
 
+        //Panel para seleccionar el equipo para garantía...
         paneles.PanelCodeEquipos();
 
 
@@ -259,6 +261,7 @@ public class Register_Warranty extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField_Serial;
     // End of variables declaration//GEN-END:variables
 
+    //Método para validar la dirección de donde se está abriendo la interfaz...
     private void validateAddress() {
 
         if (flag == 1) {
@@ -281,6 +284,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }
 
+    //Método para obtener la información del equipo...
     private void getInformationEquipo() {
 
         jTextField_Code.setText(CodeEquipos.code);
@@ -310,10 +314,6 @@ public class Register_Warranty extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "¡Error al consultar la información del equipo!", "¡Error!", JOptionPane.OK_OPTION);
 
         }
-
-    }
-
-    private void CalculateDayWarranty() {
 
     }
 

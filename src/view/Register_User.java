@@ -21,10 +21,10 @@ public class Register_User extends javax.swing.JPanel {
         direction_login = Login.direction;
 
         //Objetos para el PlayHolder de los jTextField... 
-        TextPrompt name = new TextPrompt("Ingrese el nombre", jTextField_Name);
-        TextPrompt telephone = new TextPrompt("Ingrese el N° de télefono", jTextField_Telephone);
-        TextPrompt username = new TextPrompt("Ingrese el nombre de usuario", jTextField_Username);
-        TextPrompt password = new TextPrompt("Ingrese la contraseña", jPasswordField_Password);
+        TextPrompt name = new TextPrompt("Ej. Calos Perez", jTextField_Name);
+        TextPrompt telephone = new TextPrompt("Ej. 0414 - 589.56.41", jTextField_Telephone);
+        TextPrompt username = new TextPrompt("Ej. ADMIN", jTextField_Username);
+        TextPrompt password = new TextPrompt("Ej. *********", jPasswordField_Password);
 
         formatText.ValidateName(jTextField_Name);
         formatText.ValidateUsername(jTextField_Username);

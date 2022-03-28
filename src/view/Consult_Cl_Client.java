@@ -22,9 +22,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
         initComponents();
 
         TextPrompt text = new TextPrompt("Ingrese el N° de C.I del Cliente", jTextField_CI_Client);
-
         formattext.ValidateCI(jTextField_CI_Client);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -83,13 +81,13 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
         if (!ci_client.equals("")) {
 
-            if (jTextField_CI_Client.getText().length() == 10 || jTextField_CI_Client.getText().length() == 9) {
+            if (jTextField_CI_Client.getText().length() == 8 || jTextField_CI_Client.getText().length() == 7) {
 
                 try {
 
                     Connection cn = BD_Connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
-                            "select cedula_client from client where cedula_client = '" + ci_client + "'");
+                            "select cedula_client from client where unformat_cedula_client = '" + ci_client + "'");
 
                     ResultSet rs = pst.executeQuery();
 
@@ -101,7 +99,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                             Connection cn2 = BD_Connection.connection();
                             PreparedStatement pst2 = cn2.prepareStatement(
-                                    "select name_client, telephone_client, direction_client from client where cedula_client = '"
+                                    "select name_client, telephone_client, direction_client from client where unformat_cedula_client = '"
                                     + ci_client + "'");
 
                             ResultSet rs2 = pst2.executeQuery();
@@ -116,7 +114,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                                 if (question == 0) {
 
                                     Register_Warranty.flag = 0;
-                                    paneles.PanelRegisterEquipo();
+                                    paneles.PanelRegisterWarranty();
 
                                 } else {
 
@@ -196,13 +194,13 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
             if (!ci_client.equals("")) {
 
-                if (jTextField_CI_Client.getText().length() == 10 || jTextField_CI_Client.getText().length() == 9) {
+                if (jTextField_CI_Client.getText().length() == 8 || jTextField_CI_Client.getText().length() == 7) {
 
                     try {
 
                         Connection cn = BD_Connection.connection();
                         PreparedStatement pst = cn.prepareStatement(
-                                "select cedula_client from client where cedula_client = '" + ci_client + "'");
+                                "select cedula_client from client where unformat_cedula_client = '" + ci_client + "'");
 
                         ResultSet rs = pst.executeQuery();
 
@@ -214,7 +212,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                                 Connection cn2 = BD_Connection.connection();
                                 PreparedStatement pst2 = cn2.prepareStatement(
-                                        "select name_client, telephone_client, direction_client from client where cedula_client = '"
+                                        "select name_client, telephone_client, direction_client from client where unformat_cedula_client = '"
                                         + ci_client + "'");
 
                                 ResultSet rs2 = pst2.executeQuery();
@@ -229,7 +227,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                                     if (question == 0) {
 
                                         Register_Warranty.flag = 0;
-                                        paneles.PanelRegisterEquipo();
+                                        paneles.PanelRegisterWarranty();
 
                                     } else {
 
