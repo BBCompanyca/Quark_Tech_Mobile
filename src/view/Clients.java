@@ -8,6 +8,7 @@ import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import static view.Users.ID;
 
 public class Clients extends javax.swing.JPanel {
 
@@ -23,6 +24,8 @@ public class Clients extends javax.swing.JPanel {
         TextPrompt search = new TextPrompt("Ingrese algún parametro", jTextField_Search_Client);
 
         getClients();
+
+        validatePermissions();
 
     }
 
@@ -203,19 +206,15 @@ public class Clients extends javax.swing.JPanel {
 
                 if (search.equals("")) {
 
-                    query = "select id_client, name_client, telephone_client, cedula_client, registered_by from client "
-                            + "where direction_tienda = '" + Login.direction + "'";
+                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client";
 
                 } else {
 
-                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client "
-                            + "where id_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                            + "name_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                            + "telephone_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                            + "cedula_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                            + "registered_by = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                            + "unformat_telephone_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                            + "unformat_cedula_client = '" + search + "' and direction_tienda = '" + Login.direction + "'";
+                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client "
+                            + "where id_client = '" + search + "' or name_client = '" + search + "' or "
+                            + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
+                            + "direction_tienda = '" + search + "' or unformat_telephone_client = '" + search + "' or "
+                            + "unformat_cedula_client = '" + search + "'";
 
                 }
 
@@ -290,7 +289,7 @@ public class Clients extends javax.swing.JPanel {
                     model.addColumn("Nombre");
                     model.addColumn("Teléfono");
                     model.addColumn("Cédula");
-                    model.addColumn("Registrado_por");
+                    model.addColumn("Tienda");
 
                     while (rs.next()) {
 
@@ -354,19 +353,15 @@ public class Clients extends javax.swing.JPanel {
 
             if (search.equals("")) {
 
-                query = "select id_client, name_client, telephone_client, cedula_client, registered_by from client "
-                        + "where direction_tienda = '" + Login.direction + "'";
+                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client";
 
             } else {
 
-                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client "
-                        + "where id_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                        + "name_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                        + "telephone_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                        + "cedula_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                        + "registered_by = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                        + "unformat_telephone_client = '" + search + "' and direction_tienda = '" + Login.direction + "' or "
-                        + "unformat_cedula_client = '" + search + "' and direction_tienda = '" + Login.direction + "'";
+                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client "
+                        + "where id_client = '" + search + "' or name_client = '" + search + "' or "
+                        + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
+                        + "direction_tienda = '" + search + "' or unformat_telephone_client = '" + search + "' or "
+                        + "unformat_cedula_client = '" + search + "'";
 
             }
 
@@ -441,7 +436,7 @@ public class Clients extends javax.swing.JPanel {
                 model.addColumn("Nombre");
                 model.addColumn("Teléfono");
                 model.addColumn("Cédula");
-                model.addColumn("Registrado_por");
+                model.addColumn("Tienda");
 
                 while (rs.next()) {
 
@@ -510,6 +505,54 @@ public class Clients extends javax.swing.JPanel {
 
     private void jButton_Delete_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_ClientMousePressed
 
+        int fila_point = jTable_Client.getSelectedRow();
+        int columna_point = 0;
+
+        if (fila_point > -1) {
+
+            int value = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este cliente?", "¡Selección!", 
+                    JOptionPane.YES_NO_OPTION);
+
+            if (value == 0) {
+
+                try {
+
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(
+                            "delete from client where id_client = '" + ID + "'");
+
+                    pst.executeUpdate();
+
+                    model.setRowCount(0);
+                    model.setColumnCount(0);
+                    getClients();
+
+                    JOptionPane.showMessageDialog(null, "Cliente eliminado.");
+
+                    cn.close();
+
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al eliminar el usuario! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
+                            JOptionPane.OK_OPTION);
+
+                }
+
+            } else {
+
+                model.setRowCount(0);
+                model.setColumnCount(0);
+                getClients();
+
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un cliente!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
 
     }//GEN-LAST:event_jButton_Delete_ClientMousePressed
 
@@ -525,6 +568,20 @@ public class Clients extends javax.swing.JPanel {
     private javax.swing.JTable jTable_Client;
     private javax.swing.JTextField jTextField_Search_Client;
     // End of variables declaration//GEN-END:variables
+
+    private void validatePermissions() {
+
+        if (Login.type_account.equals("Vendedor")) {
+
+            jButton_Delete_Client.setEnabled(false);
+            jButton_Delete_Client.setVisible(false);
+
+            add(jButton_New_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 100, 35));
+            add(jButton_Update_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, 100, 35));
+
+        }
+
+    }
 
     private void getClients() {
 
@@ -577,8 +634,7 @@ public class Clients extends javax.swing.JPanel {
 
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select id_client, name_client, telephone_client, cedula_client, registered_by from client where direction_tienda = '"
-                        + Login.direction + "'");
+                        "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client");
 
                 ResultSet rs = pst.executeQuery();
 
@@ -589,7 +645,7 @@ public class Clients extends javax.swing.JPanel {
                 model.addColumn("Nombre");
                 model.addColumn("Teléfono");
                 model.addColumn("Cédula");
-                model.addColumn("Registrado Por");
+                model.addColumn("Tienda");
 
                 while (rs.next()) {
 

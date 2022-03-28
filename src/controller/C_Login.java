@@ -24,8 +24,12 @@ public class C_Login implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-       /* if (e.getSource() == view.jButton_Acceder) {
+        if (e.getSource() == view.jButton_Acceder) {
 
+            
+            //System.out.println(view.jTextField_Username.getText().trim());
+            
+            /*
             //Validación de que los campos de texto no estén vacios.
             if (view.jTextField_Username.getText().equals("") || view.jPasswordField_Password.getText().equals("")) {
 
@@ -59,10 +63,10 @@ public class C_Login implements ActionListener {
                     
                 }
 
-            }
+            } */
 
-        } */
+        } 
 
-    }
+    } 
 
 }

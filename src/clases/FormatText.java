@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 public class FormatText {
 
     char d;
+    int count = 0;
 
     //Método para validar el numero de telefono...
     public void ValidateNumber(JTextField a) {
@@ -55,12 +56,33 @@ public class FormatText {
 
                 char c = e.getKeyChar();
 
+                count++;
+
                 if (!Character.isDigit(c) || a.getText().length() == 10) {
 
                     e.consume();
 
                 }
 
+                /* if (a.getText().length() == 0) {
+                    
+                    count = 0;
+                    
+                }
+
+                for (int i = a.getText().length(); i != 0; i--) {
+
+                    if (count == 3) {
+
+                        String point = a.getText();
+
+                        a.setText(point + ".");
+
+                        count = 0;
+
+                    }
+
+                } */
                 if (a.getText().length() == 2 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE
                         || a.getText().length() == 6 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE) {
 
@@ -69,7 +91,6 @@ public class FormatText {
                     a.setText(point + ".");
 
                 }
-
             }
 
         });
@@ -86,19 +107,19 @@ public class FormatText {
 
                 char c = e.getKeyChar();
 
-                if (!Character.isLetter(c) && c != ' ' 
+                if (!Character.isLetter(c) && c != ' '
                         || a.getText().length() == 0 && !Character.isLetter(c) && c == ' ') {
 
                     e.consume();
 
                 }
-                
+
                 if (d == ' ' && c == ' ') {
-                    
+
                     e.consume();
-                    
+
                 }
-                
+
                 d = c;
 
             }
@@ -128,7 +149,8 @@ public class FormatText {
         });
 
     }
-    
+
+    //Método para quitar el formato a los campos de texto...
     public String unFormatText(String cadena) {
 
         String newCadena = "";
@@ -140,6 +162,41 @@ public class FormatText {
         }
 
         return newCadena;
+    }
+
+    //Método para validar el formato de la capacidad del equipo...
+    public void ValidateCapacityEquipo(JTextField a) {
+
+        a.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+                char c = e.getKeyChar();
+
+                if (!Character.isDigit(c) || a.getText().length() == 4) {
+
+                    e.consume();
+
+                }
+
+                if (a.getText().length() == 0 && c == ' ') {
+
+                    e.consume();
+
+                }
+
+                if (a.getText().length() == 1 && c != com.sun.glass.events.KeyEvent.VK_BACKSPACE) {
+
+                    String point = a.getText();
+
+                    a.setText(point + "/");
+
+                }
+
+            }
+        });
+
     }
 
 }
