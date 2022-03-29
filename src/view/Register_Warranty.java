@@ -5,11 +5,13 @@ import clases.BD_Connection;
 import clases.DateWarranty;
 import clases.FormatText;
 import clases.Paneles;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 public class Register_Warranty extends javax.swing.JPanel {
 
-    int day_warranty = 0;
+    int day_warranty = 0, flag_calendar = 0;
     public static int flag = 0;
     public static String serial, falla, numOrden, recibided;
 
@@ -29,6 +31,8 @@ public class Register_Warranty extends javax.swing.JPanel {
 
         //Método para validar la dirección de la interfaz...
         validateAddress();
+        
+        jCalendar.setVisible(false);
 
     }
 
@@ -37,6 +41,7 @@ public class Register_Warranty extends javax.swing.JPanel {
     private void initComponents() {
 
         jCalendar1 = new com.toedter.calendar.JCalendar();
+        jCalendar = new com.toedter.calendar.JCalendar();
         jLabel_Marca = new javax.swing.JLabel();
         jTextField_Equipo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -59,10 +64,19 @@ public class Register_Warranty extends javax.swing.JPanel {
         jButton_Register = new javax.swing.JButton();
         jLabel_Serial = new javax.swing.JLabel();
         jButton_Search_Code = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton_Calendar = new javax.swing.JButton();
+        jTextField_Calendar = new javax.swing.JTextField();
+        jSeparator8 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jCalendar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jCalendarPropertyChange(evt);
+            }
+        });
+        add(jCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, -1, -1));
 
         jLabel_Marca.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Marca.setForeground(new java.awt.Color(240, 240, 240));
@@ -190,13 +204,21 @@ public class Register_Warranty extends javax.swing.JPanel {
         });
         add(jButton_Search_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, 30));
 
-        jDateChooser1.setDateFormatString("dd-MM-yyyy");
-        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser1PropertyChange(evt);
+        jButton_Calendar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_CalendarMousePressed(evt);
             }
         });
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 65, 160, 25));
+        add(jButton_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 65, -1, 30));
+
+        jTextField_Calendar.setEditable(false);
+        jTextField_Calendar.setBackground(new java.awt.Color(9, 53, 69));
+        jTextField_Calendar.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jTextField_Calendar.setForeground(new java.awt.Color(240, 240, 240));
+        jTextField_Calendar.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField_Calendar.setBorder(null);
+        add(jTextField_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 130, 20));
+        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -228,17 +250,46 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton_Search_CodeMousePressed
 
-    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+    private void jButton_CalendarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CalendarMousePressed
+        
+        if (flag_calendar == 0) {
+            
+            jCalendar.setVisible(true);
+            
+            flag_calendar = 1;
+            
+        } else {
+            
+            jCalendar.setVisible(false);
+            
+            flag_calendar = 0;
+            
+        }
+        
+    }//GEN-LAST:event_jButton_CalendarMousePressed
 
-
-    }//GEN-LAST:event_jDateChooser1PropertyChange
+    private void jCalendarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCalendarPropertyChange
+       
+        if (evt.getOldValue() != null) {
+            
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            jTextField_Calendar.setText(format.format(jCalendar.getCalendar().getTime()));
+            
+            jCalendar.setVisible(false);
+            
+            flag_calendar = 0;
+            
+        }
+        
+    }//GEN-LAST:event_jCalendarPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Calendar;
     private javax.swing.JButton jButton_Register;
     private javax.swing.JButton jButton_Search_Code;
+    private com.toedter.calendar.JCalendar jCalendar;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel_Color;
     private javax.swing.JLabel jLabel_DatePurchase;
     private javax.swing.JLabel jLabel_Falla;
@@ -253,7 +304,9 @@ public class Register_Warranty extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextArea jTextArea_Recibido;
+    private javax.swing.JTextField jTextField_Calendar;
     private javax.swing.JTextField jTextField_Code;
     private javax.swing.JTextField jTextField_Equipo;
     private javax.swing.JTextField jTextField_Falla;
