@@ -5,13 +5,14 @@ import clases.BD_Connection;
 import clases.DateWarranty;
 import clases.FormatText;
 import clases.Paneles;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 public class Register_Warranty extends javax.swing.JPanel {
 
-    int day_warranty = 0, flag_calendar = 0;
+    int flag_calendar = 0, day_warranty = 0;
     public static int flag = 0;
     public static String serial, falla, numOrden, recibided;
 
@@ -31,7 +32,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
         //Método para validar la dirección de la interfaz...
         validateAddress();
-        
+
         jCalendar.setVisible(false);
 
     }
@@ -57,7 +58,7 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextField_NumOrden = new javax.swing.JTextField();
         jLabel_NumeroDeOrden = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
-        jLabel_Color = new javax.swing.JLabel();
+        jLabel_Code = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_Recibido = new javax.swing.JTextArea();
         jLabel_garantia = new javax.swing.JLabel();
@@ -71,6 +72,11 @@ public class Register_Warranty extends javax.swing.JPanel {
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jCalendar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jCalendarMousePressed(evt);
+            }
+        });
         jCalendar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jCalendarPropertyChange(evt);
@@ -155,10 +161,10 @@ public class Register_Warranty extends javax.swing.JPanel {
         add(jLabel_NumeroDeOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, -1));
         add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 120, -1));
 
-        jLabel_Color.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_Color.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Color.setText("Código:");
-        add(jLabel_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        jLabel_Code.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Code.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Code.setText("Código:");
+        add(jLabel_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -217,6 +223,16 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextField_Calendar.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Calendar.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Calendar.setBorder(null);
+        jTextField_Calendar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField_CalendarFocusGained(evt);
+            }
+        });
+        jTextField_Calendar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_CalendarKeyTyped(evt);
+            }
+        });
         add(jTextField_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 130, 20));
         add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -251,37 +267,66 @@ public class Register_Warranty extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_Search_CodeMousePressed
 
     private void jButton_CalendarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CalendarMousePressed
-        
-        if (flag_calendar == 0) {
-            
-            jCalendar.setVisible(true);
-            
-            flag_calendar = 1;
-            
+
+        if (!jTextField_Code.getText().equals("")) {
+
+            if (flag_calendar == 0) {
+
+                jCalendar.setVisible(true);
+
+                flag_calendar = 1;
+
+            } else {
+
+                jCalendar.setVisible(false);
+
+                flag_calendar = 0;
+
+            }
+
         } else {
-            
-            jCalendar.setVisible(false);
-            
-            flag_calendar = 0;
-            
+
+            jLabel_Code.setForeground(Color.red);
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un equipo!", "¡Acceso denegado!",
+                    JOptionPane.OK_OPTION);
+
         }
-        
+
     }//GEN-LAST:event_jButton_CalendarMousePressed
 
     private void jCalendarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCalendarPropertyChange
-       
+
         if (evt.getOldValue() != null) {
-            
+
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             jTextField_Calendar.setText(format.format(jCalendar.getCalendar().getTime()));
-            
+
             jCalendar.setVisible(false);
-            
+
             flag_calendar = 0;
-            
+
+            jTextField_Calendar.requestFocus();
+
         }
-        
+
+
     }//GEN-LAST:event_jCalendarPropertyChange
+
+    private void jTextField_CalendarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_CalendarKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_CalendarKeyTyped
+
+    private void jCalendarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendarMousePressed
+
+
+    }//GEN-LAST:event_jCalendarMousePressed
+
+    private void jTextField_CalendarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_CalendarFocusGained
+
+        dayWarranty();
+
+    }//GEN-LAST:event_jTextField_CalendarFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -290,7 +335,7 @@ public class Register_Warranty extends javax.swing.JPanel {
     private javax.swing.JButton jButton_Search_Code;
     private com.toedter.calendar.JCalendar jCalendar;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JLabel jLabel_Color;
+    private javax.swing.JLabel jLabel_Code;
     private javax.swing.JLabel jLabel_DatePurchase;
     private javax.swing.JLabel jLabel_Falla;
     private javax.swing.JLabel jLabel_Marca;
@@ -367,6 +412,58 @@ public class Register_Warranty extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "¡Error al consultar la información del equipo!", "¡Error!", JOptionPane.OK_OPTION);
 
         }
+
+    }
+
+    private void dayWarranty() {
+
+        int day = 0, month = 0, year = 0;
+
+        String date = jTextField_Calendar.getText().trim();
+
+        day = Integer.parseInt(date.substring(0, 2));
+        month = Integer.parseInt(date.substring(3, 5));
+        year = Integer.parseInt(date.substring(6, 10));
+
+        Calendar calendarPurachase = Calendar.getInstance();
+
+        calendarPurachase.set(Calendar.DATE, day);
+        calendarPurachase.set(Calendar.MONTH, month - 1);
+        calendarPurachase.set(Calendar.YEAR, year);
+
+        Calendar dateNow = Calendar.getInstance();
+
+        if (calendarPurachase.after(dateNow)) {
+
+            jLabel_garantia.setForeground(Color.red);
+            jLabel_garantia.setText("¡Error en formato de fecha!");
+
+        } else {
+
+            calendarPurachase.add(Calendar.DATE, day_warranty);
+
+            if (calendarPurachase.after(dateNow)) {
+
+                long timePurchase = calendarPurachase.getTimeInMillis();
+                long timeNow = dateNow.getTimeInMillis();
+
+                int time_Warranty = (int) ((Math.abs(timeNow - timePurchase)) / 86400000);
+
+                jLabel_garantia.setForeground(new Color(240, 240, 240));
+                jLabel_garantia.setText("El equipo tiene: " + time_Warranty + " días de garantía...");
+
+            } else {
+
+                jLabel_garantia.setForeground(Color.red);
+                jLabel_garantia.setText("El equipo no cumple con los días de garantía...");
+
+            }
+
+        }
+
+        calendarPurachase.set(Calendar.DATE, day);
+        calendarPurachase.set(Calendar.MONTH, month - 1);
+        calendarPurachase.set(Calendar.YEAR, year);
 
     }
 
