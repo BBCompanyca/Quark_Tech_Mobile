@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-03-2022 a las 20:07:39
+-- Tiempo de generación: 01-04-2022 a las 20:21:34
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -41,13 +41,6 @@ CREATE TABLE `client` (
   `last_modification` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Esta tabla es para el registro de clientes';
 
---
--- Volcado de datos para la tabla `client`
---
-
-INSERT INTO `client` (`id_client`, `name_client`, `telephone_client`, `unformat_telephone_client`, `cedula_client`, `unformat_cedula_client`, `direction_client`, `direction_tienda`, `registered_by`, `last_modification`) VALUES
-(1, 'Maria Ramos', '0412 - 589.66.66', '04125896666', '27.913.620', '27913620', 'Valles del tuy', 'City Market', 'Joe_CM', '');
-
 -- --------------------------------------------------------
 
 --
@@ -56,23 +49,12 @@ INSERT INTO `client` (`id_client`, `name_client`, `telephone_client`, `unformat_
 
 CREATE TABLE `equipo` (
   `id_equipo` int(11) NOT NULL,
-  `cedula_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `unformat_cedula_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `marca` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `modelo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `code` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `brand` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `color` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `serial` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `fecha_venta` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `numero_orden` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `fecha_ingreso` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `status` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `recibido_con` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `falla` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `fecha_envio_tecnico` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `tecnico` varchar(50) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `solucion_tecnica` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `fecha_retorno` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `fecha_entrega` varchar(50) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `capacity` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `day_warranty` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `registered_by` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `last_modification` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Esta tabla es para el registro de los equipos';
@@ -106,6 +88,33 @@ INSERT INTO `user` (`id_user`, `name_user`, `username`, `password`, `telephone`,
 (2, 'José Oleaga', 'Joe_CM', 'Joe_CM', '0414 - 589.65.55', '04145896555', 'City Market', 'Administrador', 'NeiferJesus14', '', 'Activo'),
 (3, 'Adriana Medina', 'Adri_ZOO', 'Adri_ZOO', '5465 - 654.64.64', '54656546464', 'Caricuao', 'Administrador', 'NeiferJesus14', '', 'Activo');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `warranty`
+--
+
+CREATE TABLE `warranty` (
+  `id_warranty` int(11) NOT NULL,
+  `code` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `equipo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `color` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `serial` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `falla` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `num_order` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `identity_card_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `unformat_indentity_card_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `name_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `received` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `date_register` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `date_purchase` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `day_warranty` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `direction_shop` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `status` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `registered_by` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `last_modification` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Esta tabla es para el registro de las garantías...';
+
 --
 -- Índices para tablas volcadas
 --
@@ -129,6 +138,12 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
+-- Indices de la tabla `warranty`
+--
+ALTER TABLE `warranty`
+  ADD UNIQUE KEY `id_warranty` (`id_warranty`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -136,7 +151,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `client`
 --
 ALTER TABLE `client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
@@ -149,6 +164,12 @@ ALTER TABLE `equipo`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `warranty`
+--
+ALTER TABLE `warranty`
+  MODIFY `id_warranty` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
