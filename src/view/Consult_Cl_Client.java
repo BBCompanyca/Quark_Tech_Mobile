@@ -218,6 +218,8 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                                 ResultSet rs2 = pst2.executeQuery();
 
                                 if (rs2.next()) {
+                                    
+                                    name_client = rs2.getString("name_client");
 
                                     int question = JOptionPane.showConfirmDialog(null, "Nombre: " + rs2.getString("name_client") + "\n\n"
                                             + "Teléfono: " + rs2.getString("telephone_client") + "\n\n"
@@ -239,7 +241,8 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                             } catch (SQLException e) {
 
                                 System.err.println("¡Error al consultar la información del cliente! " + e);
-                                JOptionPane.showMessageDialog(null, "¡Error al consultar la información del cliente!");
+                                JOptionPane.showMessageDialog(null, "¡Error al consultar la información del cliente!", 
+                                        "¡Error!", JOptionPane.OK_OPTION);
 
                             }
 
