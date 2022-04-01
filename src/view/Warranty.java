@@ -1,7 +1,11 @@
 package view;
 
+import java.sql.*;
+import clases.BD_Connection;
 import clases.TextPrompt;
 import clases.Paneles;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public final class Warranty extends javax.swing.JPanel {
@@ -22,6 +26,8 @@ public final class Warranty extends javax.swing.JPanel {
         //Objeto para el PlayHolders del jTextField buscar usuarios...
         TextPrompt search_user = new TextPrompt("Ingrese algún parametro", jTextField_Search_User);
 
+        getWarranty();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -33,7 +39,7 @@ public final class Warranty extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jButton_Delete_User = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
-        jTable_User = new javax.swing.JTable();
+        jTable_Warranty = new javax.swing.JTable();
         jButton_Search_User = new javax.swing.JButton();
         jButton_New_User = new javax.swing.JButton();
         jButton_Update_User = new javax.swing.JButton();
@@ -85,10 +91,10 @@ public final class Warranty extends javax.swing.JPanel {
         jScrollPane.setBorder(null);
         jScrollPane.setForeground(new java.awt.Color(240, 240, 240));
 
-        jTable_User.setBackground(new java.awt.Color(9, 53, 69));
-        jTable_User.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTable_User.setForeground(new java.awt.Color(240, 240, 240));
-        jTable_User.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Warranty.setBackground(new java.awt.Color(9, 53, 69));
+        jTable_Warranty.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jTable_Warranty.setForeground(new java.awt.Color(240, 240, 240));
+        jTable_Warranty.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -114,18 +120,18 @@ public final class Warranty extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable_User.setGridColor(new java.awt.Color(240, 240, 240));
-        jTable_User.setSelectionBackground(new java.awt.Color(9, 53, 69));
-        jScrollPane.setViewportView(jTable_User);
-        if (jTable_User.getColumnModel().getColumnCount() > 0) {
-            jTable_User.getColumnModel().getColumn(0).setResizable(false);
-            jTable_User.getColumnModel().getColumn(1).setResizable(false);
-            jTable_User.getColumnModel().getColumn(2).setResizable(false);
-            jTable_User.getColumnModel().getColumn(3).setResizable(false);
-            jTable_User.getColumnModel().getColumn(4).setResizable(false);
+        jTable_Warranty.setGridColor(new java.awt.Color(240, 240, 240));
+        jTable_Warranty.setSelectionBackground(new java.awt.Color(9, 53, 69));
+        jScrollPane.setViewportView(jTable_Warranty);
+        if (jTable_Warranty.getColumnModel().getColumnCount() > 0) {
+            jTable_Warranty.getColumnModel().getColumn(0).setResizable(false);
+            jTable_Warranty.getColumnModel().getColumn(1).setResizable(false);
+            jTable_Warranty.getColumnModel().getColumn(2).setResizable(false);
+            jTable_Warranty.getColumnModel().getColumn(3).setResizable(false);
+            jTable_Warranty.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 750, 203));
+        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 770, 203));
 
         jButton_Search_User.setText("Buscar");
         jButton_Search_User.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -176,12 +182,11 @@ public final class Warranty extends javax.swing.JPanel {
 
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
-        
+
     }//GEN-LAST:event_jButton_Search_UserMousePressed
 
     private void jTextField_Search_UserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_Search_UserKeyPressed
 
-        
 
     }//GEN-LAST:event_jTextField_Search_UserKeyPressed
 
@@ -201,12 +206,11 @@ public final class Warranty extends javax.swing.JPanel {
 
     private void jButton_Update_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_UserMousePressed
 
-       
+
     }//GEN-LAST:event_jButton_Update_UserMousePressed
 
     private void jButton_Delete_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_UserMousePressed
 
-        
 
     }//GEN-LAST:event_jButton_Delete_UserMousePressed
 
@@ -219,10 +223,92 @@ public final class Warranty extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable_User;
+    private javax.swing.JTable jTable_Warranty;
     private javax.swing.JTextField jTextField_Search_User;
     // End of variables declaration//GEN-END:variables
 
-    
+    private void getWarranty() {
+
+        String query;
+
+        if (Login.type_account.equals("Moderador")) {
+
+            query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
+                    + "direction_shop, status from warranty";
+
+        } else {
+
+            query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
+                    + "status from warranty where  direction_shop = '" + Login.direction + "'";
+
+        }
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement(query);
+
+            ResultSet rs = pst.executeQuery();
+
+            jTable_Warranty = new JTable(model);
+            jScrollPane.setViewportView(jTable_Warranty);
+
+            if (Login.type_account.equals("Moderador")) {
+
+                model.addColumn("ID");
+                model.addColumn("Equipo");
+                model.addColumn("Color");
+                model.addColumn("Serial");
+                model.addColumn("Cliente");
+                model.addColumn("Cédula");
+                model.addColumn("Estatus");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[7];
+                    for (int i = 0; i < 7; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+            } else {
+
+                model.addColumn("ID");
+                model.addColumn("Equipo");
+                model.addColumn("Color");
+                model.addColumn("Serial");
+                model.addColumn("Cliente");
+                model.addColumn("Cédula");
+                model.addColumn("Estatus");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[7];
+                    for (int i = 0; i < 7; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+            }
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al vaciar la tabla de garantías! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla de garantías!", "¡Error!",
+                    JOptionPane.OK_CANCEL_OPTION);
+
+        }
+
+    }
 
 }

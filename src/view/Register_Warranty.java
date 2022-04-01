@@ -13,7 +13,7 @@ import java.util.Date;
 public class Register_Warranty extends javax.swing.JPanel {
 
     int flag_calendar = 0, day_warranty = 0, flag_register = 0, time_Warranty;
-    public static int flag = 0;
+    public static int flag = 0,flag_AddressRegisterAndConsult = 0;
 
     String brand, model, color, date_register, date_purchase, day, month, year, time_Warranty_STG;
     public static String serial, falla, numOrder, received;
