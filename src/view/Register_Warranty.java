@@ -2,24 +2,26 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
-import clases.DateWarranty;
 import clases.FormatText;
 import clases.Paneles;
+import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
+import java.util.Date;
 
 public class Register_Warranty extends javax.swing.JPanel {
 
-    int day_warranty = 0;
-    public static int flag = 0;
-    public static String serial, falla, numOrden, recibided;
+    int flag_calendar = 0, day_warranty = 0, flag_register = 0, time_Warranty;
+    public static int flag = 0, flag_AddressRegisterAndConsult = 0;
+
+    String brand, model, color, date_register, date_purchase, day, month, year, time_Warranty_STG, identity_card_client, name_client;
+    public static String serial, falla, numOrder, received;
 
     Paneles paneles = new Paneles();
 
     //Instancia para darle formato a los campos de texto.
     FormatText formattext = new FormatText();
-
-    //Instancia para calcular los días de garantía de cada equipo...
-    DateWarranty dateWarranty = new DateWarranty();
 
     public Register_Warranty() {
         initComponents();
@@ -30,6 +32,12 @@ public class Register_Warranty extends javax.swing.JPanel {
         //Método para validar la dirección de la interfaz...
         validateAddress();
 
+        getAddressPanel();
+
+        jCalendar.setVisible(false);
+
+        jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -37,7 +45,8 @@ public class Register_Warranty extends javax.swing.JPanel {
     private void initComponents() {
 
         jCalendar1 = new com.toedter.calendar.JCalendar();
-        jLabel_Marca = new javax.swing.JLabel();
+        jCalendar = new com.toedter.calendar.JCalendar();
+        jLabel_Equipo = new javax.swing.JLabel();
         jTextField_Equipo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jTextField_Code = new javax.swing.JTextField();
@@ -52,22 +61,37 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextField_NumOrden = new javax.swing.JTextField();
         jLabel_NumeroDeOrden = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
-        jLabel_Color = new javax.swing.JLabel();
+        jLabel_Code = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_Recibido = new javax.swing.JTextArea();
         jLabel_garantia = new javax.swing.JLabel();
         jButton_Register = new javax.swing.JButton();
         jLabel_Serial = new javax.swing.JLabel();
         jButton_Search_Code = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton_Calendar = new javax.swing.JButton();
+        jTextField_Calendar = new javax.swing.JTextField();
+        jSeparator8 = new javax.swing.JSeparator();
+        jLabel_Title = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel_Marca.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_Marca.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Marca.setText("Equipo:");
-        add(jLabel_Marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+        jCalendar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jCalendarMousePressed(evt);
+            }
+        });
+        jCalendar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jCalendarPropertyChange(evt);
+            }
+        });
+        add(jCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
+
+        jLabel_Equipo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Equipo.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Equipo.setText("Equipo:");
+        add(jLabel_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         jTextField_Equipo.setEditable(false);
         jTextField_Equipo.setBackground(new java.awt.Color(9, 53, 69));
@@ -75,8 +99,8 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextField_Equipo.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Equipo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Equipo.setBorder(null);
-        add(jTextField_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 250, 20));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 250, -1));
+        add(jTextField_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 250, 20));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 250, -1));
 
         jTextField_Code.setEditable(false);
         jTextField_Code.setBackground(new java.awt.Color(9, 53, 69));
@@ -84,14 +108,14 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextField_Code.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Code.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Code.setBorder(null);
-        add(jTextField_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 150, 20));
+        add(jTextField_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 150, 20));
 
         jLabel_Recibido.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Recibido.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Recibido.setText("Se recibe con:");
-        add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 120, 30));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 150, -1));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 150, -1));
+        add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 120, 30));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 150, -1));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 150, -1));
 
         jTextField_Serial.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Serial.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
@@ -103,13 +127,13 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jTextField_SerialActionPerformed(evt);
             }
         });
-        add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 150, 20));
+        add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 150, 20));
 
         jLabel_DatePurchase.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_DatePurchase.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_DatePurchase.setText("Fecha de compra:");
-        add(jLabel_DatePurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, -1, -1));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 210, -1));
+        add(jLabel_DatePurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, -1, -1));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 210, -1));
 
         jTextField_Falla.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Falla.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
@@ -121,30 +145,30 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jTextField_FallaActionPerformed(evt);
             }
         });
-        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 210, 20));
+        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 210, 20));
 
         jLabel_Falla.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Falla.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Falla.setText("Falla:");
-        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
         jTextField_NumOrden.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_NumOrden.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_NumOrden.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_NumOrden.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_NumOrden.setBorder(null);
-        add(jTextField_NumOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 120, 20));
+        add(jTextField_NumOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 120, 20));
 
         jLabel_NumeroDeOrden.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_NumeroDeOrden.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_NumeroDeOrden.setText("N° ORDEN:");
-        add(jLabel_NumeroDeOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, -1));
-        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 120, -1));
+        add(jLabel_NumeroDeOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, -1, -1));
+        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 120, -1));
 
-        jLabel_Color.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_Color.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Color.setText("Código:");
-        add(jLabel_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        jLabel_Code.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Code.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Code.setText("Código:");
+        add(jLabel_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -157,7 +181,7 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setText("\n");
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 330, 130));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 330, 130));
 
         jLabel_garantia.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_garantia.setForeground(new java.awt.Color(240, 240, 240));
@@ -175,12 +199,12 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jButton_RegisterMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, 190, 60));
+        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 190, 60));
 
         jLabel_Serial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Serial.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Serial.setText("Serial:");
-        add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         jButton_Search_Code.setFocusPainted(false);
         jButton_Search_Code.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -188,15 +212,39 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jButton_Search_CodeMousePressed(evt);
             }
         });
-        add(jButton_Search_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, 30));
+        add(jButton_Search_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, 30));
 
-        jDateChooser1.setDateFormatString("dd-MM-yyyy");
-        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser1PropertyChange(evt);
+        jButton_Calendar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_CalendarMousePressed(evt);
             }
         });
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 65, 160, 25));
+        add(jButton_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, 30));
+
+        jTextField_Calendar.setEditable(false);
+        jTextField_Calendar.setBackground(new java.awt.Color(9, 53, 69));
+        jTextField_Calendar.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jTextField_Calendar.setForeground(new java.awt.Color(240, 240, 240));
+        jTextField_Calendar.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField_Calendar.setBorder(null);
+        jTextField_Calendar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField_CalendarFocusGained(evt);
+            }
+        });
+        jTextField_Calendar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_CalendarKeyTyped(evt);
+            }
+        });
+        add(jTextField_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 130, 20));
+        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 130, -1));
+
+        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Title.setText("Nueva Garantía - Cliente: ");
+        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 790, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -209,6 +257,201 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
+        int flag = 0;
+
+        String code, equipo, date_purchase;
+
+        code = jTextField_Code.getText().trim();
+        equipo = jTextField_Equipo.getText().trim();
+        serial = jTextField_Serial.getText().trim();
+        falla = jTextField_Falla.getText().trim();
+        numOrder = jTextField_NumOrden.getText().trim();
+        date_purchase = jTextField_Calendar.getText().trim();
+        received = jTextArea_Recibido.getText().trim();
+
+        if (code.equals("")) {
+
+            jLabel_Code.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_Code.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (equipo.equals("")) {
+
+            jLabel_Equipo.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_Equipo.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (serial.equals("")) {
+
+            jLabel_Serial.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_Serial.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (falla.equals("")) {
+
+            jLabel_Falla.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_Falla.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (numOrder.equals("")) {
+
+            jLabel_NumeroDeOrden.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_NumeroDeOrden.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (date_purchase.equals("")) {
+
+            jLabel_DatePurchase.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_DatePurchase.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (received.equals("")) {
+
+            jLabel_Recibido.setForeground(Color.red);
+            flag++;
+
+        } else {
+
+            jLabel_Recibido.setForeground(new Color(240, 240, 240));
+
+        }
+
+        if (flag == 0) {
+
+            if (flag_register == 0) {
+
+                try {
+
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(
+                            "select serial from warranty where serial = '" + serial + "' and not status = '" + "Entregado" + "'");
+
+                    ResultSet rs = pst.executeQuery();
+
+                    if (rs.next()) {
+
+                        jLabel_Serial.setForeground(Color.red);
+
+                        JOptionPane.showMessageDialog(null, "¡Ya existe un equipo con este serial registrado en el sistema!",
+                                "¡Acceso Denegado!", JOptionPane.OK_OPTION);
+
+                        jTextField_Serial.setText("");
+
+                        cn.close();
+
+                    } else {
+
+                        cn.close();
+
+                        try {
+
+                            if (time_Warranty < 1) {
+
+                                time_Warranty_STG = "-";
+
+                            } else {
+
+                                time_Warranty_STG = String.valueOf(time_Warranty);
+                            }
+
+                            Connection cn2 = BD_Connection.connection();
+                            PreparedStatement pst2 = cn2.prepareStatement(
+                                    "insert into warranty values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                            pst2.setInt(1, 0);
+                            pst2.setString(2, code);
+                            pst2.setString(3, brand + " - " + model);
+                            pst2.setString(4, color);
+                            pst2.setString(5, serial);
+                            pst2.setString(6, falla);
+                            pst2.setString(7, numOrder);
+                            pst2.setString(8, formattext.ValidateCI2(identity_card_client));
+                            pst2.setString(9, identity_card_client);
+                            pst2.setString(10, name_client);
+                            pst2.setString(11, received);
+                            pst2.setString(12, DateNow());
+                            pst2.setString(13, date_purchase);
+                            pst2.setString(14, time_Warranty_STG);
+                            pst2.setString(15, Login.direction);
+                            pst2.setString(16, "Nuevo Ingreso");
+                            pst2.setString(17, Login.user);
+                            pst2.setString(18, "");
+
+                            pst2.executeUpdate();
+
+                            PaintAndCleanCamp();
+
+                            JOptionPane.showMessageDialog(null, "Registro Exitoso", "¡Exito!",
+                                    JOptionPane.INFORMATION_MESSAGE);
+
+                            paneles.PanelWarranty();;
+
+                        } catch (SQLException e) {
+
+                            System.err.println("¡Error al registrar el equipo! " + e);
+                            JOptionPane.showMessageDialog(null, "¡Error al registrar el equipo!",
+                                    "¡Error!", JOptionPane.OK_OPTION);
+
+                        }
+
+                    }
+
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al validar la información del equipo! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al validar la información del equipo!",
+                            "¡Error!", JOptionPane.OK_OPTION);
+
+                }
+
+            } else {
+
+                jLabel_DatePurchase.setForeground(Color.red);
+
+                JOptionPane.showMessageDialog(null, "¡Debes seleccionar una fecha valida!", "¡Acceso Denegado!",
+                        JOptionPane.OK_OPTION);
+
+                jTextField_Calendar.setText("");
+
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
+
     }//GEN-LAST:event_jButton_RegisterMousePressed
 
     private void jButton_Search_CodeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_CodeMousePressed
@@ -216,8 +459,8 @@ public class Register_Warranty extends javax.swing.JPanel {
         //Si presiona el boton para seleccionar un equipo se guardará la información de la interfaz...
         serial = jTextField_Serial.getText().trim();
         falla = jTextField_Falla.getText().trim();
-        numOrden = jTextField_NumOrden.getText().trim();
-        recibided = jTextArea_Recibido.getText().trim();
+        numOrder = jTextField_NumOrden.getText().trim();
+        received = jTextArea_Recibido.getText().trim();
 
         //Variable bandera para saber de donde se está abriendo la interfaz...
         flag = 1;
@@ -228,24 +471,84 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton_Search_CodeMousePressed
 
-    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+    private void jButton_CalendarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CalendarMousePressed
+
+        if (!jTextField_Code.getText().equals("")) {
+
+            if (flag_calendar == 0) {
+
+                jCalendar.setVisible(true);
+
+                flag_calendar = 1;
+
+            } else {
+
+                jCalendar.setVisible(false);
+
+                flag_calendar = 0;
+
+            }
+
+        } else {
+
+            jLabel_Code.setForeground(Color.red);
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un equipo!", "¡Acceso denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
+
+    }//GEN-LAST:event_jButton_CalendarMousePressed
+
+    private void jCalendarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCalendarPropertyChange
+
+        if (evt.getOldValue() != null) {
+
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            jTextField_Calendar.setText(format.format(jCalendar.getCalendar().getTime()));
+            date_purchase = format.format(jCalendar.getCalendar().getTime());
+
+            jCalendar.setVisible(false);
+
+            flag_calendar = 0;
+
+            jTextField_Calendar.requestFocus();
+
+        }
 
 
-    }//GEN-LAST:event_jDateChooser1PropertyChange
+    }//GEN-LAST:event_jCalendarPropertyChange
+
+    private void jTextField_CalendarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_CalendarKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_CalendarKeyTyped
+
+    private void jCalendarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendarMousePressed
+
+
+    }//GEN-LAST:event_jCalendarMousePressed
+
+    private void jTextField_CalendarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_CalendarFocusGained
+
+        dayWarranty();
+
+    }//GEN-LAST:event_jTextField_CalendarFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Calendar;
     private javax.swing.JButton jButton_Register;
     private javax.swing.JButton jButton_Search_Code;
+    private com.toedter.calendar.JCalendar jCalendar;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel_Color;
+    private javax.swing.JLabel jLabel_Code;
     private javax.swing.JLabel jLabel_DatePurchase;
+    private javax.swing.JLabel jLabel_Equipo;
     private javax.swing.JLabel jLabel_Falla;
-    private javax.swing.JLabel jLabel_Marca;
     private javax.swing.JLabel jLabel_NumeroDeOrden;
     private javax.swing.JLabel jLabel_Recibido;
     private javax.swing.JLabel jLabel_Serial;
+    private javax.swing.JLabel jLabel_Title;
     public static javax.swing.JLabel jLabel_garantia;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -253,7 +556,9 @@ public class Register_Warranty extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextArea jTextArea_Recibido;
+    private javax.swing.JTextField jTextField_Calendar;
     private javax.swing.JTextField jTextField_Code;
     private javax.swing.JTextField jTextField_Equipo;
     private javax.swing.JTextField jTextField_Falla;
@@ -268,8 +573,8 @@ public class Register_Warranty extends javax.swing.JPanel {
 
             jTextField_Serial.setText(serial);
             jTextField_Falla.setText(falla);
-            jTextField_NumOrden.setText(numOrden);
-            jTextArea_Recibido.setText(recibided);
+            jTextField_NumOrden.setText(numOrder);
+            jTextArea_Recibido.setText(received);
 
         } else {
 
@@ -300,6 +605,9 @@ public class Register_Warranty extends javax.swing.JPanel {
             if (rs.next()) {
 
                 day_warranty = rs.getInt("day_warranty");
+                brand = rs.getString("brand");
+                model = rs.getString("model");
+                color = rs.getString("color");
 
                 jTextField_Equipo.setText(rs.getString("brand") + " - " + rs.getString("model")
                         + " - " + rs.getString("color") + " - " + rs.getString("capacity"));
@@ -317,4 +625,105 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }
 
+    private void dayWarranty() {
+
+        int day = 0, month = 0, year = 0;
+
+        String date = jTextField_Calendar.getText().trim();
+
+        day = Integer.parseInt(date.substring(0, 2));
+        month = Integer.parseInt(date.substring(3, 5));
+        year = Integer.parseInt(date.substring(6, 10));
+
+        Calendar calendarPurachase = Calendar.getInstance();
+
+        calendarPurachase.set(Calendar.DATE, day);
+        calendarPurachase.set(Calendar.MONTH, month - 1);
+        calendarPurachase.set(Calendar.YEAR, year);
+
+        Calendar dateNow = Calendar.getInstance();
+
+        if (calendarPurachase.after(dateNow)) {
+
+            jLabel_garantia.setForeground(Color.red);
+            jLabel_garantia.setText("¡Error en formato de fecha!");
+
+            flag_register = 1;
+
+        } else {
+
+            flag_register = 0;
+
+            calendarPurachase.add(Calendar.DATE, day_warranty);
+
+            if (calendarPurachase.after(dateNow)) {
+
+                long timePurchase = calendarPurachase.getTimeInMillis();
+                long timeNow = dateNow.getTimeInMillis();
+
+                time_Warranty = (int) ((Math.abs(timeNow - timePurchase)) / 86400000);
+
+                jLabel_garantia.setForeground(new Color(240, 240, 240));
+                jLabel_garantia.setText("El equipo tiene: " + time_Warranty + " días de garantía...");
+
+            } else {
+
+                jLabel_garantia.setForeground(Color.red);
+                jLabel_garantia.setText("El equipo no cumple con los días de garantía...");
+
+            }
+
+        }
+
+        calendarPurachase.set(Calendar.DATE, day);
+        calendarPurachase.set(Calendar.MONTH, month - 1);
+        calendarPurachase.set(Calendar.YEAR, year);
+
+    }
+
+    private void PaintAndCleanCamp() {
+
+        jLabel_Code.setForeground(Color.GREEN);
+        jLabel_DatePurchase.setForeground(Color.GREEN);
+        jLabel_Equipo.setForeground(Color.GREEN);
+        jLabel_Falla.setForeground(Color.GREEN);
+        jLabel_NumeroDeOrden.setForeground(Color.GREEN);
+        jLabel_Serial.setForeground(Color.GREEN);
+        jLabel_Recibido.setForeground(Color.GREEN);
+
+        jTextField_Code.setText("");
+        jTextField_Equipo.setText("");
+        jTextField_Serial.setText("");
+        jTextField_Falla.setText("");
+        jTextField_NumOrden.setText("");
+        jTextField_Calendar.setText("");
+        jTextArea_Recibido.setText("");
+        jLabel_garantia.setText("");
+
+    }
+
+    private String DateNow() {
+
+        Date Datenow = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        return format.format(Datenow);
+
+    }
+
+    private void getAddressPanel() {
+
+        if (flag_AddressRegisterAndConsult == 1) {
+
+            identity_card_client = Register_Client.identity_card_client;
+            name_client = Register_Client.name_client;
+
+        } else {
+
+            identity_card_client = Consult_Cl_Client.ci_client;
+            name_client = Consult_Cl_Client.name_client;
+
+        }
+
+    }
 }

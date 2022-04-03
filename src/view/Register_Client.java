@@ -9,6 +9,8 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class Register_Client extends javax.swing.JPanel {
+    
+    public static String name_client, identity_card_client;
 
     //Objeto para darle formato a los campos de texto.
     FormatText formattext = new FormatText();
@@ -122,14 +124,14 @@ public class Register_Client extends javax.swing.JPanel {
 
         int flag = 0;
 
-        String name, telephone, ci, direction_client;
+        String telephone, direction_client;
 
-        name = jTextField_Name.getText().trim();
+        name_client = jTextField_Name.getText().trim();
         telephone = jTextField_Telephone.getText().trim();
-        ci = jTextField_CI.getText().trim();
+        identity_card_client = jTextField_CI.getText().trim();
         direction_client = jTextField_Direction_Client.getText().trim();
 
-        if (name.equals("")) {
+        if (name_client.equals("")) {
 
             jLabel_Name.setForeground(Color.red);
             flag++;
@@ -151,7 +153,7 @@ public class Register_Client extends javax.swing.JPanel {
 
         }
 
-        if (ci.equals("")) {
+        if (identity_card_client.equals("")) {
 
             jLabel_CI.setForeground(Color.red);
             flag++;
@@ -179,7 +181,7 @@ public class Register_Client extends javax.swing.JPanel {
 
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select cedula_client from client where cedula_client = '" + ci + "'");
+                        "select cedula_client from client where cedula_client = '" + identity_card_client + "'");
 
                 ResultSet rs = pst.executeQuery();
 
@@ -208,11 +210,11 @@ public class Register_Client extends javax.swing.JPanel {
                                 "insert into client values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                         pst2.setInt(1, 0);
-                        pst2.setString(2, name);
+                        pst2.setString(2, name_client);
                         pst2.setString(3, telephone);
                         pst2.setString(4, unformat_telphone);
-                        pst2.setString(5, formattext.ValidateCI2(ci));
-                        pst2.setString(6, ci);
+                        pst2.setString(5, formattext.ValidateCI2(identity_card_client));
+                        pst2.setString(6, identity_card_client);
                         pst2.setString(7, direction_client);
                         pst2.setString(8, Login.direction);
                         pst2.setString(9, Login.user);
@@ -229,6 +231,7 @@ public class Register_Client extends javax.swing.JPanel {
 
                         if (Consult_Cl_Client.flag == 1) {
 
+                            Register_Warranty.flag_AddressRegisterAndConsult = 1;
                             paneles.PanelRegisterWarranty();
 
                         } else {
