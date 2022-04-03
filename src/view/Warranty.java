@@ -4,6 +4,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.TextPrompt;
 import clases.Paneles;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +25,7 @@ public final class Warranty extends javax.swing.JPanel {
         type_Account = Login.type_account;
 
         //Objeto para el PlayHolders del jTextField buscar usuarios...
-        TextPrompt search_user = new TextPrompt("Ingrese algún parametro", jTextField_Search_User);
+        TextPrompt search_user = new TextPrompt("Ingrese algún parametro", jTextField_Search_Warranty);
 
         getWarranty();
 
@@ -35,7 +36,7 @@ public final class Warranty extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField_Search_User = new javax.swing.JTextField();
+        jTextField_Search_Warranty = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jButton_Delete_User = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
@@ -54,29 +55,29 @@ public final class Warranty extends javax.swing.JPanel {
         jLabel1.setText("Garantías");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 110, 30));
 
-        jTextField_Search_User.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Search_User.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTextField_Search_User.setForeground(new java.awt.Color(240, 240, 240));
-        jTextField_Search_User.setBorder(null);
-        jTextField_Search_User.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTextField_Search_Warranty.setBackground(new java.awt.Color(9, 53, 69));
+        jTextField_Search_Warranty.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextField_Search_Warranty.setForeground(new java.awt.Color(240, 240, 240));
+        jTextField_Search_Warranty.setBorder(null);
+        jTextField_Search_Warranty.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTextField_Search_UserMousePressed(evt);
+                jTextField_Search_WarrantyMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTextField_Search_UserMouseReleased(evt);
+                jTextField_Search_WarrantyMouseReleased(evt);
             }
         });
-        jTextField_Search_User.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_Search_Warranty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_Search_UserActionPerformed(evt);
+                jTextField_Search_WarrantyActionPerformed(evt);
             }
         });
-        jTextField_Search_User.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextField_Search_Warranty.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField_Search_UserKeyPressed(evt);
+                jTextField_Search_WarrantyKeyPressed(evt);
             }
         });
-        add(jTextField_Search_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 590, 30));
+        add(jTextField_Search_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 590, 30));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 590, 10));
 
         jButton_Delete_User.setText("BORRAR");
@@ -168,27 +169,271 @@ public final class Warranty extends javax.swing.JPanel {
         add(jButton_Update_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 100, 35));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_UserMousePressed
+    private void jTextField_Search_WarrantyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_WarrantyMousePressed
 
-    }//GEN-LAST:event_jTextField_Search_UserMousePressed
+    }//GEN-LAST:event_jTextField_Search_WarrantyMousePressed
 
-    private void jTextField_Search_UserMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_UserMouseReleased
+    private void jTextField_Search_WarrantyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_WarrantyMouseReleased
         //nothing
-    }//GEN-LAST:event_jTextField_Search_UserMouseReleased
+    }//GEN-LAST:event_jTextField_Search_WarrantyMouseReleased
 
-    private void jTextField_Search_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_Search_UserActionPerformed
+    private void jTextField_Search_WarrantyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_Search_WarrantyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_Search_UserActionPerformed
+    }//GEN-LAST:event_jTextField_Search_WarrantyActionPerformed
 
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
+        String search = jTextField_Search_Warranty.getText().trim();
+
+        String query = "";
+
+        if (Login.type_account.equals("Moderador")) {
+
+            if (search.equals("")) {
+
+                query = "select id_warranty, equipo, serial, name_client, identity_card_client, "
+                        + "direction_shop, status from warranty where not status = '" + "Entregado" + "'";
+
+            } else {
+
+                query = "select id_warranty, equipo, serial, name_client, identity_card_client, "
+                        + "direction_shop, status from warranty where id_warranty = '" + search + "' and not status = '" + "Entregado" + "' or "
+                        + "equipo = '" + search + "' and not status = '" + "Entregado" + "' or "
+                        + "serial = '" + search + "' and not status = '" + "Entregado" + "' or "
+                        + "name_client = '" + search + "' and not status = '" + "Entregado" + "' or "
+                        + "unformat_identity_card_client = '" + search + "' and not status = '" + "Entregado" + "' or "
+                        + "direction_shop = '" + search + "' and not status = '" + "Entregado" + "' or "
+                        + "status = '" + search + "' and not status = '" + "Entregado" + "'";
+
+            }
+
+        } else {
+
+            if (search.equals("")) {
+
+                query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
+                        + "status from warranty where direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
+
+            } else {
+
+                query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
+                        + "status from warranty where "
+                        + "id_warranty = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                        + "equipo = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                        + "color = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                        + "serial = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                        + "name_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                        + "unformat_identity_card_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                        + "status = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
+
+            }
+
+        }
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement(query);
+
+            ResultSet rs = pst.executeQuery();
+
+            jTable_Warranty = new JTable(model);
+            jScrollPane.setViewportView(jTable_Warranty);
+
+            model.setColumnCount(0);
+            model.setRowCount(0);
+
+            if (Login.type_account.equals("Moderador")) {
+
+                model.addColumn("ID");
+                model.addColumn("Equipo");
+                model.addColumn("Serial");
+                model.addColumn("Cliente");
+                model.addColumn("Cédula");
+                model.addColumn("Tienda");
+                model.addColumn("Estatus");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[7];
+                    for (int i = 0; i < 7; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+            } else {
+
+                model.addColumn("ID");
+                model.addColumn("Equipo");
+                model.addColumn("Color");
+                model.addColumn("Serial");
+                model.addColumn("Cliente");
+                model.addColumn("Cédula");
+                model.addColumn("Estatus");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[7];
+                    for (int i = 0; i < 7; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+            }
+
+            cn.close();
+
+            jTextField_Search_Warranty.setText("");
+            jTextField_Search_Warranty.requestFocus();
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al vaciar la tabla de garantías! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla de garantías!", "¡Error!",
+                    JOptionPane.OK_CANCEL_OPTION);
+
+        }
 
     }//GEN-LAST:event_jButton_Search_UserMousePressed
 
-    private void jTextField_Search_UserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_Search_UserKeyPressed
+    private void jTextField_Search_WarrantyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_Search_WarrantyKeyPressed
 
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-    }//GEN-LAST:event_jTextField_Search_UserKeyPressed
+            String search = jTextField_Search_Warranty.getText().trim();
+
+            String query = "";
+
+            if (Login.type_account.equals("Moderador")) {
+
+                if (search.equals("")) {
+
+                    query = "select id_warranty, equipo, serial, name_client, identity_card_client, "
+                            + "direction_shop, status from warranty where not status = '" + "Entregado" + "'";
+
+                } else {
+
+                    query = "select id_warranty, equipo, serial, name_client, identity_card_client, "
+                            + "direction_shop, status from warranty where id_warranty = '" + search + "' and not status = '" + "Entregado" + "' or "
+                            + "equipo = '" + search + "' and not status = '" + "Entregado" + "' or "
+                            + "serial = '" + search + "' and not status = '" + "Entregado" + "' or "
+                            + "name_client = '" + search + "' and not status = '" + "Entregado" + "' or "
+                            + "unformat_identity_card_client = '" + search + "' and not status = '" + "Entregado" + "' or "
+                            + "direction_shop = '" + search + "' and not status = '" + "Entregado" + "' or "
+                            + "status = '" + search + "' and not status = '" + "Entregado" + "'";
+
+                }
+
+            } else {
+
+                if (search.equals("")) {
+
+                    query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
+                            + "status from warranty where direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
+
+                } else {
+
+                    query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
+                            + "status from warranty where "
+                            + "id_warranty = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                            + "equipo = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                            + "color = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                            + "serial = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                            + "name_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                            + "unformat_identity_card_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
+                            + "status = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
+
+                }
+
+            }
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(query);
+
+                ResultSet rs = pst.executeQuery();
+
+                jTable_Warranty = new JTable(model);
+                jScrollPane.setViewportView(jTable_Warranty);
+
+                model.setColumnCount(0);
+                model.setRowCount(0);
+
+                if (Login.type_account.equals("Moderador")) {
+
+                    model.addColumn("ID");
+                    model.addColumn("Equipo");
+                    model.addColumn("Serial");
+                    model.addColumn("Cliente");
+                    model.addColumn("Cédula");
+                    model.addColumn("Tienda");
+                    model.addColumn("Estatus");
+
+                    while (rs.next()) {
+
+                        Object[] fila = new Object[7];
+                        for (int i = 0; i < 7; i++) {
+
+                            fila[i] = rs.getObject(i + 1);
+
+                        }
+
+                        model.addRow(fila);
+
+                    }
+
+                } else {
+
+                    model.addColumn("ID");
+                    model.addColumn("Equipo");
+                    model.addColumn("Color");
+                    model.addColumn("Serial");
+                    model.addColumn("Cliente");
+                    model.addColumn("Cédula");
+                    model.addColumn("Estatus");
+
+                    while (rs.next()) {
+
+                        Object[] fila = new Object[7];
+                        for (int i = 0; i < 7; i++) {
+
+                            fila[i] = rs.getObject(i + 1);
+
+                        }
+
+                        model.addRow(fila);
+
+                    }
+
+                }
+
+                cn.close();
+
+                jTextField_Search_Warranty.setText("");
+                jTextField_Search_Warranty.requestFocus();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al vaciar la tabla de garantías! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla de garantías!", "¡Error!",
+                        JOptionPane.OK_CANCEL_OPTION);
+
+            }
+
+        }
+
+    }//GEN-LAST:event_jTextField_Search_WarrantyKeyPressed
 
     private void jButton_New_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_New_UserMousePressed
 
@@ -224,7 +469,7 @@ public final class Warranty extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable_Warranty;
-    private javax.swing.JTextField jTextField_Search_User;
+    private javax.swing.JTextField jTextField_Search_Warranty;
     // End of variables declaration//GEN-END:variables
 
     private void getWarranty() {
@@ -234,12 +479,12 @@ public final class Warranty extends javax.swing.JPanel {
         if (Login.type_account.equals("Moderador")) {
 
             query = "select id_warranty, equipo, serial, name_client, identity_card_client, "
-                    + "direction_shop, status from warranty";
+                    + "direction_shop, status from warranty where not status = '" + "Entregado" + "'";
 
         } else {
 
             query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
-                    + "status from warranty where  direction_shop = '" + Login.direction + "'";
+                    + "status from warranty where direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
 
         }
 
@@ -300,6 +545,8 @@ public final class Warranty extends javax.swing.JPanel {
                 }
 
             }
+
+            cn.close();
 
         } catch (SQLException e) {
 
