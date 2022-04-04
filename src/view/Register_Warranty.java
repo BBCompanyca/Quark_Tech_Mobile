@@ -181,7 +181,7 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setText("\n");
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 330, 130));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 330, 100));
 
         jLabel_garantia.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_garantia.setForeground(new java.awt.Color(240, 240, 240));
@@ -199,7 +199,7 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jButton_RegisterMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 190, 60));
+        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 190, 60));
 
         jLabel_Serial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Serial.setForeground(new java.awt.Color(240, 240, 240));
