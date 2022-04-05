@@ -41,8 +41,8 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
         jLabel_CI_Client.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_CI_Client.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_CI_Client.setText("Número C.I:");
-        add(jLabel_CI_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 250, 10));
+        add(jLabel_CI_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 150, -1, -1));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 210, 250, 10));
 
         jButton_Consult.setText("Consultar");
         jButton_Consult.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -55,13 +55,13 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                 jButton_ConsultActionPerformed(evt);
             }
         });
-        add(jButton_Consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 190, 40));
+        add(jButton_Consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 260, 190, 40));
 
-        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Title.setText("Consultar Cliente Para Registro De Equipo");
-        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 790, 50));
+        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 890, 50));
 
         jTextField_CI_Client.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_CI_Client.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
@@ -72,7 +72,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                 jTextField_CI_ClientKeyPressed(evt);
             }
         });
-        add(jTextField_CI_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 250, 30));
+        add(jTextField_CI_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 180, 250, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_ConsultMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_ConsultMousePressed

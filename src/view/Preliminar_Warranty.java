@@ -52,7 +52,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Code.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Code.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Code.setText("Código:");
-        add(jLabel_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+        add(jLabel_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
         jTextField_Code.setEditable(false);
         jTextField_Code.setBackground(new java.awt.Color(9, 53, 69));
@@ -60,12 +60,12 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextField_Code.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Code.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Code.setBorder(null);
-        add(jTextField_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 150, 20));
+        add(jTextField_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 150, 20));
 
         jLabel_Equipo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Equipo.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Equipo.setText("Equipo:");
-        add(jLabel_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        add(jLabel_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
         jTextField_Equipo.setEditable(false);
         jTextField_Equipo.setBackground(new java.awt.Color(9, 53, 69));
@@ -73,13 +73,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextField_Equipo.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Equipo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Equipo.setBorder(null);
-        add(jTextField_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 250, 20));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 250, -1));
+        add(jTextField_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 250, 20));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 250, -1));
 
         jLabel_Serial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Serial.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Serial.setText("Serial:");
-        add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
 
         jTextField_Serial.setEditable(false);
         jTextField_Serial.setBackground(new java.awt.Color(9, 53, 69));
@@ -92,13 +92,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextField_SerialActionPerformed(evt);
             }
         });
-        add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 150, 20));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 150, -1));
+        add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 150, 20));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 150, -1));
 
         jLabel_Falla.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Falla.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Falla.setText("Falla:");
-        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
         jTextField_Falla.setEditable(false);
         jTextField_Falla.setBackground(new java.awt.Color(9, 53, 69));
@@ -111,13 +111,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextField_FallaActionPerformed(evt);
             }
         });
-        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 210, 20));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 210, -1));
+        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 210, 20));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 210, -1));
 
         jLabel_NumeroDeOrden.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_NumeroDeOrden.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_NumeroDeOrden.setText("N° ORDEN:");
-        add(jLabel_NumeroDeOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, -1, -1));
+        add(jLabel_NumeroDeOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, -1, -1));
 
         jTextField_NumOrden.setEditable(false);
         jTextField_NumOrden.setBackground(new java.awt.Color(9, 53, 69));
@@ -125,8 +125,8 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextField_NumOrden.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_NumOrden.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_NumOrden.setBorder(null);
-        add(jTextField_NumOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 120, 20));
-        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 120, -1));
+        add(jTextField_NumOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 120, 20));
+        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 120, -1));
 
         jTextField_Calendar.setEditable(false);
         jTextField_Calendar.setBackground(new java.awt.Color(9, 53, 69));
@@ -144,13 +144,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextField_CalendarKeyTyped(evt);
             }
         });
-        add(jTextField_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 130, 20));
+        add(jTextField_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, 130, 20));
 
         jLabel_DatePurchase.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_DatePurchase.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_DatePurchase.setText("Fecha de entrada:");
-        add(jLabel_DatePurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, -1, -1));
-        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 130, -1));
+        add(jLabel_DatePurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, -1, -1));
+        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, 130, -1));
 
         jTextField_Code1.setEditable(false);
         jTextField_Code1.setBackground(new java.awt.Color(9, 53, 69));
@@ -159,25 +159,25 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextField_Code1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Code1.setBorder(null);
         add(jTextField_Code1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 150, 20));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 150, -1));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 150, -1));
 
-        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Title.setText("Garantía - Cliente: ");
-        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 790, 30));
+        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 890, 30));
 
         jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Status.setText("Nuevo Ingreso");
-        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 335, 300, 30));
+        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 210, 50));
 
         jLabel_Warranty.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_Warranty.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Warranty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Warranty.setText("Este equipo no cumple con el tiempo de garantía.");
-        add(jLabel_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 335, 450, 30));
+        add(jLabel_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 450, 50));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -191,12 +191,12 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setText("\n");
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 330, 100));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 330, 100));
 
         jLabel_Recibido.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Recibido.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Recibido.setText("Se recibe con:");
-        add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 120, 30));
+        add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 120, 30));
 
         jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Dark.png"))); // NOI18N
         jButton_Register.setBorder(null);
@@ -207,7 +207,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_RegisterMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, 150, 60));
+        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 150, 60));
 
         jButton_Register1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Report_Dark.png"))); // NOI18N
         jButton_Register1.setBorder(null);
@@ -218,7 +218,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_Register1MousePressed(evt);
             }
         });
-        add(jButton_Register1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, 150, 60));
+        add(jButton_Register1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 150, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -304,7 +304,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
                 if (validate_int > 0) {
 
-                    jLabel_Warranty.setText("El equipo tiene " + validate_int + " días de ganratía...");
+                    jLabel_Warranty.setText("El equipo tiene " + validate_int + " días de garantía...");
 
                 } else {
 

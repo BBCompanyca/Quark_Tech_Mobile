@@ -47,7 +47,7 @@ public class Reset_Password extends javax.swing.JPanel {
         jLabel_newPass.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_newPass.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_newPass.setText("Contraseña:");
-        add(jLabel_newPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
+        add(jLabel_newPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
 
         jPasswordField_ConfirmPassword.setBackground(new java.awt.Color(9, 53, 69));
         jPasswordField_ConfirmPassword.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -58,14 +58,14 @@ public class Reset_Password extends javax.swing.JPanel {
                 jPasswordField_ConfirmPasswordActionPerformed(evt);
             }
         });
-        add(jPasswordField_ConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 250, 30));
+        add(jPasswordField_ConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 250, 30));
 
         jLabel_confirmPass.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_confirmPass.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_confirmPass.setText("Confirmar contraseña:");
-        add(jLabel_confirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 250, 10));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 250, 10));
+        add(jLabel_confirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 250, 10));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 250, 10));
 
         jButton_Restart.setText("Restaurar");
         jButton_Restart.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -73,13 +73,13 @@ public class Reset_Password extends javax.swing.JPanel {
                 jButton_RestartMousePressed(evt);
             }
         });
-        add(jButton_Restart, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 190, 40));
+        add(jButton_Restart, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 190, 40));
 
-        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Title.setText("Restaurar contraseña usuario - Name");
-        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 790, 50));
+        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 890, 50));
 
         jPasswordField_Password.setBackground(new java.awt.Color(9, 53, 69));
         jPasswordField_Password.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -90,7 +90,7 @@ public class Reset_Password extends javax.swing.JPanel {
                 jPasswordField_PasswordActionPerformed(evt);
             }
         });
-        add(jPasswordField_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 250, 30));
+        add(jPasswordField_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 250, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPasswordField_ConfirmPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_ConfirmPasswordActionPerformed

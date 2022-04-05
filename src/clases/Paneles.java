@@ -23,12 +23,14 @@ import view.Update_User;
 import view.Users;
 
 public class Paneles {
+    
+    int WidthPanel = 890, HeigthPanel = 470;
 
     //Panel que se inicia cuando abre el sistema...
     public void PanelMain() {
 
         Principal main = new Principal();
-        main.setSize(790, 370);
+        main.setSize(WidthPanel, HeigthPanel);
         main.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -42,7 +44,7 @@ public class Paneles {
     public void PanelUsers() {
 
         Users users = new Users();
-        users.setSize(790, 370);
+        users.setSize(WidthPanel, HeigthPanel);
         users.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -56,7 +58,7 @@ public class Paneles {
     public void PanelRegisterUser() {
 
         Register_User registerUsers = new Register_User();
-        registerUsers.setSize(790, 370);
+        registerUsers.setSize(WidthPanel, HeigthPanel);
         registerUsers.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -70,7 +72,7 @@ public class Paneles {
     public void PanelUpadteUser() {
 
         Update_User updateUsers = new Update_User();
-        updateUsers.setSize(790, 370);
+        updateUsers.setSize(WidthPanel, HeigthPanel);
         updateUsers.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -84,7 +86,7 @@ public class Paneles {
     public void PanelClients() {
 
         Clients clients = new Clients();
-        clients.setSize(790, 370);
+        clients.setSize(WidthPanel, HeigthPanel);
         clients.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -98,7 +100,7 @@ public class Paneles {
     public void PanelRegisterClient() {
 
         Register_Client register_client = new Register_Client();
-        register_client.setSize(790, 370);
+        register_client.setSize(WidthPanel, HeigthPanel);
         register_client.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -112,7 +114,7 @@ public class Paneles {
     public void PanelUpdateClient() {
 
         Update_Client update_client = new Update_Client();
-        update_client.setSize(790, 370);
+        update_client.setSize(WidthPanel, HeigthPanel);
         update_client.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -126,7 +128,7 @@ public class Paneles {
     public void PanelResetPassword() {
 
         Reset_Password pl = new Reset_Password();
-        pl.setSize(790, 370);
+        pl.setSize(WidthPanel, HeigthPanel);
         pl.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -140,7 +142,7 @@ public class Paneles {
     public void PanelEquipos() {
 
         Equipos equipos = new Equipos();
-        equipos.setSize(790, 370);
+        equipos.setSize(WidthPanel, HeigthPanel);
         equipos.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -154,7 +156,7 @@ public class Paneles {
     public void PanelCodeEquipos() {
 
         CodeEquipos CodeEquipos = new CodeEquipos();
-        CodeEquipos.setSize(790, 370);
+        CodeEquipos.setSize(WidthPanel, HeigthPanel);
         CodeEquipos.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -168,7 +170,7 @@ public class Paneles {
     public void PanelCreateCodeEquipo() {
 
         CreateCodeEquipo createCodeEquipo = new CreateCodeEquipo();
-        createCodeEquipo.setSize(790, 370);
+        createCodeEquipo.setSize(WidthPanel, HeigthPanel);
         createCodeEquipo.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -182,7 +184,7 @@ public class Paneles {
     public void PanelConsulCient() {
 
         Consult_Cl_Client consutl_ci_client = new Consult_Cl_Client();
-        consutl_ci_client.setSize(790, 370);
+        consutl_ci_client.setSize(WidthPanel, HeigthPanel);
         consutl_ci_client.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -196,7 +198,7 @@ public class Paneles {
     public void PanelWarranty() {
 
         Warranty warranty = new Warranty();
-        warranty.setSize(790, 370);
+        warranty.setSize(WidthPanel, HeigthPanel);
         warranty.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -209,12 +211,12 @@ public class Paneles {
     //Panel para registrar una nueva garantía...
     public void PanelRegisterWarranty() {
 
-        Register_Warranty register_equipo = new Register_Warranty();
-        register_equipo.setSize(790, 370);
-        register_equipo.setLocation(0, 0);
+        Register_Warranty register_warranty = new Register_Warranty();
+        register_warranty.setSize(WidthPanel, HeigthPanel);
+        register_warranty.setLocation(0, 0);
 
         jPanel_Content.removeAll();
-        jPanel_Content.add(register_equipo, BorderLayout.CENTER);
+        jPanel_Content.add(register_warranty, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 
@@ -224,7 +226,7 @@ public class Paneles {
     public void Panel_PreliminarWarranty() {
 
         Preliminar_Warranty preliminar_warranty = new Preliminar_Warranty();
-        preliminar_warranty.setSize(790, 370);
+        preliminar_warranty.setSize(WidthPanel, HeigthPanel);
         preliminar_warranty.setLocation(0, 0);
 
         jPanel_Content.removeAll();
@@ -238,7 +240,7 @@ public class Paneles {
     public void PanelMenu_Mod_Admin() {
 
         Menu_Mod_Adm menu = new Menu_Mod_Adm();
-        menu.setSize(210, 600);
+        menu.setSize(210, 700);
         menu.setLocation(0, 0);
 
         jPanel_Content_Menu.removeAll();
@@ -252,7 +254,7 @@ public class Paneles {
     public void PanelMenu_Seller() {
 
         Menu_Seller menu = new Menu_Seller();
-        menu.setSize(210, 600);
+        menu.setSize(210, 700);
         menu.setLocation(0, 0);
 
         jPanel_Content_Menu.removeAll();
@@ -266,7 +268,7 @@ public class Paneles {
     public void PanelMenu_Tecnico() {
 
         Menu_Tecnico menu = new Menu_Tecnico();
-        menu.setSize(210, 600);
+        menu.setSize(210, 700);
         menu.setLocation(0, 0);
 
         jPanel_Content_Menu.removeAll();

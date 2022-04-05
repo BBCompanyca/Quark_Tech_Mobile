@@ -78,8 +78,8 @@ public final class Users extends javax.swing.JPanel {
                 jTextField_Search_UserKeyPressed(evt);
             }
         });
-        add(jTextField_Search_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 590, 30));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 590, 10));
+        add(jTextField_Search_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 700, 30));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 700, 10));
 
         jButton_Delete_User.setText("BORRAR");
         jButton_Delete_User.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,7 +87,7 @@ public final class Users extends javax.swing.JPanel {
                 jButton_Delete_UserMousePressed(evt);
             }
         });
-        add(jButton_Delete_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, 100, 35));
+        add(jButton_Delete_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 100, 35));
 
         jScrollPane.setBackground(new java.awt.Color(9, 53, 69));
         jScrollPane.setBorder(null);
@@ -133,7 +133,7 @@ public final class Users extends javax.swing.JPanel {
             jTable_User.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 750, 203));
+        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 850, 260));
 
         jButton_Search_User.setText("Buscar");
         jButton_Search_User.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,7 +141,7 @@ public final class Users extends javax.swing.JPanel {
                 jButton_Search_UserMousePressed(evt);
             }
         });
-        add(jButton_Search_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 80, 30));
+        add(jButton_Search_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 80, 30));
 
         jButton_New_User.setText("NUEVO");
         jButton_New_User.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,7 +154,7 @@ public final class Users extends javax.swing.JPanel {
                 jButton_New_UserActionPerformed(evt);
             }
         });
-        add(jButton_New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 100, 35));
+        add(jButton_New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 100, 35));
 
         jButton_Update_User.setText("MODIFICAR");
         jButton_Update_User.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -167,7 +167,7 @@ public final class Users extends javax.swing.JPanel {
                 jButton_Update_UserActionPerformed(evt);
             }
         });
-        add(jButton_Update_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 100, 35));
+        add(jButton_Update_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_UserMousePressed
