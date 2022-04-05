@@ -12,6 +12,7 @@ import view.Warranty;
 import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
+import view.Preliminar_Warranty;
 import view.Principal;
 import view.Register_Client;
 import view.Register_Warranty;
@@ -214,6 +215,20 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(register_equipo, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    //Panel para ver la informaciòn de las garantìas...
+    public void Panel_PreliminarWarranty() {
+
+        Preliminar_Warranty preliminar_warranty = new Preliminar_Warranty();
+        preliminar_warranty.setSize(790, 370);
+        preliminar_warranty.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(preliminar_warranty, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

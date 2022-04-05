@@ -377,11 +377,8 @@ public class Register_Warranty extends javax.swing.JPanel {
 
                             if (time_Warranty < 1) {
 
-                                time_Warranty_STG = "-";
+                                time_Warranty = 0;
 
-                            } else {
-
-                                time_Warranty_STG = String.valueOf(time_Warranty);
                             }
 
                             Connection cn2 = BD_Connection.connection();
@@ -401,7 +398,7 @@ public class Register_Warranty extends javax.swing.JPanel {
                             pst2.setString(11, received);
                             pst2.setString(12, DateNow());
                             pst2.setString(13, date_purchase);
-                            pst2.setString(14, time_Warranty_STG);
+                            pst2.setInt(14, time_Warranty);
                             pst2.setString(15, Login.direction);
                             pst2.setString(16, "Nuevo Ingreso");
                             pst2.setString(17, Login.user);

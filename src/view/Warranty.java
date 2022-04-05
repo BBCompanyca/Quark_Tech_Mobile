@@ -451,6 +451,20 @@ public final class Warranty extends javax.swing.JPanel {
 
     private void jButton_Update_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_UserMousePressed
 
+        int fila_point = jTable_Warranty.getSelectedRow();
+        int columna_punt = 0;
+
+        if (fila_point > -1) {
+
+            ID = (int) model.getValueAt(fila_point, columna_punt);
+            paneles.Panel_PreliminarWarranty();
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un registro!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
 
     }//GEN-LAST:event_jButton_Update_UserMousePressed
 
