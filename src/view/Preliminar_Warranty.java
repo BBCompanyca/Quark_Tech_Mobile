@@ -2,16 +2,21 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
+import clases.Reports;
 import java.awt.Color;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {
+    
+    Reports reports = new Reports();
 
     public Preliminar_Warranty() {
         initComponents();
 
         getInformationWarranty();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -242,7 +247,21 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_RegisterMousePressed
 
     private void jButton_Register1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Register1MousePressed
-        // TODO add your handling code here:
+
+        String fecha = jTextField_Calendar.getText();
+        
+        JFileChooser fc = new JFileChooser();
+
+        int seleccion = fc.showSaveDialog(this);
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+
+            File fichero = fc.getSelectedFile();
+
+            reports.ReportWarranty(Warranty.ID, fichero, fecha);
+
+        }
+
     }//GEN-LAST:event_jButton_Register1MousePressed
 
 
@@ -299,7 +318,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextField_Calendar.setText(rs.getString("date_register"));
                 jTextArea_Recibido.setText(rs.getString("received"));
                 jLabel_Status.setText(rs.getString("status"));
-                
+
                 int validate_int = rs.getInt("day_warranty");
 
                 if (validate_int > 0) {
