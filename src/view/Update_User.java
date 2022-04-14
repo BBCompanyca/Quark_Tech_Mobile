@@ -77,43 +77,43 @@ public class Update_User extends javax.swing.JPanel {
         jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Name.setText("Nombre:");
-        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
 
         jTextField_Name.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setBorder(null);
         jTextField_Name.setCaretColor(new java.awt.Color(240, 240, 240));
-        add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 240, 30));
+        add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 240, 30));
 
         jTextField_Telephone.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setBorder(null);
         jTextField_Telephone.setCaretColor(new java.awt.Color(240, 240, 240));
-        add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 240, 30));
+        add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 240, 30));
 
         jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Status.setText("Estatus:");
-        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, -1));
+        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, -1, -1));
 
         jTextField_Username.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Username.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Username.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Username.setBorder(null);
         jTextField_Username.setCaretColor(new java.awt.Color(240, 240, 240));
-        add(jTextField_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 240, 30));
+        add(jTextField_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 240, 30));
 
         jLabel_Username.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Username.setText("Nombre De Usuario:");
-        add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, -1, -1));
+        add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(240, 240, 240));
         jLabel4.setText("Modificado Por:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, -1, -1));
 
         jTextField_Last_Modification.setEditable(false);
         jTextField_Last_Modification.setBackground(new java.awt.Color(9, 53, 69));
@@ -121,14 +121,14 @@ public class Update_User extends javax.swing.JPanel {
         jTextField_Last_Modification.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Last_Modification.setBorder(null);
         jTextField_Last_Modification.setCaretColor(new java.awt.Color(240, 240, 240));
-        add(jTextField_Last_Modification, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 240, 30));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 240, -1));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 240, -1));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 240, -1));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 240, -1));
+        add(jTextField_Last_Modification, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 240, 30));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 240, -1));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 240, -1));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 240, -1));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 240, -1));
 
         jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Moderador", "Administrador", "Vendedor", "Tecnico" }));
-        add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 110, -1));
+        add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 110, -1));
 
         jComboBox_Direction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Almacen", "Caricuao", "City Market" }));
         jComboBox_Direction.addActionListener(new java.awt.event.ActionListener() {
@@ -136,25 +136,25 @@ public class Update_User extends javax.swing.JPanel {
                 jComboBox_DirectionActionPerformed(evt);
             }
         });
-        add(jComboBox_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 100, -1));
+        add(jComboBox_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 100, -1));
 
         jComboBox_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, -1, -1));
+        add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
 
         jLabel_Telephono.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Telephono.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Telephono.setText("Teléfono:");
-        add(jLabel_Telephono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
+        add(jLabel_Telephono, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
 
         jLabel_Type_Account.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Type_Account.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Type_Account.setText("Permisos De:");
-        add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+        add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, -1, -1));
 
         jLabel_Direction.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Direction.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Direction.setText("Dirección:");
-        add(jLabel_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, -1, -1));
+        add(jLabel_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, -1, -1));
 
         jButton_Update.setText("Modificar");
         jButton_Update.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,7 +162,7 @@ public class Update_User extends javax.swing.JPanel {
                 jButton_UpdateMousePressed(evt);
             }
         });
-        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 280, 140, 40));
+        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, 140, 40));
 
         jButton_RestartPassword.setText("Contraseña");
         jButton_RestartPassword.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,13 +170,13 @@ public class Update_User extends javax.swing.JPanel {
                 jButton_RestartPasswordMousePressed(evt);
             }
         });
-        add(jButton_RestartPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 140, 40));
+        add(jButton_RestartPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 140, 40));
 
-        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Title.setText("jLabel1");
-        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 790, 50));
+        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 890, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox_DirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_DirectionActionPerformed

@@ -55,6 +55,7 @@ public class Register_User extends javax.swing.JPanel {
         jLabel_Permission = new javax.swing.JLabel();
         jComboBox_Permission = new javax.swing.JComboBox<>();
         jButton_Register = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,53 +63,53 @@ public class Register_User extends javax.swing.JPanel {
         jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Name.setText("Nombre:");
-        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
+        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
 
         jTextField_Name.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Name.setBorder(null);
-        add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 220, 30));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 220, -1));
+        add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 220, 30));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 220, -1));
 
         jTextField_Telephone.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Telephone.setBorder(null);
-        add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 220, 30));
+        add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 220, 30));
 
         jLabel_Telephone.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Telephone.setText("Teléfono:");
-        add(jLabel_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 220, -1));
+        add(jLabel_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, -1, -1));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 220, -1));
 
         jLabel_Username.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Username.setText("Nombre de usuario:");
-        add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
+        add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, -1, -1));
 
         jTextField_Username.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Username.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Username.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Username.setBorder(null);
-        add(jTextField_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 220, 30));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 220, -1));
+        add(jTextField_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 220, 30));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 220, -1));
 
         jLabel_Password.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Password.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Password.setText("Contraseña:");
-        add(jLabel_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, -1, -1));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 220, -1));
+        add(jLabel_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, -1, -1));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, 220, -1));
 
         jPasswordField_Password.setBackground(new java.awt.Color(9, 53, 69));
         jPasswordField_Password.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jPasswordField_Password.setForeground(new java.awt.Color(240, 240, 240));
         jPasswordField_Password.setBorder(null);
-        add(jPasswordField_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 220, 30));
+        add(jPasswordField_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 220, 30));
 
         jComboBox_Direction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Almacen", "Caricuao", "City Market" }));
         jComboBox_Direction.addActionListener(new java.awt.event.ActionListener() {
@@ -116,17 +117,17 @@ public class Register_User extends javax.swing.JPanel {
                 jComboBox_DirectionActionPerformed(evt);
             }
         });
-        add(jComboBox_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, -1, -1));
+        add(jComboBox_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
 
         jLabel_Direction.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Direction.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Direction.setText("Dirección:");
-        add(jLabel_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, -1, -1));
+        add(jLabel_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, -1, -1));
 
         jLabel_Permission.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Permission.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Permission.setText("Permisos De:");
-        add(jLabel_Permission, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, -1));
+        add(jLabel_Permission, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
 
         jComboBox_Permission.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Moderador", "Administrador", "Vendedor", "Tecnico" }));
         jComboBox_Permission.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +135,7 @@ public class Register_User extends javax.swing.JPanel {
                 jComboBox_PermissionActionPerformed(evt);
             }
         });
-        add(jComboBox_Permission, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
+        add(jComboBox_Permission, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
 
         jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_dark.png"))); // NOI18N
         jButton_Register.setBorder(null);
@@ -149,7 +150,13 @@ public class Register_User extends javax.swing.JPanel {
                 jButton_RegisterMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 255, 190, 60));
+        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 190, 60));
+
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Registrar Nuevo Usuario");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 890, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox_DirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_DirectionActionPerformed
@@ -517,6 +524,7 @@ public class Register_User extends javax.swing.JPanel {
     private javax.swing.JButton jButton_Register;
     private javax.swing.JComboBox<String> jComboBox_Direction;
     private javax.swing.JComboBox<String> jComboBox_Permission;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Direction;
     private javax.swing.JLabel jLabel_Name;
     private javax.swing.JLabel jLabel_Password;

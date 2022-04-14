@@ -66,7 +66,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-outline.png"))); // NOI18N
         Btn_Main.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 210, 50));
+        add(Btn_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 50));
 
         jSeparator1.setPreferredSize(new java.awt.Dimension(50, 5));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 190, 20));
@@ -94,7 +94,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/account-multiple.png"))); // NOI18N
         Btn_Clients.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Clients, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 210, 50));
+        add(Btn_Clients, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 210, 50));
 
         Btn_Warranty.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Warranty.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,7 +119,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         jLabel10.setText("Garantías");
         Btn_Warranty.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
-        add(Btn_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 210, 50));
+        add(Btn_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 210, 50));
 
         Btn_About_Me.setBackground(new java.awt.Color(78, 120, 121));
         Btn_About_Me.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -144,7 +144,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/management_client_24px.png"))); // NOI18N
         Btn_About_Me.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 210, 50));
+        add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 210, 50));
 
         Btn_Reportes.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Reportes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -169,7 +169,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/android_24px.png"))); // NOI18N
         Btn_Reportes.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 210, 50));
+        add(Btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 210, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_MainMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMouseEntered

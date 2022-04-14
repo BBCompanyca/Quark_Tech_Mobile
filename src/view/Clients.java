@@ -51,7 +51,7 @@ public class Clients extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Clientes");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 100, 30));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 590, 10));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 700, 10));
 
         jTextField_Search_Client.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Search_Client.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -75,7 +75,7 @@ public class Clients extends javax.swing.JPanel {
                 jTextField_Search_ClientKeyPressed(evt);
             }
         });
-        add(jTextField_Search_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 590, 30));
+        add(jTextField_Search_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 700, 30));
 
         jButton_Search_Client.setText("Buscar");
         jButton_Search_Client.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,7 +83,7 @@ public class Clients extends javax.swing.JPanel {
                 jButton_Search_ClientMousePressed(evt);
             }
         });
-        add(jButton_Search_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 80, 30));
+        add(jButton_Search_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 80, 30));
 
         jScrollPane.setBackground(new java.awt.Color(9, 53, 69));
         jScrollPane.setBorder(null);
@@ -122,7 +122,7 @@ public class Clients extends javax.swing.JPanel {
         jTable_Client.setSelectionBackground(new java.awt.Color(9, 53, 69));
         jScrollPane.setViewportView(jTable_Client);
 
-        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 750, 203));
+        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 850, 260));
 
         jButton_New_Client.setText("NUEVO");
         jButton_New_Client.setFocusPainted(false);
@@ -136,7 +136,7 @@ public class Clients extends javax.swing.JPanel {
                 jButton_New_ClientActionPerformed(evt);
             }
         });
-        add(jButton_New_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 100, 35));
+        add(jButton_New_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 100, 35));
 
         jButton_Update_Client.setText("MODIFICAR");
         jButton_Update_Client.setFocusPainted(false);
@@ -150,7 +150,7 @@ public class Clients extends javax.swing.JPanel {
                 jButton_Update_ClientActionPerformed(evt);
             }
         });
-        add(jButton_Update_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 100, 35));
+        add(jButton_Update_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
 
         jButton_Delete_Client.setText("BORRAR");
         jButton_Delete_Client.setFocusPainted(false);
@@ -159,7 +159,7 @@ public class Clients extends javax.swing.JPanel {
                 jButton_Delete_ClientMousePressed(evt);
             }
         });
-        add(jButton_Delete_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, 100, 35));
+        add(jButton_Delete_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 100, 35));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_Search_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_ClientMousePressed

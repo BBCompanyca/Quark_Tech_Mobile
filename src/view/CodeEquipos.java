@@ -80,12 +80,12 @@ public class CodeEquipos extends javax.swing.JPanel {
         jTable_Equipo.setSelectionBackground(new java.awt.Color(9, 53, 69));
         jScrollPane.setViewportView(jTable_Equipo);
 
-        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, 793, 290));
+        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, 893, 380));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));
         jLabel1.setText("Buscar:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
         jTextField_Search.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Search.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
@@ -96,8 +96,8 @@ public class CodeEquipos extends javax.swing.JPanel {
                 jTextField_SearchKeyPressed(evt);
             }
         });
-        add(jTextField_Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 170, 30));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 170, -1));
+        add(jTextField_Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 170, 30));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 170, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_SearchKeyPressed

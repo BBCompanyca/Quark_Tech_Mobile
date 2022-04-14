@@ -72,62 +72,62 @@ public class Update_Client extends javax.swing.JPanel {
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Title.setText("jLabel1");
-        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 790, 30));
+        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 890, 40));
 
         jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Name.setText("Nombre:");
-        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 220, -1));
+        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 220, -1));
 
         jTextField_Name.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Name.setBorder(null);
-        add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 220, 30));
+        add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 220, 30));
 
         jLabel_Telephone.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Telephone.setText("Teléfono:");
-        add(jLabel_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
+        add(jLabel_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
 
         jTextField_Telephone.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Telephone.setBorder(null);
-        add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 220, 30));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 220, -1));
+        add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 220, 30));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 220, -1));
 
         jLabel_CI.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_CI.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_CI.setText("C.I:");
-        add(jLabel_CI, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
+        add(jLabel_CI, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
 
         jTextField_Ci.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Ci.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jTextField_Ci.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Ci.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Ci.setBorder(null);
-        add(jTextField_Ci, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 220, 30));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 220, -1));
+        add(jTextField_Ci, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 220, 30));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 220, -1));
 
         jLabel_Direction_Client.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Direction_Client.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Direction_Client.setText("Dirección:");
-        add(jLabel_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, -1, -1));
+        add(jLabel_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, -1, -1));
 
         jTextField_Direction_Client.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Direction_Client.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jTextField_Direction_Client.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Direction_Client.setBorder(null);
         jTextField_Direction_Client.setCaretColor(new java.awt.Color(240, 240, 240));
-        add(jTextField_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 240, 30));
+        add(jTextField_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 240, 30));
 
         jTextField_Last_Modification.setEditable(false);
         jTextField_Last_Modification.setBackground(new java.awt.Color(9, 53, 69));
@@ -135,14 +135,14 @@ public class Update_Client extends javax.swing.JPanel {
         jTextField_Last_Modification.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Last_Modification.setBorder(null);
         jTextField_Last_Modification.setCaretColor(new java.awt.Color(240, 240, 240));
-        add(jTextField_Last_Modification, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 240, 30));
+        add(jTextField_Last_Modification, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 240, 30));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(240, 240, 240));
         jLabel4.setText("Modificado Por:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, -1, -1));
-        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 240, -1));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 240, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, -1, -1));
+        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 240, -1));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, 240, -1));
 
         jButton_Update.setText("Modificar");
         jButton_Update.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,7 +150,7 @@ public class Update_Client extends javax.swing.JPanel {
                 jButton_UpdateMousePressed(evt);
             }
         });
-        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 140, 40));
+        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_UpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_UpdateMousePressed
@@ -214,7 +214,7 @@ public class Update_Client extends javax.swing.JPanel {
 
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select cedula_client from client where cedula_client = '" + ci + "' and not id_client = '"
+                        "select unformat_cedula_client from client where unformat_cedula_client = '" + ci + "' and not id_client = '"
                         + Clients.ID + "'");
 
                 ResultSet rs = pst.executeQuery();
@@ -238,7 +238,6 @@ public class Update_Client extends javax.swing.JPanel {
                     try {
 
                         String unformat_telephone = formattext.unFormatText(telephone);
-                        String unformat_ci = formattext.unFormatText(ci);
 
                         Connection cn2 = BD_Connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
@@ -250,8 +249,8 @@ public class Update_Client extends javax.swing.JPanel {
                         pst2.setString(1, name);
                         pst2.setString(2, telephone);
                         pst2.setString(3, unformat_telephone);
-                        pst2.setString(4, ci);
-                        pst2.setString(5, unformat_ci);
+                        pst2.setString(4, formattext.ValidateCI2(ci));
+                        pst2.setString(5, ci);
                         pst2.setString(6, direction_client);
                         pst2.setString(7, Login.direction);
                         pst2.setString(8, Login.user);
@@ -359,10 +358,10 @@ public class Update_Client extends javax.swing.JPanel {
 
             if (rs.next()) {
 
-                jLabel_Title.setText("Modificar la información del cliente - " + rs.getString("name_client"));
+                jLabel_Title.setText("Modificar La Información Del Cliente - " + rs.getString("name_client"));
                 jTextField_Name.setText(rs.getString("name_client"));
                 jTextField_Telephone.setText(rs.getString("telephone_client"));
-                jTextField_Ci.setText(rs.getString("cedula_client"));
+                jTextField_Ci.setText(rs.getString("unformat_cedula_client"));
                 jTextField_Direction_Client.setText(rs.getString("direction_client"));
                 jTextField_Last_Modification.setText(rs.getString("last_modification"));
 

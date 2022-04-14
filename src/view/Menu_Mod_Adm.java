@@ -78,7 +78,7 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-outline.png"))); // NOI18N
         Btn_Main.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 210, 50));
+        add(Btn_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 210, 50));
 
         Btn_Users.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Users.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,7 +117,7 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
 
         Btn_Users.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 50));
 
-        add(Btn_Users, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 210, 50));
+        add(Btn_Users, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 210, 50));
 
         Btn_Clients.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Clients.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,7 +142,7 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/account-multiple.png"))); // NOI18N
         Btn_Clients.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Clients, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 210, 50));
+        add(Btn_Clients, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 210, 50));
 
         Btn_Warranty.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Warranty.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -167,7 +167,7 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
         jLabel10.setText("Garantías");
         Btn_Warranty.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
-        add(Btn_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 210, 50));
+        add(Btn_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 210, 50));
 
         Btn_Equipos.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Equipos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -192,7 +192,7 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/android_24px.png"))); // NOI18N
         Btn_Equipos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 210, 50));
+        add(Btn_Equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 210, 50));
 
         Btn_Estadisticas.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Estadisticas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,7 +217,7 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/statistc_24px.png"))); // NOI18N
         Btn_Estadisticas.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Estadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 210, 50));
+        add(Btn_Estadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 210, 50));
 
         Btn_About_Me.setBackground(new java.awt.Color(78, 120, 121));
         Btn_About_Me.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -242,7 +242,7 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/management_client_24px.png"))); // NOI18N
         Btn_About_Me.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 210, 50));
+        add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 210, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_MainMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMouseEntered

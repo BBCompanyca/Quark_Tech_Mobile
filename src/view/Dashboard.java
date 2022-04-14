@@ -21,7 +21,7 @@ public class Dashboard extends javax.swing.JFrame {
         //Diseño de la insterfaz...
         setLocationRelativeTo(null);
         setResizable(false);
-        setSize(1000, 600);
+        setSize(1100, 700);
 
         //Nombre de usuario y tipo de cuenta del usuario que ha iniciado sesión...
         user = Login.user;
@@ -77,11 +77,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Footer.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Footer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Footer.setText("Creado Por @BBCompany.ca");
-        jPanel_Background.add(jLabel_Footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 1000, -1));
+        jPanel_Background.add(jLabel_Footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 680, 1110, -1));
 
         jLabel_background_Down.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_background_Down.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Vectors .png"))); // NOI18N
-        jPanel_Background.add(jLabel_background_Down, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 1000, 90));
+        jPanel_Background.add(jLabel_background_Down, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 1110, 90));
 
         jPanel_Content_Menu.setBackground(new java.awt.Color(42, 104, 100));
         jPanel_Content_Menu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -90,7 +90,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         jPanel_Content_Menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel_Background.add(jPanel_Content_Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 600));
+        jPanel_Background.add(jPanel_Content_Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 700));
 
         jPanel_Head.setBackground(new java.awt.Color(78, 109, 121));
         jPanel_Head.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -109,19 +109,19 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Fecha.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Fecha.setText("Fecha:");
-        jPanel_Head.add(jLabel_Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 340, 40));
+        jPanel_Head.add(jLabel_Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 340, 40));
 
         jLabel_ID.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_ID.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_ID.setText("N°");
-        jPanel_Head.add(jLabel_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 55, -1, -1));
+        jPanel_Head.add(jLabel_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 55, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(240, 240, 240));
         jLabel3.setText("ID User:");
-        jPanel_Head.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 55, -1, -1));
+        jPanel_Head.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 55, -1, -1));
 
-        jPanel_Background.add(jPanel_Head, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 35, 790, 100));
+        jPanel_Background.add(jPanel_Head, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 35, 890, 100));
 
         jPanel_Exit.setBackground(new java.awt.Color(9, 53, 69));
         jPanel_Exit.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,7 +144,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         jPanel_Exit.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        jPanel_Background.add(jPanel_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 2, 30, 30));
+        jPanel_Background.add(jPanel_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1068, 2, 30, 30));
         jPanel_Exit.getAccessibleContext().setAccessibleName("");
 
         jPanel_Content.setBackground(new java.awt.Color(9, 53, 69));
@@ -153,14 +153,14 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Content.setLayout(jPanel_ContentLayout);
         jPanel_ContentLayout.setHorizontalGroup(
             jPanel_ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 790, Short.MAX_VALUE)
+            .addGap(0, 890, Short.MAX_VALUE)
         );
         jPanel_ContentLayout.setVerticalGroup(
             jPanel_ContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
-        jPanel_Background.add(jPanel_Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 135, 790, 370));
+        jPanel_Background.add(jPanel_Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 135, 890, 470));
 
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -172,7 +172,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jLabel1MousePressed(evt);
             }
         });
-        jPanel_Background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 30));
+        jPanel_Background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 30));
 
         jLabel_Username.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
@@ -188,7 +188,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jLabel_UsernameMousePressed(evt);
             }
         });
-        jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 2, 750, 30));
+        jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 2, 850, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

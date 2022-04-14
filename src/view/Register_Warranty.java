@@ -74,6 +74,8 @@ public class Register_Warranty extends javax.swing.JPanel {
         jLabel_Title = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
+        setMinimumSize(new java.awt.Dimension(890, 360));
+        setPreferredSize(new java.awt.Dimension(890, 360));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jCalendar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -86,12 +88,12 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jCalendarPropertyChange(evt);
             }
         });
-        add(jCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
+        add(jCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, -1));
 
         jLabel_Equipo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Equipo.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Equipo.setText("Equipo:");
-        add(jLabel_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        add(jLabel_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
 
         jTextField_Equipo.setEditable(false);
         jTextField_Equipo.setBackground(new java.awt.Color(9, 53, 69));
@@ -99,8 +101,8 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextField_Equipo.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Equipo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Equipo.setBorder(null);
-        add(jTextField_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 250, 20));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 250, -1));
+        add(jTextField_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 250, 20));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 250, -1));
 
         jTextField_Code.setEditable(false);
         jTextField_Code.setBackground(new java.awt.Color(9, 53, 69));
@@ -108,14 +110,14 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextField_Code.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Code.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Code.setBorder(null);
-        add(jTextField_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 150, 20));
+        add(jTextField_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 150, 20));
 
         jLabel_Recibido.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Recibido.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Recibido.setText("Se recibe con:");
-        add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 120, 30));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 150, -1));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 150, -1));
+        add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 120, 30));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 150, -1));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 150, -1));
 
         jTextField_Serial.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Serial.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
@@ -127,13 +129,13 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jTextField_SerialActionPerformed(evt);
             }
         });
-        add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 150, 20));
+        add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 150, 20));
 
         jLabel_DatePurchase.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_DatePurchase.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_DatePurchase.setText("Fecha de compra:");
-        add(jLabel_DatePurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, -1, -1));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 210, -1));
+        add(jLabel_DatePurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, -1));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 210, -1));
 
         jTextField_Falla.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Falla.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
@@ -145,30 +147,30 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jTextField_FallaActionPerformed(evt);
             }
         });
-        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 210, 20));
+        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 210, 20));
 
         jLabel_Falla.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Falla.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Falla.setText("Falla:");
-        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
 
         jTextField_NumOrden.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_NumOrden.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_NumOrden.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_NumOrden.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_NumOrden.setBorder(null);
-        add(jTextField_NumOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 120, 20));
+        add(jTextField_NumOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 120, 20));
 
         jLabel_NumeroDeOrden.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_NumeroDeOrden.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_NumeroDeOrden.setText("N° ORDEN:");
-        add(jLabel_NumeroDeOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, -1, -1));
-        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 120, -1));
+        add(jLabel_NumeroDeOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, -1, -1));
+        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 120, -1));
 
         jLabel_Code.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Code.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Code.setText("Código:");
-        add(jLabel_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+        add(jLabel_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -181,12 +183,12 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setText("\n");
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 330, 130));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 330, 100));
 
         jLabel_garantia.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_garantia.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_garantia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(jLabel_garantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 790, 30));
+        add(jLabel_garantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 890, 30));
 
         jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_dark.png"))); // NOI18N
         jButton_Register.setBorder(null);
@@ -199,12 +201,12 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jButton_RegisterMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 190, 60));
+        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 190, 60));
 
         jLabel_Serial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Serial.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Serial.setText("Serial:");
-        add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
 
         jButton_Search_Code.setFocusPainted(false);
         jButton_Search_Code.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -212,14 +214,14 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jButton_Search_CodeMousePressed(evt);
             }
         });
-        add(jButton_Search_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, 30));
+        add(jButton_Search_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, -1, 30));
 
         jButton_Calendar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_CalendarMousePressed(evt);
             }
         });
-        add(jButton_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, 30));
+        add(jButton_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, -1, 30));
 
         jTextField_Calendar.setEditable(false);
         jTextField_Calendar.setBackground(new java.awt.Color(9, 53, 69));
@@ -237,14 +239,14 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jTextField_CalendarKeyTyped(evt);
             }
         });
-        add(jTextField_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 130, 20));
-        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 130, -1));
+        add(jTextField_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 130, 20));
+        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, 130, -1));
 
-        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Title.setText("Nueva Garantía - Cliente: ");
-        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 790, 30));
+        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 890, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -375,15 +377,6 @@ public class Register_Warranty extends javax.swing.JPanel {
 
                         try {
 
-                            if (time_Warranty < 1) {
-
-                                time_Warranty_STG = "-";
-
-                            } else {
-
-                                time_Warranty_STG = String.valueOf(time_Warranty);
-                            }
-
                             Connection cn2 = BD_Connection.connection();
                             PreparedStatement pst2 = cn2.prepareStatement(
                                     "insert into warranty values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -401,7 +394,7 @@ public class Register_Warranty extends javax.swing.JPanel {
                             pst2.setString(11, received);
                             pst2.setString(12, DateNow());
                             pst2.setString(13, date_purchase);
-                            pst2.setString(14, time_Warranty_STG);
+                            pst2.setInt(14, time_Warranty);
                             pst2.setString(15, Login.direction);
                             pst2.setString(16, "Nuevo Ingreso");
                             pst2.setString(17, Login.user);
@@ -667,6 +660,8 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jLabel_garantia.setText("El equipo tiene: " + time_Warranty + " días de garantía...");
 
             } else {
+
+                time_Warranty = 0;
 
                 jLabel_garantia.setForeground(Color.red);
                 jLabel_garantia.setText("El equipo no cumple con los días de garantía...");

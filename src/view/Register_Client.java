@@ -50,6 +50,7 @@ public class Register_Client extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel_Name = new javax.swing.JLabel();
         jButton_Register = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -59,52 +60,52 @@ public class Register_Client extends javax.swing.JPanel {
         jTextField_Direction_Client.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Direction_Client.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Direction_Client.setBorder(null);
-        add(jTextField_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 220, 30));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 220, -1));
+        add(jTextField_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 220, 30));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 220, -1));
 
         jLabel_Direction_Client.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Direction_Client.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Direction_Client.setText("Dirección:");
-        add(jLabel_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, -1));
+        add(jLabel_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, -1, -1));
 
         jTextField_Name.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Name.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Name.setBorder(null);
-        add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 220, 30));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 220, -1));
+        add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 220, 30));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 220, -1));
 
         jLabel_Telephone.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Telephone.setText("Teléfono:");
-        add(jLabel_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 220, -1));
+        add(jLabel_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 220, -1));
 
         jTextField_Telephone.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Telephone.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Telephone.setBorder(null);
-        add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 220, 30));
+        add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 220, 30));
 
         jTextField_CI.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_CI.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_CI.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_CI.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_CI.setBorder(null);
-        add(jTextField_CI, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 220, 30));
+        add(jTextField_CI, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 220, 30));
 
         jLabel_CI.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_CI.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_CI.setText("C.I:");
-        add(jLabel_CI, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 220, -1));
+        add(jLabel_CI, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 220, -1));
 
         jLabel_Name.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Name.setText("Nombre:");
-        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
+        add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
 
         jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_register_dark.png"))); // NOI18N
         jButton_Register.setBorder(null);
@@ -117,7 +118,13 @@ public class Register_Client extends javax.swing.JPanel {
                 jButton_RegisterMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 190, 60));
+        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 210, 190, 60));
+
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Registrar Nuevo Cliente");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 890, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
@@ -269,6 +276,7 @@ public class Register_Client extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Register;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_CI;
     private javax.swing.JLabel jLabel_Direction_Client;
     private javax.swing.JLabel jLabel_Name;
