@@ -6,12 +6,14 @@ import clases.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import clases.FormatText;
+import clases.EncryptPassword;
 
 public class Register_User extends javax.swing.JPanel {
 
     String username_user, type_Account, direction_login;
 
     FormatText formatText = new FormatText();
+    EncryptPassword encryptPassword = new EncryptPassword();
 
     public Register_User() {
         initComponents();
@@ -293,7 +295,7 @@ public class Register_User extends javax.swing.JPanel {
                                     pst2.setInt(1, 0);
                                     pst2.setString(2, name);
                                     pst2.setString(3, username);
-                                    pst2.setString(4, password);
+                                    pst2.setString(4, encryptPassword.ecnode("@BBCompany.ca", password));
                                     pst2.setString(5, telephone);
                                     pst2.setString(6, unformat_telphone);
                                     pst2.setString(7, direction);
