@@ -4,6 +4,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import clases.EncryptPassword;
 
 public class Login extends javax.swing.JFrame {
 
@@ -12,6 +13,8 @@ public class Login extends javax.swing.JFrame {
     public static String type_account;
     public static String direction;
     public String pass;
+
+    EncryptPassword encryptPassword = new EncryptPassword();
 
     public Login() {
         initComponents();
@@ -174,6 +177,9 @@ public class Login extends javax.swing.JFrame {
         //Validación de que todos los campos estén llenos.
         if (!user2.equals("") && !pass2.equals("")) {
 
+            //Instancia para encriptar la contraseña...
+            pass2 = encryptPassword.ecnode("@BBCompany.ca", pass2);
+
             try {
 
                 //Conexión a la base de datos para consultar los datos del usuario...
@@ -250,8 +256,7 @@ public class Login extends javax.swing.JFrame {
             jLabel_Anwser.setText("¡Debes llenar todos los campos!");
 
         }
-        
-        
+
 
     }//GEN-LAST:event_jButton_AccederMousePressed
 

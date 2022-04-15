@@ -3,15 +3,18 @@ package view;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.TextPrompt;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import static view.Dashboard.jPanel_Content;
+import clases.EncryptPassword;
+import clases.Paneles;
 
 public class Reset_Password extends javax.swing.JPanel {
 
     int ID;
     String name_user;
+    
+    Paneles paneles = new Paneles();
+    EncryptPassword encryptPassword = new EncryptPassword();
 
     public Reset_Password() {
         initComponents();
@@ -132,39 +135,41 @@ public class Reset_Password extends javax.swing.JPanel {
             jLabel_confirmPass.setForeground(new java.awt.Color(240, 240, 240));
 
         }
-        
+
         if (flag == 0) {
-            
+
+            newPass = encryptPassword.ecnode("@BBCompany.ca", newPass);
+
             try {
-                
+
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement("update user set password = ? where id_user = '" + ID + "'");
-                
+
                 pst.setString(1, newPass);
                 pst.executeUpdate();
-                
+
                 jPasswordField_Password.setText("");
                 jPasswordField_ConfirmPassword.setText("");
-                
+
                 jLabel_newPass.setForeground(Color.GREEN);
                 jLabel_confirmPass.setForeground(Color.GREEN);
-                
+
                 JOptionPane.showMessageDialog(null, "Contraseña restaurada.", "¡Exito!", JOptionPane.INFORMATION_MESSAGE);
-                
+
                 cn.close();
-                
-                nextWindow();
-                
+
+                paneles.PanelUsers();
+
             } catch (SQLException e) {
-                
+
                 System.err.println("¡Error al modificar la contraseña! " + e);
                 JOptionPane.showMessageDialog(null, "Error al modificar la contraseña", "¡Error!", JOptionPane.OK_OPTION);
-            } 
-            
+            }
+
         } else {
-            
+
             JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "!Acceso Denegado!", JOptionPane.WARNING_MESSAGE);
-            
+
         }
 
     }//GEN-LAST:event_jButton_RestartMousePressed
@@ -180,18 +185,5 @@ public class Reset_Password extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
-
-    private void nextWindow(){
-        
-        Users window = new Users();
-        window.setSize(790, 370);
-        window.setLocation(0, 0);
-        
-        jPanel_Content.removeAll();
-        jPanel_Content.add(window, BorderLayout.CENTER);
-        jPanel_Content.revalidate();
-        jPanel_Content.repaint();
-        
-    }
 
 }
