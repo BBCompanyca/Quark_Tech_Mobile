@@ -140,6 +140,7 @@ public class Reports {
 
             try {
 
+                //Consulta al servidor de la cantidad de días de garantía del equipo...
                 Connection cn2 = BD_Connection.connection();
                 PreparedStatement pst2 = cn2.prepareStatement("select day_warranty from equipo where code = '" + code + "'");
 
@@ -147,6 +148,7 @@ public class Reports {
 
                 if (rs2.next()) {
 
+                    //Resultado de la consulta...
                     String day_warrantyEquipo = rs2.getString("day_warranty");
 
                     Paragraph ParagraphTimeWarranty = new Paragraph();
