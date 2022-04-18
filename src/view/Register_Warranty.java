@@ -179,8 +179,10 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setColumns(5);
         jTextArea_Recibido.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextArea_Recibido.setForeground(new java.awt.Color(240, 240, 240));
+        jTextArea_Recibido.setLineWrap(true);
         jTextArea_Recibido.setRows(5);
         jTextArea_Recibido.setText("\n");
+        jTextArea_Recibido.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 330, 100));
