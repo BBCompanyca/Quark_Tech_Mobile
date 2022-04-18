@@ -192,8 +192,10 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setColumns(5);
         jTextArea_Recibido.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextArea_Recibido.setForeground(new java.awt.Color(240, 240, 240));
+        jTextArea_Recibido.setLineWrap(true);
         jTextArea_Recibido.setRows(5);
         jTextArea_Recibido.setText("\n");
+        jTextArea_Recibido.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 330, 100));
@@ -248,7 +250,22 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     private void jButton_Register1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Register1MousePressed
 
-        String fecha = jTextField_Calendar.getText();
+        String equipo = jTextField_Equipo.getText().trim();
+        String serial = jTextField_Serial.getText().trim();
+        String falla = jTextField_Falla.getText().trim();
+        String received = jTextArea_Recibido.getText().trim();
+        String code = jTextField_Code.getText().trim();
+        String time = jLabel_Warranty.getText();
+        
+        if (time.equals("Este equipo no cumple con el tiempo de garantía...")) {
+            
+            time = "No cumple con el tiempo de garantía.";
+            
+        } else {
+            
+            time = "Cumple con el tiempo de garantía.";
+            
+        }
         
         JFileChooser fc = new JFileChooser();
 
@@ -258,7 +275,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
             File fichero = fc.getSelectedFile();
 
-            reports.ReportWarranty(Warranty.ID, fichero, fecha);
+            reports.ReportWarranty(fichero, Warranty.ID, code, equipo, serial, falla, received, time);
 
         }
 
