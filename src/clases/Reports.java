@@ -151,7 +151,6 @@ public class Reports {
                     //Resultado de la consulta...
                     String day_warrantyEquipo = rs2.getString("day_warranty");
 
-                    //Vista del usuario con formato de los días de garantía del equipo...
                     Paragraph ParagraphTimeWarranty = new Paragraph();
                     ParagraphTimeWarranty.setAlignment(Paragraph.ALIGN_LEFT);
                     ParagraphTimeWarranty.setFont(FontFactory.getFont("Roboto", 12, Font.BOLD, BaseColor.BLACK));
