@@ -7,16 +7,20 @@ import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import clases.Paneles;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {
     
     Reports reports = new Reports();
+    
+    Paneles paneles = new Paneles();
 
+    
     public Preliminar_Warranty() {
         initComponents();
 
         getInformationWarranty();
-
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -50,6 +54,9 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Recibido = new javax.swing.JLabel();
         jButton_Register = new javax.swing.JButton();
         jButton_Register1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea_Recibido1 = new javax.swing.JTextArea();
+        jLabel_Recibido1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -176,16 +183,15 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Status.setText("Nuevo Ingreso");
-        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 210, 50));
+        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, 210, 30));
 
         jLabel_Warranty.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_Warranty.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Warranty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Warranty.setText("Este equipo no cumple con el tiempo de garantía.");
-        add(jLabel_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 450, 50));
+        add(jLabel_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 450, 30));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         jTextArea_Recibido.setEditable(false);
         jTextArea_Recibido.setBackground(new java.awt.Color(9, 53, 69));
@@ -196,14 +202,15 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setRows(5);
         jTextArea_Recibido.setText("\n");
         jTextArea_Recibido.setWrapStyleWord(true);
+        jTextArea_Recibido.setAutoscrolls(false);
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 330, 100));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 330, 70));
 
         jLabel_Recibido.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Recibido.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Recibido.setText("Se recibe con:");
-        add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 120, 30));
+        add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 130, 120, 30));
 
         jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Dark.png"))); // NOI18N
         jButton_Register.setBorder(null);
@@ -214,7 +221,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_RegisterMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 150, 60));
+        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, 150, 60));
 
         jButton_Register1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Report_Dark.png"))); // NOI18N
         jButton_Register1.setBorder(null);
@@ -225,7 +232,28 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_Register1MousePressed(evt);
             }
         });
-        add(jButton_Register1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 150, 60));
+        add(jButton_Register1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, 150, 60));
+
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextArea_Recibido1.setEditable(false);
+        jTextArea_Recibido1.setBackground(new java.awt.Color(9, 53, 69));
+        jTextArea_Recibido1.setColumns(5);
+        jTextArea_Recibido1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jTextArea_Recibido1.setForeground(new java.awt.Color(240, 240, 240));
+        jTextArea_Recibido1.setLineWrap(true);
+        jTextArea_Recibido1.setRows(5);
+        jTextArea_Recibido1.setText("\n");
+        jTextArea_Recibido1.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(jTextArea_Recibido1);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 330, 70));
+
+        jLabel_Recibido1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Recibido1.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Recibido1.setText("Comentarios Técnicos:");
+        add(jLabel_Recibido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, 200, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -246,6 +274,8 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
+        paneles.Panel_SentWarranty();
+        
     }//GEN-LAST:event_jButton_RegisterMousePressed
 
     private void jButton_Register1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Register1MousePressed
@@ -259,11 +289,11 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         
         if (time.equals("Este equipo no cumple con el tiempo de garantía...")) {
             
-            time = "No cumple con el tiempo de garantía.";
+            time = "NO CUMPLE CON EL TIEMPO DE GARANTÍA.";
             
         } else {
             
-            time = "Cumple con el tiempo de garantía.";
+            time = "CUMPLE CON EL TIEMPO DE GARANTÍA.";
             
         }
         
@@ -291,11 +321,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_Falla;
     private javax.swing.JLabel jLabel_NumeroDeOrden;
     private javax.swing.JLabel jLabel_Recibido;
+    private javax.swing.JLabel jLabel_Recibido1;
     private javax.swing.JLabel jLabel_Serial;
     public static javax.swing.JLabel jLabel_Status;
     private javax.swing.JLabel jLabel_Title;
     public static javax.swing.JLabel jLabel_Warranty;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -303,6 +335,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextArea jTextArea_Recibido;
+    private javax.swing.JTextArea jTextArea_Recibido1;
     private javax.swing.JTextField jTextField_Calendar;
     private javax.swing.JTextField jTextField_Code;
     private javax.swing.JTextField jTextField_Code1;

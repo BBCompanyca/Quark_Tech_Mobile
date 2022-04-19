@@ -18,6 +18,7 @@ import view.Register_Client;
 import view.Register_Warranty;
 import view.Register_User;
 import view.Reset_Password;
+import view.SentWarranty;
 import view.Update_Client;
 import view.Update_User;
 import view.Users;
@@ -235,6 +236,21 @@ public class Paneles {
         jPanel_Content.repaint();
 
     }
+    
+    //Panel para ver la informaciòn de las garantìas...
+    public void Panel_SentWarranty() {
+
+        SentWarranty Sent_warranty = new SentWarranty();
+        Sent_warranty.setSize(WidthPanel, HeigthPanel);
+        Sent_warranty.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(Sent_warranty, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+
 
     //Panel con el menú de MOD y ADM...
     public void PanelMenu_Mod_Admin() {
