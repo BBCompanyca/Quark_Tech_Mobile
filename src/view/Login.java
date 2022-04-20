@@ -22,6 +22,8 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setSize(700, 500);
+        
+        System.out.println(encryptPassword.ecnode("@BBCompany.ca", "Dilanjr15,."));
 
     }
 

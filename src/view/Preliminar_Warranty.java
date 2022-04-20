@@ -7,15 +7,20 @@ import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import clases.Paneles;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {
-    
+
     Reports reports = new Reports();
+
+    Paneles paneles = new Paneles();
 
     public Preliminar_Warranty() {
         initComponents();
 
         getInformationWarranty();
+        
+        ValidateButton();
 
     }
 
@@ -48,8 +53,12 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_Recibido = new javax.swing.JTextArea();
         jLabel_Recibido = new javax.swing.JLabel();
-        jButton_Register = new javax.swing.JButton();
-        jButton_Register1 = new javax.swing.JButton();
+        jButton_Sent = new javax.swing.JButton();
+        jButton_Dowload_Report = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea_Recibido1 = new javax.swing.JTextArea();
+        jButton_Cancelar = new javax.swing.JButton();
+        jLabel_Recibido1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -175,17 +184,14 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Status.setText("Nuevo Ingreso");
-        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 210, 50));
+        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, 270, 30));
 
         jLabel_Warranty.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_Warranty.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Warranty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Warranty.setText("Este equipo no cumple con el tiempo de garantía.");
-        add(jLabel_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 450, 50));
+        add(jLabel_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 450, 30));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         jTextArea_Recibido.setEditable(false);
         jTextArea_Recibido.setBackground(new java.awt.Color(9, 53, 69));
@@ -196,36 +202,68 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setRows(5);
         jTextArea_Recibido.setText("\n");
         jTextArea_Recibido.setWrapStyleWord(true);
+        jTextArea_Recibido.setAutoscrolls(false);
+        jTextArea_Recibido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 330, 100));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 330, 80));
 
         jLabel_Recibido.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Recibido.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Recibido.setText("Se recibe con:");
-        add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 120, 30));
+        add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 130, 120, 30));
 
-        jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Dark.png"))); // NOI18N
-        jButton_Register.setBorder(null);
-        jButton_Register.setBorderPainted(false);
-        jButton_Register.setContentAreaFilled(false);
-        jButton_Register.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton_Sent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Dark.png"))); // NOI18N
+        jButton_Sent.setBorder(null);
+        jButton_Sent.setBorderPainted(false);
+        jButton_Sent.setContentAreaFilled(false);
+        jButton_Sent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton_RegisterMousePressed(evt);
+                jButton_SentMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 150, 60));
+        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, 150, 60));
 
-        jButton_Register1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Report_Dark.png"))); // NOI18N
-        jButton_Register1.setBorder(null);
-        jButton_Register1.setBorderPainted(false);
-        jButton_Register1.setContentAreaFilled(false);
-        jButton_Register1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton_Dowload_Report.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Report_Dark.png"))); // NOI18N
+        jButton_Dowload_Report.setBorder(null);
+        jButton_Dowload_Report.setBorderPainted(false);
+        jButton_Dowload_Report.setContentAreaFilled(false);
+        jButton_Dowload_Report.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton_Register1MousePressed(evt);
+                jButton_Dowload_ReportMousePressed(evt);
             }
         });
-        add(jButton_Register1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, 150, 60));
+        add(jButton_Dowload_Report, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, 150, 60));
+
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextArea_Recibido1.setEditable(false);
+        jTextArea_Recibido1.setBackground(new java.awt.Color(9, 53, 69));
+        jTextArea_Recibido1.setColumns(5);
+        jTextArea_Recibido1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jTextArea_Recibido1.setForeground(new java.awt.Color(240, 240, 240));
+        jTextArea_Recibido1.setLineWrap(true);
+        jTextArea_Recibido1.setRows(5);
+        jTextArea_Recibido1.setText("\n");
+        jTextArea_Recibido1.setWrapStyleWord(true);
+        jTextArea_Recibido1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane2.setViewportView(jTextArea_Recibido1);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 330, 70));
+
+        jButton_Cancelar.setText("Cancelar");
+        jButton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CancelarActionPerformed(evt);
+            }
+        });
+        add(jButton_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, 150, 60));
+
+        jLabel_Recibido1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Recibido1.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Recibido1.setText("Comentarios Técnicos:");
+        add(jLabel_Recibido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, 200, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -244,11 +282,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_CalendarKeyTyped
 
-    private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
+    private void jButton_SentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SentMousePressed
 
-    }//GEN-LAST:event_jButton_RegisterMousePressed
+        paneles.Panel_SentWarranty();
 
-    private void jButton_Register1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Register1MousePressed
+    }//GEN-LAST:event_jButton_SentMousePressed
+
+    private void jButton_Dowload_ReportMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Dowload_ReportMousePressed
 
         String equipo = jTextField_Equipo.getText().trim();
         String serial = jTextField_Serial.getText().trim();
@@ -256,17 +296,17 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         String received = jTextArea_Recibido.getText().trim();
         String code = jTextField_Code.getText().trim();
         String time = jLabel_Warranty.getText();
-        
+
         if (time.equals("Este equipo no cumple con el tiempo de garantía...")) {
-            
-            time = "No cumple con el tiempo de garantía.";
-            
+
+            time = "NO CUMPLE CON EL TIEMPO DE GARANTÍA.";
+
         } else {
-            
-            time = "Cumple con el tiempo de garantía.";
-            
+
+            time = "CUMPLE CON EL TIEMPO DE GARANTÍA.";
+
         }
-        
+
         JFileChooser fc = new JFileChooser();
 
         int seleccion = fc.showSaveDialog(this);
@@ -279,23 +319,30 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         }
 
-    }//GEN-LAST:event_jButton_Register1MousePressed
+    }//GEN-LAST:event_jButton_Dowload_ReportMousePressed
+
+    private void jButton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_CancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_Register;
-    private javax.swing.JButton jButton_Register1;
+    private javax.swing.JButton jButton_Cancelar;
+    private javax.swing.JButton jButton_Dowload_Report;
+    private javax.swing.JButton jButton_Sent;
     private javax.swing.JLabel jLabel_Code;
     private javax.swing.JLabel jLabel_DatePurchase;
     private javax.swing.JLabel jLabel_Equipo;
     private javax.swing.JLabel jLabel_Falla;
     private javax.swing.JLabel jLabel_NumeroDeOrden;
     private javax.swing.JLabel jLabel_Recibido;
+    private javax.swing.JLabel jLabel_Recibido1;
     private javax.swing.JLabel jLabel_Serial;
     public static javax.swing.JLabel jLabel_Status;
     private javax.swing.JLabel jLabel_Title;
     public static javax.swing.JLabel jLabel_Warranty;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -303,6 +350,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextArea jTextArea_Recibido;
+    private javax.swing.JTextArea jTextArea_Recibido1;
     private javax.swing.JTextField jTextField_Calendar;
     private javax.swing.JTextField jTextField_Code;
     private javax.swing.JTextField jTextField_Code1;
@@ -361,6 +409,38 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         }
 
+    }
+    
+    private void ValidateButton(){
+        
+        try {
+            
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement("select status from warranty where id_warranty = '" + Warranty.ID + "'");
+            
+            ResultSet rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                
+                String status_Warranty = rs.getString("status");
+                
+                if (status_Warranty.equals("Nuevo Ingreso")) {
+                    
+                    jButton_Sent.setVisible(true);
+                    jButton_Cancelar.setVisible(false);
+                    
+                } else if (status_Warranty.equals("Solicitud Enviada - En Espera")) {
+                    
+                    jButton_Sent.setVisible(false);
+                    jButton_Cancelar.setVisible(true);
+                    
+                }
+                
+            }
+            
+        } catch (Exception e) {
+        }
+        
     }
 
 }
