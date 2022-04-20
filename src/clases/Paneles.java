@@ -19,12 +19,13 @@ import view.Register_Warranty;
 import view.Register_User;
 import view.Reset_Password;
 import view.SentWarranty;
+import view.Table_Technical;
 import view.Update_Client;
 import view.Update_User;
 import view.Users;
 
 public class Paneles {
-    
+
     int WidthPanel = 890, HeigthPanel = 470;
 
     //Panel que se inicia cuando abre el sistema...
@@ -152,7 +153,7 @@ public class Paneles {
         jPanel_Content.repaint();
 
     }
-    
+
     //Panel con la tabla de los equipos...
     public void PanelCodeEquipos() {
 
@@ -166,7 +167,7 @@ public class Paneles {
         jPanel_Content.repaint();
 
     }
-    
+
     //Panel para registrar nuevos equipos...
     public void PanelCreateCodeEquipo() {
 
@@ -179,7 +180,7 @@ public class Paneles {
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 
-    } 
+    }
 
     //Panel para consultar el N° de C.I del cliente...
     public void PanelConsulCient() {
@@ -194,7 +195,7 @@ public class Paneles {
         jPanel_Content.repaint();
 
     }
-    
+
     //Panel con la tabla de las garantías...
     public void PanelWarranty() {
 
@@ -222,7 +223,7 @@ public class Paneles {
         jPanel_Content.repaint();
 
     }
-    
+
     //Panel para ver la informaciòn de las garantìas...
     public void Panel_PreliminarWarranty() {
 
@@ -236,8 +237,8 @@ public class Paneles {
         jPanel_Content.repaint();
 
     }
-    
-    //Panel para ver la informaciòn de las garantìas...
+
+    //Panel de la Priminar de las garantìas...
     public void Panel_SentWarranty() {
 
         SentWarranty Sent_warranty = new SentWarranty();
@@ -251,6 +252,19 @@ public class Paneles {
 
     }
 
+    //Panel de la Priminar de las garantìas...
+    public void Panel_Table_Technical() {
+
+        Table_Technical table_technical = new Table_Technical();
+        table_technical.setSize(WidthPanel, HeigthPanel);
+        table_technical.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(table_technical, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
 
     //Panel con el menú de MOD y ADM...
     public void PanelMenu_Mod_Admin() {

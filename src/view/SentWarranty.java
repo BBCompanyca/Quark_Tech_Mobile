@@ -8,18 +8,25 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import clases.TextPrompt;
 import clases.Date;
+import clases.Paneles;
 
 public class SentWarranty extends javax.swing.JPanel {
 
+    Paneles paneles = new Paneles();
+
     Date date = new Date();
-    
+
+    public static String sent = "";
+
     public SentWarranty() {
         initComponents();
-        
+
         getInformationWarranty();
-        
+
+        ValidateAddress();
+
         TextPrompt sent = new TextPrompt("Delivery", jTextField_Sent);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -35,7 +42,7 @@ public class SentWarranty extends javax.swing.JPanel {
         jTextField_Sent = new javax.swing.JTextField();
         jTextField_Date = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jTextField3 = new javax.swing.JTextField();
+        jTextField_Technical = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton_Register = new javax.swing.JButton();
         jLabel_Background = new javax.swing.JLabel();
@@ -94,14 +101,19 @@ public class SentWarranty extends javax.swing.JPanel {
         jSeparator3.setForeground(new java.awt.Color(240, 240, 240));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 200, 10));
 
-        jTextField3.setBackground(new java.awt.Color(78, 109, 121));
-        jTextField3.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(240, 240, 240));
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 190, 30));
+        jTextField_Technical.setBackground(new java.awt.Color(78, 109, 121));
+        jTextField_Technical.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        jTextField_Technical.setForeground(new java.awt.Color(240, 240, 240));
+        jTextField_Technical.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_Technical.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        add(jTextField_Technical, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 190, 30));
 
         jButton1.setFocusPainted(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 176, 35, 35));
 
         jButton_Register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Dark.png"))); // NOI18N
@@ -122,8 +134,17 @@ public class SentWarranty extends javax.swing.JPanel {
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
+        Preliminar_Warranty.flag = 0;
 
     }//GEN-LAST:event_jButton_RegisterMousePressed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+
+        paneles.Panel_Table_Technical();
+
+        Preliminar_Warranty.flag = 2;
+
+    }//GEN-LAST:event_jButton1MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -137,9 +158,9 @@ public class SentWarranty extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_Serial;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField_Date;
     private javax.swing.JTextField jTextField_Sent;
+    private javax.swing.JTextField jTextField_Technical;
     // End of variables declaration//GEN-END:variables
 
     private void getInformationWarranty() {
@@ -169,6 +190,44 @@ public class SentWarranty extends javax.swing.JPanel {
             System.err.println("¡Error al consultar la información de la ganratía!");
             JOptionPane.showMessageDialog(null, "¡Error al consultar la información de la ganratía!", "¡Error!",
                     JOptionPane.OK_OPTION);
+
+        }
+
+    }
+
+    private void ValidateAddress() {
+
+        if (Preliminar_Warranty.flag == 1) {
+
+            jTextField_Sent.setText("");
+
+        } else {
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement("select username from user "
+                        + "where id_user = '" + Table_Technical.ID_Technical + "'");
+
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()) {
+
+                    jTextField_Technical.setText(rs.getString("username"));
+
+                }
+
+                cn.close();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la información del técnico! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la información del tecnico!", "¡Error!",
+                        JOptionPane.OK_OPTION);
+
+            }
+
+            jTextField_Sent.setText(sent);
 
         }
 

@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import clases.Paneles;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {
+    
+    public static int flag = 0;
 
     Reports reports = new Reports();
 
@@ -285,6 +287,8 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     private void jButton_SentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SentMousePressed
 
         paneles.Panel_SentWarranty();
+        
+        flag = 1;
 
     }//GEN-LAST:event_jButton_SentMousePressed
 
