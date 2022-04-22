@@ -46,6 +46,7 @@ public class SentWarranty extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton_Register = new javax.swing.JButton();
         jLabel_Background = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,7 +54,7 @@ public class SentWarranty extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(240, 240, 240));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Envío De Equipo A Servicio Ténico");
+        jLabel2.setText("Envío De Equipo A Servicio Técnico");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 15, 600, 30));
 
         jSeparator1.setForeground(new java.awt.Color(240, 240, 240));
@@ -120,6 +121,8 @@ public class SentWarranty extends javax.swing.JPanel {
         jButton_Register.setBorder(null);
         jButton_Register.setBorderPainted(false);
         jButton_Register.setContentAreaFilled(false);
+        jButton_Register.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Ligth.png"))); // NOI18N
+        jButton_Register.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Ligth.png"))); // NOI18N
         jButton_Register.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_RegisterMousePressed(evt);
@@ -130,25 +133,104 @@ public class SentWarranty extends javax.swing.JPanel {
         jLabel_Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Rectangle 2.png"))); // NOI18N
         add(jLabel_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 50, 630, 380));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back_arrow_24px.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/go_back_24px.png"))); // NOI18N
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
-        Preliminar_Warranty.flag = 0;
+        int flag = 0;
+
+        sent = jTextField_Sent.getText().trim();
+        String technical = jTextField_Technical.getText().trim();
+
+        if (sent.equals("")) {
+
+            flag = 1;
+
+        }
+
+        if (technical.equals("")) {
+
+            flag = 2;
+
+        }
+
+        if (flag == 0) {
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "update warranty set technical = ?, date_sent = ?, delivery = ?, status = ? where id_warranty = '" + Warranty.ID + "'");
+
+                pst.setString(1, technical);
+                pst.setString(2, date.DateToDay());
+                pst.setString(3, sent);
+                pst.setString(4, "Solicitud Enviada - En Espera");
+
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Envio Exitoso.");
+
+                paneles.Panel_PreliminarWarranty();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al enviar a equipo! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al enviar a equipo!", "¡Error!",
+                        JOptionPane.OK_OPTION);
+
+            }
+
+        } else if (flag == 1) {
+
+            JOptionPane.showMessageDialog(null, "¡Debes describir a quien lleva el equipo!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        } else if (flag == 2) {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un técnico", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
+
 
     }//GEN-LAST:event_jButton_RegisterMousePressed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
 
+        Preliminar_Warranty.flag = 2;
+        
+        sent = jTextField_Sent.getText().trim();
+        
         paneles.Panel_Table_Technical();
 
-        Preliminar_Warranty.flag = 2;
-
     }//GEN-LAST:event_jButton1MousePressed
+
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+
+        Preliminar_Warranty.flag = 0;
+
+        paneles.Panel_PreliminarWarranty();
+
+    }//GEN-LAST:event_jButton2MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_Register;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_Background;
@@ -199,9 +281,10 @@ public class SentWarranty extends javax.swing.JPanel {
 
         if (Preliminar_Warranty.flag == 1) {
 
+            jTextField_Technical.setText("");
             jTextField_Sent.setText("");
 
-        } else {
+        } else if (Preliminar_Warranty.flag == 2) {
 
             try {
 

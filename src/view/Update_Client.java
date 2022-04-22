@@ -155,7 +155,7 @@ public class Update_Client extends javax.swing.JPanel {
 
     private void jButton_UpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_UpdateMousePressed
 
-        int flag = 0, flag_two = 0;
+        int flag = 0;
         String name, telephone, ci, direction_client;
 
         //Algoritmo por si no es moderador...

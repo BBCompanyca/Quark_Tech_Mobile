@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import clases.Paneles;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {
-    
+
     public static int flag = 0;
 
     Reports reports = new Reports();
@@ -21,7 +21,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         initComponents();
 
         getInformationWarranty();
-        
+
         ValidateButton();
 
     }
@@ -186,11 +186,11 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, 270, 30));
+        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 430, 380, 30));
 
         jLabel_Warranty.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_Warranty.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Warranty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Warranty.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         add(jLabel_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 450, 30));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -220,6 +220,9 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jButton_Sent.setBorderPainted(false);
         jButton_Sent.setContentAreaFilled(false);
         jButton_Sent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton_SentMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_SentMousePressed(evt);
             }
@@ -255,6 +258,11 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 330, 70));
 
         jButton_Cancelar.setText("Cancelar");
+        jButton_Cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_CancelarMousePressed(evt);
+            }
+        });
         jButton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_CancelarActionPerformed(evt);
@@ -286,9 +294,10 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     private void jButton_SentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SentMousePressed
 
-        paneles.Panel_SentWarranty();
-        
         flag = 1;
+        
+        paneles.Panel_SentWarranty();
+
 
     }//GEN-LAST:event_jButton_SentMousePressed
 
@@ -328,6 +337,74 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     private void jButton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_CancelarActionPerformed
+
+    private void jButton_CancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CancelarMousePressed
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement("select status from warranty where id_warranty = '" + Warranty.ID + "'");
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                String status = rs.getString("status");
+
+                if (status.equals("Solicitud Enviada - En Espera")) {
+
+                    cn.close();
+
+                    try {
+
+                        Connection cn2 = BD_Connection.connection();
+                        PreparedStatement pst2 = cn2.prepareStatement(
+                                "update warranty set status = ? where id_warranty = '" + Warranty.ID + "'");
+
+                        pst2.setString(1, "En Tienda");
+
+                        pst2.executeUpdate();
+
+                        JOptionPane.showMessageDialog(null, "Solicitud Cancelada Con Exito.");
+
+                        cn2.close();
+
+                        paneles.Panel_PreliminarWarranty();
+
+                    } catch (SQLException e) {
+
+                        System.err.println("¡Error al cancelar la solicitud! " + e);
+                        JOptionPane.showMessageDialog(null, "¡Error al cancelar la solicitud!", "¡Error!",
+                                JOptionPane.OK_OPTION);
+
+                    }
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "El equipo fue aceptado, llama al técnico para que devuelva el equipo",
+                            "¡Acceso Denegado!", JOptionPane.OK_OPTION);
+                    
+                    paneles.Panel_PreliminarWarranty();
+
+                }
+
+            }
+
+            cn.close();
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al consultar el estatus del equipo! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al consultar el estatus del equipo!", "¡Error!",
+                    JOptionPane.OK_OPTION);
+
+        }
+
+    }//GEN-LAST:event_jButton_CancelarMousePressed
+
+    private void jButton_SentMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SentMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_SentMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -414,37 +491,42 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         }
 
     }
-    
-    private void ValidateButton(){
-        
+
+    private void ValidateButton() {
+
         try {
-            
+
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement("select status from warranty where id_warranty = '" + Warranty.ID + "'");
-            
+
             ResultSet rs = pst.executeQuery();
-            
+
             if (rs.next()) {
-                
+
                 String status_Warranty = rs.getString("status");
-                
-                if (status_Warranty.equals("Nuevo Ingreso")) {
-                    
+
+                if (status_Warranty.equals("En Tienda")) {
+
                     jButton_Sent.setVisible(true);
                     jButton_Cancelar.setVisible(false);
-                    
+
                 } else if (status_Warranty.equals("Solicitud Enviada - En Espera")) {
-                    
+
                     jButton_Sent.setVisible(false);
                     jButton_Cancelar.setVisible(true);
+
+                } else if (status_Warranty.equals("En Revisión")){
+                    
+                    jButton_Sent.setVisible(false);
+                    jButton_Cancelar.setVisible(false);
                     
                 }
-                
+
             }
-            
+
         } catch (Exception e) {
         }
-        
+
     }
 
 }
