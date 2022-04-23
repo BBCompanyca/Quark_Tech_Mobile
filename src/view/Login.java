@@ -22,8 +22,8 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setSize(700, 500);
-        
-        System.out.println(encryptPassword.ecnode("@BBCompany.ca", "Dilanjr15,."));
+
+        System.out.println(encryptPassword.ecnode("@BBCompany.ca", "Nery"));
 
     }
 
@@ -293,6 +293,7 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
+
             }
         });
     }

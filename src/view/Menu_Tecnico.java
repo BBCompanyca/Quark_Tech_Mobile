@@ -5,13 +5,21 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import static view.Dashboard.jPanel_Content;
+import clases.ConsutlBD;
 
 public class Menu_Tecnico extends javax.swing.JPanel {
-    
+
     Paneles paneles = new Paneles();
+    
+    ConsutlBD consutlBD = new ConsutlBD();
+
+    int index = 0;
 
     public Menu_Tecnico() {
         initComponents();
+        
+        consutlBD.start();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -26,9 +34,10 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         Btn_Warranty = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        Btn_Historial = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        Btn_Notification = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel_Index = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         Btn_About_Me = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -95,30 +104,35 @@ public class Menu_Tecnico extends javax.swing.JPanel {
 
         add(Btn_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 210, 50));
 
-        Btn_Historial.setBackground(new java.awt.Color(78, 120, 121));
-        Btn_Historial.addMouseListener(new java.awt.event.MouseAdapter() {
+        Btn_Notification.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_Notification.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_HistorialMouseEntered(evt);
+                Btn_NotificationMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_HistorialMouseExited(evt);
+                Btn_NotificationMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                Btn_HistorialMousePressed(evt);
+                Btn_NotificationMousePressed(evt);
             }
         });
-        Btn_Historial.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Historial");
-        Btn_Historial.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
+        Btn_Notification.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/history_24px.png"))); // NOI18N
-        Btn_Historial.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/notification_24px.png"))); // NOI18N
+        Btn_Notification.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Historial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 210, 50));
+        jLabel_Index.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel_Index.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Index.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Btn_Notification.add(jLabel_Index, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 30, 30));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Solicitudes");
+        Btn_Notification.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 80, 30));
+
+        add(Btn_Notification, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 210, 50));
 
         Btn_About_Me.setBackground(new java.awt.Color(78, 120, 121));
         Btn_About_Me.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,7 +172,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
     private void Btn_WarrantyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_WarrantyMouseExited
 
         if (Btn_Main.getBackground().getRGB() != -11634567
-                || Btn_Historial.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
+                || Btn_Notification.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_Warranty);
 
@@ -170,10 +184,10 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         resetColor(Btn_Main);
         setColor(Btn_Warranty);
         resetColor(Btn_About_Me);
-        resetColor(Btn_Historial);
-        
+        resetColor(Btn_Notification);
+
         paneles.PanelEquipos();
-                
+
     }//GEN-LAST:event_Btn_WarrantyMousePressed
 
     private void Btn_About_MeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMouseEntered
@@ -188,7 +202,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
     private void Btn_About_MeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMouseExited
 
         if (Btn_Main.getBackground().getRGB() != -11634567
-                || Btn_Historial.getBackground().getRGB() != -11634567 || Btn_Warranty.getBackground().getRGB() != -11634567) {
+                || Btn_Notification.getBackground().getRGB() != -11634567 || Btn_Warranty.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_About_Me);
 
@@ -200,7 +214,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         resetColor(Btn_Main);
         resetColor(Btn_Warranty);
         setColor(Btn_About_Me);
-        resetColor(Btn_Historial);
+        resetColor(Btn_Notification);
 
     }//GEN-LAST:event_Btn_About_MeMousePressed
 
@@ -215,7 +229,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
 
     private void Btn_MainMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMouseExited
 
-        if (Btn_Historial.getBackground().getRGB() != -11634567
+        if (Btn_Notification.getBackground().getRGB() != -11634567
                 || Btn_Warranty.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_Main);
@@ -238,55 +252,56 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         setColor(Btn_Main);
         resetColor(Btn_Warranty);
         resetColor(Btn_About_Me);
-        resetColor(Btn_Historial);
+        resetColor(Btn_Notification);
 
     }//GEN-LAST:event_Btn_MainMousePressed
 
-    private void Btn_HistorialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_HistorialMouseEntered
-       
-        if (Btn_Historial.getBackground().getRGB() == -11634567) {
+    private void Btn_NotificationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_NotificationMouseEntered
 
-            setColor(Btn_Historial);
+        if (Btn_Notification.getBackground().getRGB() == -11634567) {
+
+            setColor(Btn_Notification);
 
         }
-        
-    }//GEN-LAST:event_Btn_HistorialMouseEntered
 
-    private void Btn_HistorialMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_HistorialMouseExited
+    }//GEN-LAST:event_Btn_NotificationMouseEntered
+
+    private void Btn_NotificationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_NotificationMouseExited
 
         if (Btn_Main.getBackground().getRGB() != -11634567
                 || Btn_Warranty.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
 
-            resetColor(Btn_Historial);
+            resetColor(Btn_Notification);
 
         }
 
-    }//GEN-LAST:event_Btn_HistorialMouseExited
+    }//GEN-LAST:event_Btn_NotificationMouseExited
 
-    private void Btn_HistorialMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_HistorialMousePressed
+    private void Btn_NotificationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_NotificationMousePressed
 
         resetColor(Btn_Main);
         resetColor(Btn_Warranty);
         resetColor(Btn_About_Me);
-        setColor(Btn_Historial);
+        setColor(Btn_Notification);
 
-    }//GEN-LAST:event_Btn_HistorialMousePressed
+    }//GEN-LAST:event_Btn_NotificationMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Btn_About_Me;
-    private javax.swing.JPanel Btn_Historial;
     public static javax.swing.JPanel Btn_Main;
+    private javax.swing.JPanel Btn_Notification;
     private javax.swing.JPanel Btn_Warranty;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel9;
+    public static javax.swing.JLabel jLabel_Index;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
