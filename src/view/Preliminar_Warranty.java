@@ -50,7 +50,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextField_Code1 = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel_Title = new javax.swing.JLabel();
-        jLabel_Status = new javax.swing.JLabel();
         jLabel_Warranty = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_Recibido = new javax.swing.JTextArea();
@@ -61,6 +60,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido1 = new javax.swing.JTextArea();
         jButton_Cancelar = new javax.swing.JButton();
         jLabel_Recibido1 = new javax.swing.JLabel();
+        jLabel_Status = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -183,11 +183,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Title.setText("Garantía - Cliente: ");
         add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 890, 30));
 
-        jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 430, 380, 30));
-
         jLabel_Warranty.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jLabel_Warranty.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Warranty.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -227,7 +222,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_SentMousePressed(evt);
             }
         });
-        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, 150, 60));
+        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 350, 150, 60));
 
         jButton_Dowload_Report.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Report_Dark.png"))); // NOI18N
         jButton_Dowload_Report.setBorder(null);
@@ -238,7 +233,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_Dowload_ReportMousePressed(evt);
             }
         });
-        add(jButton_Dowload_Report, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, 150, 60));
+        add(jButton_Dowload_Report, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 150, 60));
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -268,12 +263,17 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_CancelarActionPerformed(evt);
             }
         });
-        add(jButton_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, 150, 60));
+        add(jButton_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 350, 150, 60));
 
         jLabel_Recibido1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Recibido1.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Recibido1.setText("Comentarios Técnicos:");
         add(jLabel_Recibido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, 200, 30));
+
+        jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, 380, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -497,7 +497,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         try {
 
             Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement("select status from warranty where id_warranty = '" + Warranty.ID + "'");
+            PreparedStatement pst = cn.prepareStatement("select status, technical from warranty where id_warranty = '" + Warranty.ID + "'");
 
             ResultSet rs = pst.executeQuery();
 
@@ -520,11 +520,16 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                     jButton_Sent.setVisible(false);
                     jButton_Cancelar.setVisible(false);
                     
+                    jLabel_Status.setText(status_Warranty + " - Técnico: " + rs.getString("technical"));
+                    
                 }
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            
+            System.out.println("¡Error al consultar el status del equipo! " + e);
+            
         }
 
     }

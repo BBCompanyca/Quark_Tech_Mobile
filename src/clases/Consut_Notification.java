@@ -1,6 +1,5 @@
 package clases;
 
-import clases.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +8,9 @@ import javax.swing.JOptionPane;
 import view.Login;
 import static view.Menu_Tecnico.jLabel_Index;
 
-public class ConsutlBD extends Thread {
+public class Consut_Notification extends Thread {
 
-    int index = 0;
+    public static int index = 0;
 
     @Override
     public void run() {
@@ -34,7 +33,7 @@ public class ConsutlBD extends Thread {
 
     }
 
-    private void getNotification() {
+    public void getNotification() {
 
         try {
 
@@ -53,14 +52,12 @@ public class ConsutlBD extends Thread {
             if (index != 0) {
 
                 jLabel_Index.setText(String.valueOf(index));
-                System.out.println("consultó");
 
                 index = 0;
 
             } else {
 
                 jLabel_Index.setText("");
-
                 index = 0;
 
             }

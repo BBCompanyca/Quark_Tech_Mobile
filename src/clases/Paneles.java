@@ -19,10 +19,12 @@ import view.Register_Warranty;
 import view.Register_User;
 import view.Reset_Password;
 import view.SentWarranty;
+import view.Solicitudes;
 import view.Table_Technical;
 import view.Update_Client;
 import view.Update_User;
 import view.Users;
+import view.Warranty_Technical;
 
 public class Paneles {
 
@@ -209,6 +211,20 @@ public class Paneles {
         jPanel_Content.repaint();
 
     }
+    
+    //Panel con la tabla de las garantías del técnico...
+    public void PanelWarrantyTechnical() {
+
+        Warranty_Technical warranty_technical = new Warranty_Technical();
+        warranty_technical.setSize(WidthPanel, HeigthPanel);
+        warranty_technical.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(warranty_technical, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
 
     //Panel para registrar una nueva garantía...
     public void PanelRegisterWarranty() {
@@ -261,6 +277,20 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(table_technical, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+
+    //Panel de la Priminar de las garantìas...
+    public void Panel_Solicitudes() {
+
+        Solicitudes solicitudes = new Solicitudes();
+        solicitudes.setSize(WidthPanel, HeigthPanel);
+        solicitudes.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(solicitudes, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

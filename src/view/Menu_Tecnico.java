@@ -5,13 +5,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import static view.Dashboard.jPanel_Content;
-import clases.ConsutlBD;
+import clases.Consut_Notification;
 
 public class Menu_Tecnico extends javax.swing.JPanel {
 
     Paneles paneles = new Paneles();
     
-    ConsutlBD consutlBD = new ConsutlBD();
+    Consut_Notification consutlBD = new Consut_Notification();
 
     int index = 0;
 
@@ -186,7 +186,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         resetColor(Btn_About_Me);
         resetColor(Btn_Notification);
 
-        paneles.PanelEquipos();
+        paneles.PanelWarrantyTechnical();
 
     }//GEN-LAST:event_Btn_WarrantyMousePressed
 
@@ -283,6 +283,10 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         resetColor(Btn_Warranty);
         resetColor(Btn_About_Me);
         setColor(Btn_Notification);
+        
+        paneles.Panel_Solicitudes();
+        
+        consutlBD.getNotification();
 
     }//GEN-LAST:event_Btn_NotificationMousePressed
 
