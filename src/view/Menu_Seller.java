@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 public class Menu_Seller extends javax.swing.JPanel {
 
     Paneles paneles = new Paneles();
-    
+
     public Menu_Seller() {
         initComponents();
     }
@@ -30,7 +30,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         Btn_About_Me = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        Btn_Reportes = new javax.swing.JPanel();
+        Btn_Equipos = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
@@ -146,30 +146,30 @@ public class Menu_Seller extends javax.swing.JPanel {
 
         add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 210, 50));
 
-        Btn_Reportes.setBackground(new java.awt.Color(78, 120, 121));
-        Btn_Reportes.addMouseListener(new java.awt.event.MouseAdapter() {
+        Btn_Equipos.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_Equipos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_ReportesMouseEntered(evt);
+                Btn_EquiposMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_ReportesMouseExited(evt);
+                Btn_EquiposMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                Btn_ReportesMousePressed(evt);
+                Btn_EquiposMousePressed(evt);
             }
         });
-        Btn_Reportes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Btn_Equipos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Equipos");
-        Btn_Reportes.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
+        Btn_Equipos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/android_24px.png"))); // NOI18N
-        Btn_Reportes.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+        Btn_Equipos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Reportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 210, 50));
+        add(Btn_Equipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 210, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_MainMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMouseEntered
@@ -185,7 +185,7 @@ public class Menu_Seller extends javax.swing.JPanel {
 
         if (Btn_Clients.getBackground().getRGB() != -11634567
                 || Btn_Warranty.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567
-                || Btn_Reportes.getBackground().getRGB() != -11634567) {
+                || Btn_Equipos.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_Main);
 
@@ -200,7 +200,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         setColor(Btn_Main);
         resetColor(Btn_Clients);
         resetColor(Btn_Warranty);
-        resetColor(Btn_Reportes);
+        resetColor(Btn_Equipos);
         resetColor(Btn_About_Me);
     }//GEN-LAST:event_Btn_MainMousePressed
 
@@ -217,7 +217,7 @@ public class Menu_Seller extends javax.swing.JPanel {
 
         if (Btn_Main.getBackground().getRGB() != -11634567
                 || Btn_Warranty.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567
-                || Btn_Reportes.getBackground().getRGB() != -11634567) {
+                || Btn_Equipos.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_Clients);
 
@@ -227,15 +227,15 @@ public class Menu_Seller extends javax.swing.JPanel {
     private void Btn_ClientsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ClientsMousePressed
 
         paneles.PanelClients();
-        
+
         resetColor(Btn_Main);
         setColor(Btn_Clients);
         resetColor(Btn_Warranty);
-        resetColor(Btn_Reportes);
+        resetColor(Btn_Equipos);
         resetColor(Btn_About_Me);
-        
+
         Consult_Cl_Client.flag = 0;
-        
+
     }//GEN-LAST:event_Btn_ClientsMousePressed
 
     private void Btn_WarrantyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_WarrantyMouseEntered
@@ -251,7 +251,7 @@ public class Menu_Seller extends javax.swing.JPanel {
 
         if (Btn_Main.getBackground().getRGB() != -11634567
                 || Btn_Clients.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567
-                || Btn_Reportes.getBackground().getRGB() != -11634567) {
+                || Btn_Equipos.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_Warranty);
 
@@ -263,11 +263,11 @@ public class Menu_Seller extends javax.swing.JPanel {
         resetColor(Btn_Main);
         resetColor(Btn_Clients);
         setColor(Btn_Warranty);
-        resetColor(Btn_Reportes);
+        resetColor(Btn_Equipos);
         resetColor(Btn_About_Me);
-        
-        paneles.PanelEquipos();
-        
+
+        paneles.PanelWarranty();
+
     }//GEN-LAST:event_Btn_WarrantyMousePressed
 
     private void Btn_About_MeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMouseEntered
@@ -283,7 +283,7 @@ public class Menu_Seller extends javax.swing.JPanel {
 
         if (Btn_Main.getBackground().getRGB() != -11634567
                 || Btn_Clients.getBackground().getRGB() != -11634567 || Btn_Warranty.getBackground().getRGB() != -11634567
-                || Btn_Reportes.getBackground().getRGB() != -11634567) {
+                || Btn_Equipos.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_About_Me);
 
@@ -295,47 +295,49 @@ public class Menu_Seller extends javax.swing.JPanel {
         resetColor(Btn_Main);
         resetColor(Btn_Clients);
         resetColor(Btn_Warranty);
-        resetColor(Btn_Reportes);
+        resetColor(Btn_Equipos);
         setColor(Btn_About_Me);
-        
+
     }//GEN-LAST:event_Btn_About_MeMousePressed
 
-    private void Btn_ReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ReportesMouseEntered
+    private void Btn_EquiposMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMouseEntered
 
-        if (Btn_Reportes.getBackground().getRGB() == -11634567) {
+        if (Btn_Equipos.getBackground().getRGB() == -11634567) {
 
-            setColor(Btn_Reportes);
+            setColor(Btn_Equipos);
 
         }
-    }//GEN-LAST:event_Btn_ReportesMouseEntered
+    }//GEN-LAST:event_Btn_EquiposMouseEntered
 
-    private void Btn_ReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ReportesMouseExited
+    private void Btn_EquiposMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMouseExited
 
         if (Btn_Main.getBackground().getRGB() != -11634567
                 || Btn_Clients.getBackground().getRGB() != -11634567 || Btn_Warranty.getBackground().getRGB() != -11634567
                 || Btn_About_Me.getBackground().getRGB() != -11634567) {
 
-            resetColor(Btn_Reportes);
+            resetColor(Btn_Equipos);
 
         }
-    }//GEN-LAST:event_Btn_ReportesMouseExited
+    }//GEN-LAST:event_Btn_EquiposMouseExited
 
-    private void Btn_ReportesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ReportesMousePressed
+    private void Btn_EquiposMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMousePressed
 
         resetColor(Btn_Main);
         resetColor(Btn_Clients);
         resetColor(Btn_Warranty);
-        setColor(Btn_Reportes);
+        setColor(Btn_Equipos);
         resetColor(Btn_About_Me);
 
-    }//GEN-LAST:event_Btn_ReportesMousePressed
+        paneles.PanelEquipos();
+
+    }//GEN-LAST:event_Btn_EquiposMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Btn_About_Me;
     private javax.swing.JPanel Btn_Clients;
+    private javax.swing.JPanel Btn_Equipos;
     public static javax.swing.JPanel Btn_Main;
-    private javax.swing.JPanel Btn_Reportes;
     private javax.swing.JPanel Btn_Warranty;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

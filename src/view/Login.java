@@ -23,6 +23,8 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         setSize(700, 500);
 
+        System.out.println(encryptPassword.ecnode("@BBCompany.ca", "Nery"));
+
     }
 
     @SuppressWarnings("unchecked")
@@ -291,6 +293,7 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
+
             }
         });
     }

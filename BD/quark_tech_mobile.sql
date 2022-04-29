@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-04-2022 a las 20:21:34
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.2
+-- Tiempo de generación: 29-04-2022 a las 04:49:36
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -59,6 +58,13 @@ CREATE TABLE `equipo` (
   `last_modification` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Esta tabla es para el registro de los equipos';
 
+--
+-- Volcado de datos para la tabla `equipo`
+--
+
+INSERT INTO `equipo` (`id_equipo`, `code`, `brand`, `model`, `color`, `capacity`, `day_warranty`, `registered_by`, `last_modification`) VALUES
+(1, '0102ALC2/32-N', 'Alcatel 1', '5033EP', 'Negro', '2/32GB', '15', 'NeiferJesus14', '');
+
 -- --------------------------------------------------------
 
 --
@@ -84,9 +90,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `name_user`, `username`, `password`, `telephone`, `unformat_telephone_user`, `direction`, `type_account`, `registered_by`, `last_modification`, `status`) VALUES
-(1, 'Neifer Reverón', 'NeiferJesus14', 'Dilanjr15,.', '0414 - 214.46.84', '04142144684', 'Almacen', 'Moderador', 'System', '', 'Activo'),
-(2, 'José Oleaga', 'Joe_CM', 'Joe_CM', '0414 - 589.65.55', '04145896555', 'City Market', 'Administrador', 'NeiferJesus14', '', 'Activo'),
-(3, 'Adriana Medina', 'Adri_ZOO', 'Adri_ZOO', '5465 - 654.64.64', '54656546464', 'Caricuao', 'Administrador', 'NeiferJesus14', '', 'Activo');
+(1, 'Neifer Reverón', 'NeiferJesus14', '41DD3LQ4D6GVvOXW6vFX4A==', '0414 - 214.46.84', '04142144684', 'Almacen', 'Moderador', 'System', '12345', 'Activo'),
+(2, 'Nery Ramos', 'Nery', 'U6tiCUDp7lU=', '0444 - 444.44.44', '04444444444', 'Almacen', 'Tecnico', 'NeiferJesus14', '', 'Activo'),
+(3, 'Richard Miller', 'Richard', 'rIxyf/mbZq0=', '0414 - 477.78.85', '04144777885', 'City Market', 'Vendedor', 'NeiferJesus14', '', 'Activo');
 
 -- --------------------------------------------------------
 
@@ -103,7 +109,7 @@ CREATE TABLE `warranty` (
   `falla` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `num_order` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `identity_card_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `unformat_indentity_card_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `unformat_identity_card_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `name_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `received` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `date_register` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -112,7 +118,10 @@ CREATE TABLE `warranty` (
   `direction_shop` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `status` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `registered_by` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `last_modification` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `technical` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `date_sent` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `delivery` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `date_accepted` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Esta tabla es para el registro de las garantías...';
 
 --
@@ -141,7 +150,7 @@ ALTER TABLE `user`
 -- Indices de la tabla `warranty`
 --
 ALTER TABLE `warranty`
-  ADD UNIQUE KEY `id_warranty` (`id_warranty`);
+  ADD PRIMARY KEY (`id_warranty`) USING BTREE;
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -157,7 +166,7 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
