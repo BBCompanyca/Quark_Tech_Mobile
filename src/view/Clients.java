@@ -8,7 +8,6 @@ import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import static view.Users.ID;
 
 public class Clients extends javax.swing.JPanel {
 
@@ -510,7 +509,7 @@ public class Clients extends javax.swing.JPanel {
 
         if (fila_point > -1) {
 
-            int value = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este cliente?", "¡Selección!", 
+            int value = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este cliente?", "¡Selección!",
                     JOptionPane.YES_NO_OPTION);
 
             if (value == 0) {
@@ -585,90 +584,44 @@ public class Clients extends javax.swing.JPanel {
 
     private void getClients() {
 
-        if (Login.type_account.equals("Moderador")) {
+        try {
 
-            try {
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select c.id_client, c.name_client, c.telephone_client, c.identity_card_client, u.name_user from client c left join user u "
+                    + "on c.registered_by = u.id_user");
 
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement(
-                        "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client");
+            ResultSet rs = pst.executeQuery();
 
-                ResultSet rs = pst.executeQuery();
+            jTable_Client = new JTable(model);
+            jScrollPane.setViewportView(jTable_Client);
 
-                jTable_Client = new JTable(model);
-                jScrollPane.setViewportView(jTable_Client);
+            model.addColumn("ID");
+            model.addColumn("Nombre");
+            model.addColumn("Teléfono");
+            model.addColumn("Cédula");
+            model.addColumn("Registrado Por");
 
-                model.addColumn("ID");
-                model.addColumn("Nombre");
-                model.addColumn("Teléfono");
-                model.addColumn("Cédula");
-                model.addColumn("Tienda");
-                model.addColumn("Registrado Por");
+            while (rs.next()) {
 
-                while (rs.next()) {
+                Object[] fila = new Object[5];
+                for (int i = 0; i < 5; i++) {
 
-                    Object[] fila = new Object[6];
-                    for (int i = 0; i < 6; i++) {
-
-                        fila[i] = rs.getObject(i + 1);
-
-                    }
-
-                    model.addRow(fila);
+                    fila[i] = rs.getObject(i + 1);
 
                 }
 
-                cn.close();
-
-            } catch (SQLException e) {
-
-                System.out.println("¡Error al consultar la lista de clientes! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
-                        JOptionPane.OK_OPTION);
+                model.addRow(fila);
 
             }
 
-        } else {
+            cn.close();
 
-            try {
+        } catch (SQLException e) {
 
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement(
-                        "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client");
-
-                ResultSet rs = pst.executeQuery();
-
-                jTable_Client = new JTable(model);
-                jScrollPane.setViewportView(jTable_Client);
-
-                model.addColumn("ID");
-                model.addColumn("Nombre");
-                model.addColumn("Teléfono");
-                model.addColumn("Cédula");
-                model.addColumn("Tienda");
-
-                while (rs.next()) {
-
-                    Object[] fila = new Object[5];
-                    for (int i = 0; i < 5; i++) {
-
-                        fila[i] = rs.getObject(i + 1);
-
-                    }
-
-                    model.addRow(fila);
-
-                }
-
-                cn.close();
-
-            } catch (SQLException e) {
-
-                System.err.println("¡Error al consultar la lista de clientes! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
-                        JOptionPane.OK_OPTION);
-
-            }
+            System.err.println("¡Error al consultar la lista de clientes! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
+                    JOptionPane.OK_OPTION);
 
         }
 

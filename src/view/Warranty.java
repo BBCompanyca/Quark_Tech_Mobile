@@ -492,8 +492,11 @@ public final class Warranty extends javax.swing.JPanel {
 
         if (Login.type_account.equals("Moderador")) {
 
-            query = "select id_warranty, equipo, serial, name_client, identity_card_client, "
-                    + "direction_shop, status from warranty where not status = '" + "Entregado" + "'";
+            query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.shop, w.status "
+                    + "from warranty w "
+                    + "join equipo e on e.id_equipo = w.id_equipo "
+                    + "join client c on c.id_client = w.id_client "
+                    + "and not w.status = '" + "Entregado" + "'";
 
         } else {
 

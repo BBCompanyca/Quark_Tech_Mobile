@@ -46,26 +46,84 @@ public class FormatText {
 
     }
 
-    public String ValidateCI2(String ci) {
+    //Mètodo para validar el formato del RIF del cliente...
+    public void ValidateChar_Rif(JTextField a) {
+
+        a.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+                char c = e.getKeyChar();
+
+                if (a.getText().length() == 0 && c != 'v' && c != 'j' && c != 'g' && c != 'V' && c != 'J' && c != 'G') {
+
+                    e.consume();
+
+                } else if (a.getText().length() != 0 && !Character.isDigit(c)) {
+
+                    e.consume();
+
+                }
+
+            }
+
+        });
+
+    }
+
+    //Mètodo para darle formtato al rif del cliente...
+    public String Identity_Card_Client(String ci) {
 
         String aux = "";
         int count = 0;
 
-        for (int i = ci.length() - 1; i >= 0; i--) {
-            if (count == 3) {
+        String character = ci.substring(0, 1);
+        String text = ci.substring(1, ci.length());
 
-                aux = ci.charAt(i) + "." + aux;
-                count = 1;
+        if (character.equalsIgnoreCase("v")) {
 
-            } else {
+            for (int i = text.length() - 1; i >= 0; i--) {
+                if (count == 3) {
 
-                aux = ci.charAt(i) + aux;
-                count++;
+                    aux = text.charAt(i) + "." + aux;
+                    count = 1;
 
+                } else {
+
+                    aux = text.charAt(i) + aux;
+                    count++;
+
+                }
             }
+
+            text = aux;
+            text = character + "-" + text;
+            text = text.toUpperCase();
+
+        } else if (character.equalsIgnoreCase("j") || character.equalsIgnoreCase("g")) {
+
+            for (int i = text.length() - 1; i >= 0; i--) {
+                if (count == 1) {
+
+                    aux = text.charAt(i) + "-" + aux;
+                    count++;
+
+                } else {
+
+                    aux = text.charAt(i) + aux;
+                    count++;
+
+                }
+            }
+            
+            text = aux;
+            text = character + "-" + text;
+            text = text.toUpperCase();
+
         }
 
-        return aux;
+        return text;
 
     }
 

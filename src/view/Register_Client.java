@@ -9,7 +9,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class Register_Client extends javax.swing.JPanel {
-    
+
     public static String name_client, identity_card_client;
 
     //Objeto para darle formato a los campos de texto.
@@ -30,6 +30,7 @@ public class Register_Client extends javax.swing.JPanel {
         //Instacia para darle formato a los campos de texto...
         formattext.ValidateName(jTextField_Name);
         formattext.ValidateNumber(jTextField_Telephone);
+        formattext.ValidateChar_Rif(jTextField_CI);
 
     }
 
@@ -188,7 +189,7 @@ public class Register_Client extends javax.swing.JPanel {
 
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select cedula_client from client where cedula_client = '" + identity_card_client + "'");
+                        "select identity_card_client from client where unformat_identity_card_client = '" + identity_card_client + "'");
 
                 ResultSet rs = pst.executeQuery();
 
@@ -211,6 +212,7 @@ public class Register_Client extends javax.swing.JPanel {
                     try {
 
                         String unformat_telphone = formattext.unFormatText(telephone);
+                        identity_card_client = identity_card_client.toUpperCase();
 
                         Connection cn2 = BD_Connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
@@ -220,11 +222,11 @@ public class Register_Client extends javax.swing.JPanel {
                         pst2.setString(2, name_client);
                         pst2.setString(3, telephone);
                         pst2.setString(4, unformat_telphone);
-                        pst2.setString(5, formattext.ValidateCI2(identity_card_client));
+                        pst2.setString(5, formattext.Identity_Card_Client(identity_card_client));
                         pst2.setString(6, identity_card_client);
                         pst2.setString(7, direction_client);
                         pst2.setString(8, Login.direction);
-                        pst2.setString(9, Login.user);
+                        pst2.setString(9, String.valueOf(Login.ID_User));
                         pst2.setString(10, "");
 
                         pst2.executeUpdate();
@@ -298,7 +300,6 @@ public class Register_Client extends javax.swing.JPanel {
             jTextField_Name.requestFocus();
 
             jTextField_CI.setText(Consult_Cl_Client.ci_client);
-            jTextField_CI.setEditable(false);
 
         }
 
