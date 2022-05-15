@@ -8,8 +8,11 @@ import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import clases.Search;
 
 public class Clients extends javax.swing.JPanel {
+
+    Search searchClients = new Search();
 
     DefaultTableModel model = new DefaultTableModel();
 
@@ -177,146 +180,11 @@ public class Clients extends javax.swing.JPanel {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            int flag = 0;
             String search = jTextField_Search_Client.getText().trim();
-            String query = "";
 
-            if (Login.type_account.equals("Moderador")) {
+            searchClients.SearchClient(search);
 
-                if (search.equals("")) {
-
-                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client";
-
-                } else {
-
-                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, "
-                            + "registered_by from client "
-                            + "where id_client = '" + search + "' or name_client = '" + search + "' or "
-                            + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
-                            + "direction_tienda = '" + search + "' or registered_by = '" + search + "' or "
-                            + "unformat_telephone_client = '" + search + "' or "
-                            + "unformat_cedula_client = '" + search + "'";
-
-                }
-
-            } else {
-
-                flag++;
-
-                if (search.equals("")) {
-
-                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client";
-
-                } else {
-
-                    query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client "
-                            + "where id_client = '" + search + "' or name_client = '" + search + "' or "
-                            + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
-                            + "direction_tienda = '" + search + "' or unformat_telephone_client = '" + search + "' or "
-                            + "unformat_cedula_client = '" + search + "'";
-
-                }
-
-            }
-
-            if (flag == 0) {
-
-                try {
-
-                    Connection cn = BD_Connection.connection();
-                    PreparedStatement pst = cn.prepareStatement(query);
-
-                    ResultSet rs = pst.executeQuery();
-
-                    model.setColumnCount(0);
-                    model.setRowCount(0);
-
-                    jTable_Client = new JTable(model);
-                    jScrollPane.setViewportView(jTable_Client);
-
-                    model.addColumn("ID");
-                    model.addColumn("Nombre");
-                    model.addColumn("Teléfono");
-                    model.addColumn("Cédula");
-                    model.addColumn("Tienda");
-                    model.addColumn("Registrado Por");
-
-                    jTable_Client.setEditingRow(0);
-
-                    while (rs.next()) {
-
-                        Object[] fila = new Object[6];
-                        for (int i = 0; i < 6; i++) {
-
-                            fila[i] = rs.getObject(i + 1);
-
-                        }
-
-                        model.addRow(fila);
-
-                    }
-
-                    cn.close();
-
-                    jTextField_Search_Client.setText("");
-                    jTextField_Search_Client.requestFocus();
-
-                } catch (SQLException e) {
-
-                    System.err.println("¡Error al consultar la lista de clientes! " + e);
-                    JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
-                            JOptionPane.OK_OPTION);
-
-                }
-
-            } else {
-
-                try {
-
-                    Connection cn = BD_Connection.connection();
-                    PreparedStatement pst = cn.prepareStatement(query);
-
-                    ResultSet rs = pst.executeQuery();
-
-                    model.setColumnCount(0);
-                    model.setRowCount(0);
-
-                    jTable_Client = new JTable(model);
-                    jScrollPane.setViewportView(jTable_Client);
-
-                    model.addColumn("ID");
-                    model.addColumn("Nombre");
-                    model.addColumn("Teléfono");
-                    model.addColumn("Cédula");
-                    model.addColumn("Tienda");
-
-                    while (rs.next()) {
-
-                        Object[] fila = new Object[5];
-                        for (int i = 0; i < 5; i++) {
-
-                            fila[i] = rs.getObject(i + 1);
-
-                        }
-
-                        model.addRow(fila);
-
-                    }
-
-                    cn.close();
-
-                    jTextField_Search_Client.setText("");
-                    jTextField_Search_Client.requestFocus();
-
-                } catch (SQLException e) {
-
-                    System.err.println("¡Error al consultar la lista de clientes! " + e);
-                    JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
-                            JOptionPane.OK_OPTION);
-
-                }
-
-            }
+            jTextField_Search_Client.setText("");
 
         }
 
@@ -324,147 +192,13 @@ public class Clients extends javax.swing.JPanel {
 
     private void jButton_Search_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_ClientMousePressed
 
-        int flag = 0;
         String search = jTextField_Search_Client.getText().trim();
-        String query = "";
 
-        if (Login.type_account.equals("Moderador")) {
+        searchClients.SearchClient(search);
 
-            if (search.equals("")) {
-
-                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, registered_by from client";
-
-            } else {
-
-                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda, "
-                        + "registered_by from client "
-                        + "where id_client = '" + search + "' or name_client = '" + search + "' or "
-                        + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
-                        + "direction_tienda = '" + search + "' or registered_by = '" + search + "' or "
-                        + "unformat_telephone_client = '" + search + "' or "
-                        + "unformat_cedula_client = '" + search + "'";
-
-            }
-
-        } else {
-
-            flag++;
-
-            if (search.equals("")) {
-
-                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client";
-
-            } else {
-
-                query = "select id_client, name_client, telephone_client, cedula_client, direction_tienda from client "
-                        + "where id_client = '" + search + "' or name_client = '" + search + "' or "
-                        + "telephone_client = '" + search + "' or cedula_client = '" + search + "' or "
-                        + "direction_tienda = '" + search + "' or unformat_telephone_client = '" + search + "' or "
-                        + "unformat_cedula_client = '" + search + "'";
-
-            }
-
-        }
-
-        if (flag == 0) {
-
-            try {
-
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement(query);
-
-                ResultSet rs = pst.executeQuery();
-
-                model.setColumnCount(0);
-                model.setRowCount(0);
-
-                jTable_Client = new JTable(model);
-                jScrollPane.setViewportView(jTable_Client);
-
-                model.addColumn("ID");
-                model.addColumn("Nombre");
-                model.addColumn("Teléfono");
-                model.addColumn("Cédula");
-                model.addColumn("Tienda");
-                model.addColumn("Registrado Por");
-
-                jTable_Client.setEditingRow(0);
-
-                while (rs.next()) {
-
-                    Object[] fila = new Object[6];
-                    for (int i = 0; i < 6; i++) {
-
-                        fila[i] = rs.getObject(i + 1);
-
-                    }
-
-                    model.addRow(fila);
-
-                }
-
-                cn.close();
-
-                jTextField_Search_Client.setText("");
-                jTextField_Search_Client.requestFocus();
-
-            } catch (SQLException e) {
-
-                System.err.println("¡Error al consultar la lista de clientes! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
-                        JOptionPane.OK_OPTION);
-
-            }
-
-        } else {
-
-            try {
-
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement(query);
-
-                ResultSet rs = pst.executeQuery();
-
-                model.setColumnCount(0);
-                model.setRowCount(0);
-
-                jTable_Client = new JTable(model);
-                jScrollPane.setViewportView(jTable_Client);
-
-                model.addColumn("ID");
-                model.addColumn("Nombre");
-                model.addColumn("Teléfono");
-                model.addColumn("Cédula");
-                model.addColumn("Tienda");
-
-                while (rs.next()) {
-
-                    Object[] fila = new Object[5];
-                    for (int i = 0; i < 5; i++) {
-
-                        fila[i] = rs.getObject(i + 1);
-
-                    }
-
-                    model.addRow(fila);
-
-                }
-
-                cn.close();
-
-                jTextField_Search_Client.setText("");
-                jTextField_Search_Client.requestFocus();
-
-            } catch (SQLException e) {
-
-                System.err.println("¡Error al consultar la lista de clientes! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de clientes!", "¡Error!",
-                        JOptionPane.OK_OPTION);
-
-            }
-
-        }
-
+        jTextField_Search_Client.setText("");
+        
+        jTextField_Search_Client.requestFocus();
 
     }//GEN-LAST:event_jButton_Search_ClientMousePressed
 
@@ -562,10 +296,10 @@ public class Clients extends javax.swing.JPanel {
     private javax.swing.JButton jButton_Search_Client;
     private javax.swing.JButton jButton_Update_Client;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane;
+    public static javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable_Client;
-    private javax.swing.JTextField jTextField_Search_Client;
+    public static javax.swing.JTable jTable_Client;
+    public static javax.swing.JTextField jTextField_Search_Client;
     // End of variables declaration//GEN-END:variables
 
     private void validatePermissions() {
@@ -588,7 +322,7 @@ public class Clients extends javax.swing.JPanel {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select c.id_client, c.name_client, c.telephone_client, c.identity_card_client, u.name_user from client c left join user u "
+                    "select c.id_client, c.name_client, c.telephone_client, c.identity_card_client, c.direction_client, u.name_user from client c left join user u "
                     + "on c.registered_by = u.id_user");
 
             ResultSet rs = pst.executeQuery();
@@ -600,12 +334,13 @@ public class Clients extends javax.swing.JPanel {
             model.addColumn("Nombre");
             model.addColumn("Teléfono");
             model.addColumn("Cédula");
+            model.addColumn("Dirección");
             model.addColumn("Registrado Por");
 
             while (rs.next()) {
 
-                Object[] fila = new Object[5];
-                for (int i = 0; i < 5; i++) {
+                Object[] fila = new Object[6];
+                for (int i = 0; i < 6; i++) {
 
                     fila[i] = rs.getObject(i + 1);
 
