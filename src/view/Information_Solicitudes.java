@@ -33,6 +33,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel_Received = new javax.swing.JLabel();
+        jLabel_Model = new javax.swing.JLabel();
         jLabel_Equipo = new javax.swing.JLabel();
         jLabel_Color = new javax.swing.JLabel();
         jLabel_Serial = new javax.swing.JLabel();
@@ -53,27 +54,32 @@ public class Information_Solicitudes extends javax.swing.JPanel {
         jLabel_Received.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Received.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Received.setText("Se Recibe Con:");
-        add(jLabel_Received, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 120, -1));
+        add(jLabel_Received, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 185, 120, -1));
+
+        jLabel_Model.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Model.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Model.setText("Modelo:");
+        add(jLabel_Model, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 45, 500, -1));
 
         jLabel_Equipo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Equipo.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Equipo.setText("Equipo:");
-        add(jLabel_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 500, -1));
+        add(jLabel_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 500, -1));
 
         jLabel_Color.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Color.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Color.setText("Color:");
-        add(jLabel_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 490, -1));
+        add(jLabel_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 500, -1));
 
         jLabel_Serial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Serial.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Serial.setText("Serial:");
-        add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 500, -1));
+        add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 115, 500, -1));
 
         jLabel_Falla.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Falla.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Falla.setText("Falla:");
-        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 490, -1));
+        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 500, -1));
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -93,7 +99,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
         jTextArea1.setOpaque(false);
         jScrollPane1.setViewportView(jTextArea1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 450, 50));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 185, 450, 45));
 
         jButton_Rechazar.setText("Rechazar");
         jButton_Rechazar.setFocusPainted(false);
@@ -262,7 +268,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
                     } catch (SQLException e) {
 
                         System.err.println("¡Error al aceptar el equipo! " + e);
-                        JOptionPane.showMessageDialog(null, "¡Error al aceptar el equipo!",
+                        JOptionPane.showMessageDialog(null, "¡Error al rechazar el equipo!",
                                 "¡Error!", JOptionPane.OK_OPTION);
 
                     }
@@ -297,6 +303,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_Color;
     private javax.swing.JLabel jLabel_Equipo;
     private javax.swing.JLabel jLabel_Falla;
+    private javax.swing.JLabel jLabel_Model;
     private javax.swing.JLabel jLabel_Received;
     private javax.swing.JLabel jLabel_Serial;
     private javax.swing.JScrollPane jScrollPane1;
@@ -312,19 +319,24 @@ public class Information_Solicitudes extends javax.swing.JPanel {
         try {
 
             Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement("select id_warranty, equipo, color, serial, falla, received from warranty where "
-                    + "id_warranty = '" + id_warranty_consult + "'");
+            PreparedStatement pst = cn.prepareStatement(
+                    "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.received from warranty w join equipo e "
+                            + "on w.id_warranty = '" + id_warranty_consult + "' and e.id_equipo = w.id_equipo");
+                    
+                    /*"select id_warranty, equipo, color, serial, falla, received from warranty where "
+                    + "id_warranty = '" + id_warranty_consult + "'");*/
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
 
-                id_warranty = rs.getInt("id_warranty");
-                jLabel_Equipo.setText("Equipo: " + rs.getString("equipo"));
-                jLabel_Color.setText("Color: " + rs.getString("color"));
-                jLabel_Serial.setText("Serial: " + rs.getString("serial"));
-                jLabel_Falla.setText("Falla: " + rs.getString("falla"));
-                jTextArea1.setText(rs.getString("received"));
+                id_warranty = rs.getInt(1);
+                jLabel_Equipo.setText("Equipo: " + rs.getString(2));
+                jLabel_Model.setText("Módelo: " + rs.getString(3));
+                jLabel_Color.setText("Color: " + rs.getString(4));
+                jLabel_Serial.setText("Serial: " + rs.getString(5));
+                jLabel_Falla.setText("Falla: " + rs.getString(6));
+                jTextArea1.setText(rs.getString(7));
 
             }
 

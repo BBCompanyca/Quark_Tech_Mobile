@@ -480,10 +480,10 @@ public final class Warranty extends javax.swing.JPanel {
     private javax.swing.JButton jButton_Search_User;
     private javax.swing.JButton jButton_Update_User;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane;
+    public static javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable_Warranty;
-    private javax.swing.JTextField jTextField_Search_Warranty;
+    public static javax.swing.JTable jTable_Warranty;
+    public static javax.swing.JTextField jTextField_Search_Warranty;
     // End of variables declaration//GEN-END:variables
 
     private void getWarranty() {
@@ -500,10 +500,11 @@ public final class Warranty extends javax.swing.JPanel {
 
         } else {
 
-           /* query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status "
-                    + "from warranty w join equipo e on w.id_equipo = e.id_equipo "
-                    + "left join client c on w.id_client = c.id_client "
-                    + "join user u on u.direction = w.shop"; */
+            query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.status "
+                    + "from warranty w "
+                    + "join equipo e on e.id_equipo = w.id_equipo "
+                    + "join client c on c.id_client = w.id_client "
+                    + "and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "'";
 
         }
 
@@ -545,7 +546,6 @@ public final class Warranty extends javax.swing.JPanel {
 
                 model.addColumn("ID");
                 model.addColumn("Equipo");
-                model.addColumn("Módelo");
                 model.addColumn("Serial");
                 model.addColumn("Cliente");
                 model.addColumn("Rif");
@@ -553,8 +553,8 @@ public final class Warranty extends javax.swing.JPanel {
 
                 while (rs.next()) {
 
-                    Object[] fila = new Object[7];
-                    for (int i = 0; i < 7; i++) {
+                    Object[] fila = new Object[6];
+                    for (int i = 0; i < 6; i++) {
 
                         fila[i] = rs.getObject(i + 1);
 
