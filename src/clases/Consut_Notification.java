@@ -39,7 +39,8 @@ public class Consut_Notification extends Thread {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select id_warranty from warranty where technical = '" + Login.user + "' and status = '" + "Solicitud Enviada - En Espera" + "'");
+                    "select id_warranty from warranty where id_technical = '" + Login.ID_User + "' "
+                    + "and status = '" + "Solicitud Enviada - En Espera" + "'");
 
             ResultSet rs = pst.executeQuery();
 
