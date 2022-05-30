@@ -132,7 +132,7 @@ public final class Warranty extends javax.swing.JPanel {
             jTable_Warranty.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 850, 270));
+        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 870, 270));
 
         jButton_Search_User.setText("Buscar");
         jButton_Search_User.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -492,7 +492,7 @@ public final class Warranty extends javax.swing.JPanel {
 
         if (Login.type_account.equals("Moderador")) {
 
-            query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.shop, w.status "
+            query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.shop, w.status "
                     + "from warranty w "
                     + "join equipo e on e.id_equipo = w.id_equipo "
                     + "join client c on c.id_client = w.id_client "
@@ -522,16 +522,17 @@ public final class Warranty extends javax.swing.JPanel {
 
                 model.addColumn("ID");
                 model.addColumn("Equipo");
+                model.addColumn("Módelo");
                 model.addColumn("Serial");
                 model.addColumn("Cliente");
-                model.addColumn("Cédula");
+                model.addColumn("Rif");
                 model.addColumn("Tienda");
                 model.addColumn("Estatus");
 
                 while (rs.next()) {
 
-                    Object[] fila = new Object[7];
-                    for (int i = 0; i < 7; i++) {
+                    Object[] fila = new Object[8];
+                    for (int i = 0; i < 8; i++) {
 
                         fila[i] = rs.getObject(i + 1);
 

@@ -150,17 +150,15 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
             if (rs.next()) {
 
-                String status = rs.getString("status");
+                if (rs.getString("status").equals("Solicitud Enviada - En Espera")) {
 
-                cn.close();
-
-                if (status.equals("Solicitud Enviada - En Espera")) {
+                    cn.close();
 
                     try {
 
                         Connection cn2 = BD_Connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
-                                "update warranty set status = ?, date_accepted = ? where id_warranty = '" + id_warranty + "'");
+                                "update warranty set status = ?, date_received_technical = ? where id_warranty = '" + id_warranty + "'");
 
                         pst2.setString(1, "En Revisión");
                         pst2.setString(2, date.DateToDay());
@@ -229,17 +227,15 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
             if (rs.next()) {
 
-                String status = rs.getString("status");
+                if (rs.getString("status").equals("Solicitud Enviada - En Espera")) {
 
-                cn.close();
-
-                if (status.equals("Solicitud Enviada - En Espera")) {
+                    cn.close();
 
                     try {
 
                         Connection cn2 = BD_Connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
-                                "update warranty set status = ?, date_accepted = ? where id_warranty = '" + id_warranty + "'");
+                                "update warranty set status = ?, date_received_technical = ? where id_warranty = '" + id_warranty + "'");
 
                         pst2.setString(1, "En Tienda");
                         pst2.setString(2, " ");
@@ -321,11 +317,10 @@ public class Information_Solicitudes extends javax.swing.JPanel {
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.received from warranty w join equipo e "
-                            + "on w.id_warranty = '" + id_warranty_consult + "' and e.id_equipo = w.id_equipo");
-                    
-                    /*"select id_warranty, equipo, color, serial, falla, received from warranty where "
-                    + "id_warranty = '" + id_warranty_consult + "'");*/
+                    + "on w.id_warranty = '" + id_warranty_consult + "' and e.id_equipo = w.id_equipo");
 
+            /*"select id_warranty, equipo, color, serial, falla, received from warranty where "
+                    + "id_warranty = '" + id_warranty_consult + "'");*/
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {

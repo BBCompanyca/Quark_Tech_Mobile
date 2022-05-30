@@ -355,7 +355,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
                             Connection cn2 = BD_Connection.connection();
                             PreparedStatement pst2 = cn2.prepareStatement(
-                                    "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                                    "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
                             pst2.setInt(1, 0);
                             pst2.setInt(2, Consult_Cl_Client.id_client);
@@ -367,14 +367,16 @@ public class Register_Warranty extends javax.swing.JPanel {
                             pst2.setString(8, falla);
                             pst2.setString(9, date.DateToDay());
                             pst2.setString(10, received);
-                            pst2.setString(11, "");
-                            pst2.setString(12, "");
+                            pst2.setInt(11, time_Warranty); 
+                            pst2.setString(12, ""); 
                             pst2.setString(13, "");
                             pst2.setString(14, "");
-                            pst2.setString(15, "Nuevo Ingreso");
-                            pst2.setString(16, "");
+                            pst2.setString(15, "");
+                            pst2.setString(16, "Nuevo Ingreso");
                             pst2.setString(17, "");
                             pst2.setString(18, "");
+                            pst2.setString(19, "");
+                            pst2.setString(20, "");
 
                             pst2.executeUpdate();
 
