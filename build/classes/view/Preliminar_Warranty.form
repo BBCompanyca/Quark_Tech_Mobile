@@ -286,6 +286,8 @@
           </Border>
         </Property>
         <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="alignmentX" type="float" value="10.0"/>
+        <Property name="alignmentY" type="float" value="10.0"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
@@ -323,6 +325,9 @@
                   <Color PropertyName="color" blue="f0" green="f0" red="f0" type="rgb"/>
                 </LineBorder>
               </Border>
+            </Property>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[10, 10, 10, 10]"/>
             </Property>
           </Properties>
         </Component>
@@ -492,6 +497,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Entregar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton_EntregarMousePressed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="30" y="340" width="150" height="60"/>
