@@ -103,8 +103,12 @@ public class Search {
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
+<<<<<<< HEAD
                         + "and not w.status = '" + "Entregado" + "' and w.id_warranty = '" + search + "' "
                         + "and c.id_client = w.id_client";
+=======
+                        + "and not w.status = '" + "Entregado" + "' and w.id_warranty = '" + search + "' and c.id_client = w.id_client";
+>>>>>>> d6f353efa8f51e43bffd53ec5a9fdf22a8bd07df
 
             }
 
