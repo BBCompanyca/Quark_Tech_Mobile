@@ -98,8 +98,8 @@ public class Search {
                         + "and not w.status = '" + "Entregado" + "'";
 
             } else {
-
-                query = "";
+                
+                //Hacer aquí la consulta de busqueda por parametro....
 
             }
 

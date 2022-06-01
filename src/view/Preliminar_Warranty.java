@@ -159,6 +159,8 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setAlignmentX(10.0F);
+        jScrollPane1.setAlignmentY(10.0F);
         jScrollPane1.setFocusable(false);
 
         jTextArea_Recibido.setEditable(false);
@@ -172,6 +174,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setWrapStyleWord(true);
         jTextArea_Recibido.setAutoscrolls(false);
         jTextArea_Recibido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
+        jTextArea_Recibido.setMargin(new java.awt.Insets(10, 10, 10, 10));
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 330, 125));
@@ -249,6 +252,11 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 380, 30));
 
         jButton_Entregar.setText("Entregar");
+        jButton_Entregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_EntregarMousePressed(evt);
+            }
+        });
         add(jButton_Entregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 150, 60));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -380,6 +388,34 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SentMouseExited
 
+    private void jButton_EntregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_EntregarMousePressed
+
+        try {
+
+            Connection cn2 = BD_Connection.connection();
+            PreparedStatement pst2 = cn2.prepareStatement(
+                    "update warranty set status = ? where id_warranty = '" + Warranty.ID + "'");
+
+            pst2.setString(1, "Entregado");
+
+            pst2.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Equipo Entregado Con Exito.");
+
+            cn2.close();
+
+            paneles.PanelWarranty();
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al entregar el equipo! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al entregar el equipo", "¡Error!",
+                    JOptionPane.OK_OPTION);
+
+        }
+
+    }//GEN-LAST:event_jButton_EntregarMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Cancelar;
@@ -436,7 +472,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextArea_Recibido1.setText(rs.getString("w.comments_technical"));
 
                 if (status_technical.equals("") || status_technical.equals("...")) {
-                    
+
                     jLabel_Status.setText(status);
 
                 } else {
@@ -478,24 +514,27 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
             jButton_Sent.setVisible(true);
             jButton_Cancelar.setVisible(false);
+            jButton_Entregar.setVisible(false);
 
         } else if (status.equals("Solicitud Enviada - En Espera")) {
 
             jButton_Sent.setVisible(false);
             jButton_Cancelar.setVisible(true);
+            jButton_Entregar.setVisible(false);
 
         } else if (status.equals("En Revisión")) {
 
             jButton_Sent.setVisible(false);
             jButton_Cancelar.setVisible(false);
+            jButton_Entregar.setVisible(false);
 
-        } else if(status.equals("En Tienda") && status_technical.equals("Reparado") || 
-                status.equals("En Tienda") && status_technical.equals("No Reparado")){
-            
+        } else if (status.equals("En Tienda") && status_technical.equals("Reparado")
+                || status.equals("En Tienda") && status_technical.equals("No Reparado")) {
+
             jButton_Sent.setVisible(false);
             jButton_Cancelar.setVisible(false);
             jButton_Entregar.setVisible(true);
-            
+
         }
 
     }

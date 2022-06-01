@@ -210,7 +210,7 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Estadisticas");
+        jLabel15.setText("Historial");
         Btn_Estadisticas.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

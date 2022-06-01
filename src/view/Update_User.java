@@ -439,7 +439,7 @@ public class Update_User extends javax.swing.JPanel {
             
             jLabel_Title.setText("Información Del Usuario - " + name_user);
 
-            //El usuario seleccionado es el que inició sesión y su cuenta es Administrador...    
+        //El usuario seleccionado es el que inició sesión y su cuenta es Administrador...    
         } else if (Login.type_account.equals(type_Account_this) && Login.ID_User == Users.ID && Login.type_account.equals("Administrador")) {
 
             jLabel_Title.setText("Información Del Usuario - " + name_user);
@@ -451,15 +451,15 @@ public class Update_User extends javax.swing.JPanel {
             jLabel_Direction.setVisible(false);
             jComboBox_Direction.setVisible(false);
 
-            add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
+            add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, -1, -1));
 
-            add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
+            add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
 
-            add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+            add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, -1, -1));
 
-            add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
+            add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 110, -1));
 
-            //Mismos permisos y diferente ID... Es la cuenta de otro usuario.
+        //Mismos permisos y diferente ID... Es la cuenta de otro usuario.
         } else if (Login.type_account.equals(type_Account_this) && Login.ID_User != Users.ID) {
             
             jLabel_Title.setText("Información Del Usuario - " + name_user);
@@ -475,7 +475,7 @@ public class Update_User extends javax.swing.JPanel {
             jButton_Update.setVisible(false);
             jButton_RestartPassword.setVisible(false);
 
-            //Permisos diferentes, el usuario que inició sesión es adminsitrador y el usuario seleccionado es moderador...    
+        //Permisos diferentes, el usuario que inició sesión es adminsitrador y el usuario seleccionado es moderador...    
         } else if (Login.type_account.equals("Administrador") && type_Account_this.equals("Moderador")) {
             
             jLabel_Title.setText("Información Del Usuario - " + name_user);
@@ -490,18 +490,18 @@ public class Update_User extends javax.swing.JPanel {
             jLabel_Direction.setVisible(false);
             jComboBox_Direction.setVisible(false);
 
-            add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
+            add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, -1, -1));
 
-            add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
+            add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
 
-            add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+            add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, -1, -1));
 
-            add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
+            add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 110, -1));
 
             jComboBox_Status.setEnabled(false);
             jComboBox_Type_Account.setEnabled(false);
 
-            //Permisos diferentes, el usuario que inició sesión es adminsitrador y el usuario seleccionado es vendedor o técnico...
+        //Permisos diferentes, el usuario que inició sesión es adminsitrador y el usuario seleccionado es vendedor o técnico...
         } else if (Login.type_account.equals("Administrador") && type_Account_this.equals("Vendedor") || type_Account_this.equals("Tecnico")) {
 
             jLabel_Title.setText("Modificar La Información Del Usuario - " + name_user);
@@ -509,14 +509,14 @@ public class Update_User extends javax.swing.JPanel {
             jLabel_Direction.setVisible(false);
             jComboBox_Direction.setVisible(false);
 
-            add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
+            add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, -1, -1));
 
-            add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
+            add(jComboBox_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
 
-            add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+            add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, -1, -1));
 
             jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Vendedor", "Tecnico" }));
-            add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 110, -1));
+            add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 110, -1));
 
             jComboBox_Type_Account.setSelectedItem(type_Account_this);
             
