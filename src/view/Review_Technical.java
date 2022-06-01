@@ -127,21 +127,33 @@ public class Review_Technical extends javax.swing.JPanel {
         jLabel_Recibido1.setText("Comentarios Técnicos:");
         add(jLabel_Recibido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 200, -1));
 
-        jButton_Sent.setText("Enviar");
+        jButton_Sent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Dark.png"))); // NOI18N
+        jButton_Sent.setBorder(null);
+        jButton_Sent.setBorderPainted(false);
+        jButton_Sent.setContentAreaFilled(false);
+        jButton_Sent.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Sent.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Ligth.png"))); // NOI18N
+        jButton_Sent.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Ligth.png"))); // NOI18N
         jButton_Sent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_SentMousePressed(evt);
             }
         });
-        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 340, 150, 50));
+        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 340, 150, 60));
 
-        jButton_Guardar.setText("Guardar");
+        jButton_Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save btn dark.png"))); // NOI18N
+        jButton_Guardar.setBorder(null);
+        jButton_Guardar.setBorderPainted(false);
+        jButton_Guardar.setContentAreaFilled(false);
+        jButton_Guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Guardar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save btn ligth.png"))); // NOI18N
+        jButton_Guardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save btn ligth.png"))); // NOI18N
         jButton_Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_GuardarMousePressed(evt);
             }
         });
-        add(jButton_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, 150, 50));
+        add(jButton_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(515, 340, 150, 60));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));

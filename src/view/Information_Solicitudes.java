@@ -101,14 +101,20 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 185, 450, 45));
 
-        jButton_Rechazar.setText("Rechazar");
+        jButton_Rechazar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Rechazar btn dark.png"))); // NOI18N
+        jButton_Rechazar.setBorder(null);
+        jButton_Rechazar.setBorderPainted(false);
+        jButton_Rechazar.setContentAreaFilled(false);
+        jButton_Rechazar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_Rechazar.setFocusPainted(false);
+        jButton_Rechazar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Rechazar btn ligth.png"))); // NOI18N
+        jButton_Rechazar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Rechazar btn ligth.png"))); // NOI18N
         jButton_Rechazar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_RechazarMousePressed(evt);
             }
         });
-        add(jButton_Rechazar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, 100, 40));
+        add(jButton_Rechazar, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 180, 100, -1));
 
         jSeparator1.setBackground(new java.awt.Color(9, 53, 69));
         jSeparator1.setForeground(new java.awt.Color(9, 53, 69));
@@ -128,14 +134,20 @@ public class Information_Solicitudes extends javax.swing.JPanel {
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
         add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 0, -1, 233));
 
-        jButton_Accept.setText("Aceptar");
+        jButton_Accept.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/aceptar btn dark.png"))); // NOI18N
+        jButton_Accept.setBorder(null);
+        jButton_Accept.setBorderPainted(false);
+        jButton_Accept.setContentAreaFilled(false);
+        jButton_Accept.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_Accept.setFocusPainted(false);
+        jButton_Accept.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/aceptar btn ligth.png"))); // NOI18N
+        jButton_Accept.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/aceptar btn ligth.png"))); // NOI18N
         jButton_Accept.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_AcceptMousePressed(evt);
             }
         });
-        add(jButton_Accept, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 180, 100, 40));
+        add(jButton_Accept, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 180, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_AcceptMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_AcceptMousePressed
@@ -263,7 +275,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                     } catch (SQLException e) {
 
-                        System.err.println("¡Error al aceptar el equipo! " + e);
+                        System.err.println("¡Error al rechazar el equipo! " + e);
                         JOptionPane.showMessageDialog(null, "¡Error al rechazar el equipo!",
                                 "¡Error!", JOptionPane.OK_OPTION);
 

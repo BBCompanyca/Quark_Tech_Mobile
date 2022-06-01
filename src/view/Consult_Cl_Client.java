@@ -44,7 +44,13 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
         add(jLabel_CI_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 150, -1, -1));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 210, 250, 10));
 
-        jButton_Consult.setText("Consultar");
+        jButton_Consult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consult btn dark.png"))); // NOI18N
+        jButton_Consult.setBorder(null);
+        jButton_Consult.setBorderPainted(false);
+        jButton_Consult.setContentAreaFilled(false);
+        jButton_Consult.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Consult.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consutl btn ligth.png"))); // NOI18N
+        jButton_Consult.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consutl btn ligth.png"))); // NOI18N
         jButton_Consult.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_ConsultMousePressed(evt);
@@ -55,7 +61,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                 jButton_ConsultActionPerformed(evt);
             }
         });
-        add(jButton_Consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 260, 190, 40));
+        add(jButton_Consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 250, 190, 50));
 
         jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));

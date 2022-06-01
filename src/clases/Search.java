@@ -85,7 +85,7 @@ public class Search {
 
     public void SearchWarranty(String search) {
 
-        String query;
+        String query = "";
 
         if (Login.type_account.equals("Moderador")) {
 
