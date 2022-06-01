@@ -91,6 +91,7 @@ public class sentWarranty_Technical extends javax.swing.JPanel {
         jSeparator3.setForeground(new java.awt.Color(240, 240, 240));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 200, 10));
 
+        jTextField_Shop.setEditable(false);
         jTextField_Shop.setBackground(new java.awt.Color(78, 109, 121));
         jTextField_Shop.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jTextField_Shop.setForeground(new java.awt.Color(240, 240, 240));
@@ -137,7 +138,8 @@ public class sentWarranty_Technical extends javax.swing.JPanel {
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
-      /*  String delivery = jTextField_Sent.getText().trim();
+        String delivery = jTextField_Sent.getText().trim();
+        String shop = jTextField_Shop.getText().trim();
 
         if (!delivery.equals("")) {
 
@@ -145,17 +147,35 @@ public class sentWarranty_Technical extends javax.swing.JPanel {
 
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "update warranty set ");
+                        "update warranty set delivery_shop = ?, date_sent_shop = ?, date_received_shop = ?, status = ? where id_warranty = '"
+                        + Warranty_Technical.ID_Warranty + "'");
 
-            } catch (Exception e) {
+                pst.setString(1, delivery);
+                pst.setString(2, date.DateToDay());
+                pst.setString(3, date.DateToDay());
+                pst.setString(4, "En Tienda");
+
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Envio Exitoso.", "¡Exito!", JOptionPane.INFORMATION_MESSAGE);
+                
+                cn.close();
+                
+                paneles.PanelWarrantyTechnical();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al realizar envio! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al realizar envío!", "¡Error!", JOptionPane.INFORMATION_MESSAGE);
+
             }
 
         } else {
-            
-            JOptionPane.showMessageDialog(null, "¡Debes registrar quien llevará el equipo!", "¡Acceso Denegado!", 
+
+            JOptionPane.showMessageDialog(null, "¡Debes registrar quien llevará el equipo!", "¡Acceso Denegado!",
                     JOptionPane.OK_OPTION);
-            
-        } */
+
+        }
 
     }//GEN-LAST:event_jButton_RegisterMousePressed
 
@@ -188,18 +208,18 @@ public class sentWarranty_Technical extends javax.swing.JPanel {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select equipo, color, serial, falla, direction_shop from warranty where "
-                    + "id_warranty = '" + Warranty_Technical.ID_Warranty + "'");
+                    "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.shop from warranty w join equipo e "
+                    + "on w.id_warranty = '" + Warranty_Technical.ID_Warranty + "' and w.id_equipo = e.id_equipo");
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
 
-                jLabel_Equipo.setText("Equipo: " + rs.getString("equipo"));
-                jLabel_Color.setText("Color: " + rs.getString("color"));
-                jLabel_Serial.setText("Serial: " + rs.getString("serial"));
-                jLabel_Falla.setText("Falla: " + rs.getString("falla"));
-                jTextField_Shop.setText(rs.getString("direction_shop"));
+                jLabel_Equipo.setText("Equipo: " + rs.getString("e.brand") + " - " + rs.getString("e.model"));
+                jLabel_Color.setText("Color: " + rs.getString("e.color"));
+                jLabel_Serial.setText("Serial: " + rs.getString("w.serial"));
+                jLabel_Falla.setText("Falla: " + rs.getString("w.falla"));
+                jTextField_Shop.setText(rs.getString("w.shop"));
                 jTextField_Date.setText(date.DateToDay());
 
             }
@@ -208,7 +228,7 @@ public class sentWarranty_Technical extends javax.swing.JPanel {
 
         } catch (SQLException e) {
 
-            System.err.println("¡Error al consultar la infomración de la garantía! " + e);
+            System.err.println("¡Error al consultar la información de la garantía! " + e);
             JOptionPane.showMessageDialog(null, "¡Error al consultar la infomración de la garantía!", "¡Error!",
                     JOptionPane.OK_OPTION);
 

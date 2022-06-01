@@ -238,19 +238,20 @@ public class Review_Technical extends javax.swing.JPanel {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select equipo, serial, falla, direction_shop, comments_technical, status_technical from warranty where "
-                    + "id_warranty = '" + Warranty_Technical.ID_Warranty + "'");
+                    "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.shop, w.comments_technical, "
+                            + "w.status_technical from warranty w join equipo e on w.id_warranty = '" 
+                            + Warranty_Technical.ID_Warranty + "' and w.id_equipo = e.id_equipo");
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
 
-                jTextField_Equipo.setText(rs.getString("equipo"));
-                jTextField_Serial.setText(rs.getString("serial"));
-                jTextField_Falla.setText(rs.getString("falla"));
-                jTextField_Tienda.setText(rs.getString("direction_shop"));
-                jTextArea_Coment_Technical.setText(rs.getString("comments_technical"));
-                jComboBox_Status.setSelectedItem(rs.getString("status_technical"));
+                jTextField_Equipo.setText(rs.getString("e.brand") + " - " + rs.getString("e.model") + " - " + rs.getString("e.color"));
+                jTextField_Serial.setText(rs.getString("w.serial"));
+                jTextField_Falla.setText(rs.getString("w.falla"));
+                jTextField_Tienda.setText(rs.getString("w.shop"));
+                jTextArea_Coment_Technical.setText(rs.getString("w.comments_technical"));
+                jComboBox_Status.setSelectedItem(rs.getString("w.status_technical"));
 
             }
 
@@ -275,7 +276,7 @@ public class Review_Technical extends javax.swing.JPanel {
             comments_technical = jTextArea_Coment_Technical.getText();
             status_technical = jComboBox_Status.getSelectedItem().toString();
 
-            if (!comments_technical.equals("") && !status_technical.equals("...")) {
+            if (!comments_technical.equals("")) {
 
                 try {
 
@@ -337,7 +338,7 @@ public class Review_Technical extends javax.swing.JPanel {
 
                 } catch (SQLException e) {
 
-                    System.err.println("¡Error al guardar la infomración de la garantía! " + e);
+                    System.err.println("¡Error al guardar la información de la garantía! " + e);
                     JOptionPane.showMessageDialog(null, "¡Error al guardar la infomración de la garantía!", "¡Error!",
                             JOptionPane.OK_OPTION);
 

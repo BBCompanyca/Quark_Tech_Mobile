@@ -215,11 +215,11 @@ public class Clients extends javax.swing.JPanel {
     private void jButton_Update_ClientMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_ClientMousePressed
 
         int fila_point = jTable_Client.getSelectedRow();
-        int columna_punt = 0;
+        int columna_point = 0;
 
         if (fila_point > -1) {
 
-            ID = (int) model.getValueAt(fila_point, columna_punt);
+            ID = (int) model.getValueAt(fila_point, columna_point);
 
             paneles.PanelUpdateClient();
 
@@ -242,6 +242,8 @@ public class Clients extends javax.swing.JPanel {
         int columna_point = 0;
 
         if (fila_point > -1) {
+            
+            ID = (int) model.getValueAt(fila_point, columna_point);
 
             int value = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este cliente?", "¡Selección!",
                     JOptionPane.YES_NO_OPTION);
@@ -309,8 +311,8 @@ public class Clients extends javax.swing.JPanel {
             jButton_Delete_Client.setEnabled(false);
             jButton_Delete_Client.setVisible(false);
 
-            add(jButton_New_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 100, 35));
-            add(jButton_Update_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, 100, 35));
+            add(jButton_New_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, 100, 35));
+            add(jButton_Update_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, 100, 35));
 
         }
 

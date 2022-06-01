@@ -11,6 +11,8 @@ import clases.Paneles;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {
 
+    String status = "", status_technical = "";
+
     public static int flag = 0;
 
     Reports reports = new Reports();
@@ -30,8 +32,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel_Code = new javax.swing.JLabel();
-        jTextField_Code = new javax.swing.JTextField();
         jLabel_Equipo = new javax.swing.JLabel();
         jTextField_Equipo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -41,14 +41,10 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Falla = new javax.swing.JLabel();
         jTextField_Falla = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
-        jLabel_NumeroDeOrden = new javax.swing.JLabel();
-        jTextField_NumOrden = new javax.swing.JTextField();
-        jSeparator7 = new javax.swing.JSeparator();
         jTextField_Calendar = new javax.swing.JTextField();
         jLabel_DatePurchase = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
         jTextField_Code1 = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
         jLabel_Title = new javax.swing.JLabel();
         jLabel_Warranty = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -61,27 +57,15 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido1 = new javax.swing.JTextArea();
         jLabel_Recibido1 = new javax.swing.JLabel();
         jLabel_Status = new javax.swing.JLabel();
+        jButton_Entregar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel_Code.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_Code.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Code.setText("Código:");
-        add(jLabel_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
-
-        jTextField_Code.setEditable(false);
-        jTextField_Code.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Code.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        jTextField_Code.setForeground(new java.awt.Color(240, 240, 240));
-        jTextField_Code.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField_Code.setBorder(null);
-        add(jTextField_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 150, 20));
-
         jLabel_Equipo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Equipo.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Equipo.setText("Equipo:");
-        add(jLabel_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        add(jLabel_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
         jTextField_Equipo.setEditable(false);
         jTextField_Equipo.setBackground(new java.awt.Color(9, 53, 69));
@@ -89,13 +73,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextField_Equipo.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Equipo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Equipo.setBorder(null);
-        add(jTextField_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 250, 20));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 250, -1));
+        add(jTextField_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 250, 20));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 250, -1));
 
         jLabel_Serial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Serial.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Serial.setText("Serial:");
-        add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
+        add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         jTextField_Serial.setEditable(false);
         jTextField_Serial.setBackground(new java.awt.Color(9, 53, 69));
@@ -108,13 +92,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextField_SerialActionPerformed(evt);
             }
         });
-        add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 150, 20));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 150, -1));
+        add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 150, 20));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 150, -1));
 
         jLabel_Falla.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Falla.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Falla.setText("Falla:");
-        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         jTextField_Falla.setEditable(false);
         jTextField_Falla.setBackground(new java.awt.Color(9, 53, 69));
@@ -127,28 +111,14 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextField_FallaActionPerformed(evt);
             }
         });
-        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 210, 20));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 210, -1));
-
-        jLabel_NumeroDeOrden.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_NumeroDeOrden.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_NumeroDeOrden.setText("N° ORDEN:");
-        add(jLabel_NumeroDeOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, -1, -1));
-
-        jTextField_NumOrden.setEditable(false);
-        jTextField_NumOrden.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_NumOrden.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        jTextField_NumOrden.setForeground(new java.awt.Color(240, 240, 240));
-        jTextField_NumOrden.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField_NumOrden.setBorder(null);
-        add(jTextField_NumOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, 120, 20));
-        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 120, -1));
+        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 210, 20));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 210, -1));
 
         jTextField_Calendar.setEditable(false);
         jTextField_Calendar.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Calendar.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Calendar.setForeground(new java.awt.Color(240, 240, 240));
-        jTextField_Calendar.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField_Calendar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField_Calendar.setBorder(null);
         jTextField_Calendar.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -175,7 +145,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextField_Code1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Code1.setBorder(null);
         add(jTextField_Code1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 150, 20));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 150, -1));
 
         jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
@@ -224,7 +193,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_SentMousePressed(evt);
             }
         });
-        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 150, 60));
+        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 150, 60));
 
         jButton_Cancelar.setText("Cancelar");
         jButton_Cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -237,18 +206,19 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_CancelarActionPerformed(evt);
             }
         });
-        add(jButton_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 150, 60));
+        add(jButton_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 150, 60));
 
-        jButton_Dowload_Report.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Report_Dark.png"))); // NOI18N
+        jButton_Dowload_Report.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pdf_80px.png"))); // NOI18N
         jButton_Dowload_Report.setBorder(null);
         jButton_Dowload_Report.setBorderPainted(false);
         jButton_Dowload_Report.setContentAreaFilled(false);
+        jButton_Dowload_Report.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_Dowload_Report.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_Dowload_ReportMousePressed(evt);
             }
         });
-        add(jButton_Dowload_Report, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 150, 60));
+        add(jButton_Dowload_Report, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 60, 80));
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -277,6 +247,9 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Status.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 380, 30));
+
+        jButton_Entregar.setText("Entregar");
+        add(jButton_Entregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 150, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -310,7 +283,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         String serial = jTextField_Serial.getText().trim();
         String falla = jTextField_Falla.getText().trim();
         String received = jTextArea_Recibido.getText().trim();
-        String code = jTextField_Code.getText().trim();
         String time = jLabel_Warranty.getText();
 
         if (time.equals("Este equipo no cumple con el tiempo de garantía...")) {
@@ -331,8 +303,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
             File fichero = fc.getSelectedFile();
 
-            reports.ReportWarranty(fichero, Warranty.ID, code, equipo, serial, falla, received, time);
-
+            //reports.ReportWarranty(fichero, Warranty.ID, code, equipo, serial, falla, received, time);
         }
 
     }//GEN-LAST:event_jButton_Dowload_ReportMousePressed
@@ -364,7 +335,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "update warranty set status = ? where id_warranty = '" + Warranty.ID + "'");
 
-                        pst2.setString(1, "En Tienda");
+                        pst2.setString(1, "Nuevo Ingreso");
 
                         pst2.executeUpdate();
 
@@ -413,12 +384,11 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Cancelar;
     private javax.swing.JButton jButton_Dowload_Report;
+    private javax.swing.JButton jButton_Entregar;
     private javax.swing.JButton jButton_Sent;
-    private javax.swing.JLabel jLabel_Code;
     private javax.swing.JLabel jLabel_DatePurchase;
     private javax.swing.JLabel jLabel_Equipo;
     private javax.swing.JLabel jLabel_Falla;
-    private javax.swing.JLabel jLabel_NumeroDeOrden;
     private javax.swing.JLabel jLabel_Recibido;
     private javax.swing.JLabel jLabel_Recibido1;
     private javax.swing.JLabel jLabel_Serial;
@@ -428,19 +398,15 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextArea jTextArea_Recibido;
     private javax.swing.JTextArea jTextArea_Recibido1;
     private javax.swing.JTextField jTextField_Calendar;
-    private javax.swing.JTextField jTextField_Code;
     private javax.swing.JTextField jTextField_Code1;
     private javax.swing.JTextField jTextField_Equipo;
     private javax.swing.JTextField jTextField_Falla;
-    private javax.swing.JTextField jTextField_NumOrden;
     private javax.swing.JTextField jTextField_Serial;
     // End of variables declaration//GEN-END:variables
 
@@ -449,27 +415,37 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         try {
 
             Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select code, equipo, serial, falla, num_order, name_client, received, date_register, "
-                    + "day_warranty, status, status_technical, comments_technical from warranty where id_warranty = '" + Warranty.ID + "'");
+            PreparedStatement pst = cn.prepareStatement("select c.name_client, e.brand, e.model, e.color, w.serial, w.falla, w.date_register, w.received, w.comments_technical, "
+                    + "w.status, w.status_technical, w.day_warranty from warranty w join client c on w.id_client = c.id_client and w.id_warranty = '" + Warranty.ID + "' "
+                    + "join equipo e on w.id_equipo = e.id_equipo and w.id_warranty = '" + Warranty.ID + "'");
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
 
-                jLabel_Title.setText("Garantía - Cliente: " + rs.getString("name_client"));
+                status = rs.getString("w.status");
+                status_technical = rs.getString("w.status_technical");
 
-                jTextField_Code.setText(rs.getString("code"));
-                jTextField_Equipo.setText(rs.getString("equipo"));
-                jTextField_Serial.setText(rs.getString("serial"));
-                jTextField_Falla.setText(rs.getString("falla"));
-                jTextField_NumOrden.setText(rs.getString("num_order"));
-                jTextField_Calendar.setText(rs.getString("date_register"));
-                jTextArea_Recibido.setText(rs.getString("received"));
-                jTextArea_Recibido1.setText(rs.getString("comments_technical"));
-                jLabel_Status.setText(rs.getString("status"));
+                jLabel_Title.setText("Garantía - Cliente: " + rs.getString("c.name_client"));
 
-                int validate_int = rs.getInt("day_warranty");
+                jTextField_Equipo.setText(rs.getString("e.brand") + " - " + rs.getString("e.model") + " - " + rs.getString("e.color"));
+                jTextField_Serial.setText(rs.getString("w.serial"));
+                jTextField_Falla.setText(rs.getString("w.falla"));
+                jTextField_Calendar.setText(rs.getString("w.date_register"));
+                jTextArea_Recibido.setText(rs.getString("w.received"));
+                jTextArea_Recibido1.setText(rs.getString("w.comments_technical"));
+
+                if (status_technical.equals("") || status_technical.equals("...")) {
+                    
+                    jLabel_Status.setText(status);
+
+                } else {
+
+                    jLabel_Status.setText(status + " - " + status_technical);
+
+                }
+
+                int validate_int = rs.getInt("w.day_warranty");
 
                 if (validate_int > 0) {
 
@@ -488,7 +464,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         } catch (SQLException e) {
 
-            System.err.println("¡Error al consultar la información de la ganratía!");
+            System.err.println("¡Error al consultar la información de la ganratía! " + e);
             JOptionPane.showMessageDialog(null, "¡Error al consultar la información de la ganratía!", "¡Error!",
                     JOptionPane.OK_OPTION);
 
@@ -498,48 +474,28 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     private void ValidateButton() {
 
-        try {
+        if (status.equals("Nuevo Ingreso")) {
 
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement("select status, status_technical, technical from warranty where id_warranty = '" + Warranty.ID + "'");
+            jButton_Sent.setVisible(true);
+            jButton_Cancelar.setVisible(false);
 
-            ResultSet rs = pst.executeQuery();
+        } else if (status.equals("Solicitud Enviada - En Espera")) {
 
-            if (rs.next()) {
+            jButton_Sent.setVisible(false);
+            jButton_Cancelar.setVisible(true);
 
-                String status_Warranty = rs.getString("status");
+        } else if (status.equals("En Revisión")) {
 
-                if (status_Warranty.equals("En Tienda")) {
+            jButton_Sent.setVisible(false);
+            jButton_Cancelar.setVisible(false);
 
-                    jButton_Sent.setVisible(true);
-                    jButton_Cancelar.setVisible(false);
-
-                    if (rs.getString("status_technical").equals("Reparado") || rs.getString("status_technical").equals("No Reparado")) {
-
-                        jLabel_Status.setText(status_Warranty + " - Equipo " + rs.getString("status_technical"));
-
-                    }
-
-                } else if (status_Warranty.equals("Solicitud Enviada - En Espera")) {
-
-                    jButton_Sent.setVisible(false);
-                    jButton_Cancelar.setVisible(true);
-
-                } else if (status_Warranty.equals("En Revisión")) {
-
-                    jButton_Sent.setVisible(false);
-                    jButton_Cancelar.setVisible(false);
-
-                    jLabel_Status.setText(status_Warranty + " - Técnico: " + rs.getString("technical"));
-
-                }
-
-            }
-
-        } catch (SQLException e) {
-
-            System.out.println("¡Error al consultar el status del equipo! " + e);
-
+        } else if(status.equals("En Tienda") && status_technical.equals("Reparado") || 
+                status.equals("En Tienda") && status_technical.equals("No Reparado")){
+            
+            jButton_Sent.setVisible(false);
+            jButton_Cancelar.setVisible(false);
+            jButton_Entregar.setVisible(true);
+            
         }
 
     }

@@ -402,8 +402,9 @@ public class Warranty_Technical extends javax.swing.JPanel {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select id_warranty, equipo, color, serial, falla, direction_shop from warranty where status = '" + "En Revisión" + "' "
-                    + "and technical = '" + Login.user + "'");
+                    "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.shop from warranty w join equipo e on "
+                            + "w.id_equipo = e.id_equipo and w.id_technical = '" + Login.ID_User + "' and w.status = '" + 
+                                    "En Revision" + "'");
 
             ResultSet rs = pst.executeQuery();
 
@@ -412,14 +413,15 @@ public class Warranty_Technical extends javax.swing.JPanel {
 
             model.addColumn("ID");
             model.addColumn("Equipo");
+            model.addColumn("Módelo");
             model.addColumn("Color");
             model.addColumn("Serial");
             model.addColumn("Falla");
             model.addColumn("Tienda");
 
             while (rs.next()) {
-                Object[] fila = new Object[6];
-                for (int i = 0; i < 6; i++) {
+                Object[] fila = new Object[7];
+                for (int i = 0; i < 7; i++) {
 
                     fila[i] = rs.getObject(i + 1);
 
