@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import clases.Search;
 
 public final class Warranty extends javax.swing.JPanel {
 
@@ -15,6 +16,8 @@ public final class Warranty extends javax.swing.JPanel {
     String direction, type_Account, permission;
 
     Paneles paneles = new Paneles();
+
+    Search searchClass = new Search();
 
     DefaultTableModel model = new DefaultTableModel();
 
@@ -185,124 +188,9 @@ public final class Warranty extends javax.swing.JPanel {
 
         String search = jTextField_Search_Warranty.getText().trim();
 
-        String query = "";
+        searchClass.SearchWarranty(search);
 
-        if (Login.type_account.equals("Moderador")) {
-
-            if (search.equals("")) {
-
-                query = "select id_warranty, equipo, serial, name_client, identity_card_client, "
-                        + "direction_shop, status from warranty where not status = '" + "Entregado" + "'";
-
-            } else {
-
-                query = "select id_warranty, equipo, serial, name_client, identity_card_client, "
-                        + "direction_shop, status from warranty where id_warranty = '" + search + "' and not status = '" + "Entregado" + "' or "
-                        + "equipo = '" + search + "' and not status = '" + "Entregado" + "' or "
-                        + "serial = '" + search + "' and not status = '" + "Entregado" + "' or "
-                        + "name_client = '" + search + "' and not status = '" + "Entregado" + "' or "
-                        + "unformat_identity_card_client = '" + search + "' and not status = '" + "Entregado" + "' or "
-                        + "direction_shop = '" + search + "' and not status = '" + "Entregado" + "' or "
-                        + "status = '" + search + "' and not status = '" + "Entregado" + "'";
-
-            }
-
-        } else {
-
-            if (search.equals("")) {
-
-                query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
-                        + "status from warranty where direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
-
-            } else {
-
-                query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
-                        + "status from warranty where "
-                        + "id_warranty = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "equipo = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "color = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "serial = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "name_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "unformat_identity_card_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "status = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
-
-            }
-
-        }
-
-        try {
-
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement(query);
-
-            ResultSet rs = pst.executeQuery();
-
-            jTable_Warranty = new JTable(model);
-            jScrollPane.setViewportView(jTable_Warranty);
-
-            model.setColumnCount(0);
-            model.setRowCount(0);
-
-            if (Login.type_account.equals("Moderador")) {
-
-                model.addColumn("ID");
-                model.addColumn("Equipo");
-                model.addColumn("Serial");
-                model.addColumn("Cliente");
-                model.addColumn("Cédula");
-                model.addColumn("Tienda");
-                model.addColumn("Estatus");
-
-                while (rs.next()) {
-
-                    Object[] fila = new Object[7];
-                    for (int i = 0; i < 7; i++) {
-
-                        fila[i] = rs.getObject(i + 1);
-
-                    }
-
-                    model.addRow(fila);
-
-                }
-
-            } else {
-
-                model.addColumn("ID");
-                model.addColumn("Equipo");
-                model.addColumn("Color");
-                model.addColumn("Serial");
-                model.addColumn("Cliente");
-                model.addColumn("Cédula");
-                model.addColumn("Estatus");
-
-                while (rs.next()) {
-
-                    Object[] fila = new Object[7];
-                    for (int i = 0; i < 7; i++) {
-
-                        fila[i] = rs.getObject(i + 1);
-
-                    }
-
-                    model.addRow(fila);
-
-                }
-
-            }
-
-            cn.close();
-
-            jTextField_Search_Warranty.setText("");
-            jTextField_Search_Warranty.requestFocus();
-
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al vaciar la tabla de garantías! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla de garantías!", "¡Error!",
-                    JOptionPane.OK_CANCEL_OPTION);
-
-        }
+        jTextField_Search_Warranty.setText("");
 
     }//GEN-LAST:event_jButton_Search_UserMousePressed
 
@@ -312,124 +200,9 @@ public final class Warranty extends javax.swing.JPanel {
 
             String search = jTextField_Search_Warranty.getText().trim();
 
-            String query = "";
+            searchClass.SearchWarranty(search);
 
-            if (Login.type_account.equals("Moderador")) {
-
-                if (search.equals("")) {
-
-                    query = "select id_warranty, equipo, serial, name_client, identity_card_client, "
-                            + "direction_shop, status from warranty where not status = '" + "Entregado" + "'";
-
-                } else {
-
-                    query = "select id_warranty, equipo, serial, name_client, identity_card_client, "
-                            + "direction_shop, status from warranty where id_warranty = '" + search + "' and not status = '" + "Entregado" + "' or "
-                            + "equipo = '" + search + "' and not status = '" + "Entregado" + "' or "
-                            + "serial = '" + search + "' and not status = '" + "Entregado" + "' or "
-                            + "name_client = '" + search + "' and not status = '" + "Entregado" + "' or "
-                            + "unformat_identity_card_client = '" + search + "' and not status = '" + "Entregado" + "' or "
-                            + "direction_shop = '" + search + "' and not status = '" + "Entregado" + "' or "
-                            + "status = '" + search + "' and not status = '" + "Entregado" + "'";
-
-                }
-
-            } else {
-
-                if (search.equals("")) {
-
-                    query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
-                            + "status from warranty where direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
-
-                } else {
-
-                    query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
-                            + "status from warranty where "
-                            + "id_warranty = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                            + "equipo = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                            + "color = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                            + "serial = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                            + "name_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                            + "unformat_identity_card_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                            + "status = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
-
-                }
-
-            }
-
-            try {
-
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement(query);
-
-                ResultSet rs = pst.executeQuery();
-
-                jTable_Warranty = new JTable(model);
-                jScrollPane.setViewportView(jTable_Warranty);
-
-                model.setColumnCount(0);
-                model.setRowCount(0);
-
-                if (Login.type_account.equals("Moderador")) {
-
-                    model.addColumn("ID");
-                    model.addColumn("Equipo");
-                    model.addColumn("Serial");
-                    model.addColumn("Cliente");
-                    model.addColumn("Cédula");
-                    model.addColumn("Tienda");
-                    model.addColumn("Estatus");
-
-                    while (rs.next()) {
-
-                        Object[] fila = new Object[7];
-                        for (int i = 0; i < 7; i++) {
-
-                            fila[i] = rs.getObject(i + 1);
-
-                        }
-
-                        model.addRow(fila);
-
-                    }
-
-                } else {
-
-                    model.addColumn("ID");
-                    model.addColumn("Equipo");
-                    model.addColumn("Color");
-                    model.addColumn("Serial");
-                    model.addColumn("Cliente");
-                    model.addColumn("Cédula");
-                    model.addColumn("Estatus");
-
-                    while (rs.next()) {
-
-                        Object[] fila = new Object[7];
-                        for (int i = 0; i < 7; i++) {
-
-                            fila[i] = rs.getObject(i + 1);
-
-                        }
-
-                        model.addRow(fila);
-
-                    }
-
-                }
-
-                cn.close();
-
-                jTextField_Search_Warranty.setText("");
-                jTextField_Search_Warranty.requestFocus();
-
-            } catch (SQLException e) {
-
-                System.err.println("¡Error al vaciar la tabla de garantías! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla de garantías!", "¡Error!",
-                        JOptionPane.OK_CANCEL_OPTION);
-
-            }
+            jTextField_Search_Warranty.setText("");
 
         }
 

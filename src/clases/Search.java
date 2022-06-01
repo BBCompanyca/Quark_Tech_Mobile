@@ -99,7 +99,11 @@ public class Search {
 
             } else {
 
-                query = "";
+                query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.shop, w.status "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and not w.status = '" + "Entregado" + "' and w.id_warranty = '" + search + "' and c.id_client = w.id_client";
 
             }
 
