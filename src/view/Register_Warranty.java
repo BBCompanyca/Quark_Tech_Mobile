@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import java.util.Date;
+import javax.swing.BorderFactory;
 
 public class Register_Warranty extends javax.swing.JPanel {
 
@@ -37,6 +38,9 @@ public class Register_Warranty extends javax.swing.JPanel {
         jCalendar.setVisible(false);
 
         jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
+        
+        jTextArea_Recibido.setBorder(BorderFactory.createCompoundBorder(jTextArea_Recibido.getBorder(), 
+                BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 
     }
 
@@ -355,7 +359,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
                             Connection cn2 = BD_Connection.connection();
                             PreparedStatement pst2 = cn2.prepareStatement(
-                                    "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                                    "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
                             pst2.setInt(1, 0);
                             pst2.setInt(2, Consult_Cl_Client.id_client);
@@ -368,15 +372,16 @@ public class Register_Warranty extends javax.swing.JPanel {
                             pst2.setString(9, date.DateToDay());
                             pst2.setString(10, received);
                             pst2.setInt(11, time_Warranty); 
-                            pst2.setString(12, ""); 
+                            pst2.setString(12, date_purchase); 
                             pst2.setString(13, "");
                             pst2.setString(14, "");
                             pst2.setString(15, "");
-                            pst2.setString(16, "Nuevo Ingreso");
-                            pst2.setString(17, "");
+                            pst2.setString(16, "");
+                            pst2.setString(17, "Nuevo Ingreso");
                             pst2.setString(18, "");
                             pst2.setString(19, "");
                             pst2.setString(20, "");
+                            pst2.setString(21, "");
 
                             pst2.executeUpdate();
 

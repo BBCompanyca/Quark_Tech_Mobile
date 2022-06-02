@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2022 a las 04:10:22
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.1.1
+-- Tiempo de generación: 02-06-2022 a las 21:09:14
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -121,6 +122,7 @@ CREATE TABLE `warranty` (
   `date_register` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `received` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `day_warranty` int(10) NOT NULL,
+  `date_purchase` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `date_sent_technical` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `delivery_technical` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `date_received_technical` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -136,10 +138,14 @@ CREATE TABLE `warranty` (
 -- Volcado de datos para la tabla `warranty`
 --
 
-INSERT INTO `warranty` (`id_warranty`, `id_client`, `id_equipo`, `id_technical`, `id_registered_by`, `shop`, `serial`, `falla`, `date_register`, `received`, `day_warranty`, `date_sent_technical`, `delivery_technical`, `date_received_technical`, `comments_technical`, `status`, `status_technical`, `date_sent_shop`, `delivery_shop`, `date_received_shop`) VALUES
-(1, 1, 1, 2, 1, 'Almacen', '123456', 'Software', '25/05/2022', 'asd', 14, '30/05/2022', 'Sr Roger', '30/05/2022', 'Cambio de pantalla', 'Entregado', 'No Reparado', '30/05/2022', 'Sr Roger', '30/05/2022'),
-(2, 1, 1, 2, 1, 'Almacen', 'asdfg', 'Sofware', '30/05/2022', 'Cargador, audifonos y el equipo se encuentra en buen estado.', 0, '30/05/2022', 'Roger Fernandez', '30/05/2022', 'El que equipo se le hizo el root necesario y se logró recuperar el sistema.', 'Entregado', 'Reparado', '30/05/2022', 'Sr Roger', '30/05/2022'),
-(3, 1, 1, 2, 1, 'Almacen', 'qwert', 'Corneta', '31/05/2022', 'Nada la vida es loca, vivela.', 0, '31/05/2022', 'Sr Roger.', '31/05/2022', 'asdad', 'Entregado', 'Reparado', '31/05/2022', 'Sr Roger', '31/05/2022');
+INSERT INTO `warranty` (`id_warranty`, `id_client`, `id_equipo`, `id_technical`, `id_registered_by`, `shop`, `serial`, `falla`, `date_register`, `received`, `day_warranty`, `date_purchase`, `date_sent_technical`, `delivery_technical`, `date_received_technical`, `comments_technical`, `status`, `status_technical`, `date_sent_shop`, `delivery_shop`, `date_received_shop`) VALUES
+(1, 1, 1, 2, 1, 'Almacen', '123456', 'Software', '25/05/2022', 'asd', 14, '', '30/05/2022', 'Sr Roger', '30/05/2022', 'Cambio de pantalla', 'Entregado', 'No Reparado', '30/05/2022', 'Sr Roger', '30/05/2022'),
+(2, 1, 1, 2, 1, 'Almacen', 'asdfg', 'Sofware', '30/05/2022', 'Cargador, audifonos y el equipo se encuentra en buen estado.', 0, '', '30/05/2022', 'Roger Fernandez', '30/05/2022', 'El que equipo se le hizo el root necesario y se logró recuperar el sistema.', 'Entregado', 'Reparado', '30/05/2022', 'Sr Roger', '30/05/2022'),
+(3, 1, 1, 2, 1, 'Almacen', 'qwert', 'Corneta', '31/05/2022', 'Nada la vida es loca, vivela.', 0, '', '31/05/2022', 'Sr Roger.', '31/05/2022', 'asdad', 'Entregado', 'Reparado', '31/05/2022', 'Sr Roger', '31/05/2022'),
+(4, 1, 1, 2, 1, 'Almacen', 'asdff', 'asda', '02/06/2022', 'asdasdaddasdasdasdas', 14, '', '02/06/2022', 'Sr Roger', '02/06/2022', 'No se pudo que repar el equipo.', 'Entregado', 'No Reparado', '02/06/2022', 'Sr Roger', '02/06/2022'),
+(5, 1, 1, 2, 1, 'Almacen', 'sdadada', 'zxczczczxc', '02/06/2022', 'asdadasdasasdasdasdasd', 14, '', '02/06/2022', 'sadad', '02/06/2022', 'asdasdasdasdasdasdasdasd', 'Entregado', 'Reparado', '02/06/2022', 'asdasdasd', '02/06/2022'),
+(6, 1, 1, 0, 1, 'Almacen', 'asdasdas', 'asdasda', '02/06/2022', 'sadad', 14, '', '', '', '', 'Si Funciona', 'En Tienda', 'Reparado', '', '', ''),
+(7, 1, 1, 0, 1, 'Almacen', 'asdaxzczxczx', 'zxcxzxz', '02/06/2022', 'zxczxcz', 14, '01/06/2022', '', '', '', 'Si Funciona', 'En Tienda', 'Reparado', '', '', '');
 
 --
 -- Índices para tablas volcadas
@@ -195,7 +201,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `warranty`
 --
 ALTER TABLE `warranty`
-  MODIFY `id_warranty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_warranty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

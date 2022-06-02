@@ -19,7 +19,8 @@ public class Reports {
 
     Date date = new Date();
 
-    public void ReportWarranty(File Ruta, int ID, String code, String equipo, String serial, String falla, String received, String time) {
+    public void ReportWarranty(File Ruta, int ID, String brand, String model, String serial, String received, String falla, String time, 
+            String comments_technical, String status_technical) {
 
         Document document = new Document();
 
@@ -28,7 +29,7 @@ public class Reports {
             //String rutaa = System.getProperty("user.home");
             PdfWriter.getInstance(document, new FileOutputStream(Ruta + ".pdf"));
 
-            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF2.jpg");
+            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\BannerPDF2.jpg");
             header.scaleToFit(600, 700);
             header.setAlignment(Chunk.ALIGN_CENTER);
 
@@ -55,7 +56,8 @@ public class Reports {
 
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select name_client, identity_card_client, name_client, date_purchase from warranty where id_warranty = '" + ID + "'");
+                        "select c.name_client, c.identity_card_client, c.direction_client, w.date_purchase from warranty w join client c on "
+                        + "c.id_client = w.id_client and w.id_warranty = '" + ID + "'");
 
                 ResultSet rs = pst.executeQuery();
 
@@ -67,7 +69,7 @@ public class Reports {
 
                         Paragraph ParagraphName = new Paragraph();
                         ParagraphName.setAlignment(Paragraph.ALIGN_RIGHT);
-                        ParagraphName.setFont(FontFactory.getFont("Times New Roman", 12, Font.BOLD, BaseColor.BLACK));
+                        ParagraphName.setFont(FontFactory.getFont("times new roman", 12, Font.BOLD, BaseColor.BLACK));
                         ParagraphName.add(" NOMBRE:");
                         informationClient.addCell(ParagraphName);
                         informationClient.addCell(" " + rs.getString(1));
@@ -75,17 +77,17 @@ public class Reports {
                         Paragraph ParagraphIndentity = new Paragraph();
                         ParagraphIndentity.setAlignment(Paragraph.ALIGN_RIGHT);
                         ParagraphIndentity.setFont(FontFactory.getFont("Times New Roman", 12, Font.BOLD, BaseColor.BLACK));
-                        ParagraphIndentity.add(" CÉDULA:");
+                        ParagraphIndentity.add(" CÉDULA O RIF:");
                         informationClient.addCell(ParagraphIndentity);
                         informationClient.addCell(" " + rs.getString(2));
-                        
+
                         Paragraph ParagraphAtencion = new Paragraph();
                         ParagraphAtencion.setAlignment(Paragraph.ALIGN_RIGHT);
                         ParagraphAtencion.setFont(FontFactory.getFont("Times New Roman", 12, Font.BOLD, BaseColor.BLACK));
-                        ParagraphAtencion.add(" ATENCIÓN:");
+                        ParagraphAtencion.add(" DIRECCIÓN:");
                         informationClient.addCell(ParagraphAtencion);
                         informationClient.addCell(" " + rs.getString(3));
-                        
+
                         Paragraph ParagraphDatePurchase = new Paragraph();
                         ParagraphDatePurchase.setAlignment(Paragraph.ALIGN_RIGHT);
                         ParagraphDatePurchase.setFont(FontFactory.getFont("Times New Roman", 12, Font.BOLD, BaseColor.BLACK));
@@ -110,15 +112,15 @@ public class Reports {
             Paragraph ParagraphEquipo = new Paragraph();
             ParagraphEquipo.setAlignment(Paragraph.ALIGN_LEFT);
             ParagraphEquipo.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-            ParagraphEquipo.add("\n \n             EQUIPO: ");
+            ParagraphEquipo.add("\n \n               EQUIPO: ");
             ParagraphEquipo.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
-            ParagraphEquipo.add(equipo);
+            ParagraphEquipo.add(brand + " " + model);
             document.add(ParagraphEquipo);
 
             Paragraph ParagraphSerial = new Paragraph();
             ParagraphSerial.setAlignment(Paragraph.ALIGN_LEFT);
             ParagraphSerial.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-            ParagraphSerial.add("\n             SERIAL: ");
+            ParagraphSerial.add("\n               SERIAL: ");
             ParagraphSerial.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
             ParagraphSerial.add(serial);
             document.add(ParagraphSerial);
@@ -126,7 +128,7 @@ public class Reports {
             Paragraph ParagraphReceived = new Paragraph();
             ParagraphReceived.setAlignment(Paragraph.ALIGN_LEFT);
             ParagraphReceived.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-            ParagraphReceived.add("\n             SE RECIBE CON: ");
+            ParagraphReceived.add("\n               SE RECIBE CON: ");
             ParagraphReceived.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
             ParagraphReceived.add(received);
             document.add(ParagraphReceived);
@@ -134,16 +136,16 @@ public class Reports {
             Paragraph ParagraphFalla = new Paragraph();
             ParagraphFalla.setAlignment(Paragraph.ALIGN_LEFT);
             ParagraphFalla.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-            ParagraphFalla.add("\n             FALLA: ");
+            ParagraphFalla.add("\n               FALLA: ");
             ParagraphFalla.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
-            ParagraphFalla.add(falla + ".");
+            ParagraphFalla.add(falla);
             document.add(ParagraphFalla);
 
             try {
 
                 //Consulta al servidor de la cantidad de días de garantía del equipo...
                 Connection cn2 = BD_Connection.connection();
-                PreparedStatement pst2 = cn2.prepareStatement("select day_warranty from equipo where code = '" + code + "'");
+                PreparedStatement pst2 = cn2.prepareStatement("select day_warranty from warranty where id_warranty = '" + ID + "'");
 
                 ResultSet rs2 = pst2.executeQuery();
 
@@ -155,7 +157,7 @@ public class Reports {
                     Paragraph ParagraphTimeWarranty = new Paragraph();
                     ParagraphTimeWarranty.setAlignment(Paragraph.ALIGN_LEFT);
                     ParagraphTimeWarranty.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-                    ParagraphTimeWarranty.add("\n             TIEMPO DE GARANTÍA " + "(" + day_warrantyEquipo + " DIAS): ");
+                    ParagraphTimeWarranty.add("\n               TIEMPO DE GARANTÍA " + "(" + day_warrantyEquipo + " DIAS): ");
                     ParagraphTimeWarranty.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
                     ParagraphTimeWarranty.add(time);
                     document.add(ParagraphTimeWarranty);
@@ -170,11 +172,33 @@ public class Reports {
 
             }
 
+            if (!comments_technical.equals("")) {
+
+                Paragraph ParagraphCommets_Technical = new Paragraph();
+                ParagraphCommets_Technical.setAlignment(Paragraph.ALIGN_LEFT);
+                ParagraphCommets_Technical.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
+                ParagraphCommets_Technical.add("\n               OBSERVACIÓN TÉCNICA: ");
+                ParagraphCommets_Technical.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
+                ParagraphCommets_Technical.add(comments_technical);
+                document.add(ParagraphCommets_Technical);
+                
+                Paragraph ParagraphStatus_Technical = new Paragraph();
+                ParagraphStatus_Technical.setAlignment(Paragraph.ALIGN_LEFT);
+                ParagraphStatus_Technical.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
+                ParagraphStatus_Technical.add("\n               (" + status_technical + ")");
+                document.add(ParagraphStatus_Technical);
+
+            }
+
             document.close();
 
             JOptionPane.showMessageDialog(null, "Reporte Creado Correctamente...");
-            
+
         } catch (Exception e) {
+
+            System.err.println("¡Error al generar reporte! " + e);
+            JOptionPane.showMessageDialog(null, "Error Al Generar Reporte.", "¡Error!", JOptionPane.OK_OPTION);
+
         }
 
     }

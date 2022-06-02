@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import clases.Paneles;
+import javax.swing.BorderFactory;
 
 public class Review_Technical extends javax.swing.JPanel {
 
@@ -16,6 +17,9 @@ public class Review_Technical extends javax.swing.JPanel {
         initComponents();
 
         getInformation();
+        
+        jTextArea_Coment_Technical.setBorder(BorderFactory.createCompoundBorder(jTextArea_Coment_Technical.getBorder(), 
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
     }
 

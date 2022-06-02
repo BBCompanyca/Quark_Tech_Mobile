@@ -8,10 +8,12 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import clases.Paneles;
+import javax.swing.BorderFactory;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {
 
-    String status = "", status_technical = "";
+    String status = "", status_technical = "", brand = "", model = "", color = "", serial = "", falla = "", date_register = "", 
+            received = "", comments_technical = "";
 
     public static int flag = 0;
 
@@ -25,6 +27,11 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         getInformationWarranty();
 
         ValidateButton();
+
+        jTextArea_Recibido.setBorder(BorderFactory.createCompoundBorder(jTextArea_Recibido.getBorder(), 
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        jTextArea_Comments_Technical.setBorder(BorderFactory.createCompoundBorder(jTextArea_Comments_Technical.getBorder(), 
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
     }
 
@@ -54,7 +61,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jButton_Cancelar = new javax.swing.JButton();
         jButton_Dowload_Report = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea_Recibido1 = new javax.swing.JTextArea();
+        jTextArea_Comments_Technical = new javax.swing.JTextArea();
         jLabel_Recibido1 = new javax.swing.JLabel();
         jLabel_Status = new javax.swing.JLabel();
         jButton_Entregar = new javax.swing.JButton();
@@ -188,6 +195,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jButton_Sent.setBorder(null);
         jButton_Sent.setBorderPainted(false);
         jButton_Sent.setContentAreaFilled(false);
+        jButton_Sent.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_Sent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButton_SentMouseExited(evt);
@@ -196,9 +204,20 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_SentMousePressed(evt);
             }
         });
-        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 150, 60));
+        jButton_Sent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SentActionPerformed(evt);
+            }
+        });
+        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 150, 60));
 
-        jButton_Cancelar.setText("Cancelar");
+        jButton_Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar btn dark.png"))); // NOI18N
+        jButton_Cancelar.setBorder(null);
+        jButton_Cancelar.setBorderPainted(false);
+        jButton_Cancelar.setContentAreaFilled(false);
+        jButton_Cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Cancelar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar btn ligth.png"))); // NOI18N
+        jButton_Cancelar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar btn ligth.png"))); // NOI18N
         jButton_Cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_CancelarMousePressed(evt);
@@ -209,7 +228,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_CancelarActionPerformed(evt);
             }
         });
-        add(jButton_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 150, 60));
+        add(jButton_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 150, 60));
 
         jButton_Dowload_Report.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pdf_80px.png"))); // NOI18N
         jButton_Dowload_Report.setBorder(null);
@@ -227,17 +246,17 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setFocusable(false);
 
-        jTextArea_Recibido1.setEditable(false);
-        jTextArea_Recibido1.setBackground(new java.awt.Color(9, 53, 69));
-        jTextArea_Recibido1.setColumns(5);
-        jTextArea_Recibido1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        jTextArea_Recibido1.setForeground(new java.awt.Color(240, 240, 240));
-        jTextArea_Recibido1.setLineWrap(true);
-        jTextArea_Recibido1.setRows(5);
-        jTextArea_Recibido1.setText("\n");
-        jTextArea_Recibido1.setWrapStyleWord(true);
-        jTextArea_Recibido1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
-        jScrollPane2.setViewportView(jTextArea_Recibido1);
+        jTextArea_Comments_Technical.setEditable(false);
+        jTextArea_Comments_Technical.setBackground(new java.awt.Color(9, 53, 69));
+        jTextArea_Comments_Technical.setColumns(5);
+        jTextArea_Comments_Technical.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        jTextArea_Comments_Technical.setForeground(new java.awt.Color(240, 240, 240));
+        jTextArea_Comments_Technical.setLineWrap(true);
+        jTextArea_Comments_Technical.setRows(5);
+        jTextArea_Comments_Technical.setText("\n");
+        jTextArea_Comments_Technical.setWrapStyleWord(true);
+        jTextArea_Comments_Technical.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
+        jScrollPane2.setViewportView(jTextArea_Comments_Technical);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 330, 125));
 
@@ -251,13 +270,19 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 380, 30));
 
-        jButton_Entregar.setText("Entregar");
+        jButton_Entregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/entregar btn dark.png"))); // NOI18N
+        jButton_Entregar.setBorder(null);
+        jButton_Entregar.setBorderPainted(false);
+        jButton_Entregar.setContentAreaFilled(false);
+        jButton_Entregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Entregar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/entregar btn ligth.png"))); // NOI18N
+        jButton_Entregar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/entregar btn ligth.png"))); // NOI18N
         jButton_Entregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_EntregarMousePressed(evt);
             }
         });
-        add(jButton_Entregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 150, 60));
+        add(jButton_Entregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 150, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -287,11 +312,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     private void jButton_Dowload_ReportMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Dowload_ReportMousePressed
 
-        String equipo = jTextField_Equipo.getText().trim();
-        String serial = jTextField_Serial.getText().trim();
-        String falla = jTextField_Falla.getText().trim();
-        String received = jTextArea_Recibido.getText().trim();
-        String time = jLabel_Warranty.getText();
+        String time = jLabel_Warranty.getText(); 
 
         if (time.equals("Este equipo no cumple con el tiempo de garantía...")) {
 
@@ -311,7 +332,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
             File fichero = fc.getSelectedFile();
 
-            //reports.ReportWarranty(fichero, Warranty.ID, code, equipo, serial, falla, received, time);
+            reports.ReportWarranty(fichero, Warranty.ID, brand, model, serial, received, falla, time, comments_technical, status_technical);
         }
 
     }//GEN-LAST:event_jButton_Dowload_ReportMousePressed
@@ -416,6 +437,10 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton_EntregarMousePressed
 
+    private void jButton_SentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_SentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Cancelar;
@@ -437,8 +462,8 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JTextArea jTextArea_Comments_Technical;
     private javax.swing.JTextArea jTextArea_Recibido;
-    private javax.swing.JTextArea jTextArea_Recibido1;
     private javax.swing.JTextField jTextField_Calendar;
     private javax.swing.JTextField jTextField_Code1;
     private javax.swing.JTextField jTextField_Equipo;
@@ -452,24 +477,32 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement("select c.name_client, e.brand, e.model, e.color, w.serial, w.falla, w.date_register, w.received, w.comments_technical, "
-                    + "w.status, w.status_technical, w.day_warranty from warranty w join client c on w.id_client = c.id_client and w.id_warranty = '" + Warranty.ID + "' "
+                    + "w.status, w.status_technical, w.day_warranty, w.date_purchase from warranty w join client c on w.id_client = c.id_client and w.id_warranty = '" + Warranty.ID + "' "
                     + "join equipo e on w.id_equipo = e.id_equipo and w.id_warranty = '" + Warranty.ID + "'");
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
-
+                
+                brand = rs.getString("e.brand");
+                model = rs.getString("e.model");
+                color = rs.getString("e.color");
+                serial = rs.getString("w.serial");
+                falla = rs.getString("w.falla");
+                date_register = rs.getString("w.date_register");
+                received = rs.getString("w.received");
+                comments_technical = rs.getString("w.comments_technical");
                 status = rs.getString("w.status");
                 status_technical = rs.getString("w.status_technical");
 
                 jLabel_Title.setText("Garantía - Cliente: " + rs.getString("c.name_client"));
 
-                jTextField_Equipo.setText(rs.getString("e.brand") + " - " + rs.getString("e.model") + " - " + rs.getString("e.color"));
-                jTextField_Serial.setText(rs.getString("w.serial"));
-                jTextField_Falla.setText(rs.getString("w.falla"));
-                jTextField_Calendar.setText(rs.getString("w.date_register"));
-                jTextArea_Recibido.setText(rs.getString("w.received"));
-                jTextArea_Recibido1.setText(rs.getString("w.comments_technical"));
+                jTextField_Equipo.setText(brand + " - " + model + " - " + color);
+                jTextField_Serial.setText(serial);
+                jTextField_Falla.setText(falla);
+                jTextField_Calendar.setText(date_register);
+                jTextArea_Recibido.setText(received);
+                jTextArea_Comments_Technical.setText(comments_technical);
 
                 if (status_technical.equals("") || status_technical.equals("...")) {
 
