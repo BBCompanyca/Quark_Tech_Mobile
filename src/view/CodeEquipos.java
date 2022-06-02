@@ -18,8 +18,8 @@ public class CodeEquipos extends javax.swing.JPanel {
     DefaultTableModel model = new DefaultTableModel();
 
     Paneles paneles = new Paneles();
-
-    public static String code;
+    
+    public static int id_equipo = 0;
 
     public CodeEquipos() {
         initComponents();
@@ -109,11 +109,11 @@ public class CodeEquipos extends javax.swing.JPanel {
 
             if (search.equals("")) {
 
-                query = "select code, brand, model, color, day_warranty from equipo";
+                query = "select id_equipo, code, brand, model, color, day_warranty from equipo";
 
             } else {
 
-                query = "select code, brand, model, color, day_warranty from equipo where code = '" + search + "' or "
+                query = "select id_equipo, code, brand, model, color, day_warranty from equipo where code = '" + search + "' or "
                         + "brand = '" + search + "' or model = '" + search + "' or color = '" + search + "' or "
                         + "day_warranty = '" + search + "'";
 
@@ -132,6 +132,7 @@ public class CodeEquipos extends javax.swing.JPanel {
                 model.setColumnCount(0);
                 model.setRowCount(0);
 
+                model.addColumn("ID");
                 model.addColumn("Código");
                 model.addColumn("Marca");
                 model.addColumn("Modelo");
@@ -139,9 +140,9 @@ public class CodeEquipos extends javax.swing.JPanel {
                 model.addColumn("Días de garantías");
 
                 while (rs.next()) {
-                    Object[] fila = new Object[5];
+                    Object[] fila = new Object[6];
 
-                    for (int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 6; i++) {
 
                         fila[i] = rs.getObject(i + 1);
 
@@ -191,7 +192,7 @@ public class CodeEquipos extends javax.swing.JPanel {
 
                 if (fila_point >= -1) {
 
-                    code = (String) jTable_Equipo.getValueAt(fila_point, columna_point);
+                    id_equipo = (int) jTable_Equipo.getValueAt(fila_point, columna_point);
 
                     paneles.PanelRegisterWarranty();
 
@@ -209,13 +210,14 @@ public class CodeEquipos extends javax.swing.JPanel {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select code, brand, model, color, day_warranty from equipo");
+                    "select id_equipo, code, brand, model, color, day_warranty from equipo");
 
             ResultSet rs = pst.executeQuery();
 
             jTable_Equipo = new JTable(model);
             jScrollPane.setViewportView(jTable_Equipo);
 
+            model.addColumn("ID");
             model.addColumn("Código");
             model.addColumn("Marca");
             model.addColumn("Modelo");
@@ -223,9 +225,9 @@ public class CodeEquipos extends javax.swing.JPanel {
             model.addColumn("Días de garantías");
 
             while (rs.next()) {
-                Object[] fila = new Object[5];
+                Object[] fila = new Object[6];
 
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 6; i++) {
 
                     fila[i] = rs.getObject(i + 1);
 

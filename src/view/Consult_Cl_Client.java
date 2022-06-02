@@ -15,14 +15,14 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
     Paneles paneles = new Paneles();
 
-    public static int flag = 0;
+    public static int flag = 0, id_client = 0;
     public static String name_client, ci_client;
 
     public Consult_Cl_Client() {
         initComponents();
 
         TextPrompt text = new TextPrompt("Ingrese el N° de C.I del Cliente", jTextField_CI_Client);
-        formattext.ValidateCI(jTextField_CI_Client);
+        formattext.ValidateChar_Rif(jTextField_CI_Client);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,7 +44,13 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
         add(jLabel_CI_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 150, -1, -1));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 210, 250, 10));
 
-        jButton_Consult.setText("Consultar");
+        jButton_Consult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consult btn dark.png"))); // NOI18N
+        jButton_Consult.setBorder(null);
+        jButton_Consult.setBorderPainted(false);
+        jButton_Consult.setContentAreaFilled(false);
+        jButton_Consult.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Consult.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consutl btn ligth.png"))); // NOI18N
+        jButton_Consult.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consutl btn ligth.png"))); // NOI18N
         jButton_Consult.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_ConsultMousePressed(evt);
@@ -55,7 +61,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                 jButton_ConsultActionPerformed(evt);
             }
         });
-        add(jButton_Consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 260, 190, 40));
+        add(jButton_Consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 250, 190, 50));
 
         jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
@@ -81,92 +87,84 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
         if (!ci_client.equals("")) {
 
-            if (jTextField_CI_Client.getText().length() == 8 || jTextField_CI_Client.getText().length() == 7) {
+            try {
 
-                try {
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select identity_card_client from client where unformat_identity_card_client = '" + ci_client + "'");
 
-                    Connection cn = BD_Connection.connection();
-                    PreparedStatement pst = cn.prepareStatement(
-                            "select cedula_client from client where unformat_cedula_client = '" + ci_client + "'");
+                ResultSet rs = pst.executeQuery();
 
-                    ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
 
-                    if (rs.next()) {
+                    cn.close();
 
-                        cn.close();
+                    try {
 
-                        try {
+                        Connection cn2 = BD_Connection.connection();
+                        PreparedStatement pst2 = cn2.prepareStatement(
+                                "select id_client, name_client, telephone_client, direction_client from client where "
+                                + "unformat_identity_card_client = '" + ci_client + "'");
 
-                            Connection cn2 = BD_Connection.connection();
-                            PreparedStatement pst2 = cn2.prepareStatement(
-                                    "select name_client, telephone_client, direction_client from client where unformat_cedula_client = '"
-                                    + ci_client + "'");
+                        ResultSet rs2 = pst2.executeQuery();
 
-                            ResultSet rs2 = pst2.executeQuery();
+                        if (rs2.next()) {
 
-                            if (rs2.next()) {
+                            int question = JOptionPane.showConfirmDialog(null, "Nombre: " + rs2.getString("name_client") + "\n\n"
+                                    + "Teléfono: " + rs2.getString("telephone_client") + "\n\n"
+                                    + "Dirección: " + rs2.getString("direction_client") + "\n",
+                                    "Selección", JOptionPane.OK_CANCEL_OPTION);
 
-                                int question = JOptionPane.showConfirmDialog(null, "Nombre: " + rs2.getString("name_client") + "\n\n"
-                                        + "Teléfono: " + rs2.getString("telephone_client") + "\n\n"
-                                        + "Dirección: " + rs2.getString("direction_client") + "\n",
-                                        "Selección", JOptionPane.OK_CANCEL_OPTION);
+                            if (question == 0) {
 
-                                if (question == 0) {
+                                Register_Warranty.flag = 0;
+                                Register_Warranty.flag_AddressRegisterAndConsult = 0;
 
-                                    Register_Warranty.flag = 0;
-                                    Register_Warranty.flag_AddressRegisterAndConsult = 0;
-                                    paneles.PanelRegisterWarranty();
+                                name_client = rs2.getString("name_client");
+                                id_client = rs2.getInt(1);
 
-                                } else {
+                                paneles.PanelRegisterWarranty();
 
-                                    paneles.PanelConsulCient();
+                            } else {
 
-                                }
+                                paneles.PanelConsulCient();
+
                             }
-
-                        } catch (SQLException e) {
-
-                            System.err.println("¡Error al consultar la información del cliente! " + e);
-                            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del cliente!");
-
                         }
 
-                    } else {
+                    } catch (SQLException e) {
 
-                        cn.close();
-
-                        int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
-                                "Selección", JOptionPane.OK_CANCEL_OPTION);
-
-                        if (question == 0) {
-
-                            flag = 1;
-
-                            paneles.PanelRegisterClient();
-
-                        } else {
-
-                            paneles.PanelConsulCient();
-
-                        }
+                        System.err.println("¡Error al consultar la información del cliente! " + e);
+                        JOptionPane.showMessageDialog(null, "¡Error al consultar la información del cliente!");
 
                     }
 
-                } catch (SQLException e) {
+                } else {
 
-                    System.err.println("¡Error al consultar la C.I del cliente! " + e);
-                    JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I del cliente!", "¡Error!", JOptionPane.OK_OPTION);
+                    cn.close();
+
+                    int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
+                            "Selección", JOptionPane.OK_CANCEL_OPTION);
+
+                    if (question == 0) {
+
+                        flag = 1;
+
+                        ci_client = jTextField_CI_Client.getText().trim();
+                        paneles.PanelRegisterClient();
+
+                    } else {
+
+                        paneles.PanelConsulCient();
+
+                    }
 
                 }
 
-            } else {
+            } catch (SQLException e) {
 
-                jLabel_CI_Client.setForeground(Color.red);
-
-                JOptionPane.showMessageDialog(null, "¡Error de formato!", "¡Error!", JOptionPane.WARNING_MESSAGE);
-
-                jTextField_CI_Client.setText("");
-                jTextField_CI_Client.requestFocus();
+                System.err.println("¡Error al consultar la C.I del cliente! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I del cliente!", "¡Error!", JOptionPane.OK_OPTION);
 
             }
 
@@ -195,94 +193,84 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
             if (!ci_client.equals("")) {
 
-                if (jTextField_CI_Client.getText().length() == 8 || jTextField_CI_Client.getText().length() == 7) {
+                try {
 
-                    try {
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(
+                            "select identity_card_client from client where unformat_identity_card_client = '" + ci_client + "'");
 
-                        Connection cn = BD_Connection.connection();
-                        PreparedStatement pst = cn.prepareStatement(
-                                "select cedula_client from client where unformat_cedula_client = '" + ci_client + "'");
+                    ResultSet rs = pst.executeQuery();
 
-                        ResultSet rs = pst.executeQuery();
+                    if (rs.next()) {
 
-                        if (rs.next()) {
+                        cn.close();
 
-                            cn.close();
+                        try {
 
-                            try {
+                            Connection cn2 = BD_Connection.connection();
+                            PreparedStatement pst2 = cn2.prepareStatement(
+                                    "select id_client, name_client, telephone_client, direction_client from client where "
+                                    + "unformat_identity_card_client = '" + ci_client + "'");
 
-                                Connection cn2 = BD_Connection.connection();
-                                PreparedStatement pst2 = cn2.prepareStatement(
-                                        "select name_client, telephone_client, direction_client from client where unformat_cedula_client = '"
-                                        + ci_client + "'");
+                            ResultSet rs2 = pst2.executeQuery();
 
-                                ResultSet rs2 = pst2.executeQuery();
+                            if (rs2.next()) {
 
-                                if (rs2.next()) {
-                                    
+                                int question = JOptionPane.showConfirmDialog(null, "Nombre: " + rs2.getString("name_client") + "\n\n"
+                                        + "Teléfono: " + rs2.getString("telephone_client") + "\n\n"
+                                        + "Dirección: " + rs2.getString("direction_client") + "\n",
+                                        "Selección", JOptionPane.OK_CANCEL_OPTION);
+
+                                if (question == 0) {
+
+                                    Register_Warranty.flag = 0;
+                                    Register_Warranty.flag_AddressRegisterAndConsult = 0;
+
                                     name_client = rs2.getString("name_client");
+                                    id_client = rs2.getInt(1);
 
-                                    int question = JOptionPane.showConfirmDialog(null, "Nombre: " + rs2.getString("name_client") + "\n\n"
-                                            + "Teléfono: " + rs2.getString("telephone_client") + "\n\n"
-                                            + "Dirección: " + rs2.getString("direction_client") + "\n",
-                                            "Selección", JOptionPane.OK_CANCEL_OPTION);
+                                    paneles.PanelRegisterWarranty();
 
-                                    if (question == 0) {
+                                } else {
 
-                                        Register_Warranty.flag = 0;
-                                        paneles.PanelRegisterWarranty();
+                                    paneles.PanelConsulCient();
 
-                                    } else {
-
-                                        paneles.PanelConsulCient();
-
-                                    }
                                 }
-
-                            } catch (SQLException e) {
-
-                                System.err.println("¡Error al consultar la información del cliente! " + e);
-                                JOptionPane.showMessageDialog(null, "¡Error al consultar la información del cliente!", 
-                                        "¡Error!", JOptionPane.OK_OPTION);
-
                             }
 
-                        } else {
+                        } catch (SQLException e) {
 
-                            cn.close();
-
-                            int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
-                                    "Selección", JOptionPane.OK_CANCEL_OPTION);
-
-                            if (question == 0) {
-
-                                flag = 1;
-
-                                paneles.PanelRegisterClient();
-
-                            } else {
-
-                                paneles.PanelConsulCient();
-
-                            }
+                            System.err.println("¡Error al consultar la información del cliente! " + e);
+                            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del cliente!",
+                                    "¡Error!", JOptionPane.OK_OPTION);
 
                         }
 
-                    } catch (SQLException e) {
+                    } else {
 
-                        System.err.println("¡Error al consultar la C.I del cliente! " + e);
-                        JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I del cliente!", "¡Error!", JOptionPane.OK_OPTION);
+                        cn.close();
+
+                        int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
+                                "Selección", JOptionPane.OK_CANCEL_OPTION);
+
+                        if (question == 0) {
+
+                            flag = 1;
+
+                            paneles.PanelRegisterClient();
+
+                        } else {
+
+                            paneles.PanelConsulCient();
+
+                        }
 
                     }
 
-                } else {
+                } catch (SQLException e) {
 
-                    jLabel_CI_Client.setForeground(Color.red);
-
-                    JOptionPane.showMessageDialog(null, "¡Error de formato!", "¡Error!", JOptionPane.WARNING_MESSAGE);
-
-                    jTextField_CI_Client.setText("");
-                    jTextField_CI_Client.requestFocus();
+                    System.err.println("¡Error al consultar la C.I del cliente! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I del cliente!", "¡Error!", JOptionPane.OK_OPTION);
 
                 }
 

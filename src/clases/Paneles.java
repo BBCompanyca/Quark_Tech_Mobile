@@ -18,6 +18,7 @@ import view.Register_Client;
 import view.Register_Warranty;
 import view.Register_User;
 import view.Reset_Password;
+import view.Review_Technical;
 import view.SentWarranty;
 import view.Solicitudes;
 import view.Table_Technical;
@@ -25,6 +26,7 @@ import view.Update_Client;
 import view.Update_User;
 import view.Users;
 import view.Warranty_Technical;
+import view.sentWarranty_Technical;
 
 public class Paneles {
 
@@ -211,7 +213,7 @@ public class Paneles {
         jPanel_Content.repaint();
 
     }
-    
+
     //Panel con la tabla de las garantías del técnico...
     public void PanelWarrantyTechnical() {
 
@@ -254,7 +256,7 @@ public class Paneles {
 
     }
 
-    //Panel de la Priminar de las garantìas...
+    //Panel de envios de las garantìas a servicio técnico...
     public void Panel_SentWarranty() {
 
         SentWarranty Sent_warranty = new SentWarranty();
@@ -268,7 +270,21 @@ public class Paneles {
 
     }
 
-    //Panel de la Priminar de las garantìas...
+    //Panel de envio de garantía a la tienda...
+    public void Panel_SentWarranty_Technical() {
+
+        sentWarranty_Technical Sent_warranty_technical = new sentWarranty_Technical();
+        Sent_warranty_technical.setSize(WidthPanel, HeigthPanel);
+        Sent_warranty_technical.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(Sent_warranty_technical, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+
+    //Panel de la Preliminar de las garantìas...
     public void Panel_Table_Technical() {
 
         Table_Technical table_technical = new Table_Technical();
@@ -282,7 +298,21 @@ public class Paneles {
 
     }
 
-    //Panel de la Priminar de las garantìas...
+    //Panel para hacer la revision de los equipos...
+    public void Panel_Review_Technical() {
+
+        Review_Technical review_technical = new Review_Technical();
+        review_technical.setSize(WidthPanel, HeigthPanel);
+        review_technical.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(review_technical, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+
+    //Panel para las solicitudes de las garantìas...
     public void Panel_Solicitudes() {
 
         Solicitudes solicitudes = new Solicitudes();

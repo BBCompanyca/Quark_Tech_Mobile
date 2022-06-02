@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import java.util.Date;
+import javax.swing.BorderFactory;
 
 public class Register_Warranty extends javax.swing.JPanel {
 
@@ -16,7 +17,7 @@ public class Register_Warranty extends javax.swing.JPanel {
     public static int flag = 0, flag_AddressRegisterAndConsult = 0;
 
     String brand, model, color, date_register, date_purchase, day, month, year, time_Warranty_STG, identity_card_client, name_client;
-    public static String serial, falla, numOrder, received;
+    public static String serial, falla, received;
 
     Paneles paneles = new Paneles();
 
@@ -37,6 +38,9 @@ public class Register_Warranty extends javax.swing.JPanel {
         jCalendar.setVisible(false);
 
         jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
+        
+        jTextArea_Recibido.setBorder(BorderFactory.createCompoundBorder(jTextArea_Recibido.getBorder(), 
+                BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 
     }
 
@@ -54,13 +58,9 @@ public class Register_Warranty extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jTextField_Serial = new javax.swing.JTextField();
-        jLabel_DatePurchase = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         jTextField_Falla = new javax.swing.JTextField();
         jLabel_Falla = new javax.swing.JLabel();
-        jTextField_NumOrden = new javax.swing.JTextField();
-        jLabel_NumeroDeOrden = new javax.swing.JLabel();
-        jSeparator7 = new javax.swing.JSeparator();
         jLabel_Code = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_Recibido = new javax.swing.JTextArea();
@@ -68,9 +68,10 @@ public class Register_Warranty extends javax.swing.JPanel {
         jButton_Register = new javax.swing.JButton();
         jLabel_Serial = new javax.swing.JLabel();
         jButton_Search_Code = new javax.swing.JButton();
-        jButton_Calendar = new javax.swing.JButton();
+        jLabel_DatePurchase = new javax.swing.JLabel();
         jTextField_Calendar = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
+        jButton_Calendar = new javax.swing.JButton();
         jLabel_Title = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
@@ -130,11 +131,6 @@ public class Register_Warranty extends javax.swing.JPanel {
             }
         });
         add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 150, 20));
-
-        jLabel_DatePurchase.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_DatePurchase.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_DatePurchase.setText("Fecha de compra:");
-        add(jLabel_DatePurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, -1));
         add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 210, -1));
 
         jTextField_Falla.setBackground(new java.awt.Color(9, 53, 69));
@@ -153,19 +149,6 @@ public class Register_Warranty extends javax.swing.JPanel {
         jLabel_Falla.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Falla.setText("Falla:");
         add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
-
-        jTextField_NumOrden.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_NumOrden.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        jTextField_NumOrden.setForeground(new java.awt.Color(240, 240, 240));
-        jTextField_NumOrden.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField_NumOrden.setBorder(null);
-        add(jTextField_NumOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 120, 20));
-
-        jLabel_NumeroDeOrden.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_NumeroDeOrden.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_NumeroDeOrden.setText("N° ORDEN:");
-        add(jLabel_NumeroDeOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, -1, -1));
-        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 120, -1));
 
         jLabel_Code.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Code.setForeground(new java.awt.Color(240, 240, 240));
@@ -218,18 +201,16 @@ public class Register_Warranty extends javax.swing.JPanel {
         });
         add(jButton_Search_Code, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, -1, 30));
 
-        jButton_Calendar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton_CalendarMousePressed(evt);
-            }
-        });
-        add(jButton_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, -1, 30));
+        jLabel_DatePurchase.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_DatePurchase.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_DatePurchase.setText("Fecha de compra:");
+        add(jLabel_DatePurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
 
         jTextField_Calendar.setEditable(false);
         jTextField_Calendar.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Calendar.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jTextField_Calendar.setForeground(new java.awt.Color(240, 240, 240));
-        jTextField_Calendar.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField_Calendar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField_Calendar.setBorder(null);
         jTextField_Calendar.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -241,8 +222,15 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jTextField_CalendarKeyTyped(evt);
             }
         });
-        add(jTextField_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 130, 20));
-        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, 130, -1));
+        add(jTextField_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 130, 20));
+        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, 130, -1));
+
+        jButton_Calendar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_CalendarMousePressed(evt);
+            }
+        });
+        add(jButton_Calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, -1, 30));
 
         jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
@@ -261,6 +249,8 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
+        clases.Date date = new clases.Date();
+        
         int flag = 0;
 
         String code, equipo, date_purchase;
@@ -269,7 +259,6 @@ public class Register_Warranty extends javax.swing.JPanel {
         equipo = jTextField_Equipo.getText().trim();
         serial = jTextField_Serial.getText().trim();
         falla = jTextField_Falla.getText().trim();
-        numOrder = jTextField_NumOrden.getText().trim();
         date_purchase = jTextField_Calendar.getText().trim();
         received = jTextArea_Recibido.getText().trim();
 
@@ -314,17 +303,6 @@ public class Register_Warranty extends javax.swing.JPanel {
         } else {
 
             jLabel_Falla.setForeground(new Color(240, 240, 240));
-
-        }
-
-        if (numOrder.equals("")) {
-
-            jLabel_NumeroDeOrden.setForeground(Color.red);
-            flag++;
-
-        } else {
-
-            jLabel_NumeroDeOrden.setForeground(new Color(240, 240, 240));
 
         }
 
@@ -381,25 +359,25 @@ public class Register_Warranty extends javax.swing.JPanel {
 
                             Connection cn2 = BD_Connection.connection();
                             PreparedStatement pst2 = cn2.prepareStatement(
-                                    "insert into warranty values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                    "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
                             pst2.setInt(1, 0);
-                            pst2.setString(2, code);
-                            pst2.setString(3, brand + " - " + model);
-                            pst2.setString(4, color);
-                            pst2.setString(5, serial);
-                            pst2.setString(6, falla);
-                            pst2.setString(7, numOrder);
-                            pst2.setString(8, formattext.ValidateCI2(identity_card_client));
-                            pst2.setString(9, identity_card_client);
-                            pst2.setString(10, name_client);
-                            pst2.setString(11, received);
-                            pst2.setString(12, DateNow());
-                            pst2.setString(13, date_purchase);
-                            pst2.setInt(14, time_Warranty);
-                            pst2.setString(15, Login.direction);
-                            pst2.setString(16, "En Tienda");
-                            pst2.setString(17, Login.user);
+                            pst2.setInt(2, Consult_Cl_Client.id_client);
+                            pst2.setInt(3, CodeEquipos.id_equipo);
+                            pst2.setInt(4, 0);
+                            pst2.setInt(5, Login.ID_User);
+                            pst2.setString(6, Login.direction);
+                            pst2.setString(7, serial);
+                            pst2.setString(8, falla);
+                            pst2.setString(9, date.DateToDay());
+                            pst2.setString(10, received);
+                            pst2.setInt(11, time_Warranty); 
+                            pst2.setString(12, date_purchase); 
+                            pst2.setString(13, "");
+                            pst2.setString(14, "");
+                            pst2.setString(15, "");
+                            pst2.setString(16, "");
+                            pst2.setString(17, "Nuevo Ingreso");
                             pst2.setString(18, "");
                             pst2.setString(19, "");
                             pst2.setString(20, "");
@@ -457,7 +435,6 @@ public class Register_Warranty extends javax.swing.JPanel {
         //Si presiona el boton para seleccionar un equipo se guardará la información de la interfaz...
         serial = jTextField_Serial.getText().trim();
         falla = jTextField_Falla.getText().trim();
-        numOrder = jTextField_NumOrden.getText().trim();
         received = jTextArea_Recibido.getText().trim();
 
         //Variable bandera para saber de donde se está abriendo la interfaz...
@@ -543,7 +520,6 @@ public class Register_Warranty extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_DatePurchase;
     private javax.swing.JLabel jLabel_Equipo;
     private javax.swing.JLabel jLabel_Falla;
-    private javax.swing.JLabel jLabel_NumeroDeOrden;
     private javax.swing.JLabel jLabel_Recibido;
     private javax.swing.JLabel jLabel_Serial;
     private javax.swing.JLabel jLabel_Title;
@@ -553,14 +529,12 @@ public class Register_Warranty extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextArea jTextArea_Recibido;
     private javax.swing.JTextField jTextField_Calendar;
     private javax.swing.JTextField jTextField_Code;
     private javax.swing.JTextField jTextField_Equipo;
     private javax.swing.JTextField jTextField_Falla;
-    private javax.swing.JTextField jTextField_NumOrden;
     private javax.swing.JTextField jTextField_Serial;
     // End of variables declaration//GEN-END:variables
 
@@ -571,14 +545,12 @@ public class Register_Warranty extends javax.swing.JPanel {
 
             jTextField_Serial.setText(serial);
             jTextField_Falla.setText(falla);
-            jTextField_NumOrden.setText(numOrder);
             jTextArea_Recibido.setText(received);
 
         } else {
 
             jTextField_Serial.setText("");
             jTextField_Falla.setText("");
-            jTextField_NumOrden.setText("");
             jTextArea_Recibido.setText("");
             jTextField_Code.setText("");
             jTextField_Equipo.setText("");
@@ -590,13 +562,11 @@ public class Register_Warranty extends javax.swing.JPanel {
     //Método para obtener la información del equipo...
     private void getInformationEquipo() {
 
-        jTextField_Code.setText(CodeEquipos.code);
-
         try {
 
             Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement("select brand, model, color, capacity, day_warranty from equipo "
-                    + "where code = '" + CodeEquipos.code + "'");
+            PreparedStatement pst = cn.prepareStatement("select code, brand, model, color, capacity, day_warranty from equipo "
+                    + "where id_equipo = '" + CodeEquipos.id_equipo + "'");
 
             ResultSet rs = pst.executeQuery();
 
@@ -607,6 +577,8 @@ public class Register_Warranty extends javax.swing.JPanel {
                 model = rs.getString("model");
                 color = rs.getString("color");
 
+                jTextField_Code.setText(rs.getString("code"));
+                
                 jTextField_Equipo.setText(rs.getString("brand") + " - " + rs.getString("model")
                         + " - " + rs.getString("color") + " - " + rs.getString("capacity"));
 
@@ -687,7 +659,6 @@ public class Register_Warranty extends javax.swing.JPanel {
         jLabel_DatePurchase.setForeground(Color.GREEN);
         jLabel_Equipo.setForeground(Color.GREEN);
         jLabel_Falla.setForeground(Color.GREEN);
-        jLabel_NumeroDeOrden.setForeground(Color.GREEN);
         jLabel_Serial.setForeground(Color.GREEN);
         jLabel_Recibido.setForeground(Color.GREEN);
 
@@ -695,7 +666,6 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextField_Equipo.setText("");
         jTextField_Serial.setText("");
         jTextField_Falla.setText("");
-        jTextField_NumOrden.setText("");
         jTextField_Calendar.setText("");
         jTextArea_Recibido.setText("");
         jLabel_garantia.setText("");
@@ -720,7 +690,6 @@ public class Register_Warranty extends javax.swing.JPanel {
 
         } else {
 
-            identity_card_client = Consult_Cl_Client.ci_client;
             name_client = Consult_Cl_Client.name_client;
 
         }

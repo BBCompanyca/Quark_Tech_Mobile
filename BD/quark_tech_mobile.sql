@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-04-2022 a las 04:49:36
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.1.1
+-- Tiempo de generación: 02-06-2022 a las 21:09:14
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -32,13 +33,20 @@ CREATE TABLE `client` (
   `name_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `telephone_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `unformat_telephone_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `cedula_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `unformat_cedula_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `identity_card_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `unformat_identity_card_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `direction_client` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `direction_tienda` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `registered_by` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `last_modification` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `registered_by` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `last_modification` varchar(11) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Esta tabla es para el registro de clientes';
+
+--
+-- Volcado de datos para la tabla `client`
+--
+
+INSERT INTO `client` (`id_client`, `name_client`, `telephone_client`, `unformat_telephone_client`, `identity_card_client`, `unformat_identity_card_client`, `direction_client`, `direction_tienda`, `registered_by`, `last_modification`) VALUES
+(1, 'Neifer Reveron', '0414 - 589.65.23', '04145896523', 'V-27.913.620', 'V27913620', 'Charallave', 'City Market', '1', '3');
 
 -- --------------------------------------------------------
 
@@ -91,8 +99,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `name_user`, `username`, `password`, `telephone`, `unformat_telephone_user`, `direction`, `type_account`, `registered_by`, `last_modification`, `status`) VALUES
 (1, 'Neifer Reverón', 'NeiferJesus14', '41DD3LQ4D6GVvOXW6vFX4A==', '0414 - 214.46.84', '04142144684', 'Almacen', 'Moderador', 'System', '12345', 'Activo'),
-(2, 'Nery Ramos', 'Nery', 'U6tiCUDp7lU=', '0444 - 444.44.44', '04444444444', 'Almacen', 'Tecnico', 'NeiferJesus14', '', 'Activo'),
-(3, 'Richard Miller', 'Richard', 'rIxyf/mbZq0=', '0414 - 477.78.85', '04144777885', 'City Market', 'Vendedor', 'NeiferJesus14', '', 'Activo');
+(2, 'Nery Ramos', 'Nery', 'U6tiCUDp7lU=', '0444 - 444.44.44', '04444444444', 'Almacen', 'Tecnico', 'NeiferJesus14', 'NeiferJesus14', 'Activo'),
+(3, 'Richard Miller', 'Richard', 'rIxyf/mbZq0=', '0414 - 477.78.85', '04144777885', 'City Market', 'Administrador', 'NeiferJesus14', 'NeiferJesus14', 'Activo'),
+(4, 'Adriana Medina', 'Adriana', 'a3uHkkgIX5I=', '0414 - 788.85.89', '04147888589', 'Caricuao', 'Administrador', 'NeiferJesus14', '', 'Activo'),
+(5, 'Juan', 'Juan', 'A/TJ/+nsMT4=', '0144 - 444.44.44', '01444444444', 'City Market', 'Vendedor', 'Richard', 'NeiferJesus14', 'Activo');
 
 -- --------------------------------------------------------
 
@@ -102,27 +112,40 @@ INSERT INTO `user` (`id_user`, `name_user`, `username`, `password`, `telephone`,
 
 CREATE TABLE `warranty` (
   `id_warranty` int(11) NOT NULL,
-  `code` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `equipo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `color` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `id_client` int(11) NOT NULL,
+  `id_equipo` int(11) NOT NULL,
+  `id_technical` int(11) NOT NULL,
+  `id_registered_by` int(11) NOT NULL,
+  `shop` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `serial` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `falla` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `num_order` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `identity_card_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `unformat_identity_card_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `name_client` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `received` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `falla` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `date_register` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `received` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `day_warranty` int(10) NOT NULL,
   `date_purchase` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `day_warranty` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `direction_shop` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `date_sent_technical` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `delivery_technical` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `date_received_technical` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `comments_technical` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `registered_by` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `technical` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `date_sent` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `delivery` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `date_accepted` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `status_technical` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `date_sent_shop` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `delivery_shop` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `date_received_shop` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Esta tabla es para el registro de las garantías...';
+
+--
+-- Volcado de datos para la tabla `warranty`
+--
+
+INSERT INTO `warranty` (`id_warranty`, `id_client`, `id_equipo`, `id_technical`, `id_registered_by`, `shop`, `serial`, `falla`, `date_register`, `received`, `day_warranty`, `date_purchase`, `date_sent_technical`, `delivery_technical`, `date_received_technical`, `comments_technical`, `status`, `status_technical`, `date_sent_shop`, `delivery_shop`, `date_received_shop`) VALUES
+(1, 1, 1, 2, 1, 'Almacen', '123456', 'Software', '25/05/2022', 'asd', 14, '', '30/05/2022', 'Sr Roger', '30/05/2022', 'Cambio de pantalla', 'Entregado', 'No Reparado', '30/05/2022', 'Sr Roger', '30/05/2022'),
+(2, 1, 1, 2, 1, 'Almacen', 'asdfg', 'Sofware', '30/05/2022', 'Cargador, audifonos y el equipo se encuentra en buen estado.', 0, '', '30/05/2022', 'Roger Fernandez', '30/05/2022', 'El que equipo se le hizo el root necesario y se logró recuperar el sistema.', 'Entregado', 'Reparado', '30/05/2022', 'Sr Roger', '30/05/2022'),
+(3, 1, 1, 2, 1, 'Almacen', 'qwert', 'Corneta', '31/05/2022', 'Nada la vida es loca, vivela.', 0, '', '31/05/2022', 'Sr Roger.', '31/05/2022', 'asdad', 'Entregado', 'Reparado', '31/05/2022', 'Sr Roger', '31/05/2022'),
+(4, 1, 1, 2, 1, 'Almacen', 'asdff', 'asda', '02/06/2022', 'asdasdaddasdasdasdas', 14, '', '02/06/2022', 'Sr Roger', '02/06/2022', 'No se pudo que repar el equipo.', 'Entregado', 'No Reparado', '02/06/2022', 'Sr Roger', '02/06/2022'),
+(5, 1, 1, 2, 1, 'Almacen', 'sdadada', 'zxczczczxc', '02/06/2022', 'asdadasdasasdasdasdasd', 14, '', '02/06/2022', 'sadad', '02/06/2022', 'asdasdasdasdasdasdasdasd', 'Entregado', 'Reparado', '02/06/2022', 'asdasdasd', '02/06/2022'),
+(6, 1, 1, 0, 1, 'Almacen', 'asdasdas', 'asdasda', '02/06/2022', 'sadad', 14, '', '', '', '', 'Si Funciona', 'En Tienda', 'Reparado', '', '', ''),
+(7, 1, 1, 0, 1, 'Almacen', 'asdaxzczxczx', 'zxcxzxz', '02/06/2022', 'zxczxcz', 14, '01/06/2022', '', '', '', 'Si Funciona', 'En Tienda', 'Reparado', '', '', '');
 
 --
 -- Índices para tablas volcadas
@@ -160,7 +183,7 @@ ALTER TABLE `warranty`
 -- AUTO_INCREMENT de la tabla `client`
 --
 ALTER TABLE `client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
@@ -172,13 +195,13 @@ ALTER TABLE `equipo`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `warranty`
 --
 ALTER TABLE `warranty`
-  MODIFY `id_warranty` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_warranty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

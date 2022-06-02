@@ -4,6 +4,8 @@ import clases.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public final class Solicitudes extends javax.swing.JPanel {
 
@@ -55,8 +57,8 @@ public final class Solicitudes extends javax.swing.JPanel {
         try {
 
             Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select id_warranty from warranty where technical = '" + Login.user + "' and status = '" + "Solicitud Enviada - En Espera" + "'");
+            PreparedStatement pst = cn.prepareStatement("select id_warranty from warranty where id_technical = '" + Login.ID_User + "' "
+                    + "and status = '" + "Solicitud Enviada - En Espera" + "'");
 
             ResultSet rs = pst.executeQuery();
 
@@ -71,7 +73,12 @@ public final class Solicitudes extends javax.swing.JPanel {
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al mostrar notificaciones! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al mostrar las solicitudes!", "¡Error!",
+                    JOptionPane.OK_OPTION);
+
         }
 
     }

@@ -1,6 +1,9 @@
 package view;
 
 import clases.BD_Connection;
+import clases.Paneles;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,14 +13,20 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class Warranty_Technical extends javax.swing.JPanel {
-    
+
     DefaultTableModel model = new DefaultTableModel();
+    
+    Paneles paneles = new Paneles();
+
+    public static int ID_Warranty;
 
     public Warranty_Technical() {
         initComponents();
-        
+
         getInformationWarranty();
         
+        EventTable();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -255,7 +264,7 @@ public class Warranty_Technical extends javax.swing.JPanel {
 
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
-       /* String search = jTextField_Search_Warranty.getText().trim();
+        /* String search = jTextField_Search_Warranty.getText().trim();
 
         String query = "";
 
@@ -387,47 +396,73 @@ public class Warranty_Technical extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField_Search_Warranty;
     // End of variables declaration//GEN-END:variables
 
-    private void getInformationWarranty(){
-        
+    private void getInformationWarranty() {
+
         try {
-            
+
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select id_warranty, equipo, color, serial, falla, direction_shop from warranty where status = '" + "En Revisión" + "' "
-                            + "and technical = '" + Login.user + "'");
-            
+                    "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.shop from warranty w join equipo e on "
+                            + "w.id_equipo = e.id_equipo and w.id_technical = '" + Login.ID_User + "' and w.status = '" + 
+                                    "En Revision" + "'");
+
             ResultSet rs = pst.executeQuery();
-            
+
             jTable_Warranty = new JTable(model);
             jScrollPane.setViewportView(jTable_Warranty);
-            
+
             model.addColumn("ID");
             model.addColumn("Equipo");
+            model.addColumn("Módelo");
             model.addColumn("Color");
             model.addColumn("Serial");
             model.addColumn("Falla");
             model.addColumn("Tienda");
-            
-            while (rs.next()) {                
-                Object[] fila = new Object[6];
-                for (int i = 0; i < 6; i++) {
-                    
+
+            while (rs.next()) {
+                Object[] fila = new Object[7];
+                for (int i = 0; i < 7; i++) {
+
                     fila[i] = rs.getObject(i + 1);
-                    
+
                 }
-                
+
                 model.addRow(fila);
             }
-            
+
             cn.close();
-            
+
         } catch (SQLException e) {
-            
+
             System.err.println("¡Error al vaciar la tabla de garantías! " + e);
             JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla de garantías!", "¡Error!", JOptionPane.OK_OPTION);
-            
+
         }
-        
+
     }
-    
+
+    private void EventTable() {
+
+        jTable_Warranty.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                int fila_point = jTable_Warranty.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+
+                if (fila_point >= -1) {
+
+                    ID_Warranty = (int) jTable_Warranty.getValueAt(fila_point, columna_point);
+                    
+                    paneles.Panel_Review_Technical();
+
+                }
+
+            }
+        }
+        );
+
+    }
+
 }

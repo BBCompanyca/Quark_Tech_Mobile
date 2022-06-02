@@ -173,16 +173,16 @@ public class SentWarranty extends javax.swing.JPanel {
 
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "update warranty set technical = ?, date_sent = ?, delivery = ?, status = ? where id_warranty = '" + Warranty.ID + "'");
+                        "update warranty set id_technical = ?, date_sent_technical = ?, delivery_technical = ?, status = ? where id_warranty = '" + Warranty.ID + "'");
 
-                pst.setString(1, technical);
+                pst.setInt(1, Table_Technical.ID_Technical);
                 pst.setString(2, date.DateToDay());
                 pst.setString(3, sent);
                 pst.setString(4, "Solicitud Enviada - En Espera");
 
                 pst.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "Envio Exitoso.");
+                JOptionPane.showMessageDialog(null, "Envío Exitoso.");
 
                 paneles.Panel_PreliminarWarranty();
 
@@ -251,16 +251,17 @@ public class SentWarranty extends javax.swing.JPanel {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select equipo, color, serial, falla from warranty where id_warranty = '" + Warranty.ID + "'");
+                    "select e.brand, e.model, e.color, w.serial, w.falla from warranty w join equipo e on w.id_equipo = e.id_equipo and "
+                            + "w.id_warranty = '" + Warranty.ID + "'");
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
 
-                jLabel_Equipo.setText("Equipo: " + rs.getString("equipo"));
-                jLabel_Color.setText("Color: " + rs.getString("color"));
-                jLabel_Serial.setText("Serial: " + rs.getString("serial"));
-                jLabel_Falla.setText("Falla: " + rs.getString("falla"));
+                jLabel_Equipo.setText("Equipo: " + rs.getString("e.brand") + " - " + rs.getString("e.model"));
+                jLabel_Color.setText("Color: " + rs.getString("e.color"));
+                jLabel_Serial.setText("Serial: " + rs.getString("w.serial"));
+                jLabel_Falla.setText("Falla: " + rs.getString("w.falla"));
                 jTextField_Date.setText("Fecha: " + date.DateToDay());
 
             }

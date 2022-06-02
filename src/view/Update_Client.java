@@ -29,7 +29,7 @@ public class Update_Client extends javax.swing.JPanel {
         formattext.ValidateName(jTextField_Name);
         formattext.ValidateName(jTextField_Direction_Client);
         formattext.ValidateNumber(jTextField_Telephone);
-        formattext.ValidateCI(jTextField_Ci);
+        formattext.ValidateChar_Rif(jTextField_Ci);
 
     }
 
@@ -214,7 +214,7 @@ public class Update_Client extends javax.swing.JPanel {
 
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select unformat_cedula_client from client where unformat_cedula_client = '" + ci + "' and not id_client = '"
+                        "select unformat_identity_card_client from client where unformat_identity_card_client = '" + ci + "' and not id_client = '"
                         + Clients.ID + "'");
 
                 ResultSet rs = pst.executeQuery();
@@ -238,22 +238,23 @@ public class Update_Client extends javax.swing.JPanel {
                     try {
 
                         String unformat_telephone = formattext.unFormatText(telephone);
+                        ci = ci.toUpperCase();
 
                         Connection cn2 = BD_Connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "update client set name_client = ?, telephone_client = ?, unformat_telephone_client = ?, "
-                                + "cedula_client = ?, unformat_cedula_client = ?,"
+                                + "identity_card_client = ?, unformat_identity_card_client = ?,"
                                 + "direction_client = ?, direction_tienda = ?, last_modification = ? "
                                 + "where id_client = '" + Clients.ID + "'");
 
                         pst2.setString(1, name);
                         pst2.setString(2, telephone);
                         pst2.setString(3, unformat_telephone);
-                        pst2.setString(4, formattext.ValidateCI2(ci));
+                        pst2.setString(4, formattext.Identity_Card_Client(ci));
                         pst2.setString(5, ci);
                         pst2.setString(6, direction_client);
                         pst2.setString(7, Login.direction);
-                        pst2.setString(8, Login.user);
+                        pst2.setString(8, String.valueOf(Login.ID_User));
 
                         pst2.executeUpdate();
 
@@ -352,18 +353,20 @@ public class Update_Client extends javax.swing.JPanel {
         try {
 
             Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement("select * from client where id_client = '" + Clients.ID + "'");
+            PreparedStatement pst = cn.prepareStatement("select c.name_client, c.telephone_client, "
+                    + "c.direction_client, c.unformat_identity_card_client, u.username from client c join "
+                    + "user u on id_client = '" + Clients.ID + "'");
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
 
-                jLabel_Title.setText("Modificar La Información Del Cliente - " + rs.getString("name_client"));
-                jTextField_Name.setText(rs.getString("name_client"));
-                jTextField_Telephone.setText(rs.getString("telephone_client"));
-                jTextField_Ci.setText(rs.getString("unformat_cedula_client"));
+                jLabel_Title.setText("Modificar La Información Del Cliente - " + rs.getString("c.name_client"));
+                jTextField_Name.setText(rs.getString("c.name_client"));
+                jTextField_Telephone.setText(rs.getString("c.telephone_client"));
                 jTextField_Direction_Client.setText(rs.getString("direction_client"));
-                jTextField_Last_Modification.setText(rs.getString("last_modification"));
+                jTextField_Ci.setText(rs.getString("c.unformat_identity_card_client"));
+                jTextField_Last_Modification.setText(rs.getString("u.username"));
 
             }
 
