@@ -200,9 +200,9 @@ public final class Warranty extends javax.swing.JPanel {
 
             String search = jTextField_Search_Warranty.getText().trim();
 
-            searchClass.SearchWarranty(search);
-
             jTextField_Search_Warranty.setText("");
+
+            searchClass.SearchWarranty(search);
 
         }
 

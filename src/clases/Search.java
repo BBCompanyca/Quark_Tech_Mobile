@@ -28,7 +28,8 @@ public class Search {
 
         } else {
 
-            query = "select c.id_client, c.name_client, c.telephone_client, c.identity_card_client, c.direction_client, u.name_user from client c join user u "
+            query = "select c.id_client, c.name_client, c.telephone_client, c.identity_card_client, c.direction_client, u.name_user"
+                    + "from client c join user u "
                     + "on c.id_client = '" + search + "' and c.registered_by = u.id_user or "
                     + "c.name_client = '" + search + "' and c.registered_by = u.id_user or "
                     + "c.unformat_telephone_client = '" + search + "' and c.registered_by = u.id_user or "
@@ -85,7 +86,7 @@ public class Search {
 
     public void SearchWarranty(String search) {
 
-        String query = "";
+        String query;
 
         if (Login.type_account.equals("Moderador")) {
 
@@ -98,9 +99,12 @@ public class Search {
                         + "and not w.status = '" + "Entregado" + "'";
 
             } else {
-                
-                //Hacer aquí la consulta de busqueda por parametro....
 
+                JOptionPane.showMessageDialog(null, "¡Función en desarrollo! Lo Sentimos...", "¡Error!",
+                        JOptionPane.OK_OPTION);
+
+                query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.shop, w.status "
+                        + "from warranty w ";
             }
 
         } else {
@@ -115,15 +119,14 @@ public class Search {
 
             } else {
 
-                query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
-                        + "status from warranty where "
-                        + "id_warranty = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "equipo = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "color = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "serial = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "name_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "unformat_identity_card_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "status = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
+                JOptionPane.showMessageDialog(null, "¡Función en desarrollo! Lo Sentimos...", "¡Error!",
+                        JOptionPane.OK_OPTION);
+
+                query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.status "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "'";
 
             }
 
@@ -148,7 +151,7 @@ public class Search {
                 model.addColumn("Equipo");
                 model.addColumn("Serial");
                 model.addColumn("Cliente");
-                model.addColumn("Cédula");
+                model.addColumn("Rif");
                 model.addColumn("Tienda");
                 model.addColumn("Estatus");
 
@@ -172,7 +175,7 @@ public class Search {
                 model.addColumn("Color");
                 model.addColumn("Serial");
                 model.addColumn("Cliente");
-                model.addColumn("Cédula");
+                model.addColumn("Rif");
                 model.addColumn("Estatus");
 
                 while (rs.next()) {
