@@ -28,7 +28,7 @@ public class Search {
 
         } else {
 
-            query = "select c.id_client, c.name_client, c.telephone_client, c.identity_card_client, c.direction_client, u.name_user"
+            query = "select c.id_client, c.name_client, c.telephone_client, c.identity_card_client, c.direction_client, u.name_user "
                     + "from client c join user u "
                     + "on c.id_client = '" + search + "' and c.registered_by = u.id_user or "
                     + "c.name_client = '" + search + "' and c.registered_by = u.id_user or "
@@ -85,8 +85,11 @@ public class Search {
     }
 
     public void SearchWarranty(String search) {
-
-        String query;
+        
+        JOptionPane.showMessageDialog(null, "Esto llegó: " + search);
+        
+         /*
+        String query = "";
 
         if (Login.type_account.equals("Moderador")) {
 
@@ -102,9 +105,12 @@ public class Search {
 
                 JOptionPane.showMessageDialog(null, "¡Función en desarrollo! Lo Sentimos...", "¡Error!",
                         JOptionPane.OK_OPTION);
-
+                
                 query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.shop, w.status "
-                        + "from warranty w ";
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and not w.status = '" + "Entregado" + "'"; 
             }
 
         } else {
@@ -204,8 +210,8 @@ public class Search {
             JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla de garantías!", "¡Error!",
                     JOptionPane.OK_CANCEL_OPTION);
 
-        }
-
+        } 
+        */
     }
 
 }

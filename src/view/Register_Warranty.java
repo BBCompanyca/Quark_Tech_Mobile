@@ -13,7 +13,7 @@ import javax.swing.BorderFactory;
 
 public class Register_Warranty extends javax.swing.JPanel {
 
-    int flag_calendar = 0, day_warranty = 0, flag_register = 0, time_Warranty;
+    int flag_calendar = 0, day_warranty = 0, flag_register = 0, time_Warranty = 0, id_client = 0;
     public static int flag = 0, flag_AddressRegisterAndConsult = 0;
 
     String brand, model, color, date_register, date_purchase, day, month, year, time_Warranty_STG, identity_card_client, name_client;
@@ -362,7 +362,7 @@ public class Register_Warranty extends javax.swing.JPanel {
                                     "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
                             pst2.setInt(1, 0);
-                            pst2.setInt(2, Consult_Cl_Client.id_client);
+                            pst2.setInt(2, id_client);
                             pst2.setInt(3, CodeEquipos.id_equipo);
                             pst2.setInt(4, 0);
                             pst2.setInt(5, Login.ID_User);
@@ -382,13 +382,19 @@ public class Register_Warranty extends javax.swing.JPanel {
                             pst2.setString(19, "");
                             pst2.setString(20, "");
                             pst2.setString(21, "");
-
+                            
                             pst2.executeUpdate();
 
                             PaintAndCleanCamp();
 
                             JOptionPane.showMessageDialog(null, "Registro Exitoso", "¡Exito!",
                                     JOptionPane.INFORMATION_MESSAGE);
+                            
+                            serial = ""; 
+                            falla = ""; 
+                            received = "";
+                            jTextField_Code.setText("");
+                            jTextField_Equipo.setText("");
 
                             paneles.PanelWarranty();;
 
@@ -684,13 +690,37 @@ public class Register_Warranty extends javax.swing.JPanel {
     private void getAddressPanel() {
 
         if (flag_AddressRegisterAndConsult == 1) {
-
-            identity_card_client = Register_Client.identity_card_client;
+            
             name_client = Register_Client.name_client;
+            
+            try {
+                
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement("select id_client from client where "
+                        + "unformat_identity_card_client = '" + Register_Client.identity_card_client + "'");
+                
+                ResultSet rs = pst.executeQuery();
+                
+                if (rs.next()) {
+                    
+                    id_client = rs.getInt("id_client");
+                    
+                }
+                
+                cn.close();
+                
+            } catch (SQLException e) {
+                
+                System.out.println("¡Error al consultar el ID del cliente! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar el ID del cliente!", "¡Error", JOptionPane.OK_OPTION);
+                
+            }
 
         } else {
 
             name_client = Consult_Cl_Client.name_client;
+            
+            id_client = Consult_Cl_Client.id_client;
 
         }
 
