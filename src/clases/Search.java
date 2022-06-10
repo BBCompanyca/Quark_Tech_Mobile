@@ -9,8 +9,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static view.Clients.jTable_Client;
 import static view.Clients.jScrollPane;
-import static view.Warranty.jTextField_Search_Warranty;
 import static view.Warranty.jTable_Warranty;
+import static view.Warranty.jScrollPane_W;
 import view.Login;
 
 public class Search {
@@ -85,17 +85,14 @@ public class Search {
     }
 
     public void SearchWarranty(String search) {
-        
-        JOptionPane.showMessageDialog(null, "Esto llegó: " + search);
-        
-         /*
+
         String query = "";
 
         if (Login.type_account.equals("Moderador")) {
 
             if (search.equals("")) {
 
-                query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.shop, w.status "
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.shop "
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
@@ -103,21 +100,21 @@ public class Search {
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "¡Función en desarrollo! Lo Sentimos...", "¡Error!",
-                        JOptionPane.OK_OPTION);
-                
-                query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.shop, w.status "
+                JOptionPane.showMessageDialog(null, "¡Función en desarrollo!");
+
+                /*  query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.shop "
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
-                        + "and not w.status = '" + "Entregado" + "'"; 
+                        + "and w.id_warranty = '" + search + "' and not w.status = '" + "Entregado" + "' or "
+                        + "c.unformat_identity_card_client = '" + search + "' and not w.status = '" + "Entregado" + "'"; */
             }
 
         } else {
 
             if (search.equals("")) {
 
-                query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.status "
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status "
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
@@ -125,15 +122,19 @@ public class Search {
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "¡Función en desarrollo! Lo Sentimos...", "¡Error!",
-                        JOptionPane.OK_OPTION);
+                JOptionPane.showMessageDialog(null, "¡Función en desarrollo!");
 
-                query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.status "
+                /* query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status "
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
-                        + "and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "'";
-
+                        + "and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_warranty = '" + search + "' or "
+                        + "w.shop = '" + Login.direction + "' and e.brand = '" + search + "' or "
+                        + "w.shop = '" + Login.direction + "' and e.model = '" + search + "' or "
+                        + "w.shop = '" + Login.direction + "' and w.serial = '" + search + "' or "
+                        + "w.shop = '" + Login.direction + "' and c.name_client = '" + search + "' or "
+                        + "w.shop = '" + Login.direction + "' and c.unformat_identity_card_client = '" + search + "' or "
+                        + "w.shop = '" + Login.direction + "' and w.status = '" + search + "'"; */
             }
 
         }
@@ -145,8 +146,8 @@ public class Search {
 
             ResultSet rs = pst.executeQuery();
 
-            jTable_Warranty = new JTable(model);
-            jScrollPane.setViewportView(jTable_Warranty);
+            jTable_Client = new JTable(model);
+            jScrollPane_W.setViewportView(jTable_Client);
 
             model.setColumnCount(0);
             model.setRowCount(0);
@@ -154,12 +155,12 @@ public class Search {
             if (Login.type_account.equals("Moderador")) {
 
                 model.addColumn("ID");
-                model.addColumn("Equipo");
+                model.addColumn("Marca");
+                model.addColumn("Módelo");
                 model.addColumn("Serial");
                 model.addColumn("Cliente");
                 model.addColumn("Rif");
                 model.addColumn("Tienda");
-                model.addColumn("Estatus");
 
                 while (rs.next()) {
 
@@ -177,8 +178,8 @@ public class Search {
             } else {
 
                 model.addColumn("ID");
-                model.addColumn("Equipo");
-                model.addColumn("Color");
+                model.addColumn("Marca");
+                model.addColumn("Módelo");
                 model.addColumn("Serial");
                 model.addColumn("Cliente");
                 model.addColumn("Rif");
@@ -201,17 +202,14 @@ public class Search {
 
             cn.close();
 
-            jTextField_Search_Warranty.setText("");
-            jTextField_Search_Warranty.requestFocus();
-
         } catch (SQLException e) {
 
             System.err.println("¡Error al vaciar la tabla de garantías! " + e);
             JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla de garantías!", "¡Error!",
                     JOptionPane.OK_CANCEL_OPTION);
 
-        } 
-        */
+        }
+
     }
 
 }

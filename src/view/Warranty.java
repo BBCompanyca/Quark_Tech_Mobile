@@ -42,7 +42,7 @@ public final class Warranty extends javax.swing.JPanel {
         jTextField_Search_Warranty = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jButton_Delete_User = new javax.swing.JButton();
-        jScrollPane = new javax.swing.JScrollPane();
+        jScrollPane_W = new javax.swing.JScrollPane();
         jTable_Warranty = new javax.swing.JTable();
         jButton_Search_User = new javax.swing.JButton();
         jButton_New_User = new javax.swing.JButton();
@@ -91,9 +91,9 @@ public final class Warranty extends javax.swing.JPanel {
         });
         add(jButton_Delete_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 100, 35));
 
-        jScrollPane.setBackground(new java.awt.Color(9, 53, 69));
-        jScrollPane.setBorder(null);
-        jScrollPane.setForeground(new java.awt.Color(240, 240, 240));
+        jScrollPane_W.setBackground(new java.awt.Color(9, 53, 69));
+        jScrollPane_W.setBorder(null);
+        jScrollPane_W.setForeground(new java.awt.Color(240, 240, 240));
 
         jTable_Warranty.setBackground(new java.awt.Color(9, 53, 69));
         jTable_Warranty.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -126,7 +126,7 @@ public final class Warranty extends javax.swing.JPanel {
         });
         jTable_Warranty.setGridColor(new java.awt.Color(240, 240, 240));
         jTable_Warranty.setSelectionBackground(new java.awt.Color(9, 53, 69));
-        jScrollPane.setViewportView(jTable_Warranty);
+        jScrollPane_W.setViewportView(jTable_Warranty);
         if (jTable_Warranty.getColumnModel().getColumnCount() > 0) {
             jTable_Warranty.getColumnModel().getColumn(0).setResizable(false);
             jTable_Warranty.getColumnModel().getColumn(1).setResizable(false);
@@ -135,7 +135,7 @@ public final class Warranty extends javax.swing.JPanel {
             jTable_Warranty.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 890, 270));
+        add(jScrollPane_W, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 890, 270));
 
         jButton_Search_User.setText("Buscar");
         jButton_Search_User.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -196,7 +196,7 @@ public final class Warranty extends javax.swing.JPanel {
 
     private void jTextField_Search_WarrantyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_Search_WarrantyKeyPressed
 
-     /*   if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
             String search = jTextField_Search_Warranty.getText().trim();
 
@@ -204,7 +204,7 @@ public final class Warranty extends javax.swing.JPanel {
 
             jTextField_Search_Warranty.setText("");
 
-        } */
+        } 
 
     }//GEN-LAST:event_jTextField_Search_WarrantyKeyPressed
 
@@ -253,7 +253,7 @@ public final class Warranty extends javax.swing.JPanel {
     private javax.swing.JButton jButton_Search_User;
     private javax.swing.JButton jButton_Update_User;
     private javax.swing.JLabel jLabel1;
-    public static javax.swing.JScrollPane jScrollPane;
+    public static javax.swing.JScrollPane jScrollPane_W;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JTable jTable_Warranty;
     public static javax.swing.JTextField jTextField_Search_Warranty;
@@ -289,7 +289,7 @@ public final class Warranty extends javax.swing.JPanel {
             ResultSet rs = pst.executeQuery();
 
             jTable_Warranty = new JTable(model);
-            jScrollPane.setViewportView(jTable_Warranty);
+            jScrollPane_W.setViewportView(jTable_Warranty);
 
             if (Login.type_account.equals("Moderador")) {
 
