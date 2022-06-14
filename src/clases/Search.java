@@ -9,8 +9,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static view.Clients.jTable_Client;
 import static view.Clients.jScrollPane;
-import static view.Warranty.jTextField_Search_Warranty;
 import static view.Warranty.jTable_Warranty;
+import static view.Warranty.jScrollPane_W;
 import view.Login;
 
 public class Search {
@@ -28,7 +28,8 @@ public class Search {
 
         } else {
 
-            query = "select c.id_client, c.name_client, c.telephone_client, c.identity_card_client, c.direction_client, u.name_user from client c join user u "
+            query = "select c.id_client, c.name_client, c.telephone_client, c.identity_card_client, c.direction_client, u.name_user "
+                    + "from client c join user u "
                     + "on c.id_client = '" + search + "' and c.registered_by = u.id_user or "
                     + "c.name_client = '" + search + "' and c.registered_by = u.id_user or "
                     + "c.unformat_telephone_client = '" + search + "' and c.registered_by = u.id_user or "
@@ -91,23 +92,32 @@ public class Search {
 
             if (search.equals("")) {
 
-                query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.shop, w.status "
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.shop "
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
                         + "and not w.status = '" + "Entregado" + "'";
 
             } else {
-                
-                //Hacer aquí la consulta de busqueda por parametro....
 
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.shop "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and w.id_warranty = '" + search + "' and not w.status = '" + "Entregado" + "' or "
+                        + "e.brand = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client or "
+                        + "e.model = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client or "
+                        + "w.serial = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client or "
+                        + "c.name_client = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client or "
+                        + "c.unformat_identity_card_client = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client or "
+                        + "w.shop = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client";
             }
 
         } else {
 
             if (search.equals("")) {
 
-                query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.status "
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status "
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
@@ -115,15 +125,17 @@ public class Search {
 
             } else {
 
-                query = "select id_warranty, equipo, color, serial, name_client, identity_card_client, "
-                        + "status from warranty where "
-                        + "id_warranty = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "equipo = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "color = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "serial = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "name_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "unformat_identity_card_client = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "' or "
-                        + "status = '" + search + "' and direction_shop = '" + Login.direction + "' and not status = '" + "Entregado" + "'";
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and w.id_warranty = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' or "
+                        + "e.brand = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client or "
+                        + "e.model = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client or "
+                        + "w.serial = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client or "
+                        + "c.name_client = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client or "
+                        + "c.unformat_identity_card_client = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client or "
+                        + "w.status = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client";
 
             }
 
@@ -136,8 +148,8 @@ public class Search {
 
             ResultSet rs = pst.executeQuery();
 
-            jTable_Warranty = new JTable(model);
-            jScrollPane.setViewportView(jTable_Warranty);
+            jTable_Client = new JTable(model);
+            jScrollPane_W.setViewportView(jTable_Client);
 
             model.setColumnCount(0);
             model.setRowCount(0);
@@ -145,12 +157,12 @@ public class Search {
             if (Login.type_account.equals("Moderador")) {
 
                 model.addColumn("ID");
-                model.addColumn("Equipo");
+                model.addColumn("Marca");
+                model.addColumn("Módelo");
                 model.addColumn("Serial");
                 model.addColumn("Cliente");
-                model.addColumn("Cédula");
+                model.addColumn("Rif");
                 model.addColumn("Tienda");
-                model.addColumn("Estatus");
 
                 while (rs.next()) {
 
@@ -168,11 +180,11 @@ public class Search {
             } else {
 
                 model.addColumn("ID");
-                model.addColumn("Equipo");
-                model.addColumn("Color");
+                model.addColumn("Marca");
+                model.addColumn("Módelo");
                 model.addColumn("Serial");
                 model.addColumn("Cliente");
-                model.addColumn("Cédula");
+                model.addColumn("Rif");
                 model.addColumn("Estatus");
 
                 while (rs.next()) {
@@ -191,9 +203,6 @@ public class Search {
             }
 
             cn.close();
-
-            jTextField_Search_Warranty.setText("");
-            jTextField_Search_Warranty.requestFocus();
 
         } catch (SQLException e) {
 

@@ -156,7 +156,8 @@ public class Login extends javax.swing.JFrame {
                 //Conexión a la base de datos para consultar los datos del usuario...
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select id_user, username, password, direction, type_account, status from user where username = '" + user2 + "' and password = '" + pass2 + "'");
+                        "select id_user, username, password, direction, type_account, status from user where "
+                                + "username = '" + user2 + "' and password = '" + pass2 + "'");
 
                 ResultSet rs = pst.executeQuery();
 

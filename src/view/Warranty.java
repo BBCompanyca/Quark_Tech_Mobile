@@ -42,11 +42,11 @@ public final class Warranty extends javax.swing.JPanel {
         jTextField_Search_Warranty = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jButton_Delete_User = new javax.swing.JButton();
-        jScrollPane = new javax.swing.JScrollPane();
+        jScrollPane_W = new javax.swing.JScrollPane();
         jTable_Warranty = new javax.swing.JTable();
         jButton_Search_User = new javax.swing.JButton();
         jButton_New_User = new javax.swing.JButton();
-        jButton_Update_User = new javax.swing.JButton();
+        jButton_Preliminar_Warranty = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setPreferredSize(new java.awt.Dimension(790, 370));
@@ -91,9 +91,9 @@ public final class Warranty extends javax.swing.JPanel {
         });
         add(jButton_Delete_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 100, 35));
 
-        jScrollPane.setBackground(new java.awt.Color(9, 53, 69));
-        jScrollPane.setBorder(null);
-        jScrollPane.setForeground(new java.awt.Color(240, 240, 240));
+        jScrollPane_W.setBackground(new java.awt.Color(9, 53, 69));
+        jScrollPane_W.setBorder(null);
+        jScrollPane_W.setForeground(new java.awt.Color(240, 240, 240));
 
         jTable_Warranty.setBackground(new java.awt.Color(9, 53, 69));
         jTable_Warranty.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -126,7 +126,7 @@ public final class Warranty extends javax.swing.JPanel {
         });
         jTable_Warranty.setGridColor(new java.awt.Color(240, 240, 240));
         jTable_Warranty.setSelectionBackground(new java.awt.Color(9, 53, 69));
-        jScrollPane.setViewportView(jTable_Warranty);
+        jScrollPane_W.setViewportView(jTable_Warranty);
         if (jTable_Warranty.getColumnModel().getColumnCount() > 0) {
             jTable_Warranty.getColumnModel().getColumn(0).setResizable(false);
             jTable_Warranty.getColumnModel().getColumn(1).setResizable(false);
@@ -135,7 +135,7 @@ public final class Warranty extends javax.swing.JPanel {
             jTable_Warranty.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 870, 270));
+        add(jScrollPane_W, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 890, 270));
 
         jButton_Search_User.setText("Buscar");
         jButton_Search_User.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,18 +158,18 @@ public final class Warranty extends javax.swing.JPanel {
         });
         add(jButton_New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 100, 35));
 
-        jButton_Update_User.setText("PRELIMINAR");
-        jButton_Update_User.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton_Preliminar_Warranty.setText("PRELIMINAR");
+        jButton_Preliminar_Warranty.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton_Update_UserMousePressed(evt);
+                jButton_Preliminar_WarrantyMousePressed(evt);
             }
         });
-        jButton_Update_User.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Preliminar_Warranty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Update_UserActionPerformed(evt);
+                jButton_Preliminar_WarrantyActionPerformed(evt);
             }
         });
-        add(jButton_Update_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
+        add(jButton_Preliminar_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_Search_WarrantyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_WarrantyMousePressed
@@ -186,11 +186,11 @@ public final class Warranty extends javax.swing.JPanel {
 
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
-        String search = jTextField_Search_Warranty.getText().trim();
+      String search = jTextField_Search_Warranty.getText().trim();
 
         searchClass.SearchWarranty(search);
 
-        jTextField_Search_Warranty.setText("");
+        jTextField_Search_Warranty.setText(""); 
 
     }//GEN-LAST:event_jButton_Search_UserMousePressed
 
@@ -204,7 +204,7 @@ public final class Warranty extends javax.swing.JPanel {
 
             jTextField_Search_Warranty.setText("");
 
-        }
+        } 
 
     }//GEN-LAST:event_jTextField_Search_WarrantyKeyPressed
 
@@ -218,11 +218,11 @@ public final class Warranty extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_New_UserActionPerformed
 
-    private void jButton_Update_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Update_UserActionPerformed
+    private void jButton_Preliminar_WarrantyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Preliminar_WarrantyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_Update_UserActionPerformed
+    }//GEN-LAST:event_jButton_Preliminar_WarrantyActionPerformed
 
-    private void jButton_Update_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_UserMousePressed
+    private void jButton_Preliminar_WarrantyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Preliminar_WarrantyMousePressed
 
         int fila_point = jTable_Warranty.getSelectedRow();
         int columna_punt = 0;
@@ -239,7 +239,7 @@ public final class Warranty extends javax.swing.JPanel {
 
         }
 
-    }//GEN-LAST:event_jButton_Update_UserMousePressed
+    }//GEN-LAST:event_jButton_Preliminar_WarrantyMousePressed
 
     private void jButton_Delete_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_UserMousePressed
 
@@ -250,10 +250,10 @@ public final class Warranty extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Delete_User;
     private javax.swing.JButton jButton_New_User;
+    private javax.swing.JButton jButton_Preliminar_Warranty;
     private javax.swing.JButton jButton_Search_User;
-    private javax.swing.JButton jButton_Update_User;
     private javax.swing.JLabel jLabel1;
-    public static javax.swing.JScrollPane jScrollPane;
+    public static javax.swing.JScrollPane jScrollPane_W;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JTable jTable_Warranty;
     public static javax.swing.JTextField jTextField_Search_Warranty;
@@ -265,7 +265,7 @@ public final class Warranty extends javax.swing.JPanel {
 
         if (Login.type_account.equals("Moderador")) {
 
-            query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.shop, w.status "
+            query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.shop "
                     + "from warranty w "
                     + "join equipo e on e.id_equipo = w.id_equipo "
                     + "join client c on c.id_client = w.id_client "
@@ -273,7 +273,7 @@ public final class Warranty extends javax.swing.JPanel {
 
         } else {
 
-            query = "select w.id_warranty, e.brand, w.serial, c.name_client, c.identity_card_client, w.status "
+            query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status "
                     + "from warranty w "
                     + "join equipo e on e.id_equipo = w.id_equipo "
                     + "join client c on c.id_client = w.id_client "
@@ -289,23 +289,22 @@ public final class Warranty extends javax.swing.JPanel {
             ResultSet rs = pst.executeQuery();
 
             jTable_Warranty = new JTable(model);
-            jScrollPane.setViewportView(jTable_Warranty);
+            jScrollPane_W.setViewportView(jTable_Warranty);
 
             if (Login.type_account.equals("Moderador")) {
 
                 model.addColumn("ID");
-                model.addColumn("Equipo");
+                model.addColumn("Marca");
                 model.addColumn("Módelo");
                 model.addColumn("Serial");
                 model.addColumn("Cliente");
                 model.addColumn("Rif");
                 model.addColumn("Tienda");
-                model.addColumn("Estatus");
 
                 while (rs.next()) {
 
-                    Object[] fila = new Object[8];
-                    for (int i = 0; i < 8; i++) {
+                    Object[] fila = new Object[7];
+                    for (int i = 0; i < 7; i++) {
 
                         fila[i] = rs.getObject(i + 1);
 
@@ -318,7 +317,8 @@ public final class Warranty extends javax.swing.JPanel {
             } else {
 
                 model.addColumn("ID");
-                model.addColumn("Equipo");
+                model.addColumn("Marca");
+                model.addColumn("Módelo");
                 model.addColumn("Serial");
                 model.addColumn("Cliente");
                 model.addColumn("Rif");
@@ -326,8 +326,8 @@ public final class Warranty extends javax.swing.JPanel {
 
                 while (rs.next()) {
 
-                    Object[] fila = new Object[6];
-                    for (int i = 0; i < 6; i++) {
+                    Object[] fila = new Object[7];
+                    for (int i = 0; i < 7; i++) {
 
                         fila[i] = rs.getObject(i + 1);
 
