@@ -100,14 +100,17 @@ public class Search {
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "¡Función en desarrollo!");
-
-                /*  query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.shop "
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.shop "
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
                         + "and w.id_warranty = '" + search + "' and not w.status = '" + "Entregado" + "' or "
-                        + "c.unformat_identity_card_client = '" + search + "' and not w.status = '" + "Entregado" + "'"; */
+                        + "e.brand = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client or "
+                        + "e.model = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client or "
+                        + "w.serial = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client or "
+                        + "c.name_client = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client or "
+                        + "c.unformat_identity_card_client = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client or "
+                        + "w.shop = '" + search + "' and not w.status = '" + "Entregado" + "' and w.id_client = c.id_client";
             }
 
         } else {
@@ -122,19 +125,18 @@ public class Search {
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "¡Función en desarrollo!");
-
-                /* query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status "
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status "
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
-                        + "and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_warranty = '" + search + "' or "
-                        + "w.shop = '" + Login.direction + "' and e.brand = '" + search + "' or "
-                        + "w.shop = '" + Login.direction + "' and e.model = '" + search + "' or "
-                        + "w.shop = '" + Login.direction + "' and w.serial = '" + search + "' or "
-                        + "w.shop = '" + Login.direction + "' and c.name_client = '" + search + "' or "
-                        + "w.shop = '" + Login.direction + "' and c.unformat_identity_card_client = '" + search + "' or "
-                        + "w.shop = '" + Login.direction + "' and w.status = '" + search + "'"; */
+                        + "and w.id_warranty = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' or "
+                        + "e.brand = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client or "
+                        + "e.model = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client or "
+                        + "w.serial = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client or "
+                        + "c.name_client = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client or "
+                        + "c.unformat_identity_card_client = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client or "
+                        + "w.status = '" + search + "' and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "' and w.id_client = c.id_client";
+
             }
 
         }

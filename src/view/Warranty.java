@@ -46,7 +46,7 @@ public final class Warranty extends javax.swing.JPanel {
         jTable_Warranty = new javax.swing.JTable();
         jButton_Search_User = new javax.swing.JButton();
         jButton_New_User = new javax.swing.JButton();
-        jButton_Update_User = new javax.swing.JButton();
+        jButton_Preliminar_Warranty = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setPreferredSize(new java.awt.Dimension(790, 370));
@@ -158,18 +158,18 @@ public final class Warranty extends javax.swing.JPanel {
         });
         add(jButton_New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 100, 35));
 
-        jButton_Update_User.setText("PRELIMINAR");
-        jButton_Update_User.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton_Preliminar_Warranty.setText("PRELIMINAR");
+        jButton_Preliminar_Warranty.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton_Update_UserMousePressed(evt);
+                jButton_Preliminar_WarrantyMousePressed(evt);
             }
         });
-        jButton_Update_User.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Preliminar_Warranty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Update_UserActionPerformed(evt);
+                jButton_Preliminar_WarrantyActionPerformed(evt);
             }
         });
-        add(jButton_Update_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
+        add(jButton_Preliminar_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_Search_WarrantyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_WarrantyMousePressed
@@ -186,11 +186,11 @@ public final class Warranty extends javax.swing.JPanel {
 
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
-      /*  String search = jTextField_Search_Warranty.getText().trim();
+      String search = jTextField_Search_Warranty.getText().trim();
 
         searchClass.SearchWarranty(search);
 
-        jTextField_Search_Warranty.setText(""); */
+        jTextField_Search_Warranty.setText(""); 
 
     }//GEN-LAST:event_jButton_Search_UserMousePressed
 
@@ -218,11 +218,11 @@ public final class Warranty extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_New_UserActionPerformed
 
-    private void jButton_Update_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Update_UserActionPerformed
+    private void jButton_Preliminar_WarrantyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Preliminar_WarrantyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_Update_UserActionPerformed
+    }//GEN-LAST:event_jButton_Preliminar_WarrantyActionPerformed
 
-    private void jButton_Update_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_UserMousePressed
+    private void jButton_Preliminar_WarrantyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Preliminar_WarrantyMousePressed
 
         int fila_point = jTable_Warranty.getSelectedRow();
         int columna_punt = 0;
@@ -239,7 +239,7 @@ public final class Warranty extends javax.swing.JPanel {
 
         }
 
-    }//GEN-LAST:event_jButton_Update_UserMousePressed
+    }//GEN-LAST:event_jButton_Preliminar_WarrantyMousePressed
 
     private void jButton_Delete_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_UserMousePressed
 
@@ -250,8 +250,8 @@ public final class Warranty extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Delete_User;
     private javax.swing.JButton jButton_New_User;
+    private javax.swing.JButton jButton_Preliminar_Warranty;
     private javax.swing.JButton jButton_Search_User;
-    private javax.swing.JButton jButton_Update_User;
     private javax.swing.JLabel jLabel1;
     public static javax.swing.JScrollPane jScrollPane_W;
     private javax.swing.JSeparator jSeparator1;
