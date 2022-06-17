@@ -415,6 +415,8 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
         resetColor(Btn_Equipos);
         resetColor(Btn_Estadisticas);
         setColor(Btn_About_Me);
+        
+        paneles.Panel_Priliminar_History();
     }//GEN-LAST:event_Btn_About_MeMousePressed
 
     private void Btn_EquiposMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EquiposMouseEntered
@@ -484,6 +486,8 @@ public class Menu_Mod_Adm extends javax.swing.JPanel {
         resetColor(Btn_Equipos);
         setColor(Btn_Estadisticas);
         resetColor(Btn_About_Me);
+        
+        paneles.Panel_History();
         
     }//GEN-LAST:event_Btn_EstadisticasMousePressed
 

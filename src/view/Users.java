@@ -481,27 +481,34 @@ public final class Users extends javax.swing.JPanel {
 
                 } else {
 
-                    try {
+                    int selection = JOptionPane.showConfirmDialog(null, "¿Realmente desea eliminar este usuario?", "¡Confirmar!", 
+                            JOptionPane.YES_NO_OPTION);
 
-                        Connection cn = BD_Connection.connection();
-                        PreparedStatement pst = cn.prepareStatement(
-                                "delete from user where id_user = '" + ID + "'");
+                    if (selection == 0) {
 
-                        pst.executeUpdate();
+                        try {
 
-                        model.setRowCount(0);
-                        model.setColumnCount(0);
-                        getUsers();
+                            Connection cn = BD_Connection.connection();
+                            PreparedStatement pst = cn.prepareStatement(
+                                    "delete from user where id_user = '" + ID + "'");
 
-                        JOptionPane.showMessageDialog(null, "Usuario eliminado.");
+                            pst.executeUpdate();
 
-                        cn.close();
+                            model.setRowCount(0);
+                            model.setColumnCount(0);
+                            getUsers();
 
-                    } catch (SQLException e) {
+                            JOptionPane.showMessageDialog(null, "Usuario eliminado.");
 
-                        System.err.println("¡Error al eliminar el usuario! " + e);
-                        JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
-                                JOptionPane.OK_OPTION);
+                            cn.close();
+
+                        } catch (SQLException e) {
+
+                            System.err.println("¡Error al eliminar el usuario! " + e);
+                            JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
+                                    JOptionPane.OK_OPTION);
+
+                        }
 
                     }
 

@@ -10,14 +10,14 @@ import clases.Consut_Notification;
 public class Menu_Tecnico extends javax.swing.JPanel {
 
     Paneles paneles = new Paneles();
-    
+
     Consut_Notification consutlBD = new Consut_Notification();
 
     int index = 0;
 
     public Menu_Tecnico() {
         initComponents();
-        
+
         consutlBD.start();
 
     }
@@ -38,6 +38,9 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel_Index = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        Btn_History = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         Btn_About_Me = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -77,7 +80,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-outline.png"))); // NOI18N
         Btn_Main.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 210, 50));
+        add(Btn_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 165, 210, 50));
 
         Btn_Warranty.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Warranty.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,7 +105,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         jLabel10.setText("Garantías");
         Btn_Warranty.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
-        add(Btn_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 210, 50));
+        add(Btn_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 215, 210, 50));
 
         Btn_Notification.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Notification.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -132,7 +135,32 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         jLabel15.setText("Solicitudes");
         Btn_Notification.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 80, 30));
 
-        add(Btn_Notification, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 210, 50));
+        add(Btn_Notification, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 265, 210, 50));
+
+        Btn_History.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_History.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Btn_HistoryMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Btn_HistoryMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Btn_HistoryMousePressed(evt);
+            }
+        });
+        Btn_History.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Historial");
+        Btn_History.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
+
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/statistc_24px.png"))); // NOI18N
+        Btn_History.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+
+        add(Btn_History, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 315, 210, 50));
 
         Btn_About_Me.setBackground(new java.awt.Color(78, 120, 121));
         Btn_About_Me.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,7 +185,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/management_client_24px.png"))); // NOI18N
         Btn_About_Me.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 210, 50));
+        add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 365, 210, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_WarrantyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_WarrantyMouseEntered
@@ -283,16 +311,51 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         resetColor(Btn_Warranty);
         resetColor(Btn_About_Me);
         setColor(Btn_Notification);
-        
+
         paneles.Panel_Solicitudes();
-        
+
         consutlBD.getNotification();
 
     }//GEN-LAST:event_Btn_NotificationMousePressed
 
+    private void Btn_HistoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_HistoryMouseEntered
+
+        if (Btn_History.getBackground().getRGB() == -11634567) {
+
+            setColor(Btn_History);
+
+        }
+
+    }//GEN-LAST:event_Btn_HistoryMouseEntered
+
+    private void Btn_HistoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_HistoryMouseExited
+
+        if (Btn_Main.getBackground().getRGB() != -11634567
+                || Btn_Warranty.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567
+                || Btn_Notification.getBackground().getRGB() != -11634567) {
+
+            resetColor(Btn_History);
+
+        }
+
+    }//GEN-LAST:event_Btn_HistoryMouseExited
+
+    private void Btn_HistoryMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_HistoryMousePressed
+
+        resetColor(Btn_Main);
+        resetColor(Btn_Warranty);
+        resetColor(Btn_About_Me);
+        resetColor(Btn_Notification);
+        setColor(Btn_History);
+
+        paneles.Panel_History();
+
+    }//GEN-LAST:event_Btn_HistoryMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Btn_About_Me;
+    private javax.swing.JPanel Btn_History;
     public static javax.swing.JPanel Btn_Main;
     private javax.swing.JPanel Btn_Notification;
     private javax.swing.JPanel Btn_Warranty;
@@ -300,8 +363,10 @@ public class Menu_Tecnico extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel9;

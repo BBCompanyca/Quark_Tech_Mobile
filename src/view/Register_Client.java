@@ -22,13 +22,13 @@ public class Register_Client extends javax.swing.JPanel {
 
         TextPrompt name = new TextPrompt("Ej. Carlos Perez", jTextField_Name);
         TextPrompt telephone = new TextPrompt("Ej. 0414 - 589.56.41", jTextField_Telephone);
-        TextPrompt ci = new TextPrompt("Ej. 24.458.526", jTextField_CI);
+        TextPrompt ci = new TextPrompt("Ej. V24.458.526", jTextField_CI);
         TextPrompt direction = new TextPrompt("Ej. Las Mercedes", jTextField_Direction_Client);
 
         validateAddressRegister();
 
         //Instacia para darle formato a los campos de texto...
-        formattext.ValidateName(jTextField_Name);
+       // formattext.ValidateName(jTextField_Name);
         formattext.ValidateNumber(jTextField_Telephone);
         formattext.ValidateChar_Rif(jTextField_CI);
 

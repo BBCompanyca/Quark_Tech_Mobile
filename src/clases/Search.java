@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import static view.Clients.jTable_Client;
-import static view.Clients.jScrollPane;
-import static view.Warranty.jTable_Warranty;
 import static view.Warranty.jScrollPane_W;
 import view.Login;
+import static view.Clients.jTable_Client;
+import static view.Clients.jScrollPane_C;
+import static view.History.jScrollPane_H;
+import static view.History.jTable_History;
 
 public class Search {
 
@@ -47,7 +48,7 @@ public class Search {
             ResultSet rs = pst.executeQuery();
 
             jTable_Client = new JTable(model);
-            jScrollPane.setViewportView(jTable_Client);
+            jScrollPane_C.setViewportView(jTable_Client);
 
             model.setColumnCount(0);
             model.setRowCount(0);
@@ -209,6 +210,75 @@ public class Search {
             System.err.println("¡Error al vaciar la tabla de garantías! " + e);
             JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla de garantías!", "¡Error!",
                     JOptionPane.OK_CANCEL_OPTION);
+
+        }
+
+    }
+
+    public void SearchHistory(String search, String desde, String hasta) {
+
+        String query = "";
+
+        if (Login.type_account.equals("Moderador") || Login.type_account.equals("Tecnico")) {
+
+            query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
+                    + "from warranty w "
+                    + "join equipo e on e.id_equipo = w.id_equipo "
+                    + "join client c on c.id_client = w.id_client "
+                    + "and w.serial = '" + search + "' and w.id_client = c.id_client and w.date_register between '" + desde + "' and '" + hasta + "'";
+
+        } else if (Login.type_account.equals("Administrador") || Login.type_account.equals("Vendedor")) {
+
+            query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
+                    + "from warranty w "
+                    + "join equipo e on e.id_equipo = w.id_equipo "
+                    + "join client c on c.id_client = w.id_client "
+                    + "join user u on u.id_user = w.id_registered_by "
+                    + "and w.serial = '" + search + "' and u.direction = '" + Login.direction + "' and w.id_client = c.id_client and "
+                    + "w.date_register between '" + desde + "' and '" + hasta + "'";
+
+        }
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement(query);
+
+            ResultSet rs = pst.executeQuery();
+
+            jTable_History = new JTable(model);
+            jScrollPane_H.setViewportView(jTable_History);
+
+            model.setColumnCount(0);
+            model.setRowCount(0);
+
+            model.addColumn("ID");
+            model.addColumn("Marca");
+            model.addColumn("Módelo");
+            model.addColumn("Serial");
+            model.addColumn("Cliente");
+            model.addColumn("Rif");
+            model.addColumn("Estatus");
+
+            while (rs.next()) {
+
+                Object[] fila = new Object[7];
+                for (int i = 0; i < 7; i++) {
+
+                    fila[i] = rs.getObject(i + 1);
+
+                }
+
+                model.addRow(fila);
+
+            }
+
+            cn.close();
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al vaciar la tabla del historico! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla! ", "¡Error!", JOptionPane.OK_OPTION);
 
         }
 

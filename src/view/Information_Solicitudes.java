@@ -331,8 +331,6 @@ public class Information_Solicitudes extends javax.swing.JPanel {
                     "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.received from warranty w join equipo e "
                     + "on w.id_warranty = '" + id_warranty_consult + "' and e.id_equipo = w.id_equipo");
 
-            /*"select id_warranty, equipo, color, serial, falla, received from warranty where "
-                    + "id_warranty = '" + id_warranty_consult + "'");*/
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
