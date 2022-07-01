@@ -10,7 +10,7 @@ import clases.Paneles;
 import javax.swing.JOptionPane;
 
 public class History extends javax.swing.JPanel {
-    
+
     Paneles paneles = new Paneles();
     Search searchClass = new Search();
     public static int ID;
@@ -19,8 +19,6 @@ public class History extends javax.swing.JPanel {
         initComponents();
 
         TextPrompt search = new TextPrompt("Ingrese algún serial...", jTextField_Search_Serial);
-        
-        EventTable();
 
     }
 
@@ -29,7 +27,7 @@ public class History extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane_H = new javax.swing.JScrollPane();
-        jTable_History = new javax.swing.JTable();
+        jTable_History_H = new javax.swing.JTable();
         jTextField_Search_Serial = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -47,10 +45,10 @@ public class History extends javax.swing.JPanel {
         jScrollPane_H.setBorder(null);
         jScrollPane_H.setForeground(new java.awt.Color(204, 204, 204));
 
-        jTable_History.setBackground(new java.awt.Color(220, 220, 220));
-        jTable_History.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTable_History.setForeground(new java.awt.Color(230, 230, 230));
-        jTable_History.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_History_H.setBackground(new java.awt.Color(220, 220, 220));
+        jTable_History_H.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jTable_History_H.setForeground(new java.awt.Color(230, 230, 230));
+        jTable_History_H.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -76,9 +74,9 @@ public class History extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable_History.setGridColor(new java.awt.Color(240, 240, 240));
-        jTable_History.setSelectionBackground(new java.awt.Color(9, 53, 69));
-        jScrollPane_H.setViewportView(jTable_History);
+        jTable_History_H.setGridColor(new java.awt.Color(240, 240, 240));
+        jTable_History_H.setSelectionBackground(new java.awt.Color(9, 53, 69));
+        jScrollPane_H.setViewportView(jTable_History_H);
 
         add(jScrollPane_H, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 890, 260));
 
@@ -173,6 +171,8 @@ public class History extends javax.swing.JPanel {
 
             jTextField_Search_Serial.requestFocus();
 
+            EventTable();
+
         }
 
     }//GEN-LAST:event_jTextField_Search_SerialKeyPressed
@@ -195,6 +195,8 @@ public class History extends javax.swing.JPanel {
 
         jTextField_Search_Serial.requestFocus();
 
+        EventTable();
+
     }//GEN-LAST:event_jButton_Search_ClientMousePressed
 
 
@@ -207,27 +209,25 @@ public class History extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     public static javax.swing.JScrollPane jScrollPane_H;
     private javax.swing.JSeparator jSeparator1;
-    public static javax.swing.JTable jTable_History;
+    public static javax.swing.JTable jTable_History_H;
     public static javax.swing.JTextField jTextField_Search_Serial;
     // End of variables declaration//GEN-END:variables
 
     private void EventTable() {
 
-        jTable_History.addMouseListener(new MouseAdapter() {
+        jTable_History_H.addMouseListener(new MouseAdapter() {
 
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                int fila_point = jTable_History.rowAtPoint(e.getPoint());
+                int fila_point = jTable_History_H.rowAtPoint(e.getPoint());
                 int columna_point = 0;
 
                 if (fila_point >= -1) {
 
-                    ID = (int) jTable_History.getValueAt(fila_point, columna_point);
+                    ID = (int) jTable_History_H.getValueAt(fila_point, columna_point);
 
-                   // paneles.Panel_Priliminar_History();
-                    
-                    JOptionPane.showMessageDialog(null, ID);
+                    paneles.Panel_Priliminar_History();
 
                 }
 
@@ -236,5 +236,5 @@ public class History extends javax.swing.JPanel {
         });
 
     }
-    
+
 }

@@ -12,7 +12,7 @@ import view.Login;
 import static view.Clients.jTable_Client;
 import static view.Clients.jScrollPane_C;
 import static view.History.jScrollPane_H;
-import static view.History.jTable_History;
+import static view.History.jTable_History_H;
 
 public class Search {
 
@@ -246,8 +246,8 @@ public class Search {
 
             ResultSet rs = pst.executeQuery();
 
-            jTable_History = new JTable(model);
-            jScrollPane_H.setViewportView(jTable_History);
+            jTable_History_H = new JTable(model);
+            jScrollPane_H.setViewportView(jTable_History_H);
 
             model.setColumnCount(0);
             model.setRowCount(0);
