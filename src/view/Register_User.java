@@ -548,12 +548,12 @@ public class Register_User extends javax.swing.JPanel {
         if (type_Account.equals("Administrador")) {
 
             jComboBox_Permission.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Vendedor", "Tecnico"}));
-            add(jComboBox_Permission, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, -1, -1));
+            add(jComboBox_Permission, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, -1, -1));
 
             jLabel_Permission.setFont(new java.awt.Font("Roboto", 0, 18));
             jLabel_Permission.setForeground(new java.awt.Color(240, 240, 240));
             jLabel_Permission.setText("Permisos De:");
-            add(jLabel_Permission, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
+            add(jLabel_Permission, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
 
             jComboBox_Direction.setVisible(false);
             jLabel_Direction.setVisible(false);

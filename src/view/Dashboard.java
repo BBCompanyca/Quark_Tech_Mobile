@@ -61,6 +61,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Content = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel_Username = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -189,6 +190,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
         jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 2, 850, 30));
+        jPanel_Background.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -308,6 +310,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel jPanel_Content_Menu;
     private javax.swing.JPanel jPanel_Exit;
     private javax.swing.JPanel jPanel_Head;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
     //Método para obtener la fecha actual...

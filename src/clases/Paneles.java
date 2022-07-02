@@ -8,10 +8,12 @@ import view.CreateCodeEquipo;
 import static view.Dashboard.jPanel_Content;
 import static view.Dashboard.jPanel_Content_Menu;
 import view.Equipos;
+import view.History;
 import view.Warranty;
 import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
+import view.Preliminar_History;
 import view.Preliminar_Warranty;
 import view.Principal;
 import view.Register_Client;
@@ -321,6 +323,34 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(solicitudes, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+
+    //Panel para las el historico del equipo...
+    public void Panel_History() {
+
+        History history = new History();
+        history.setSize(WidthPanel, HeigthPanel);
+        history.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(history, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+
+    //Panel para las el preliminar del historico del equipo...
+    public void Panel_Priliminar_History() {
+
+        Preliminar_History preliminar_History = new Preliminar_History();
+        preliminar_History.setSize(890, 600);
+        preliminar_History.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(preliminar_History, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

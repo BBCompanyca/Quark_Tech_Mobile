@@ -156,21 +156,31 @@ public class Update_User extends javax.swing.JPanel {
         jLabel_Direction.setText("Dirección:");
         add(jLabel_Direction, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, -1, -1));
 
-        jButton_Update.setText("Modificar");
+        jButton_Update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_dark.png"))); // NOI18N
+        jButton_Update.setBorder(null);
+        jButton_Update.setBorderPainted(false);
+        jButton_Update.setContentAreaFilled(false);
+        jButton_Update.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_ligth.png"))); // NOI18N
+        jButton_Update.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save_ligth.png"))); // NOI18N
         jButton_Update.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_UpdateMousePressed(evt);
             }
         });
-        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, 140, 40));
+        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 320, 140, 50));
 
-        jButton_RestartPassword.setText("Contraseña");
+        jButton_RestartPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password_dark.png"))); // NOI18N
+        jButton_RestartPassword.setBorder(null);
+        jButton_RestartPassword.setBorderPainted(false);
+        jButton_RestartPassword.setContentAreaFilled(false);
+        jButton_RestartPassword.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password_ligth.png"))); // NOI18N
+        jButton_RestartPassword.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password_ligth.png"))); // NOI18N
         jButton_RestartPassword.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_RestartPasswordMousePressed(evt);
             }
         });
-        add(jButton_RestartPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 140, 40));
+        add(jButton_RestartPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 140, 50));
 
         jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));

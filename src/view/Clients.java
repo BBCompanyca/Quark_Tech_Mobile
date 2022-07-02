@@ -39,7 +39,7 @@ public class Clients extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jTextField_Search_Client = new javax.swing.JTextField();
         jButton_Search_Client = new javax.swing.JButton();
-        jScrollPane = new javax.swing.JScrollPane();
+        jScrollPane_C = new javax.swing.JScrollPane();
         jTable_Client = new javax.swing.JTable();
         jButton_New_Client = new javax.swing.JButton();
         jButton_Update_Client = new javax.swing.JButton();
@@ -87,9 +87,9 @@ public class Clients extends javax.swing.JPanel {
         });
         add(jButton_Search_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 80, 30));
 
-        jScrollPane.setBackground(new java.awt.Color(9, 53, 69));
-        jScrollPane.setBorder(null);
-        jScrollPane.setForeground(new java.awt.Color(240, 240, 240));
+        jScrollPane_C.setBackground(new java.awt.Color(9, 53, 69));
+        jScrollPane_C.setBorder(null);
+        jScrollPane_C.setForeground(new java.awt.Color(240, 240, 240));
 
         jTable_Client.setBackground(new java.awt.Color(9, 53, 69));
         jTable_Client.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -122,9 +122,9 @@ public class Clients extends javax.swing.JPanel {
         });
         jTable_Client.setGridColor(new java.awt.Color(240, 240, 240));
         jTable_Client.setSelectionBackground(new java.awt.Color(9, 53, 69));
-        jScrollPane.setViewportView(jTable_Client);
+        jScrollPane_C.setViewportView(jTable_Client);
 
-        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 850, 260));
+        add(jScrollPane_C, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 850, 260));
 
         jButton_New_Client.setText("NUEVO");
         jButton_New_Client.setFocusPainted(false);
@@ -268,8 +268,8 @@ public class Clients extends javax.swing.JPanel {
 
                 } catch (SQLException e) {
 
-                    System.err.println("¡Error al eliminar el usuario! " + e);
-                    JOptionPane.showMessageDialog(null, "¡Error al eliminar el usuario!", "¡Error!",
+                    System.err.println("¡Error al eliminar el cliente! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al eliminar el cliente!", "¡Error!",
                             JOptionPane.OK_OPTION);
 
                 }
@@ -298,7 +298,7 @@ public class Clients extends javax.swing.JPanel {
     private javax.swing.JButton jButton_Search_Client;
     private javax.swing.JButton jButton_Update_Client;
     private javax.swing.JLabel jLabel1;
-    public static javax.swing.JScrollPane jScrollPane;
+    public static javax.swing.JScrollPane jScrollPane_C;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JTable jTable_Client;
     public static javax.swing.JTextField jTextField_Search_Client;
@@ -330,7 +330,7 @@ public class Clients extends javax.swing.JPanel {
             ResultSet rs = pst.executeQuery();
 
             jTable_Client = new JTable(model);
-            jScrollPane.setViewportView(jTable_Client);
+            jScrollPane_C.setViewportView(jTable_Client);
 
             model.addColumn("ID");
             model.addColumn("Nombre");

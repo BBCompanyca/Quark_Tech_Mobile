@@ -70,13 +70,18 @@ public class Reset_Password extends javax.swing.JPanel {
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 250, 10));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 250, 10));
 
-        jButton_Restart.setText("Restaurar");
+        jButton_Restart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update_pass_dark.png"))); // NOI18N
+        jButton_Restart.setBorder(null);
+        jButton_Restart.setBorderPainted(false);
+        jButton_Restart.setContentAreaFilled(false);
+        jButton_Restart.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update_pass_ligth.png"))); // NOI18N
+        jButton_Restart.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update_pass_ligth.png"))); // NOI18N
         jButton_Restart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_RestartMousePressed(evt);
             }
         });
-        add(jButton_Restart, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 190, 40));
+        add(jButton_Restart, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 190, 50));
 
         jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));

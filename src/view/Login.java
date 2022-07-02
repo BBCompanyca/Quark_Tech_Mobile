@@ -24,11 +24,9 @@ public class Login extends javax.swing.JFrame {
         setSize(1040, 630);
 
         System.out.println(encryptPassword.ecnode("@BBCompany.ca", "Nery"));
-        
-        
-        
-        jTextField1.setBackground(new java.awt.Color(0,0,0,0));
-        jPasswordField1.setBackground(new java.awt.Color(0,0,0,0));
+
+        jTextField1.setBackground(new java.awt.Color(0, 0, 0, 0));
+        jPasswordField1.setBackground(new java.awt.Color(0, 0, 0, 0));
 
     }
 
@@ -157,7 +155,7 @@ public class Login extends javax.swing.JFrame {
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "select id_user, username, password, direction, type_account, status from user where "
-                                + "username = '" + user2 + "' and password = '" + pass2 + "'");
+                        + "username = '" + user2 + "' and password = '" + pass2 + "'");
 
                 ResultSet rs = pst.executeQuery();
 
@@ -182,7 +180,9 @@ public class Login extends javax.swing.JFrame {
                         } else {
 
                             //Si el usuario está inactivo dejará un mensaje y limpiará los campos...
-                            jLabel_Anwser.setText("¡Usuario inactivo! contacte a un Administrador.");
+                            jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 22));
+                            jLabel_Anwser.setForeground(Color.red);
+                            jLabel_Anwser.setText("¡Usuario inactivo! contacte a un Administrador...");
 
                             jTextField1.setText("");
                             jTextField1.requestFocus();
@@ -198,6 +198,9 @@ public class Login extends javax.swing.JFrame {
                         jTextField1.setText("");
                         jTextField1.requestFocus();
                         jPasswordField1.setText("");
+
+                        jLabel_Anwser.setForeground(Color.WHITE);
+                        jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 24));
 
                     }
 
