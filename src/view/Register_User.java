@@ -23,7 +23,7 @@ public class Register_User extends javax.swing.JPanel {
         direction_login = Login.direction;
 
         //Objetos para el PlayHolder de los jTextField... 
-        TextPrompt name = new TextPrompt("Ej. Calos Perez", jTextField_Name);
+        TextPrompt name = new TextPrompt("Ej. Carlos Perez", jTextField_Name);
         TextPrompt telephone = new TextPrompt("Ej. 0414 - 589.56.41", jTextField_Telephone);
         TextPrompt username = new TextPrompt("Ej. ADMIN", jTextField_Username);
         TextPrompt password = new TextPrompt("Ej. *********", jPasswordField_Password);
@@ -33,6 +33,10 @@ public class Register_User extends javax.swing.JPanel {
         formatText.ValidateNumber(jTextField_Telephone);
 
         validatePermission();
+
+        ValidateCamp();
+
+        jButton_Register.setVisible(false);
 
     }
 
@@ -58,6 +62,10 @@ public class Register_User extends javax.swing.JPanel {
         jComboBox_Permission = new javax.swing.JComboBox<>();
         jButton_Register = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel_Password2 = new javax.swing.JLabel();
+        jLabel_Username2 = new javax.swing.JLabel();
+        jLabel_Telefono2 = new javax.swing.JLabel();
+        jLabel_Nombre2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,6 +80,11 @@ public class Register_User extends javax.swing.JPanel {
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Name.setBorder(null);
+        jTextField_Name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_NameKeyReleased(evt);
+            }
+        });
         add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 220, 30));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 220, -1));
 
@@ -80,6 +93,11 @@ public class Register_User extends javax.swing.JPanel {
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Telephone.setBorder(null);
+        jTextField_Telephone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_TelephoneKeyReleased(evt);
+            }
+        });
         add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 220, 30));
 
         jLabel_Telephone.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -98,6 +116,11 @@ public class Register_User extends javax.swing.JPanel {
         jTextField_Username.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Username.setBorder(null);
+        jTextField_Username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_UsernameKeyReleased(evt);
+            }
+        });
         add(jTextField_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 220, 30));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 220, -1));
 
@@ -111,6 +134,11 @@ public class Register_User extends javax.swing.JPanel {
         jPasswordField_Password.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jPasswordField_Password.setForeground(new java.awt.Color(240, 240, 240));
         jPasswordField_Password.setBorder(null);
+        jPasswordField_Password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordField_PasswordKeyReleased(evt);
+            }
+        });
         add(jPasswordField_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 220, 30));
 
         jComboBox_Direction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Almacen", "Caricuao", "City Market" }));
@@ -152,13 +180,41 @@ public class Register_User extends javax.swing.JPanel {
                 jButton_RegisterMousePressed(evt);
             }
         });
-        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 190, 60));
+        add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 190, 60));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Registrar Nuevo Usuario");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 890, 40));
+
+        jLabel_Password2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Password2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Password2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Password2.setText("CAMPO REQUERIDO *");
+        jLabel_Password2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Password2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 275, 220, 20));
+
+        jLabel_Username2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Username2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Username2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Username2.setText("CAMPO REQUERIDO *");
+        jLabel_Username2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Username2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 175, 220, 20));
+
+        jLabel_Telefono2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Telefono2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Telefono2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Telefono2.setText("CAMPO REQUERIDO *");
+        jLabel_Telefono2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Telefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 275, 220, 20));
+
+        jLabel_Nombre2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Nombre2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Nombre2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Nombre2.setText("CAMPO REQUERIDO *");
+        jLabel_Nombre2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 175, 220, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox_DirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_DirectionActionPerformed
@@ -176,7 +232,7 @@ public class Register_User extends javax.swing.JPanel {
         if (type_Account.equals("Moderador")) {
 
             //Variables para validar que los campos de textos no esten vacios...
-            int flag = 0, flag_two = 0, flag_tree = 0;
+            int flag_two = 0, flag_tree = 0;
 
             name = jTextField_Name.getText().trim();
             telephone = jTextField_Telephone.getText().trim();
@@ -184,50 +240,6 @@ public class Register_User extends javax.swing.JPanel {
             password = jPasswordField_Password.getText().trim();
             permission = jComboBox_Permission.getSelectedItem().toString();
             direction = jComboBox_Direction.getSelectedItem().toString();
-
-            if (name.equals("")) {
-
-                jLabel_Name.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
-
-            }
-
-            if (telephone.equals("")) {
-
-                jLabel_Telephone.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Telephone.setForeground(new java.awt.Color(240, 240, 240));
-
-            }
-
-            if (username.equals("")) {
-
-                jLabel_Username.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
-
-            }
-
-            if (password.equals("")) {
-
-                jLabel_Password.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Password.setForeground(new java.awt.Color(240, 240, 240));
-
-            }
 
             if (permission.equals("...")) {
 
@@ -251,106 +263,97 @@ public class Register_User extends javax.swing.JPanel {
 
             }
 
-            //Condición para validar que los campos esten llenos...
-            if (flag == 0) {
-                //Condicion para validar que se haya seleccionado algún permiso...
-                if (flag_two == 0) {
-                    //Condición para validar que se haya seleccionado alguna dirección...
-                    if (flag_tree == 0) {
+            //Condicion para validar que se haya seleccionado algún permiso...
+            if (flag_two == 0) {
+                //Condición para validar que se haya seleccionado alguna dirección...
+                if (flag_tree == 0) {
 
-                        //Algoritmo para validar que el nombre usuario sea valido...
-                        try {
+                    //Algoritmo para validar que el nombre usuario sea valido...
+                    try {
 
-                            Connection cn = BD_Connection.connection();
-                            PreparedStatement pst = cn.prepareStatement(
-                                    "select username from user where username = '" + username + "'");
+                        Connection cn = BD_Connection.connection();
+                        PreparedStatement pst = cn.prepareStatement(
+                                "select username from user where username = '" + username + "'");
 
-                            ResultSet rs = pst.executeQuery();
+                        ResultSet rs = pst.executeQuery();
 
-                            if (rs.next()) {
+                        if (rs.next()) {
 
-                                jLabel_Username.setForeground(Color.red);
+                            jLabel_Username.setForeground(Color.red);
 
-                                JOptionPane.showMessageDialog(null, "¡Nombre de usuario no disponible!", "!Acceso Denegado!",
-                                        JOptionPane.OK_OPTION);
-
-                                jTextField_Username.setText("");
-                                jTextField_Username.requestFocus();
-
-                                cn.close();
-
-                            } else {
-
-                                cn.close();
-
-                                //Algoritmo para registrar el usario...
-                                try {
-
-                                    unformat_telphone = formatText.unFormatText(telephone);
-
-                                    Connection cn2 = BD_Connection.connection();
-                                    PreparedStatement pst2 = cn2.prepareStatement(
-                                            "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-                                    pst2.setInt(1, 0);
-                                    pst2.setString(2, name);
-                                    pst2.setString(3, username);
-                                    pst2.setString(4, encryptPassword.ecnode("@BBCompany.ca", password));
-                                    pst2.setString(5, telephone);
-                                    pst2.setString(6, unformat_telphone);
-                                    pst2.setString(7, direction);
-                                    pst2.setString(8, permission);
-                                    pst2.setString(9, username_user);
-                                    pst2.setString(10, "");
-                                    pst2.setString(11, "Activo");
-                                    pst2.executeUpdate();
-
-                                    PintarDeVerdejTextField();
-                                    VaciarCamposDeTextos();
-
-                                    JOptionPane.showMessageDialog(null, "Registro Exitoso.", "Exito",
-                                            JOptionPane.INFORMATION_MESSAGE);
-
-                                    resetColorjTextField();
-
-                                    cn2.close();
-
-                                } catch (SQLException e) {
-
-                                    System.err.println("¡Error al registrar usuario! " + e);
-
-                                    JOptionPane.showMessageDialog(null, "¡Error al registrar usuario!", "!Error!",
-                                            JOptionPane.OK_OPTION);
-
-                                }
-                            }
-
-                        } catch (SQLException e) {
-
-                            System.err.println("¡Error al validar el nombre de usuario! " + e);
-
-                            JOptionPane.showMessageDialog(null, "¡Error al validar el nombre de usuario!", "!Error!",
+                            JOptionPane.showMessageDialog(null, "¡Nombre de usuario no disponible!", "!Acceso Denegado!",
                                     JOptionPane.OK_OPTION);
 
+                            jTextField_Username.setText("");
+                            jTextField_Username.requestFocus();
+
+                            cn.close();
+
+                        } else {
+
+                            cn.close();
+
+                            //Algoritmo para registrar el usario...
+                            try {
+
+                                unformat_telphone = formatText.unFormatText(telephone);
+
+                                Connection cn2 = BD_Connection.connection();
+                                PreparedStatement pst2 = cn2.prepareStatement(
+                                        "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                                pst2.setInt(1, 0);
+                                pst2.setString(2, name);
+                                pst2.setString(3, username);
+                                pst2.setString(4, encryptPassword.ecnode("@BBCompany.ca", password));
+                                pst2.setString(5, telephone);
+                                pst2.setString(6, unformat_telphone);
+                                pst2.setString(7, direction);
+                                pst2.setString(8, permission);
+                                pst2.setString(9, username_user);
+                                pst2.setString(10, "");
+                                pst2.setString(11, "Activo");
+                                pst2.executeUpdate();
+
+                                PintarDeVerdejTextField();
+                                VaciarCamposDeTextos();
+
+                                JOptionPane.showMessageDialog(null, "Registro Exitoso.", "Exito",
+                                        JOptionPane.INFORMATION_MESSAGE);
+
+                                resetColorjTextField();
+
+                                cn2.close();
+
+                            } catch (SQLException e) {
+
+                                System.err.println("¡Error al registrar usuario! " + e);
+
+                                JOptionPane.showMessageDialog(null, "¡Error al registrar usuario!", "!Error!",
+                                        JOptionPane.OK_OPTION);
+
+                            }
                         }
 
-                    } else {
+                    } catch (SQLException e) {
 
-                        JOptionPane.showMessageDialog(null, "¡Debes seleccionar alguna dirección!", "!Acceso Denegado!",
-                                JOptionPane.WARNING_MESSAGE);
+                        System.err.println("¡Error al validar el nombre de usuario! " + e);
+
+                        JOptionPane.showMessageDialog(null, "¡Error al validar el nombre de usuario!", "!Error!",
+                                JOptionPane.OK_OPTION);
 
                     }
 
                 } else {
 
-                    JOptionPane.showMessageDialog(null, "¡Debes seleccionar algún permiso!", "!Acceso Denegado!",
+                    JOptionPane.showMessageDialog(null, "¡Debes seleccionar alguna dirección!", "!Acceso Denegado!",
                             JOptionPane.WARNING_MESSAGE);
 
                 }
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "!Acceso Denegado!",
+                JOptionPane.showMessageDialog(null, "¡Debes seleccionar algún permiso!", "!Acceso Denegado!",
                         JOptionPane.WARNING_MESSAGE);
 
             }
@@ -521,6 +524,30 @@ public class Register_User extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton_RegisterMousePressed
 
+    private void jTextField_NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_NameKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jTextField_NameKeyReleased
+
+    private void jTextField_UsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_UsernameKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jTextField_UsernameKeyReleased
+
+    private void jTextField_TelephoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_TelephoneKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jTextField_TelephoneKeyReleased
+
+    private void jPasswordField_PasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField_PasswordKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jPasswordField_PasswordKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Register;
@@ -529,10 +556,14 @@ public class Register_User extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Direction;
     private javax.swing.JLabel jLabel_Name;
+    private javax.swing.JLabel jLabel_Nombre2;
     private javax.swing.JLabel jLabel_Password;
+    private javax.swing.JLabel jLabel_Password2;
     private javax.swing.JLabel jLabel_Permission;
+    private javax.swing.JLabel jLabel_Telefono2;
     private javax.swing.JLabel jLabel_Telephone;
     private javax.swing.JLabel jLabel_Username;
+    private javax.swing.JLabel jLabel_Username2;
     private javax.swing.JPasswordField jPasswordField_Password;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -594,6 +625,79 @@ public class Register_User extends javax.swing.JPanel {
         jComboBox_Direction.setSelectedIndex(0);
 
         jTextField_Name.requestFocus();
+
+    }
+
+    private void ValidateCamp() {
+
+        if (jTextField_Name.getText().isEmpty()) {
+
+            jLabel_Nombre2.setText("*CAMPO REQUERIDO*");
+
+        } else if (!jTextField_Name.getText().contains(" ")) {
+
+            jLabel_Nombre2.setText("*FORMATO INVALIDO*");
+
+        } else {
+
+            jLabel_Nombre2.setText("");
+
+        }
+
+        if (jTextField_Telephone.getText().isEmpty()) {
+
+            jLabel_Telefono2.setText("*CAMPO REQUERIDO*");
+
+        } else if (jTextField_Telephone.getText().length() < 16) {
+
+            jLabel_Telefono2.setText("*FORMATO INVALIDO*");
+
+        } else if (!jTextField_Telephone.getText().contains("0412") && !jTextField_Telephone.getText().contains("0414")
+                && !jTextField_Telephone.getText().contains("0424") && !jTextField_Telephone.getText().contains("0416")
+                && !jTextField_Telephone.getText().contains("0426")) {
+
+            jLabel_Telefono2.setText("*FORMATO INVALIDO*");
+
+        } else {
+
+            jLabel_Telefono2.setText("");
+
+        }
+
+        if (jTextField_Username.getText().isEmpty()) {
+
+            jLabel_Username2.setText("*CAMPO REQUERIDO*");
+
+        } else {
+
+            jLabel_Username2.setText("");
+
+        }
+
+        if (jPasswordField_Password.getText().isEmpty()) {
+
+            jLabel_Password2.setText("*CAMPO REQUERIDO*");
+
+        } else {
+
+            jLabel_Password2.setText("");
+
+        }
+
+        if (jTextField_Name.getText().isEmpty() || jTextField_Telephone.getText().isEmpty()
+                || jTextField_Username.getText().isEmpty() || jPasswordField_Password.getText().isEmpty()
+                || jTextField_Telephone.getText().length() < 16 || !jTextField_Name.getText().contains(" ")
+                || !jTextField_Telephone.getText().contains("0412") && !jTextField_Telephone.getText().contains("0414")
+                && !jTextField_Telephone.getText().contains("0424") && !jTextField_Telephone.getText().contains("0416")
+                && !jTextField_Telephone.getText().contains("0426")) {
+
+            jButton_Register.setVisible(false);
+
+        } else {
+
+            jButton_Register.setVisible(true);
+
+        }
 
     }
 

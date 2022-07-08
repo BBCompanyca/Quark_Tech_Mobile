@@ -2,6 +2,8 @@ package clases;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class FormatText {
@@ -116,7 +118,7 @@ public class FormatText {
 
                 }
             }
-            
+
             text = aux;
             text = character + "-" + text;
             text = text.toUpperCase();
