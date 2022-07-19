@@ -12,8 +12,10 @@ import javax.swing.BorderFactory;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {
 
-    String status = "", status_technical = "", brand = "", model = "", color = "", serial = "", falla = "", date_register = "", 
+    String status = "", status_technical = "", brand = "", model = "", color = "", serial = "", falla = "", date_register = "",
             received = "", comments_technical = "";
+
+    int id_registered_by;
 
     public static int flag = 0;
 
@@ -28,9 +30,15 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         ValidateButton();
 
-        jTextArea_Recibido.setBorder(BorderFactory.createCompoundBorder(jTextArea_Recibido.getBorder(), 
+        UpdateInformation();
+        
+        ValidateCamp();
+        
+        jButton_Save.setVisible(false);
+
+        jTextArea_Recibido.setBorder(BorderFactory.createCompoundBorder(jTextArea_Recibido.getBorder(),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        jTextArea_Comments_Technical.setBorder(BorderFactory.createCompoundBorder(jTextArea_Comments_Technical.getBorder(), 
+        jTextArea_Comments_Technical.setBorder(BorderFactory.createCompoundBorder(jTextArea_Comments_Technical.getBorder(),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
     }
@@ -39,6 +47,9 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel_Recibido2 = new javax.swing.JLabel();
+        jLabel_Falla2 = new javax.swing.JLabel();
+        jLabel_Serial2 = new javax.swing.JLabel();
         jLabel_Equipo = new javax.swing.JLabel();
         jTextField_Equipo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -65,9 +76,32 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Recibido1 = new javax.swing.JLabel();
         jLabel_Status = new javax.swing.JLabel();
         jButton_Entregar = new javax.swing.JButton();
+        jButton_Update_Information = new javax.swing.JButton();
+        jButton_Save = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel_Recibido2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Recibido2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Recibido2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Recibido2.setText("CAMPO REQUERIDO *");
+        jLabel_Recibido2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Recibido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 240, 150, 20));
+
+        jLabel_Falla2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Falla2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Falla2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Falla2.setText("CAMPO REQUERIDO *");
+        jLabel_Falla2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Falla2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 275, 150, 20));
+
+        jLabel_Serial2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Serial2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Serial2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Serial2.setText("CAMPO REQUERIDO *");
+        jLabel_Serial2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Serial2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 195, 150, 20));
 
         jLabel_Equipo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Equipo.setForeground(new java.awt.Color(240, 240, 240));
@@ -99,6 +133,11 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextField_SerialActionPerformed(evt);
             }
         });
+        jTextField_Serial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_SerialKeyReleased(evt);
+            }
+        });
         add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 150, 20));
         add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 150, -1));
 
@@ -116,6 +155,11 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextField_Falla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_FallaActionPerformed(evt);
+            }
+        });
+        jTextField_Falla.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_FallaKeyReleased(evt);
             }
         });
         add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 210, 20));
@@ -182,6 +226,11 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setAutoscrolls(false);
         jTextArea_Recibido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
         jTextArea_Recibido.setMargin(new java.awt.Insets(10, 10, 10, 10));
+        jTextArea_Recibido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextArea_RecibidoKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 330, 125));
@@ -209,7 +258,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_SentActionPerformed(evt);
             }
         });
-        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 150, 60));
+        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 150, 60));
 
         jButton_Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar btn dark.png"))); // NOI18N
         jButton_Cancelar.setBorder(null);
@@ -228,7 +277,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_CancelarActionPerformed(evt);
             }
         });
-        add(jButton_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 150, 60));
+        add(jButton_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 150, 60));
 
         jButton_Dowload_Report.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pdf_80px.png"))); // NOI18N
         jButton_Dowload_Report.setBorder(null);
@@ -240,7 +289,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_Dowload_ReportMousePressed(evt);
             }
         });
-        add(jButton_Dowload_Report, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 60, 80));
+        add(jButton_Dowload_Report, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 325, 60, 80));
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -282,7 +331,35 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jButton_EntregarMousePressed(evt);
             }
         });
-        add(jButton_Entregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 150, 60));
+        add(jButton_Entregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 150, 60));
+
+        jButton_Update_Information.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/updateInformation_Dark.png"))); // NOI18N
+        jButton_Update_Information.setBorder(null);
+        jButton_Update_Information.setBorderPainted(false);
+        jButton_Update_Information.setContentAreaFilled(false);
+        jButton_Update_Information.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Update_Information.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/uodateInfomatopn_Ligth.png"))); // NOI18N
+        jButton_Update_Information.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/uodateInfomatopn_Ligth.png"))); // NOI18N
+        jButton_Update_Information.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_Update_InformationMousePressed(evt);
+            }
+        });
+        add(jButton_Update_Information, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 150, 60));
+
+        jButton_Save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saveInformation_Dark.png"))); // NOI18N
+        jButton_Save.setBorder(null);
+        jButton_Save.setBorderPainted(false);
+        jButton_Save.setContentAreaFilled(false);
+        jButton_Save.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Save.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saveInformation_Ligth.png"))); // NOI18N
+        jButton_Save.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/saveInformation_Ligth.png"))); // NOI18N
+        jButton_Save.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_SaveMousePressed(evt);
+            }
+        });
+        add(jButton_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 150, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -312,7 +389,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     private void jButton_Dowload_ReportMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Dowload_ReportMousePressed
 
-        String time = jLabel_Warranty.getText(); 
+        String time = jLabel_Warranty.getText();
 
         if (time.equals("Este equipo no cumple con el tiempo de garantía...")) {
 
@@ -441,18 +518,97 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SentActionPerformed
 
+    private void jButton_Update_InformationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_InformationMousePressed
+
+        jButton_Sent.setVisible(false);
+        jButton_Cancelar.setVisible(false);
+        jButton_Entregar.setVisible(false);
+        jButton_Dowload_Report.setVisible(false);
+
+        jButton_Update_Information.setVisible(false);
+
+        jButton_Save.setVisible(true);
+
+        jTextField_Serial.setEditable(true);
+        jTextField_Falla.setEditable(true);
+        jTextArea_Recibido.setEditable(true);
+
+    }//GEN-LAST:event_jButton_Update_InformationMousePressed
+
+    private void jButton_SaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SaveMousePressed
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement("update warranty set serial = ?, falla = ?, received = ? "
+                    + "where id_warranty = '" + Warranty.ID + "'");
+
+            pst.setString(1, jTextField_Serial.getText().trim());
+            pst.setString(2, jTextField_Serial.getText().trim());
+            pst.setString(3, jTextArea_Recibido.getText().trim());
+
+            pst.executeUpdate();
+
+            jButton_Save.setVisible(false);
+
+            jTextField_Serial.setEditable(false);
+            jTextField_Falla.setEditable(false);
+            jTextArea_Recibido.setEditable(false);
+
+            JOptionPane.showMessageDialog(null, "Modificación exitosa.");
+
+            ValidateButton();
+            
+            jButton_Dowload_Report.setVisible(true);
+            jButton_Update_Information.setVisible(true);
+
+            cn.close();
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al modificar la información de la garantía! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al modificar la información de la garantía!", "¡Error!",
+                    JOptionPane.OK_OPTION);
+
+        }
+
+    }//GEN-LAST:event_jButton_SaveMousePressed
+
+    private void jTextField_SerialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_SerialKeyReleased
+        
+        ValidateCamp();
+        
+    }//GEN-LAST:event_jTextField_SerialKeyReleased
+
+    private void jTextField_FallaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_FallaKeyReleased
+        
+        ValidateCamp();
+        
+    }//GEN-LAST:event_jTextField_FallaKeyReleased
+
+    private void jTextArea_RecibidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea_RecibidoKeyReleased
+        
+        ValidateCamp();
+        
+    }//GEN-LAST:event_jTextArea_RecibidoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Cancelar;
     private javax.swing.JButton jButton_Dowload_Report;
     private javax.swing.JButton jButton_Entregar;
+    private javax.swing.JButton jButton_Save;
     private javax.swing.JButton jButton_Sent;
+    private javax.swing.JButton jButton_Update_Information;
     private javax.swing.JLabel jLabel_DatePurchase;
     private javax.swing.JLabel jLabel_Equipo;
     private javax.swing.JLabel jLabel_Falla;
+    private javax.swing.JLabel jLabel_Falla2;
     private javax.swing.JLabel jLabel_Recibido;
     private javax.swing.JLabel jLabel_Recibido1;
+    private javax.swing.JLabel jLabel_Recibido2;
     private javax.swing.JLabel jLabel_Serial;
+    private javax.swing.JLabel jLabel_Serial2;
     public static javax.swing.JLabel jLabel_Status;
     private javax.swing.JLabel jLabel_Title;
     public static javax.swing.JLabel jLabel_Warranty;
@@ -477,13 +633,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement("select c.name_client, e.brand, e.model, e.color, w.serial, w.falla, w.date_register, w.received, w.comments_technical, "
-                    + "w.status, w.status_technical, w.day_warranty, w.date_purchase from warranty w join client c on w.id_client = c.id_client and w.id_warranty = '" + Warranty.ID + "' "
+                    + "w.status, w.status_technical, w.day_warranty, w.date_purchase, w.id_registered_by from warranty w join client c on w.id_client = c.id_client and w.id_warranty = '" + Warranty.ID + "' "
                     + "join equipo e on w.id_equipo = e.id_equipo and w.id_warranty = '" + Warranty.ID + "'");
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
-                
+
                 brand = rs.getString("e.brand");
                 model = rs.getString("e.model");
                 color = rs.getString("e.color");
@@ -494,6 +650,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 comments_technical = rs.getString("w.comments_technical");
                 status = rs.getString("w.status");
                 status_technical = rs.getString("w.status_technical");
+                id_registered_by = rs.getInt("id_registered_by");
 
                 jLabel_Title.setText("Garantía - Cliente: " + rs.getString("c.name_client"));
 
@@ -543,13 +700,17 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     private void ValidateButton() {
 
-        if (status.equals("Nuevo Ingreso")) {
+        if (status.equals("Nuevo Ingreso") && Login.type_account.equals("Moderador")
+                || status.equals("Nuevo Ingreso") && Login.type_account.equals("Administrador")
+                || status.equals("Nuevo Ingreso") && id_registered_by == Login.ID_User) {
 
             jButton_Sent.setVisible(true);
             jButton_Cancelar.setVisible(false);
             jButton_Entregar.setVisible(false);
 
-        } else if (status.equals("Solicitud Enviada - En Espera")) {
+        } else if (status.equals("Solicitud Enviada - En Espera") && Login.type_account.equals("Moderador")
+                || status.equals("Solicitud Enviada - En Espera") && Login.type_account.equals("Administrador")
+                || status.equals("Solicitud Enviada - En Espera") && id_registered_by == Login.ID_User) {
 
             jButton_Sent.setVisible(false);
             jButton_Cancelar.setVisible(true);
@@ -561,12 +722,84 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
             jButton_Cancelar.setVisible(false);
             jButton_Entregar.setVisible(false);
 
-        } else if (status.equals("En Tienda") && status_technical.equals("Reparado")
-                || status.equals("En Tienda") && status_technical.equals("No Reparado")) {
+        } else if (status.equals("En Tienda") && status_technical.equals("Reparado") && Login.type_account.equals("Moderador")
+                || status.equals("En Tienda") && status_technical.equals("Reparado") && Login.type_account.equals("Administrador")
+                || status.equals("En Tienda") && status_technical.equals("Reparado") && id_registered_by == Login.ID_User
+                || status.equals("En Tienda") && status_technical.equals("No Reparado") && Login.type_account.equals("Moderador")
+                || status.equals("En Tienda") && status_technical.equals("No Reparado") && Login.type_account.equals("Administrador")
+                || status.equals("En Tienda") && status_technical.equals("No Reparado") && id_registered_by == Login.ID_User) {
 
             jButton_Sent.setVisible(false);
             jButton_Cancelar.setVisible(false);
             jButton_Entregar.setVisible(true);
+
+        } else {
+
+            jButton_Sent.setVisible(false);
+            jButton_Cancelar.setVisible(false);
+            jButton_Entregar.setVisible(false);
+
+        }
+
+    }
+
+    private void UpdateInformation() {
+
+        if (Login.type_account.equals("Moderador") || Login.type_account.equals("Administrador")
+                || id_registered_by == Login.ID_User) {
+
+            jButton_Update_Information.setVisible(true);
+            jButton_Save.setVisible(false);
+
+        } else {
+
+            jButton_Update_Information.setVisible(false);
+            jButton_Save.setVisible(false);
+
+        }
+
+    }
+
+    private void ValidateCamp() {
+
+        if (jTextField_Serial.getText().isEmpty()) {
+
+            jLabel_Serial2.setText("CAMPO REQUERIDO *");
+
+        } else {
+
+            jLabel_Serial2.setText("");
+
+        }
+
+        if (jTextField_Falla.getText().isEmpty()) {
+
+            jLabel_Falla2.setText("CAMPO REQUERIDO *");
+
+        } else {
+
+            jLabel_Falla2.setText("");
+
+        }
+
+        if (jTextArea_Recibido.getText().isEmpty()) {
+
+            jLabel_Recibido2.setText("CAMPO REQUERIDO *");
+
+        } else {
+
+            jLabel_Recibido2.setText("");
+
+        }
+        
+        if (jTextField_Serial.getText().isEmpty() || jTextField_Falla.getText().isEmpty() 
+                || jTextArea_Recibido.getText().isEmpty()) {
+            
+            jButton_Save.setVisible(false);
+            
+        } else {
+            
+            jButton_Save.setVisible(true);
 
         }
 
