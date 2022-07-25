@@ -179,7 +179,7 @@
           <Color blue="f0" green="f0" red="f0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Color: NEGRO "/>
+        <Property name="text" type="java.lang.String" value="Color:  "/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -299,7 +299,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel19">
+    <Component class="javax.swing.JLabel" name="jLabel_Technical">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Roboto" size="18" style="0"/>
@@ -328,7 +328,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="465" y="260" width="380" height="60"/>
+          <AbsoluteConstraints x="460" y="260" width="380" height="60"/>
         </Constraint>
       </Constraints>
 
@@ -367,7 +367,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="465" y="140" width="380" height="60"/>
+          <AbsoluteConstraints x="460" y="140" width="380" height="60"/>
         </Constraint>
       </Constraints>
 

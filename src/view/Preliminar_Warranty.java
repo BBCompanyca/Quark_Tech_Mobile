@@ -162,8 +162,8 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextField_FallaKeyReleased(evt);
             }
         });
-        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 210, 20));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 210, -1));
+        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 250, 20));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 250, -1));
 
         jTextField_Calendar.setEditable(false);
         jTextField_Calendar.setBackground(new java.awt.Color(9, 53, 69));

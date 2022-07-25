@@ -7,7 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import clases.Paneles;
-import javax.swing.JOptionPane;
 
 public class History extends javax.swing.JPanel {
 
@@ -36,6 +35,7 @@ public class History extends javax.swing.JPanel {
         jDateChooser_Hasta = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel_Message = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setPreferredSize(new java.awt.Dimension(890, 470));
@@ -136,6 +136,11 @@ public class History extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Desde:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 33, 70, 20));
+
+        jLabel_Message.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Message.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        add(jLabel_Message, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 410, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_Search_SerialMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_SerialMousePressed
@@ -207,6 +212,7 @@ public class History extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    public static javax.swing.JLabel jLabel_Message;
     public static javax.swing.JScrollPane jScrollPane_H;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JTable jTable_History_H;
@@ -219,6 +225,8 @@ public class History extends javax.swing.JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                
+                
 
                 int fila_point = jTable_History_H.rowAtPoint(e.getPoint());
                 int columna_point = 0;
