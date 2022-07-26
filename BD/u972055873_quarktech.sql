@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2022 a las 21:09:14
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.2
+-- Tiempo de generación: 26-07-2022 a las 18:31:31
+-- Versión del servidor: 10.5.15-MariaDB-cll-lve
+-- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `quark_tech_mobile`
+-- Base de datos: `u972055873_quarktech`
 --
 
 -- --------------------------------------------------------
@@ -46,7 +45,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id_client`, `name_client`, `telephone_client`, `unformat_telephone_client`, `identity_card_client`, `unformat_identity_card_client`, `direction_client`, `direction_tienda`, `registered_by`, `last_modification`) VALUES
-(1, 'Neifer Reveron', '0414 - 589.65.23', '04145896523', 'V-27.913.620', 'V27913620', 'Charallave', 'City Market', '1', '3');
+(1, 'Neifer Reveron', '0412 - 507.97.65', '04125079765', 'V-27.913.620', 'V27913620', 'Charallave', 'Almacen', '1', '');
 
 -- --------------------------------------------------------
 
@@ -71,7 +70,20 @@ CREATE TABLE `equipo` (
 --
 
 INSERT INTO `equipo` (`id_equipo`, `code`, `brand`, `model`, `color`, `capacity`, `day_warranty`, `registered_by`, `last_modification`) VALUES
-(1, '0102ALC2/32-N', 'Alcatel 1', '5033EP', 'Negro', '2/32GB', '15', 'NeiferJesus14', '');
+(1, 'RED9A4/64-V', 'REDMI', '9A', 'VERDE', '4/64GB', '90', 'NeiferJesus14', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `movimientos`
+--
+
+CREATE TABLE `movimientos` (
+  `id_movimiento` int(11) NOT NULL,
+  `fecha` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `operation` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `user` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -98,11 +110,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `name_user`, `username`, `password`, `telephone`, `unformat_telephone_user`, `direction`, `type_account`, `registered_by`, `last_modification`, `status`) VALUES
-(1, 'Neifer Reverón', 'NeiferJesus14', '41DD3LQ4D6GVvOXW6vFX4A==', '0414 - 214.46.84', '04142144684', 'Almacen', 'Moderador', 'System', '12345', 'Activo'),
-(2, 'Nery Ramos', 'Nery', 'U6tiCUDp7lU=', '0444 - 444.44.44', '04444444444', 'Almacen', 'Tecnico', 'NeiferJesus14', 'NeiferJesus14', 'Activo'),
-(3, 'Richard Miller', 'Richard', 'rIxyf/mbZq0=', '0414 - 477.78.85', '04144777885', 'City Market', 'Administrador', 'NeiferJesus14', 'NeiferJesus14', 'Activo'),
-(4, 'Adriana Medina', 'Adriana', 'a3uHkkgIX5I=', '0414 - 788.85.89', '04147888589', 'Caricuao', 'Administrador', 'NeiferJesus14', '', 'Activo'),
-(5, 'Juan', 'Juan', 'A/TJ/+nsMT4=', '0144 - 444.44.44', '01444444444', 'City Market', 'Vendedor', 'Richard', 'NeiferJesus14', 'Activo');
+(1, 'Neifer Reverón', 'NeiferJesus14', '41DD3LQ4D6GVvOXW6vFX4A==', '0424-149.10.41', '04241491041', 'Almacen', 'Moderador', '', '', 'Activo');
 
 -- --------------------------------------------------------
 
@@ -139,13 +147,7 @@ CREATE TABLE `warranty` (
 --
 
 INSERT INTO `warranty` (`id_warranty`, `id_client`, `id_equipo`, `id_technical`, `id_registered_by`, `shop`, `serial`, `falla`, `date_register`, `received`, `day_warranty`, `date_purchase`, `date_sent_technical`, `delivery_technical`, `date_received_technical`, `comments_technical`, `status`, `status_technical`, `date_sent_shop`, `delivery_shop`, `date_received_shop`) VALUES
-(1, 1, 1, 2, 1, 'Almacen', '123456', 'Software', '25/05/2022', 'asd', 14, '', '30/05/2022', 'Sr Roger', '30/05/2022', 'Cambio de pantalla', 'Entregado', 'No Reparado', '30/05/2022', 'Sr Roger', '30/05/2022'),
-(2, 1, 1, 2, 1, 'Almacen', 'asdfg', 'Sofware', '30/05/2022', 'Cargador, audifonos y el equipo se encuentra en buen estado.', 0, '', '30/05/2022', 'Roger Fernandez', '30/05/2022', 'El que equipo se le hizo el root necesario y se logró recuperar el sistema.', 'Entregado', 'Reparado', '30/05/2022', 'Sr Roger', '30/05/2022'),
-(3, 1, 1, 2, 1, 'Almacen', 'qwert', 'Corneta', '31/05/2022', 'Nada la vida es loca, vivela.', 0, '', '31/05/2022', 'Sr Roger.', '31/05/2022', 'asdad', 'Entregado', 'Reparado', '31/05/2022', 'Sr Roger', '31/05/2022'),
-(4, 1, 1, 2, 1, 'Almacen', 'asdff', 'asda', '02/06/2022', 'asdasdaddasdasdasdas', 14, '', '02/06/2022', 'Sr Roger', '02/06/2022', 'No se pudo que repar el equipo.', 'Entregado', 'No Reparado', '02/06/2022', 'Sr Roger', '02/06/2022'),
-(5, 1, 1, 2, 1, 'Almacen', 'sdadada', 'zxczczczxc', '02/06/2022', 'asdadasdasasdasdasdasd', 14, '', '02/06/2022', 'sadad', '02/06/2022', 'asdasdasdasdasdasdasdasd', 'Entregado', 'Reparado', '02/06/2022', 'asdasdasd', '02/06/2022'),
-(6, 1, 1, 0, 1, 'Almacen', 'asdasdas', 'asdasda', '02/06/2022', 'sadad', 14, '', '', '', '', 'Si Funciona', 'En Tienda', 'Reparado', '', '', ''),
-(7, 1, 1, 0, 1, 'Almacen', 'asdaxzczxczx', 'zxcxzxz', '02/06/2022', 'zxczxcz', 14, '01/06/2022', '', '', '', 'Si Funciona', 'En Tienda', 'Reparado', '', '', '');
+(1, 1, 1, 0, 1, 'Almacen', '12345', 'TACTIL Y SOFTWARE', '26/07/2022', 'CARGADOR Y AUDIFONOS.', 65, '01/07/2022', '', '', '', '', 'Nuevo Ingreso', '', '', '', '');
 
 --
 -- Índices para tablas volcadas
@@ -162,6 +164,12 @@ ALTER TABLE `client`
 --
 ALTER TABLE `equipo`
   ADD PRIMARY KEY (`id_equipo`);
+
+--
+-- Indices de la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  ADD PRIMARY KEY (`id_movimiento`);
 
 --
 -- Indices de la tabla `user`
@@ -183,7 +191,7 @@ ALTER TABLE `warranty`
 -- AUTO_INCREMENT de la tabla `client`
 --
 ALTER TABLE `client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
@@ -192,16 +200,22 @@ ALTER TABLE `equipo`
   MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  MODIFY `id_movimiento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `warranty`
 --
 ALTER TABLE `warranty`
-  MODIFY `id_warranty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_warranty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -269,7 +269,7 @@ public final class Warranty extends javax.swing.JPanel {
                     + "from warranty w "
                     + "join equipo e on e.id_equipo = w.id_equipo "
                     + "join client c on c.id_client = w.id_client "
-                    + "and not w.status = '" + "Entregado" + "'";
+                    + "and not w.status = '" + "Entregado" + "' and not w.status_technical = '" + "Reemplazado" + "'";
 
         } else {
 
@@ -277,7 +277,8 @@ public final class Warranty extends javax.swing.JPanel {
                     + "from warranty w "
                     + "join equipo e on e.id_equipo = w.id_equipo "
                     + "join client c on c.id_client = w.id_client "
-                    + "and not w.status = '" + "Entregado" + "' and w.shop = '" + Login.direction + "'";
+                    + "and not w.status = '" + "Entregado" + "' and not w.status_technical = '" + "Reemplazado" 
+                    + "' and w.shop = '" + Login.direction + "'";
 
         }
 

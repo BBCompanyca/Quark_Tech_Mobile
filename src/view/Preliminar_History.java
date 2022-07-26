@@ -5,15 +5,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import static view.History.jLabel_Message;
 
 public class Preliminar_History extends javax.swing.JPanel {
 
     public Preliminar_History() {
         initComponents();
-        
-        jLabel_Message.setText("Consultando su petición... ¡Disculpe por la demora!");
 
         getInformation();
 
@@ -240,6 +238,18 @@ public class Preliminar_History extends javax.swing.JPanel {
                 id_technical = rs.getInt("id_technical");
                 id_equipo = rs.getInt("id_equipo");
 
+                Equipo equipo = new Equipo(id_equipo);
+                Thread RequestEquipo = new Thread(equipo);
+                RequestEquipo.start();
+
+                Registered_by registered_by = new Registered_by(id_registered_by);
+                Thread RequestRegistered_by = new Thread(registered_by);
+                RequestRegistered_by.start();
+
+                Technical technical = new Technical(id_technical);
+                Thread RequestTechnical = new Thread(technical);
+                RequestTechnical.start();
+
             }
 
             cn.close();
@@ -251,86 +261,169 @@ public class Preliminar_History extends javax.swing.JPanel {
                     JOptionPane.OK_OPTION);
 
         }
-        
-        try {
 
-            Connection cn2 = BD_Connection.connection();
-            PreparedStatement pst2 = cn2.prepareStatement("select brand, model, capacity, color from equipo where "
-                    + "id_equipo = '" + id_equipo + "'");
+    }
 
-            ResultSet rs2 = pst2.executeQuery();
+    public class Equipo implements Runnable {
 
-            if (rs2.next()) {
+        int id_equipo;
 
-                if (rs2.getString("capacity").equals("N/AGB")) {
+        public Equipo(int id_equipo) {
 
-                    jLabel_Equipo.setText(rs2.getString("brand") + " - " + rs2.getString("model"));
-                    jLabel_Color.setText("Color: " + rs2.getString("color"));
+            this.id_equipo = id_equipo;
 
-                } else {
+        }
 
-                    jLabel_Equipo.setText(rs2.getString("brand") + " - " + rs2.getString("model") + " - " + rs2.getString("capacity"));
-                    jLabel_Color.setText("Color: " + rs2.getString("color"));
-                    
+        @Override
+        public void run() {
+
+            Request_Equipo();
+
+        }
+
+        public void Request_Equipo() {
+
+            System.out.println("");
+            System.out.println("Request Equipo...");
+
+            try {
+
+                Connection cn2 = BD_Connection.connection();
+                PreparedStatement pst2 = cn2.prepareStatement("select brand, model, capacity, color from equipo where "
+                        + "id_equipo = '" + id_equipo + "'");
+
+                ResultSet rs2 = pst2.executeQuery();
+
+                if (rs2.next()) {
+
+                    if (rs2.getString("capacity").equals("N/AGB")) {
+
+                        jLabel_Equipo.setText(rs2.getString("brand") + " - " + rs2.getString("model"));
+                        jLabel_Color.setText("Color: " + rs2.getString("color"));
+
+                    } else {
+
+                        jLabel_Equipo.setText(rs2.getString("brand") + " - " + rs2.getString("model") + " - " + rs2.getString("capacity"));
+                        jLabel_Color.setText("Color: " + rs2.getString("color"));
+
+                    }
+
                 }
 
+                cn2.close();
+
+                System.err.println("Finalizado Request Equipo");
+                System.out.println("");
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la información del equipo! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la información del equipo!", "¡Error!",
+                        JOptionPane.OK_OPTION);
+
             }
-
-            cn2.close();
-
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al consultar la información del equipo! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del equipo!", "¡Error!",
-                    JOptionPane.OK_OPTION);
 
         }
-        
-        try {
 
-            Connection cn3 = BD_Connection.connection();
-            PreparedStatement pst3 = cn3.prepareStatement("select name_user from user where id_user = '" 
-            + id_registered_by + "'");
+    }
 
-            ResultSet rs3 = pst3.executeQuery();
+    public class Registered_by implements Runnable {
 
-            if (rs3.next()) {
+        int id_registered_by;
 
-                jLabel_Registered_by.setText("Registrado Por: " + '"' + rs3.getString("name_user") + '"');
+        public Registered_by(int id_registered_by) {
 
-            }
-
-            cn3.close();
-
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al consultar la información del registro de la garantìa! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del registro de la garantìa!", "¡Error!",
-                    JOptionPane.OK_OPTION);
+            this.id_registered_by = id_registered_by;
 
         }
-        
-        try {
 
-            Connection cn4 = BD_Connection.connection();
-            PreparedStatement pst4 = cn4.prepareStatement("select name_user from user where id_user = '" 
-            + id_technical + "'");
+        @Override
+        public void run() {
 
-            ResultSet rs4 = pst4.executeQuery();
+            Request_User();
 
-            if (rs4.next()) {
+        }
 
-                jLabel_Technical.setText("Técnico: " + '"' + rs4.getString("name_user") + '"');
+        public void Request_User() {
+
+            System.out.println("");
+            System.out.println("Request Usuario...");
+
+            try {
+
+                Connection cn3 = BD_Connection.connection();
+                PreparedStatement pst3 = cn3.prepareStatement("select name_user from user where id_user = '"
+                        + id_registered_by + "'");
+
+                ResultSet rs3 = pst3.executeQuery();
+
+                if (rs3.next()) {
+
+                    jLabel_Registered_by.setText("Registrado Por: " + '"' + rs3.getString("name_user") + '"');
+
+                }
+
+                cn3.close();
+
+                System.err.println("Finalizado Request Usuario");
+                System.out.println("");
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la información del usuario que hizo el registro! " + e);
 
             }
 
-            cn4.close();
+        }
 
-        } catch (SQLException e) {
+    }
 
-            System.err.println("¡Error al consultar la información del registro de la garantìa! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del registro de la garantìa!", "¡Error!",
-                    JOptionPane.OK_OPTION);
+    public class Technical implements Runnable {
+
+        int id_technical;
+
+        public Technical(int id_technical) {
+
+            this.id_technical = id_technical;
+
+        }
+
+        @Override
+        public void run() {
+
+            Request_Technical();
+
+        }
+
+        public void Request_Technical() {
+
+            System.out.println("");
+            System.out.println("Request Tecnico...");
+
+            try {
+
+                Connection cn4 = BD_Connection.connection();
+                PreparedStatement pst4 = cn4.prepareStatement("select name_user from user where id_user = '"
+                        + id_technical + "'");
+
+                ResultSet rs4 = pst4.executeQuery();
+
+                if (rs4.next()) {
+
+                    jLabel_Technical.setText("Técnico: " + '"' + rs4.getString("name_user") + '"');
+
+                }
+
+                cn4.close();
+
+                System.err.println("Finalizado Request Tecnico");
+                System.out.println("");
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la información del tecnico! " + e);
+
+            }
 
         }
 

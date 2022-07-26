@@ -7,6 +7,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import clases.FormatText;
 import clases.EncryptPassword;
+import clases.Register_Movimiento;
 
 public class Register_User extends javax.swing.JPanel {
 
@@ -315,6 +316,10 @@ public class Register_User extends javax.swing.JPanel {
                                 pst2.setString(11, "Activo");
                                 pst2.executeUpdate();
 
+                                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/U");
+                                Thread register = new Thread(movimiento);
+                                register.start();
+
                                 PintarDeVerdejTextField();
                                 VaciarCamposDeTextos();
 
@@ -496,6 +501,8 @@ public class Register_User extends javax.swing.JPanel {
 
                             }
                         }
+
+                        cn.close();
 
                     } catch (SQLException e) {
 
