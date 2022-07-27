@@ -7,6 +7,7 @@ import clases.Paneles;
 import clases.Register_Movimiento;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import java.util.Date;
@@ -14,11 +15,10 @@ import javax.swing.BorderFactory;
 
 public class Register_Warranty extends javax.swing.JPanel {
 
-    int flag_calendar = 0, day_warranty = 0, flag_register = 0, time_Warranty = 0, id_client = 0;
-    public static int flag = 0, flag_AddressRegisterAndConsult = 0;
+    public static int flag = 0, flag_AddressRegisterAndConsult = 0, flag_calendar = 0, day_warranty = 0, flag_register = 0, time_Warranty = 0, id_client = 0;
 
-    String brand, model, color, date_register, date_purchase, day, month, year, time_Warranty_STG, identity_card_client, name_client;
-    public static String serial, falla, received;
+    String brand, model, color, date_register, date_purchase, day, month, year, time_Warranty_STG, identity_card_client;
+    public static String serial, falla, received, name_client;
 
     Paneles paneles = new Paneles();
 
@@ -28,16 +28,13 @@ public class Register_Warranty extends javax.swing.JPanel {
     public Register_Warranty() {
         initComponents();
 
+        getAddressPanel();
+
         //Método para validar la dirección de la interfaz...
         validateAddress();
 
-        getAddressPanel();
-        
-        getInformationEquipo();
-
+        //getInformationEquipo();
         jCalendar.setVisible(false);
-
-        jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
 
         jTextArea_Recibido.setBorder(BorderFactory.createCompoundBorder(jTextArea_Recibido.getBorder(),
                 BorderFactory.createEmptyBorder(2, 2, 2, 2)));
@@ -521,6 +518,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
         validateCamp();
 
+
     }//GEN-LAST:event_jTextField_FallaKeyReleased
 
     private void jTextArea_RecibidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea_RecibidoKeyReleased
@@ -580,41 +578,6 @@ public class Register_Warranty extends javax.swing.JPanel {
             jTextArea_Recibido.setText("");
             jTextField_Code.setText("");
             jTextField_Equipo.setText("");
-
-        }
-
-    }
-
-    public void getInformationEquipo() {
-
-        try {
-
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement("select code, brand, model, color, capacity, day_warranty from equipo "
-                    + "where id_equipo = '" + CodeEquipos.id_equipo + "'");
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-
-                day_warranty = rs.getInt("day_warranty");
-                brand = rs.getString("brand");
-                model = rs.getString("model");
-                color = rs.getString("color");
-
-                jTextField_Code.setText(rs.getString("code"));
-
-                jTextField_Equipo.setText(rs.getString("brand") + " - " + rs.getString("model")
-                        + " - " + rs.getString("color") + " - " + rs.getString("capacity"));
-
-            }
-
-            cn.close();
-
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al consultar la información del equipo! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del equipo!", "¡Error!", JOptionPane.OK_OPTION);
 
         }
 
@@ -732,45 +695,6 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }
 
-    private void getAddressPanel() {
-
-        if (flag_AddressRegisterAndConsult == 1) {
-
-            name_client = Register_Client.name_client;
-
-            try {
-
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement("select id_client from client where "
-                        + "unformat_identity_card_client = '" + Register_Client.identity_card_client + "'");
-
-                ResultSet rs = pst.executeQuery();
-
-                if (rs.next()) {
-
-                    id_client = rs.getInt("id_client");
-
-                }
-
-                cn.close();
-
-            } catch (SQLException e) {
-
-                System.out.println("¡Error al consultar el ID del cliente! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al consultar el ID del cliente!", "¡Error", JOptionPane.OK_OPTION);
-
-            }
-
-        } else {
-
-            name_client = Consult_Cl_Client.name_client;
-
-            id_client = Consult_Cl_Client.id_client;
-
-        }
-
-    }
-
     private void validateCamp() {
 
         if (jTextField_Code.getText().isEmpty()) {
@@ -841,6 +765,108 @@ public class Register_Warranty extends javax.swing.JPanel {
         } else {
 
             jButton_Register.setVisible(true);
+
+        }
+
+    }
+
+    private void getAddressPanel() {
+
+        if (flag_AddressRegisterAndConsult == 1) {
+
+            getInformationClient();
+
+        } else if (flag_AddressRegisterAndConsult == 2) {
+
+            RequestEquipo requestEquipo = new RequestEquipo();
+            Thread hiloEquipo = new Thread(requestEquipo);
+            hiloEquipo.start();
+
+            jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
+
+        } else {
+
+            name_client = Consult_Cl_Client.name_client;
+
+            id_client = Consult_Cl_Client.id_client;
+
+            jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
+
+        }
+
+    }
+
+    public void getInformationClient() {
+
+        name_client = Register_Client.name_client;
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement("select id_client from client where "
+                    + "unformat_identity_card_client = '" + Register_Client.identity_card_client + "'");
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                id_client = rs.getInt("id_client");
+                jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
+
+            }
+
+            cn.close();
+
+        } catch (SQLException e) {
+
+            System.out.println("¡Error al consultar el ID del cliente! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al consultar el ID del cliente!", "¡Error", JOptionPane.OK_OPTION);
+
+        }
+
+    }
+
+    public void getInformationEquipo() {
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement("select code, brand, model, color, capacity, day_warranty from equipo "
+                    + "where id_equipo = '" + CodeEquipos.id_equipo + "'");
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                day_warranty = rs.getInt("day_warranty");
+                brand = rs.getString("brand");
+                model = rs.getString("model");
+                color = rs.getString("color");
+
+                jTextField_Code.setText(rs.getString("code"));
+
+                jTextField_Equipo.setText(rs.getString("brand") + " - " + rs.getString("model")
+                        + " - " + rs.getString("color") + " - " + rs.getString("capacity"));
+
+            }
+
+            cn.close();
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al consultar la información del equipo! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del equipo!", "¡Error!", JOptionPane.OK_OPTION);
+
+        }
+
+    }
+
+    public class RequestEquipo implements Runnable {
+
+        @Override
+        public void run() {
+
+            getInformationEquipo();
 
         }
 

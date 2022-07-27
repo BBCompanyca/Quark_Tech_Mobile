@@ -194,89 +194,153 @@ public class Register_Client extends javax.swing.JPanel {
         identity_card_client = jTextField_CI.getText().trim();
         direction_client = jTextField_Direction_Client.getText().trim();
 
-        try {
+        if (Consult_Cl_Client.flag != 1) {
 
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select identity_card_client from client where unformat_identity_card_client = '" + identity_card_client + "'");
+            try {
 
-            ResultSet rs = pst.executeQuery();
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select identity_card_client from client where unformat_identity_card_client = '" + identity_card_client + "'");
 
-            if (rs.next()) {
+                ResultSet rs = pst.executeQuery();
 
-                jLabel_CI.setForeground(Color.red);
+                if (rs.next()) {
 
-                JOptionPane.showMessageDialog(null, "¡Ya existe un cliente con este Número de Cédula!", "¡Acceso Denegado!",
-                        JOptionPane.OK_OPTION);
+                    jLabel_CI.setForeground(Color.red);
 
-                jTextField_CI.setText("");
-                jTextField_CI.requestFocus();
+                    JOptionPane.showMessageDialog(null, "¡Ya existe un cliente con este Número de Cédula!", "¡Acceso Denegado!",
+                            JOptionPane.OK_OPTION);
 
-                cn.close();
+                    jTextField_CI.setText("");
+                    jTextField_CI.requestFocus();
 
-            } else {
+                    cn.close();
 
-                cn.close();
+                } else {
 
-                try {
+                    cn.close();
 
-                    String unformat_telphone = formattext.unFormatText(telephone);
-                    identity_card_client = identity_card_client.toUpperCase();
+                    try {
 
-                    Connection cn2 = BD_Connection.connection();
-                    PreparedStatement pst2 = cn2.prepareStatement(
-                            "insert into client values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        String unformat_telphone = formattext.unFormatText(telephone);
+                        identity_card_client = identity_card_client.toUpperCase();
 
-                    pst2.setInt(1, 0);
-                    pst2.setString(2, name_client);
-                    pst2.setString(3, telephone);
-                    pst2.setString(4, unformat_telphone);
-                    pst2.setString(5, formattext.Identity_Card_Client(identity_card_client));
-                    pst2.setString(6, identity_card_client);
-                    pst2.setString(7, direction_client);
-                    pst2.setString(8, Login.direction);
-                    pst2.setString(9, String.valueOf(Login.ID_User));
-                    pst2.setString(10, "");
+                        Connection cn2 = BD_Connection.connection();
+                        PreparedStatement pst2 = cn2.prepareStatement(
+                                "insert into client values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-                    pst2.executeUpdate();
+                        pst2.setInt(1, 0);
+                        pst2.setString(2, name_client);
+                        pst2.setString(3, telephone);
+                        pst2.setString(4, unformat_telphone);
+                        pst2.setString(5, formattext.Identity_Card_Client(identity_card_client));
+                        pst2.setString(6, identity_card_client);
+                        pst2.setString(7, direction_client);
+                        pst2.setString(8, Login.direction);
+                        pst2.setString(9, String.valueOf(Login.ID_User));
+                        pst2.setString(10, "");
 
-                    Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/C");
-                    Thread register = new Thread(movimiento);
-                    register.start();
+                        pst2.executeUpdate();
 
-                    PintarDeVerdejTextField();
-                    VaciarCamposDeTextos();
+                        Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/C");
+                        Thread register = new Thread(movimiento);
+                        register.start();
 
-                    JOptionPane.showMessageDialog(null, "Registro exitoso.", "¡Exito!", JOptionPane.INFORMATION_MESSAGE);
+                        PintarDeVerdejTextField();
+                        VaciarCamposDeTextos();
 
-                    resetColorjTextField();
+                        JOptionPane.showMessageDialog(null, "Registro exitoso.", "¡Exito!", JOptionPane.INFORMATION_MESSAGE);
 
-                    if (Consult_Cl_Client.flag == 1) {
+                        resetColorjTextField();
 
-                        Register_Warranty.flag_AddressRegisterAndConsult = 1;
-                        paneles.PanelRegisterWarranty();
+                        if (Consult_Cl_Client.flag == 1) {
 
-                    } else {
+                            Register_Warranty.flag_AddressRegisterAndConsult = 1;
+                            paneles.PanelRegisterWarranty();
 
-                        paneles.PanelClients();
+                        } else {
+
+                            paneles.PanelClients();
+
+                        }
+
+                        cn2.close();
+                        
+                    } catch (SQLException e) {
+
+                        System.err.println("¡Error al registrar cliente! " + e);
+                        JOptionPane.showMessageDialog(null, "¡Error al registrar cliente!", "¡Acceso Denegado!",
+                                JOptionPane.OK_OPTION);
 
                     }
 
-                } catch (SQLException e) {
+                }
+                
+                cn.close();
 
-                    System.err.println("¡Error al registrar cliente! " + e);
-                    JOptionPane.showMessageDialog(null, "¡Error al registrar cliente!", "¡Acceso Denegado!",
-                            JOptionPane.OK_OPTION);
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar la C.I Del cliente! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I Del cliente!", "¡Acceso Denegado!",
+                        JOptionPane.OK_OPTION);
+            }
+
+        } else {
+
+            try {
+
+                String unformat_telphone = formattext.unFormatText(telephone);
+                identity_card_client = identity_card_client.toUpperCase();
+
+                Connection cn2 = BD_Connection.connection();
+                PreparedStatement pst2 = cn2.prepareStatement(
+                        "insert into client values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                pst2.setInt(1, 0);
+                pst2.setString(2, name_client);
+                pst2.setString(3, telephone);
+                pst2.setString(4, unformat_telphone);
+                pst2.setString(5, formattext.Identity_Card_Client(identity_card_client));
+                pst2.setString(6, identity_card_client);
+                pst2.setString(7, direction_client);
+                pst2.setString(8, Login.direction);
+                pst2.setString(9, String.valueOf(Login.ID_User));
+                pst2.setString(10, "");
+
+                pst2.executeUpdate();
+
+                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/C");
+                Thread register = new Thread(movimiento);
+                register.start();
+
+                PintarDeVerdejTextField();
+                VaciarCamposDeTextos();
+
+                JOptionPane.showMessageDialog(null, "Registro exitoso.", "¡Exito!", JOptionPane.INFORMATION_MESSAGE);
+
+                resetColorjTextField();
+
+                if (Consult_Cl_Client.flag == 1) {
+
+                    Register_Warranty.flag_AddressRegisterAndConsult = 1;
+                    paneles.PanelRegisterWarranty();
+
+                } else {
+
+                    paneles.PanelClients();
 
                 }
 
+                cn2.close();
+                
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al registrar cliente! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al registrar cliente!", "¡Acceso Denegado!",
+                        JOptionPane.OK_OPTION);
+
             }
 
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al consultar la C.I Del cliente! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la C.I Del cliente!", "¡Acceso Denegado!",
-                    JOptionPane.OK_OPTION);
         }
 
 
@@ -335,6 +399,7 @@ public class Register_Client extends javax.swing.JPanel {
             jTextField_Name.requestFocus();
 
             jTextField_CI.setText(Consult_Cl_Client.ci_client);
+            jTextField_CI.setEditable(false);
 
         }
 
