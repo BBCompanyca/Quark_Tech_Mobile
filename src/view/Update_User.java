@@ -5,6 +5,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -354,6 +355,10 @@ public class Update_User extends javax.swing.JPanel {
                                 pst2.setString(7, type_account);
                                 pst2.setString(8, status);
                                 pst2.executeUpdate();
+                                
+                                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/U");
+                                Thread register = new Thread(movimiento);
+                                register.start();
 
                                 ClearCamps();
 

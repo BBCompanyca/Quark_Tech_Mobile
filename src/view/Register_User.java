@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import clases.FormatText;
 import clases.EncryptPassword;
 import clases.Register_Movimiento;
+import java.util.ArrayList;
 
 public class Register_User extends javax.swing.JPanel {
 
@@ -15,6 +16,8 @@ public class Register_User extends javax.swing.JPanel {
 
     FormatText formatText = new FormatText();
     EncryptPassword encryptPassword = new EncryptPassword();
+
+    Request_Username request_Username = new Request_Username();
 
     public Register_User() {
         initComponents();
@@ -38,6 +41,10 @@ public class Register_User extends javax.swing.JPanel {
         ValidateCamp();
 
         jButton_Register.setVisible(false);
+
+        Request_Username request_Username = new Request_Username();
+        Thread request = new Thread(request_Username);
+        request.start();
 
     }
 
@@ -374,50 +381,6 @@ public class Register_User extends javax.swing.JPanel {
             password = jPasswordField_Password.getText().trim();
             permission = jComboBox_Permission.getSelectedItem().toString();
 
-            if (name.equals("")) {
-
-                jLabel_Name.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Name.setForeground(new java.awt.Color(240, 240, 240));
-
-            }
-
-            if (telephone.equals("")) {
-
-                jLabel_Telephone.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Telephone.setForeground(new java.awt.Color(240, 240, 240));
-
-            }
-
-            if (username.equals("")) {
-
-                jLabel_Username.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
-
-            }
-
-            if (password.equals("")) {
-
-                jLabel_Password.setForeground(Color.red);
-                flag++;
-
-            } else {
-
-                jLabel_Password.setForeground(new java.awt.Color(240, 240, 240));
-
-            }
-
             if (permission.equals("...")) {
 
                 jLabel_Permission.setForeground(Color.red);
@@ -429,100 +392,91 @@ public class Register_User extends javax.swing.JPanel {
 
             }
 
-            //Condición para validar que los campos esten llenos...
-            if (flag == 0) {
-                //Condicion para validar que se haya seleccionado algún permiso...
-                if (flag_two == 0) {
+            //Condicion para validar que se haya seleccionado algún permiso...
+            if (flag_two == 0) {
 
-                    //Algoritmo para validar que el nombre usuario sea valido...
-                    try {
+                //Algoritmo para validar que el nombre usuario sea valido...
+                try {
 
-                        Connection cn = BD_Connection.connection();
-                        PreparedStatement pst = cn.prepareStatement(
-                                "select username from user where username = '" + username + "'");
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(
+                            "select username from user where username = '" + username + "'");
 
-                        ResultSet rs = pst.executeQuery();
+                    ResultSet rs = pst.executeQuery();
 
-                        if (rs.next()) {
+                    if (rs.next()) {
 
-                            jLabel_Username.setForeground(Color.red);
+                        jLabel_Username.setForeground(Color.red);
 
-                            JOptionPane.showMessageDialog(null, "¡Nombre de usuario no disponible!", "!Acceso Denegado!",
-                                    JOptionPane.OK_OPTION);
+                        JOptionPane.showMessageDialog(null, "¡Nombre de usuario no disponible!", "!Acceso Denegado!",
+                                JOptionPane.OK_OPTION);
 
-                            jTextField_Username.setText("");
-                            jTextField_Username.requestFocus();
-
-                            cn.close();
-
-                        } else {
-
-                            cn.close();
-
-                            //Algoritmo para registrar el usario...
-                            try {
-
-                                unformat_telphone = formatText.unFormatText(telephone);
-                                System.out.println(unformat_telphone);
-
-                                Connection cn2 = BD_Connection.connection();
-                                PreparedStatement pst2 = cn2.prepareStatement(
-                                        "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-                                pst2.setInt(1, 0);
-                                pst2.setString(2, name);
-                                pst2.setString(3, username);
-                                pst2.setString(4, password);
-                                pst2.setString(5, telephone);
-                                pst2.setString(6, unformat_telphone);
-                                pst2.setString(7, direction_login);
-                                pst2.setString(8, permission);
-                                pst2.setString(9, username_user);
-                                pst2.setString(10, "");
-                                pst2.setString(11, "Activo");
-                                pst2.executeUpdate();
-
-                                PintarDeVerdejTextField();
-                                VaciarCamposDeTextos();
-
-                                JOptionPane.showMessageDialog(null, "Registro Exitoso.", "Exito",
-                                        JOptionPane.INFORMATION_MESSAGE);
-
-                                resetColorjTextField();
-
-                                cn2.close();
-
-                            } catch (SQLException e) {
-
-                                System.err.println("¡Error al registrar usuario! " + e);
-
-                                JOptionPane.showMessageDialog(null, "¡Error al registrar usuario!", "!Error!",
-                                        JOptionPane.OK_OPTION);
-
-                            }
-                        }
+                        jTextField_Username.setText("");
+                        jTextField_Username.requestFocus();
 
                         cn.close();
 
-                    } catch (SQLException e) {
+                    } else {
 
-                        System.err.println("¡Error al validar el nombre de usuario! " + e);
+                        cn.close();
 
-                        JOptionPane.showMessageDialog(null, "¡Error al validar el nombre de usuario!", "!Error!",
-                                JOptionPane.OK_OPTION);
+                        //Algoritmo para registrar el usario...
+                        try {
 
+                            unformat_telphone = formatText.unFormatText(telephone);
+                            System.out.println(unformat_telphone);
+
+                            Connection cn2 = BD_Connection.connection();
+                            PreparedStatement pst2 = cn2.prepareStatement(
+                                    "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                            pst2.setInt(1, 0);
+                            pst2.setString(2, name);
+                            pst2.setString(3, username);
+                            pst2.setString(4, password);
+                            pst2.setString(5, telephone);
+                            pst2.setString(6, unformat_telphone);
+                            pst2.setString(7, direction_login);
+                            pst2.setString(8, permission);
+                            pst2.setString(9, username_user);
+                            pst2.setString(10, "");
+                            pst2.setString(11, "Activo");
+                            pst2.executeUpdate();
+
+                            PintarDeVerdejTextField();
+                            VaciarCamposDeTextos();
+
+                            JOptionPane.showMessageDialog(null, "Registro Exitoso.", "Exito",
+                                    JOptionPane.INFORMATION_MESSAGE);
+
+                            resetColorjTextField();
+
+                            cn2.close();
+
+                        } catch (SQLException e) {
+
+                            System.err.println("¡Error al registrar usuario! " + e);
+
+                            JOptionPane.showMessageDialog(null, "¡Error al registrar usuario!", "!Error!",
+                                    JOptionPane.OK_OPTION);
+
+                        }
                     }
 
-                } else {
+                    cn.close();
 
-                    JOptionPane.showMessageDialog(null, "¡Debes seleccionar algún permiso!", "!Acceso Denegado!",
-                            JOptionPane.WARNING_MESSAGE);
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al validar el nombre de usuario! " + e);
+
+                    JOptionPane.showMessageDialog(null, "¡Error al validar el nombre de usuario!", "!Error!",
+                            JOptionPane.OK_OPTION);
 
                 }
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "!Acceso Denegado!",
+                JOptionPane.showMessageDialog(null, "¡Debes seleccionar algún permiso!", "!Acceso Denegado!",
                         JOptionPane.WARNING_MESSAGE);
 
             }
@@ -540,6 +494,7 @@ public class Register_User extends javax.swing.JPanel {
     private void jTextField_UsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_UsernameKeyReleased
 
         ValidateCamp();
+
 
     }//GEN-LAST:event_jTextField_UsernameKeyReleased
 
@@ -675,6 +630,8 @@ public class Register_User extends javax.swing.JPanel {
 
             jLabel_Username2.setText("*CAMPO REQUERIDO*");
 
+        } else if (true) {
+
         } else {
 
             jLabel_Username2.setText("");
@@ -703,6 +660,46 @@ public class Register_User extends javax.swing.JPanel {
         } else {
 
             jButton_Register.setVisible(true);
+
+        }
+
+    }
+
+    public class Request_Username implements Runnable {
+
+        @Override
+        public void run() {
+
+            request();
+
+        }
+
+        public void request() {
+
+            try {
+
+                ArrayList<String> username = new ArrayList<>();
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement("select username from user");
+
+                ResultSet rs = pst.executeQuery();
+
+                while (rs.next()) {
+
+                    username.add(rs.getString(1));
+
+                }
+
+                cn.close();
+
+                System.out.println(username);
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al consultar los nombres de usuario! " + e);
+
+            }
 
         }
 

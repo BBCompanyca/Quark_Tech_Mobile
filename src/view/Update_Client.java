@@ -4,6 +4,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import clases.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -264,6 +265,10 @@ public class Update_Client extends javax.swing.JPanel {
                     pst2.setString(8, String.valueOf(Login.ID_User));
 
                     pst2.executeUpdate();
+                    
+                    Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/C");
+                    Thread register = new Thread(movimiento);
+                    register.start();
 
                     paintCampTextGreen();
 

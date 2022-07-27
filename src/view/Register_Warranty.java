@@ -4,6 +4,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,13 +28,12 @@ public class Register_Warranty extends javax.swing.JPanel {
     public Register_Warranty() {
         initComponents();
 
-        //Método para obtener la información del equipo...
-        getInformationEquipo();
-
         //Método para validar la dirección de la interfaz...
         validateAddress();
 
         getAddressPanel();
+        
+        getInformationEquipo();
 
         jCalendar.setVisible(false);
 
@@ -384,6 +384,10 @@ public class Register_Warranty extends javax.swing.JPanel {
 
                         pst2.executeUpdate();
 
+                        Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/G");
+                        Thread register = new Thread(movimiento);
+                        register.start();
+
                         PaintAndCleanCamp();
 
                         JOptionPane.showMessageDialog(null, "Registro Exitoso", "¡Exito!",
@@ -554,8 +558,8 @@ public class Register_Warranty extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextArea jTextArea_Recibido;
     private javax.swing.JTextField jTextField_Calendar;
-    private javax.swing.JTextField jTextField_Code;
-    private javax.swing.JTextField jTextField_Equipo;
+    public javax.swing.JTextField jTextField_Code;
+    public javax.swing.JTextField jTextField_Equipo;
     private javax.swing.JTextField jTextField_Falla;
     private javax.swing.JTextField jTextField_Serial;
     // End of variables declaration//GEN-END:variables
@@ -581,8 +585,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }
 
-    //Método para obtener la información del equipo...
-    private void getInformationEquipo() {
+    public void getInformationEquipo() {
 
         try {
 
@@ -617,51 +620,75 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }
 
+    // Método para calcular cuantos días de garantías tiene un equipo...
     private void dayWarranty() {
 
+        // Variables para guardar el día, mes y año en que fue comprado el equipo...
         int day = 0, month = 0, year = 0;
 
+        // Esto es para obtener la fecha completa en que fue comprado el equipo...
         String date = jTextField_Calendar.getText().trim();
 
+        // Aquí estoy asignando el día, mes y año a cada variable correspondiente...
         day = Integer.parseInt(date.substring(0, 2));
         month = Integer.parseInt(date.substring(3, 5));
         year = Integer.parseInt(date.substring(6, 10));
 
+        // Aquí estoy creando un calendario...
         Calendar calendarPurachase = Calendar.getInstance();
 
+        // Aquí estooy asiganandole el día, mes y año al calendario creado arriba...
         calendarPurachase.set(Calendar.DATE, day);
         calendarPurachase.set(Calendar.MONTH, month - 1);
         calendarPurachase.set(Calendar.YEAR, year);
 
+        // En esta linea estoy creando otro calendario y obteniendo la fecha actual...
         Calendar dateNow = Calendar.getInstance();
 
+        // Esto es una condicion o pregunta donde me estoy preguntado...
+        // ¿La fecha que se compró al equipo es mayor a la fecha actual?
         if (calendarPurachase.after(dateNow)) {
 
+            // Es esta condición se cumple, osea... si la fecha que compraron el teléfono,
+            // es mayor a hoy, deja un mensaje de error porque es imposible que el teléfono
+            // lo compren mañana o pasado o ETC...
             jLabel_garantia.setForeground(Color.red);
-            jLabel_garantia.setText("¡Error en formato de fecha!");
+            jLabel_garantia.setText("¡Error en formato de fecha!"); //Deja este mensaje.
 
+            // Esto es una variable bandera, eso es para comicarle a otro método que está pasando aqui...
+            // si el valor es uno 1 es porque no es valido el formato...
             flag_register = 1;
 
-        } else {
+        } else { // Si no se cumple la condición de la imagen anterior entra a este bloque...
 
+            // Si el valor es 0 es porque si hay un valor valido en la fecha...
             flag_register = 0;
 
+            // Aquí estoy sumando los días que hay entre la fecha que se compró y la fecha actual...
             calendarPurachase.add(Calendar.DATE, day_warranty);
 
+            // Si el resultado de la suma, es una fecha mayor a la fecha actual es porque el equipo
+            // aun tiene garantía...
             if (calendarPurachase.after(dateNow)) {
 
+                // Aquí estoy calculando en mili segundos cuantos milisegundos han pasado desde el día
+                // en que se compró el equipo, y cuantos milisegundos han pasado hoy...
                 long timePurchase = calendarPurachase.getTimeInMillis();
                 long timeNow = dateNow.getTimeInMillis();
 
+                // Luego de obtener los mili segundos hago una resta de los milisegundo de haber comprado el equipo
+                // y hoy y eso lo divido entre 86400000 que es la cantidad de milisegundos que tiene un día.
                 time_Warranty = (int) ((Math.abs(timeNow - timePurchase)) / 86400000);
 
+                // Luego dejo este mensaje donde indica cuantos días le quedan de garantía al equipo...
                 jLabel_garantia.setForeground(new Color(240, 240, 240));
                 jLabel_garantia.setText("El equipo tiene: " + time_Warranty + " días de garantía...");
 
-            } else {
+            } else { // Si la suma de la condición de arriba es menor a la fecha actual, entra en este bloque...
 
                 time_Warranty = 0;
 
+                // Y deja este mensaje para que el usuario sepa que el equipo no tiene garantía...
                 jLabel_garantia.setForeground(Color.red);
                 jLabel_garantia.setText("El equipo no cumple con los días de garantía...");
 
@@ -818,4 +845,5 @@ public class Register_Warranty extends javax.swing.JPanel {
         }
 
     }
+
 }

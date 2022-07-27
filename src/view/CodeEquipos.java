@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+
 public class CodeEquipos extends javax.swing.JPanel {
 
     DefaultTableModel model = new DefaultTableModel();
@@ -193,6 +194,7 @@ public class CodeEquipos extends javax.swing.JPanel {
                 if (fila_point >= -1) {
 
                     id_equipo = (int) jTable_Equipo.getValueAt(fila_point, columna_point);
+                    Register_Warranty.flag_AddressRegisterAndConsult = 2;
 
                     paneles.PanelRegisterWarranty();
 

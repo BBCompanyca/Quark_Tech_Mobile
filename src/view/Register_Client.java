@@ -4,6 +4,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import clases.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -238,6 +239,10 @@ public class Register_Client extends javax.swing.JPanel {
                     pst2.setString(10, "");
 
                     pst2.executeUpdate();
+
+                    Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/C");
+                    Thread register = new Thread(movimiento);
+                    register.start();
 
                     PintarDeVerdejTextField();
                     VaciarCamposDeTextos();
