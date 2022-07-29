@@ -116,7 +116,7 @@ public class FormatText {
 
                 }
             }
-            
+
             text = aux;
             text = character + "-" + text;
             text = text.toUpperCase();

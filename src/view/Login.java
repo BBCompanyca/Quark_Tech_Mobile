@@ -23,8 +23,6 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         setSize(1040, 630);
 
-        System.out.println(encryptPassword.ecnode("@BBCompany.ca", "Nery"));
-
         jTextField1.setBackground(new java.awt.Color(0, 0, 0, 0));
         jPasswordField1.setBackground(new java.awt.Color(0, 0, 0, 0));
 

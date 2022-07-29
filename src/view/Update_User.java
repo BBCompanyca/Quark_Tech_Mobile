@@ -5,6 +5,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -12,7 +13,7 @@ public class Update_User extends javax.swing.JPanel {
 
     //Objeto para llamar los paneles...
     Paneles paneles = new Paneles();
-    
+
     //Objeto para darle formato a los campos de texto.
     FormatText formattext = new FormatText();
 
@@ -37,11 +38,13 @@ public class Update_User extends javax.swing.JPanel {
 
         //Método para validar los permisos de modificar la información...
         ValidateUpdate();
-        
+
         //Intancia para darle formato a los campos de texto...
         formattext.ValidateName(jTextField_Name);
         formattext.ValidateNumber(jTextField_Telephone);
         formattext.ValidateUsername(jTextField_Username);
+
+        ValidateCamp();
 
     }
 
@@ -70,6 +73,9 @@ public class Update_User extends javax.swing.JPanel {
         jButton_Update = new javax.swing.JButton();
         jButton_RestartPassword = new javax.swing.JButton();
         jLabel_Title = new javax.swing.JLabel();
+        jLabel_Telefono2 = new javax.swing.JLabel();
+        jLabel_Nombre2 = new javax.swing.JLabel();
+        jLabel_Username2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,6 +90,11 @@ public class Update_User extends javax.swing.JPanel {
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setBorder(null);
         jTextField_Name.setCaretColor(new java.awt.Color(240, 240, 240));
+        jTextField_Name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_NameKeyReleased(evt);
+            }
+        });
         add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 240, 30));
 
         jTextField_Telephone.setBackground(new java.awt.Color(9, 53, 69));
@@ -91,6 +102,11 @@ public class Update_User extends javax.swing.JPanel {
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setBorder(null);
         jTextField_Telephone.setCaretColor(new java.awt.Color(240, 240, 240));
+        jTextField_Telephone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_TelephoneKeyReleased(evt);
+            }
+        });
         add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 240, 30));
 
         jLabel_Status.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -103,6 +119,11 @@ public class Update_User extends javax.swing.JPanel {
         jTextField_Username.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Username.setBorder(null);
         jTextField_Username.setCaretColor(new java.awt.Color(240, 240, 240));
+        jTextField_Username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_UsernameKeyReleased(evt);
+            }
+        });
         add(jTextField_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 240, 30));
 
         jLabel_Username.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -187,6 +208,27 @@ public class Update_User extends javax.swing.JPanel {
         jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Title.setText("jLabel1");
         add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 890, 50));
+
+        jLabel_Telefono2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Telefono2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Telefono2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Telefono2.setText("CAMPO REQUERIDO *");
+        jLabel_Telefono2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Telefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 275, 240, 20));
+
+        jLabel_Nombre2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Nombre2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Nombre2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Nombre2.setText("CAMPO REQUERIDO *");
+        jLabel_Nombre2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 185, 240, 20));
+
+        jLabel_Username2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Username2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Username2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Username2.setText("CAMPO REQUERIDO *");
+        jLabel_Username2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Username2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 185, 240, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox_DirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_DirectionActionPerformed
@@ -295,7 +337,7 @@ public class Update_User extends javax.swing.JPanel {
                             cn.close();
 
                             try {
-                                
+
                                 String unformat_telephone_user = formattext.unFormatText(telephone);
 
                                 Connection cn2 = BD_Connection.connection();
@@ -313,6 +355,10 @@ public class Update_User extends javax.swing.JPanel {
                                 pst2.setString(7, type_account);
                                 pst2.setString(8, status);
                                 pst2.executeUpdate();
+                                
+                                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/U");
+                                Thread register = new Thread(movimiento);
+                                register.start();
 
                                 ClearCamps();
 
@@ -369,6 +415,24 @@ public class Update_User extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton_RestartPasswordMousePressed
 
+    private void jTextField_NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_NameKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jTextField_NameKeyReleased
+
+    private void jTextField_TelephoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_TelephoneKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jTextField_TelephoneKeyReleased
+
+    private void jTextField_UsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_UsernameKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jTextField_UsernameKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_RestartPassword;
@@ -379,11 +443,14 @@ public class Update_User extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_Direction;
     private javax.swing.JLabel jLabel_Name;
+    private javax.swing.JLabel jLabel_Nombre2;
     private javax.swing.JLabel jLabel_Status;
+    private javax.swing.JLabel jLabel_Telefono2;
     private javax.swing.JLabel jLabel_Telephono;
     private javax.swing.JLabel jLabel_Title;
     private javax.swing.JLabel jLabel_Type_Account;
     private javax.swing.JLabel jLabel_Username;
+    private javax.swing.JLabel jLabel_Username2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -446,14 +513,14 @@ public class Update_User extends javax.swing.JPanel {
             jComboBox_Direction.setEnabled(false);
             jComboBox_Status.setEnabled(false);
             jComboBox_Type_Account.setEnabled(false);
-            
+
             jLabel_Title.setText("Información Del Usuario - " + name_user);
 
-        //El usuario seleccionado es el que inició sesión y su cuenta es Administrador...    
+            //El usuario seleccionado es el que inició sesión y su cuenta es Administrador...    
         } else if (Login.type_account.equals(type_Account_this) && Login.ID_User == Users.ID && Login.type_account.equals("Administrador")) {
 
             jLabel_Title.setText("Información Del Usuario - " + name_user);
-            
+
             jComboBox_Direction.setEnabled(false);
             jComboBox_Status.setEnabled(false);
             jComboBox_Type_Account.setEnabled(false);
@@ -469,9 +536,9 @@ public class Update_User extends javax.swing.JPanel {
 
             add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 110, -1));
 
-        //Mismos permisos y diferente ID... Es la cuenta de otro usuario.
+            //Mismos permisos y diferente ID... Es la cuenta de otro usuario.
         } else if (Login.type_account.equals(type_Account_this) && Login.ID_User != Users.ID) {
-            
+
             jLabel_Title.setText("Información Del Usuario - " + name_user);
 
             jComboBox_Direction.setEnabled(false);
@@ -485,9 +552,9 @@ public class Update_User extends javax.swing.JPanel {
             jButton_Update.setVisible(false);
             jButton_RestartPassword.setVisible(false);
 
-        //Permisos diferentes, el usuario que inició sesión es adminsitrador y el usuario seleccionado es moderador...    
+            //Permisos diferentes, el usuario que inició sesión es adminsitrador y el usuario seleccionado es moderador...    
         } else if (Login.type_account.equals("Administrador") && type_Account_this.equals("Moderador")) {
-            
+
             jLabel_Title.setText("Información Del Usuario - " + name_user);
 
             jTextField_Name.setEditable(false);
@@ -511,11 +578,11 @@ public class Update_User extends javax.swing.JPanel {
             jComboBox_Status.setEnabled(false);
             jComboBox_Type_Account.setEnabled(false);
 
-        //Permisos diferentes, el usuario que inició sesión es adminsitrador y el usuario seleccionado es vendedor o técnico...
+            //Permisos diferentes, el usuario que inició sesión es adminsitrador y el usuario seleccionado es vendedor o técnico...
         } else if (Login.type_account.equals("Administrador") && type_Account_this.equals("Vendedor") || type_Account_this.equals("Tecnico")) {
 
             jLabel_Title.setText("Modificar La Información Del Usuario - " + name_user);
-            
+
             jLabel_Direction.setVisible(false);
             jComboBox_Direction.setVisible(false);
 
@@ -525,11 +592,11 @@ public class Update_User extends javax.swing.JPanel {
 
             add(jLabel_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, -1, -1));
 
-            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Vendedor", "Tecnico" }));
+            jComboBox_Type_Account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "Vendedor", "Tecnico"}));
             add(jComboBox_Type_Account, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 110, -1));
 
             jComboBox_Type_Account.setSelectedItem(type_Account_this);
-            
+
         }
 
     }
@@ -553,6 +620,68 @@ public class Update_User extends javax.swing.JPanel {
         jComboBox_Status.setSelectedIndex(0);
         jComboBox_Direction.setSelectedIndex(0);
         jComboBox_Type_Account.setSelectedIndex(0);
+
+    }
+
+    private void ValidateCamp() {
+
+        if (jTextField_Name.getText().isEmpty()) {
+
+            jLabel_Nombre2.setText("*CAMPO REQUERIDO*");
+
+        } else if (!jTextField_Name.getText().contains(" ")) {
+
+            jLabel_Nombre2.setText("*FORMATO INVALIDO*");
+
+        } else {
+
+            jLabel_Nombre2.setText("");
+
+        }
+
+        if (jTextField_Telephone.getText().isEmpty()) {
+
+            jLabel_Telefono2.setText("*CAMPO REQUERIDO*");
+
+        } else if (jTextField_Telephone.getText().length() < 16) {
+
+            jLabel_Telefono2.setText("*FORMATO INVALIDO*");
+
+        } else if (!jTextField_Telephone.getText().contains("0412") && !jTextField_Telephone.getText().contains("0414")
+                && !jTextField_Telephone.getText().contains("0424") && !jTextField_Telephone.getText().contains("0416")
+                && !jTextField_Telephone.getText().contains("0426")) {
+
+            jLabel_Telefono2.setText("*FORMATO INVALIDO*");
+
+        } else {
+
+            jLabel_Telefono2.setText("");
+
+        }
+
+        if (jTextField_Username.getText().isEmpty()) {
+
+            jLabel_Username2.setText("*CAMPO REQUERIDO*");
+
+        } else {
+
+            jLabel_Username2.setText("");
+
+        }
+
+        if (jTextField_Name.getText().isEmpty() || jTextField_Telephone.getText().isEmpty()
+                || jTextField_Username.getText().isEmpty() || jTextField_Telephone.getText().length() < 16
+                || !jTextField_Name.getText().contains(" ") || !jTextField_Telephone.getText().contains("0412")
+                && !jTextField_Telephone.getText().contains("0414") && !jTextField_Telephone.getText().contains("0424")
+                && !jTextField_Telephone.getText().contains("0416") && !jTextField_Telephone.getText().contains("0426")) {
+
+            jButton_Update.setVisible(false);
+
+        } else {
+
+            jButton_Update.setVisible(true);
+
+        }
 
     }
 

@@ -4,8 +4,10 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import java.util.Date;
@@ -13,11 +15,10 @@ import javax.swing.BorderFactory;
 
 public class Register_Warranty extends javax.swing.JPanel {
 
-    int flag_calendar = 0, day_warranty = 0, flag_register = 0, time_Warranty = 0, id_client = 0;
-    public static int flag = 0, flag_AddressRegisterAndConsult = 0;
+    public static int flag = 0, flag_AddressRegisterAndConsult = 0, flag_calendar = 0, day_warranty = 0, flag_register = 0, time_Warranty = 0, id_client = 0;
 
-    String brand, model, color, date_register, date_purchase, day, month, year, time_Warranty_STG, identity_card_client, name_client;
-    public static String serial, falla, received;
+    String brand, model, color, date_register, date_purchase, day, month, year, time_Warranty_STG, identity_card_client;
+    public static String serial, falla, received, name_client;
 
     Paneles paneles = new Paneles();
 
@@ -27,20 +28,20 @@ public class Register_Warranty extends javax.swing.JPanel {
     public Register_Warranty() {
         initComponents();
 
-        //Método para obtener la información del equipo...
-        getInformationEquipo();
+        getAddressPanel();
 
         //Método para validar la dirección de la interfaz...
         validateAddress();
 
-        getAddressPanel();
-
+        //getInformationEquipo();
         jCalendar.setVisible(false);
 
-        jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
-        
-        jTextArea_Recibido.setBorder(BorderFactory.createCompoundBorder(jTextArea_Recibido.getBorder(), 
+        jTextArea_Recibido.setBorder(BorderFactory.createCompoundBorder(jTextArea_Recibido.getBorder(),
                 BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+
+        jButton_Register.setVisible(false);
+
+        validateCamp();
 
     }
 
@@ -73,6 +74,12 @@ public class Register_Warranty extends javax.swing.JPanel {
         jSeparator8 = new javax.swing.JSeparator();
         jButton_Calendar = new javax.swing.JButton();
         jLabel_Title = new javax.swing.JLabel();
+        jLabel_Code2 = new javax.swing.JLabel();
+        jLabel_Falla2 = new javax.swing.JLabel();
+        jLabel_Equipo2 = new javax.swing.JLabel();
+        jLabel_Date2 = new javax.swing.JLabel();
+        jLabel_Serial2 = new javax.swing.JLabel();
+        jLabel_Received2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setMinimumSize(new java.awt.Dimension(890, 360));
@@ -130,8 +137,13 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jTextField_SerialActionPerformed(evt);
             }
         });
+        jTextField_Serial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_SerialKeyReleased(evt);
+            }
+        });
         add(jTextField_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 150, 20));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 210, -1));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 250, -1));
 
         jTextField_Falla.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Falla.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
@@ -143,7 +155,12 @@ public class Register_Warranty extends javax.swing.JPanel {
                 jTextField_FallaActionPerformed(evt);
             }
         });
-        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 210, 20));
+        jTextField_Falla.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_FallaKeyReleased(evt);
+            }
+        });
+        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 250, 20));
 
         jLabel_Falla.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Falla.setForeground(new java.awt.Color(240, 240, 240));
@@ -166,6 +183,11 @@ public class Register_Warranty extends javax.swing.JPanel {
         jTextArea_Recibido.setRows(5);
         jTextArea_Recibido.setText("\n");
         jTextArea_Recibido.setWrapStyleWord(true);
+        jTextArea_Recibido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextArea_RecibidoKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea_Recibido);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 330, 100));
@@ -237,6 +259,48 @@ public class Register_Warranty extends javax.swing.JPanel {
         jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Title.setText("Nueva Garantía - Cliente: ");
         add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 890, 40));
+
+        jLabel_Code2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Code2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Code2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_Code2.setText("CAMPO REQUERIDO *");
+        jLabel_Code2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Code2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 135, 150, 20));
+
+        jLabel_Falla2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Falla2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Falla2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_Falla2.setText("CAMPO REQUERIDO *");
+        jLabel_Falla2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Falla2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 405, 150, 20));
+
+        jLabel_Equipo2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Equipo2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Equipo2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_Equipo2.setText("CAMPO REQUERIDO *");
+        jLabel_Equipo2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Equipo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 225, 150, 20));
+
+        jLabel_Date2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Date2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Date2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_Date2.setText("CAMPO REQUERIDO *");
+        jLabel_Date2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Date2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 135, 150, 20));
+
+        jLabel_Serial2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Serial2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Serial2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_Serial2.setText("CAMPO REQUERIDO *");
+        jLabel_Serial2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Serial2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 315, 150, 20));
+
+        jLabel_Received2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Received2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Received2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_Received2.setText("CAMPO REQUERIDO *");
+        jLabel_Received2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Received2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 305, 150, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_SerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SerialActionPerformed
@@ -250,7 +314,7 @@ public class Register_Warranty extends javax.swing.JPanel {
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
         clases.Date date = new clases.Date();
-        
+
         int flag = 0;
 
         String code, equipo, date_purchase;
@@ -262,175 +326,104 @@ public class Register_Warranty extends javax.swing.JPanel {
         date_purchase = jTextField_Calendar.getText().trim();
         received = jTextArea_Recibido.getText().trim();
 
-        if (code.equals("")) {
+        if (flag_register == 0) {
 
-            jLabel_Code.setForeground(Color.red);
-            flag++;
+            try {
 
-        } else {
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select serial from warranty where serial = '" + serial + "' and not status = '" + "Entregado" + "'");
 
-            jLabel_Code.setForeground(new Color(240, 240, 240));
+                ResultSet rs = pst.executeQuery();
 
-        }
+                if (rs.next()) {
 
-        if (equipo.equals("")) {
+                    jLabel_Serial.setForeground(Color.red);
 
-            jLabel_Equipo.setForeground(Color.red);
-            flag++;
+                    JOptionPane.showMessageDialog(null, "¡Ya existe un equipo con este serial registrado en el sistema!",
+                            "¡Acceso Denegado!", JOptionPane.OK_OPTION);
 
-        } else {
+                    jTextField_Serial.setText("");
 
-            jLabel_Equipo.setForeground(new Color(240, 240, 240));
+                    cn.close();
 
-        }
+                } else {
 
-        if (serial.equals("")) {
+                    cn.close();
 
-            jLabel_Serial.setForeground(Color.red);
-            flag++;
+                    try {
 
-        } else {
+                        Connection cn2 = BD_Connection.connection();
+                        PreparedStatement pst2 = cn2.prepareStatement(
+                                "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-            jLabel_Serial.setForeground(new Color(240, 240, 240));
+                        pst2.setInt(1, 0);
+                        pst2.setInt(2, id_client);
+                        pst2.setInt(3, CodeEquipos.id_equipo);
+                        pst2.setInt(4, 0);
+                        pst2.setInt(5, Login.ID_User);
+                        pst2.setString(6, Login.direction);
+                        pst2.setString(7, serial);
+                        pst2.setString(8, falla);
+                        pst2.setString(9, date.DateToDay());
+                        pst2.setString(10, received);
+                        pst2.setInt(11, time_Warranty);
+                        pst2.setString(12, date_purchase);
+                        pst2.setString(13, "");
+                        pst2.setString(14, "");
+                        pst2.setString(15, "");
+                        pst2.setString(16, "");
+                        pst2.setString(17, "Nuevo Ingreso");
+                        pst2.setString(18, "");
+                        pst2.setString(19, "");
+                        pst2.setString(20, "");
+                        pst2.setString(21, "");
 
-        }
+                        pst2.executeUpdate();
 
-        if (falla.equals("")) {
+                        Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/G");
+                        Thread register = new Thread(movimiento);
+                        register.start();
 
-            jLabel_Falla.setForeground(Color.red);
-            flag++;
+                        PaintAndCleanCamp();
 
-        } else {
+                        JOptionPane.showMessageDialog(null, "Registro Exitoso", "¡Exito!",
+                                JOptionPane.INFORMATION_MESSAGE);
 
-            jLabel_Falla.setForeground(new Color(240, 240, 240));
+                        serial = "";
+                        falla = "";
+                        received = "";
+                        jTextField_Code.setText("");
+                        jTextField_Equipo.setText("");
 
-        }
+                        paneles.PanelWarranty();;
 
-        if (date_purchase.equals("")) {
+                    } catch (SQLException e) {
 
-            jLabel_DatePurchase.setForeground(Color.red);
-            flag++;
-
-        } else {
-
-            jLabel_DatePurchase.setForeground(new Color(240, 240, 240));
-
-        }
-
-        if (received.equals("")) {
-
-            jLabel_Recibido.setForeground(Color.red);
-            flag++;
-
-        } else {
-
-            jLabel_Recibido.setForeground(new Color(240, 240, 240));
-
-        }
-
-        if (flag == 0) {
-
-            if (flag_register == 0) {
-
-                try {
-
-                    Connection cn = BD_Connection.connection();
-                    PreparedStatement pst = cn.prepareStatement(
-                            "select serial from warranty where serial = '" + serial + "' and not status = '" + "Entregado" + "'");
-
-                    ResultSet rs = pst.executeQuery();
-
-                    if (rs.next()) {
-
-                        jLabel_Serial.setForeground(Color.red);
-
-                        JOptionPane.showMessageDialog(null, "¡Ya existe un equipo con este serial registrado en el sistema!",
-                                "¡Acceso Denegado!", JOptionPane.OK_OPTION);
-
-                        jTextField_Serial.setText("");
-
-                        cn.close();
-
-                    } else {
-
-                        cn.close();
-
-                        try {
-
-                            Connection cn2 = BD_Connection.connection();
-                            PreparedStatement pst2 = cn2.prepareStatement(
-                                    "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-
-                            pst2.setInt(1, 0);
-                            pst2.setInt(2, id_client);
-                            pst2.setInt(3, CodeEquipos.id_equipo);
-                            pst2.setInt(4, 0);
-                            pst2.setInt(5, Login.ID_User);
-                            pst2.setString(6, Login.direction);
-                            pst2.setString(7, serial);
-                            pst2.setString(8, falla);
-                            pst2.setString(9, date.DateToDay());
-                            pst2.setString(10, received);
-                            pst2.setInt(11, time_Warranty); 
-                            pst2.setString(12, date_purchase); 
-                            pst2.setString(13, "");
-                            pst2.setString(14, "");
-                            pst2.setString(15, "");
-                            pst2.setString(16, "");
-                            pst2.setString(17, "Nuevo Ingreso");
-                            pst2.setString(18, "");
-                            pst2.setString(19, "");
-                            pst2.setString(20, "");
-                            pst2.setString(21, "");
-                            
-                            pst2.executeUpdate();
-
-                            PaintAndCleanCamp();
-
-                            JOptionPane.showMessageDialog(null, "Registro Exitoso", "¡Exito!",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                            
-                            serial = ""; 
-                            falla = ""; 
-                            received = "";
-                            jTextField_Code.setText("");
-                            jTextField_Equipo.setText("");
-
-                            paneles.PanelWarranty();;
-
-                        } catch (SQLException e) {
-
-                            System.err.println("¡Error al registrar el equipo! " + e);
-                            JOptionPane.showMessageDialog(null, "¡Error al registrar el equipo!",
-                                    "¡Error!", JOptionPane.OK_OPTION);
-
-                        }
+                        System.err.println("¡Error al registrar el equipo! " + e);
+                        JOptionPane.showMessageDialog(null, "¡Error al registrar el equipo!",
+                                "¡Error!", JOptionPane.OK_OPTION);
 
                     }
 
-                } catch (SQLException e) {
-
-                    System.err.println("¡Error al validar la información del equipo! " + e);
-                    JOptionPane.showMessageDialog(null, "¡Error al validar la información del equipo!",
-                            "¡Error!", JOptionPane.OK_OPTION);
-
                 }
 
-            } else {
+            } catch (SQLException e) {
 
-                jLabel_DatePurchase.setForeground(Color.red);
-
-                JOptionPane.showMessageDialog(null, "¡Debes seleccionar una fecha valida!", "¡Acceso Denegado!",
-                        JOptionPane.OK_OPTION);
-
-                jTextField_Calendar.setText("");
+                System.err.println("¡Error al validar la información del equipo! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al validar la información del equipo!",
+                        "¡Error!", JOptionPane.OK_OPTION);
 
             }
 
         } else {
 
-            JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "¡Acceso Denegado!",
+            jLabel_DatePurchase.setForeground(Color.red);
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar una fecha valida!", "¡Acceso Denegado!",
                     JOptionPane.OK_OPTION);
+
+            jTextField_Calendar.setText("");
 
         }
 
@@ -515,6 +508,25 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jTextField_CalendarFocusGained
 
+    private void jTextField_SerialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_SerialKeyReleased
+
+        validateCamp();
+
+    }//GEN-LAST:event_jTextField_SerialKeyReleased
+
+    private void jTextField_FallaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_FallaKeyReleased
+
+        validateCamp();
+
+
+    }//GEN-LAST:event_jTextField_FallaKeyReleased
+
+    private void jTextArea_RecibidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea_RecibidoKeyReleased
+
+        validateCamp();
+
+    }//GEN-LAST:event_jTextArea_RecibidoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Calendar;
@@ -523,11 +535,17 @@ public class Register_Warranty extends javax.swing.JPanel {
     private com.toedter.calendar.JCalendar jCalendar;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel_Code;
+    private javax.swing.JLabel jLabel_Code2;
+    private javax.swing.JLabel jLabel_Date2;
     private javax.swing.JLabel jLabel_DatePurchase;
     private javax.swing.JLabel jLabel_Equipo;
+    private javax.swing.JLabel jLabel_Equipo2;
     private javax.swing.JLabel jLabel_Falla;
+    private javax.swing.JLabel jLabel_Falla2;
+    private javax.swing.JLabel jLabel_Received2;
     private javax.swing.JLabel jLabel_Recibido;
     private javax.swing.JLabel jLabel_Serial;
+    private javax.swing.JLabel jLabel_Serial2;
     private javax.swing.JLabel jLabel_Title;
     public static javax.swing.JLabel jLabel_garantia;
     private javax.swing.JScrollPane jScrollPane1;
@@ -538,8 +556,8 @@ public class Register_Warranty extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextArea jTextArea_Recibido;
     private javax.swing.JTextField jTextField_Calendar;
-    private javax.swing.JTextField jTextField_Code;
-    private javax.swing.JTextField jTextField_Equipo;
+    public javax.swing.JTextField jTextField_Code;
+    public javax.swing.JTextField jTextField_Equipo;
     private javax.swing.JTextField jTextField_Falla;
     private javax.swing.JTextField jTextField_Serial;
     // End of variables declaration//GEN-END:variables
@@ -565,87 +583,75 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }
 
-    //Método para obtener la información del equipo...
-    private void getInformationEquipo() {
-
-        try {
-
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement("select code, brand, model, color, capacity, day_warranty from equipo "
-                    + "where id_equipo = '" + CodeEquipos.id_equipo + "'");
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-
-                day_warranty = rs.getInt("day_warranty");
-                brand = rs.getString("brand");
-                model = rs.getString("model");
-                color = rs.getString("color");
-
-                jTextField_Code.setText(rs.getString("code"));
-                
-                jTextField_Equipo.setText(rs.getString("brand") + " - " + rs.getString("model")
-                        + " - " + rs.getString("color") + " - " + rs.getString("capacity"));
-
-            }
-
-            cn.close();
-
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al consultar la información del equipo! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del equipo!", "¡Error!", JOptionPane.OK_OPTION);
-
-        }
-
-    }
-
+    // Método para calcular cuantos días de garantías tiene un equipo...
     private void dayWarranty() {
 
+        // Variables para guardar el día, mes y año en que fue comprado el equipo...
         int day = 0, month = 0, year = 0;
 
+        // Esto es para obtener la fecha completa en que fue comprado el equipo...
         String date = jTextField_Calendar.getText().trim();
 
+        // Aquí estoy asignando el día, mes y año a cada variable correspondiente...
         day = Integer.parseInt(date.substring(0, 2));
         month = Integer.parseInt(date.substring(3, 5));
         year = Integer.parseInt(date.substring(6, 10));
 
+        // Aquí estoy creando un calendario...
         Calendar calendarPurachase = Calendar.getInstance();
 
+        // Aquí estooy asiganandole el día, mes y año al calendario creado arriba...
         calendarPurachase.set(Calendar.DATE, day);
         calendarPurachase.set(Calendar.MONTH, month - 1);
         calendarPurachase.set(Calendar.YEAR, year);
 
+        // En esta linea estoy creando otro calendario y obteniendo la fecha actual...
         Calendar dateNow = Calendar.getInstance();
 
+        // Esto es una condicion o pregunta donde me estoy preguntado...
+        // ¿La fecha que se compró al equipo es mayor a la fecha actual?
         if (calendarPurachase.after(dateNow)) {
 
+            // Es esta condición se cumple, osea... si la fecha que compraron el teléfono,
+            // es mayor a hoy, deja un mensaje de error porque es imposible que el teléfono
+            // lo compren mañana o pasado o ETC...
             jLabel_garantia.setForeground(Color.red);
-            jLabel_garantia.setText("¡Error en formato de fecha!");
+            jLabel_garantia.setText("¡Error en formato de fecha!"); //Deja este mensaje.
 
+            // Esto es una variable bandera, eso es para comicarle a otro método que está pasando aqui...
+            // si el valor es uno 1 es porque no es valido el formato...
             flag_register = 1;
 
-        } else {
+        } else { // Si no se cumple la condición de la imagen anterior entra a este bloque...
 
+            // Si el valor es 0 es porque si hay un valor valido en la fecha...
             flag_register = 0;
 
+            // Aquí estoy sumando los días que hay entre la fecha que se compró y la fecha actual...
             calendarPurachase.add(Calendar.DATE, day_warranty);
 
+            // Si el resultado de la suma, es una fecha mayor a la fecha actual es porque el equipo
+            // aun tiene garantía...
             if (calendarPurachase.after(dateNow)) {
 
+                // Aquí estoy calculando en mili segundos cuantos milisegundos han pasado desde el día
+                // en que se compró el equipo, y cuantos milisegundos han pasado hoy...
                 long timePurchase = calendarPurachase.getTimeInMillis();
                 long timeNow = dateNow.getTimeInMillis();
 
+                // Luego de obtener los mili segundos hago una resta de los milisegundo de haber comprado el equipo
+                // y hoy y eso lo divido entre 86400000 que es la cantidad de milisegundos que tiene un día.
                 time_Warranty = (int) ((Math.abs(timeNow - timePurchase)) / 86400000);
 
+                // Luego dejo este mensaje donde indica cuantos días le quedan de garantía al equipo...
                 jLabel_garantia.setForeground(new Color(240, 240, 240));
                 jLabel_garantia.setText("El equipo tiene: " + time_Warranty + " días de garantía...");
 
-            } else {
+            } else { // Si la suma de la condición de arriba es menor a la fecha actual, entra en este bloque...
 
                 time_Warranty = 0;
 
+                // Y deja este mensaje para que el usuario sepa que el equipo no tiene garantía...
                 jLabel_garantia.setForeground(Color.red);
                 jLabel_garantia.setText("El equipo no cumple con los días de garantía...");
 
@@ -656,6 +662,8 @@ public class Register_Warranty extends javax.swing.JPanel {
         calendarPurachase.set(Calendar.DATE, day);
         calendarPurachase.set(Calendar.MONTH, month - 1);
         calendarPurachase.set(Calendar.YEAR, year);
+
+        validateCamp();
 
     }
 
@@ -687,42 +695,181 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }
 
-    private void getAddressPanel() {
+    private void validateCamp() {
 
-        if (flag_AddressRegisterAndConsult == 1) {
-            
-            name_client = Register_Client.name_client;
-            
-            try {
-                
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement("select id_client from client where "
-                        + "unformat_identity_card_client = '" + Register_Client.identity_card_client + "'");
-                
-                ResultSet rs = pst.executeQuery();
-                
-                if (rs.next()) {
-                    
-                    id_client = rs.getInt("id_client");
-                    
-                }
-                
-                cn.close();
-                
-            } catch (SQLException e) {
-                
-                System.out.println("¡Error al consultar el ID del cliente! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al consultar el ID del cliente!", "¡Error", JOptionPane.OK_OPTION);
-                
-            }
+        if (jTextField_Code.getText().isEmpty()) {
+
+            jLabel_Code2.setText("CAMPO REQUERIDO *");
 
         } else {
 
-            name_client = Consult_Cl_Client.name_client;
-            
-            id_client = Consult_Cl_Client.id_client;
+            jLabel_Code2.setText("");
+
+        }
+
+        if (jTextField_Equipo.getText().isEmpty()) {
+
+            jLabel_Equipo2.setText("CAMPO REQUERIDO *");
+
+        } else {
+
+            jLabel_Equipo2.setText("");
+
+        }
+
+        if (jTextField_Serial.getText().isEmpty()) {
+
+            jLabel_Serial2.setText("CAMPO REQUERIDO *");
+
+        } else {
+
+            jLabel_Serial2.setText("");
+
+        }
+
+        if (jTextField_Falla.getText().isEmpty()) {
+
+            jLabel_Falla2.setText("CAMPO REQUERIDO *");
+
+        } else {
+
+            jLabel_Falla2.setText("");
+
+        }
+
+        if (jTextField_Calendar.getText().isEmpty()) {
+
+            jLabel_Date2.setText("CAMPO REQUERIDO *");
+
+        } else {
+
+            jLabel_Date2.setText("");
+
+        }
+
+        if (jTextArea_Recibido.getText().isEmpty()) {
+
+            jLabel_Received2.setText("CAMPO REQUERIDO *");
+
+        } else {
+
+            jLabel_Received2.setText("");
+
+        }
+
+        if (jTextField_Code.getText().isEmpty() || jTextField_Equipo.getText().isEmpty() || jTextField_Serial.getText().isEmpty()
+                || jTextField_Falla.getText().isEmpty() || jTextField_Calendar.getText().isEmpty() || jTextArea_Recibido.getText().isEmpty()) {
+
+            jButton_Register.setVisible(false);
+
+        } else {
+
+            jButton_Register.setVisible(true);
 
         }
 
     }
+
+    private void getAddressPanel() {
+
+        if (flag_AddressRegisterAndConsult == 1) {
+
+            getInformationClient();
+
+        } else if (flag_AddressRegisterAndConsult == 2) {
+
+            RequestEquipo requestEquipo = new RequestEquipo();
+            Thread hiloEquipo = new Thread(requestEquipo);
+            hiloEquipo.start();
+
+            jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
+
+        } else {
+
+            name_client = Consult_Cl_Client.name_client;
+
+            id_client = Consult_Cl_Client.id_client;
+
+            jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
+
+        }
+
+    }
+
+    public void getInformationClient() {
+
+        name_client = Register_Client.name_client;
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement("select id_client from client where "
+                    + "unformat_identity_card_client = '" + Register_Client.identity_card_client + "'");
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                id_client = rs.getInt("id_client");
+                jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
+
+            }
+
+            cn.close();
+
+        } catch (SQLException e) {
+
+            System.out.println("¡Error al consultar el ID del cliente! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al consultar el ID del cliente!", "¡Error", JOptionPane.OK_OPTION);
+
+        }
+
+    }
+
+    public void getInformationEquipo() {
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement("select code, brand, model, color, capacity, day_warranty from equipo "
+                    + "where id_equipo = '" + CodeEquipos.id_equipo + "'");
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                day_warranty = rs.getInt("day_warranty");
+                brand = rs.getString("brand");
+                model = rs.getString("model");
+                color = rs.getString("color");
+
+                jTextField_Code.setText(rs.getString("code"));
+
+                jTextField_Equipo.setText(rs.getString("brand") + " - " + rs.getString("model")
+                        + " - " + rs.getString("color") + " - " + rs.getString("capacity"));
+
+            }
+
+            cn.close();
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al consultar la información del equipo! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del equipo!", "¡Error!", JOptionPane.OK_OPTION);
+
+        }
+
+    }
+
+    public class RequestEquipo implements Runnable {
+
+        @Override
+        public void run() {
+
+            getInformationEquipo();
+
+        }
+
+    }
+
 }

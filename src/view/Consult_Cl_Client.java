@@ -91,57 +91,35 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                 Connection cn = BD_Connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select identity_card_client from client where unformat_identity_card_client = '" + ci_client + "'");
+                        "select id_client, name_client, telephone_client, direction_client from client where "
+                        + "unformat_identity_card_client = '" + ci_client + "'");
 
                 ResultSet rs = pst.executeQuery();
 
                 if (rs.next()) {
 
-                    cn.close();
+                    int question = JOptionPane.showConfirmDialog(null, "Nombre: " + rs.getString("name_client") + "\n\n"
+                            + "Teléfono: " + rs.getString("telephone_client") + "\n\n"
+                            + "Dirección: " + rs.getString("direction_client") + "\n",
+                            "Selección", JOptionPane.OK_CANCEL_OPTION);
 
-                    try {
+                    if (question == 0) {
 
-                        Connection cn2 = BD_Connection.connection();
-                        PreparedStatement pst2 = cn2.prepareStatement(
-                                "select id_client, name_client, telephone_client, direction_client from client where "
-                                + "unformat_identity_card_client = '" + ci_client + "'");
+                        Register_Warranty.flag = 0;
+                        Register_Warranty.flag_AddressRegisterAndConsult = 0;
 
-                        ResultSet rs2 = pst2.executeQuery();
+                        name_client = rs.getString("name_client");
+                        id_client = rs.getInt(1);
 
-                        if (rs2.next()) {
+                        paneles.PanelRegisterWarranty();
 
-                            int question = JOptionPane.showConfirmDialog(null, "Nombre: " + rs2.getString("name_client") + "\n\n"
-                                    + "Teléfono: " + rs2.getString("telephone_client") + "\n\n"
-                                    + "Dirección: " + rs2.getString("direction_client") + "\n",
-                                    "Selección", JOptionPane.OK_CANCEL_OPTION);
+                    } else {
 
-                            if (question == 0) {
-
-                                Register_Warranty.flag = 0;
-                                Register_Warranty.flag_AddressRegisterAndConsult = 0;
-
-                                name_client = rs2.getString("name_client");
-                                id_client = rs2.getInt(1);
-
-                                paneles.PanelRegisterWarranty();
-
-                            } else {
-
-                                paneles.PanelConsulCient();
-
-                            }
-                        }
-
-                    } catch (SQLException e) {
-
-                        System.err.println("¡Error al consultar la información del cliente! " + e);
-                        JOptionPane.showMessageDialog(null, "¡Error al consultar la información del cliente!");
+                        paneles.PanelConsulCient();
 
                     }
 
                 } else {
-
-                    cn.close();
 
                     int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
                             "Selección", JOptionPane.OK_CANCEL_OPTION);
@@ -160,6 +138,8 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                     }
 
                 }
+
+                cn.close();
 
             } catch (SQLException e) {
 
@@ -197,58 +177,35 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                     Connection cn = BD_Connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
-                            "select identity_card_client from client where unformat_identity_card_client = '" + ci_client + "'");
+                            "select id_client, name_client, telephone_client, direction_client from client where "
+                            + "unformat_identity_card_client = '" + ci_client + "'");
 
                     ResultSet rs = pst.executeQuery();
 
                     if (rs.next()) {
 
-                        cn.close();
+                        int question = JOptionPane.showConfirmDialog(null, "Nombre: " + rs.getString("name_client") + "\n\n"
+                                + "Teléfono: " + rs.getString("telephone_client") + "\n\n"
+                                + "Dirección: " + rs.getString("direction_client") + "\n",
+                                "Selección", JOptionPane.OK_CANCEL_OPTION);
 
-                        try {
+                        if (question == 0) {
 
-                            Connection cn2 = BD_Connection.connection();
-                            PreparedStatement pst2 = cn2.prepareStatement(
-                                    "select id_client, name_client, telephone_client, direction_client from client where "
-                                    + "unformat_identity_card_client = '" + ci_client + "'");
+                            Register_Warranty.flag = 0;
+                            Register_Warranty.flag_AddressRegisterAndConsult = 0;
 
-                            ResultSet rs2 = pst2.executeQuery();
+                            name_client = rs.getString("name_client");
+                            id_client = rs.getInt(1);
 
-                            if (rs2.next()) {
+                            paneles.PanelRegisterWarranty();
 
-                                int question = JOptionPane.showConfirmDialog(null, "Nombre: " + rs2.getString("name_client") + "\n\n"
-                                        + "Teléfono: " + rs2.getString("telephone_client") + "\n\n"
-                                        + "Dirección: " + rs2.getString("direction_client") + "\n",
-                                        "Selección", JOptionPane.OK_CANCEL_OPTION);
+                        } else {
 
-                                if (question == 0) {
-
-                                    Register_Warranty.flag = 0;
-                                    Register_Warranty.flag_AddressRegisterAndConsult = 0;
-
-                                    name_client = rs2.getString("name_client");
-                                    id_client = rs2.getInt(1);
-
-                                    paneles.PanelRegisterWarranty();
-
-                                } else {
-
-                                    paneles.PanelConsulCient();
-
-                                }
-                            }
-
-                        } catch (SQLException e) {
-
-                            System.err.println("¡Error al consultar la información del cliente! " + e);
-                            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del cliente!",
-                                    "¡Error!", JOptionPane.OK_OPTION);
+                            paneles.PanelConsulCient();
 
                         }
 
                     } else {
-
-                        cn.close();
 
                         int question = JOptionPane.showConfirmDialog(null, "El cliente no está registrado, ¿Desea Registrar?",
                                 "Selección", JOptionPane.OK_CANCEL_OPTION);
@@ -257,6 +214,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                             flag = 1;
 
+                            ci_client = jTextField_CI_Client.getText().trim();
                             paneles.PanelRegisterClient();
 
                         } else {
@@ -266,6 +224,8 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
                         }
 
                     }
+
+                    cn.close();
 
                 } catch (SQLException e) {
 

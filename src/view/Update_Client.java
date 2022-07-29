@@ -4,6 +4,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import clases.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -20,7 +21,7 @@ public class Update_Client extends javax.swing.JPanel {
         //Objetos para el PlayHolders de los campos de textos...
         TextPrompt name = new TextPrompt("Ej. Carlos Perez", jTextField_Name);
         TextPrompt telephone = new TextPrompt("Ej. 0414 - 589.56.41", jTextField_Telephone);
-        TextPrompt ci = new TextPrompt("Ej. 24.458.526", jTextField_Ci);
+        TextPrompt ci = new TextPrompt("Ej. 24.458.526", jTextField_CI);
         TextPrompt direction__client = new TextPrompt("Ej. Las Mercedes", jTextField_Direction_Client);
 
         //Método para consultar la información del cliente...
@@ -29,7 +30,9 @@ public class Update_Client extends javax.swing.JPanel {
         formattext.ValidateName(jTextField_Name);
         formattext.ValidateName(jTextField_Direction_Client);
         formattext.ValidateNumber(jTextField_Telephone);
-        formattext.ValidateChar_Rif(jTextField_Ci);
+        formattext.ValidateChar_Rif(jTextField_CI);
+
+        ValidateCamp();
 
     }
 
@@ -46,7 +49,7 @@ public class Update_Client extends javax.swing.JPanel {
         jTextField_Telephone = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel_CI = new javax.swing.JLabel();
-        jTextField_Ci = new javax.swing.JTextField();
+        jTextField_CI = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel_Direction_Client = new javax.swing.JLabel();
         jTextField_Direction_Client = new javax.swing.JTextField();
@@ -55,6 +58,10 @@ public class Update_Client extends javax.swing.JPanel {
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jButton_Update = new javax.swing.JButton();
+        jLabel_Nombre2 = new javax.swing.JLabel();
+        jLabel_Telefono2 = new javax.swing.JLabel();
+        jLabel_Rif2 = new javax.swing.JLabel();
+        jLabel_Direction2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -89,6 +96,11 @@ public class Update_Client extends javax.swing.JPanel {
         jTextField_Name.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Name.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Name.setBorder(null);
+        jTextField_Name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_NameKeyReleased(evt);
+            }
+        });
         add(jTextField_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 220, 30));
 
         jLabel_Telephone.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -101,20 +113,30 @@ public class Update_Client extends javax.swing.JPanel {
         jTextField_Telephone.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Telephone.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Telephone.setBorder(null);
+        jTextField_Telephone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_TelephoneKeyReleased(evt);
+            }
+        });
         add(jTextField_Telephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 220, 30));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 220, -1));
 
         jLabel_CI.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_CI.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_CI.setText("C.I:");
+        jLabel_CI.setText("C.I O RIF:");
         add(jLabel_CI, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
 
-        jTextField_Ci.setBackground(new java.awt.Color(9, 53, 69));
-        jTextField_Ci.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jTextField_Ci.setForeground(new java.awt.Color(240, 240, 240));
-        jTextField_Ci.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField_Ci.setBorder(null);
-        add(jTextField_Ci, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 220, 30));
+        jTextField_CI.setBackground(new java.awt.Color(9, 53, 69));
+        jTextField_CI.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jTextField_CI.setForeground(new java.awt.Color(240, 240, 240));
+        jTextField_CI.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField_CI.setBorder(null);
+        jTextField_CI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_CIKeyReleased(evt);
+            }
+        });
+        add(jTextField_CI, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 220, 30));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 220, -1));
 
         jLabel_Direction_Client.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -127,6 +149,11 @@ public class Update_Client extends javax.swing.JPanel {
         jTextField_Direction_Client.setForeground(new java.awt.Color(240, 240, 240));
         jTextField_Direction_Client.setBorder(null);
         jTextField_Direction_Client.setCaretColor(new java.awt.Color(240, 240, 240));
+        jTextField_Direction_Client.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField_Direction_ClientKeyReleased(evt);
+            }
+        });
         add(jTextField_Direction_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 240, 30));
 
         jTextField_Last_Modification.setEditable(false);
@@ -151,146 +178,124 @@ public class Update_Client extends javax.swing.JPanel {
             }
         });
         add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 140, 40));
+
+        jLabel_Nombre2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Nombre2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Nombre2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Nombre2.setText("CAMPO REQUERIDO *");
+        jLabel_Nombre2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 165, 220, 20));
+
+        jLabel_Telefono2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Telefono2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Telefono2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Telefono2.setText("CAMPO REQUERIDO *");
+        jLabel_Telefono2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Telefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 255, 220, 20));
+
+        jLabel_Rif2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Rif2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Rif2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Rif2.setText("CAMPO REQUERIDO *");
+        jLabel_Rif2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Rif2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 345, 220, 20));
+
+        jLabel_Direction2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel_Direction2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_Direction2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Direction2.setText("CAMPO REQUERIDO *");
+        jLabel_Direction2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(jLabel_Direction2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 165, 220, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_UpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_UpdateMousePressed
 
-        int flag = 0;
         String name, telephone, ci, direction_client;
 
         //Algoritmo por si no es moderador...
         name = jTextField_Name.getText().trim();
         telephone = jTextField_Telephone.getText().trim();
-        ci = jTextField_Ci.getText().trim();
+        ci = jTextField_CI.getText().trim();
         direction_client = jTextField_Direction_Client.getText().trim();
 
-        if (name.equals("")) {
+        try {
 
-            jLabel_Name.setForeground(Color.red);
-            flag++;
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select unformat_identity_card_client from client where unformat_identity_card_client = '" + ci + "' and not id_client = '"
+                    + Clients.ID + "'");
 
-        } else {
+            ResultSet rs = pst.executeQuery();
 
-            jLabel_Name.setForeground(new Color(240, 240, 240));
+            if (rs.next()) {
 
-        }
+                jLabel_CI.setForeground(Color.red);
 
-        if (telephone.equals("")) {
+                JOptionPane.showMessageDialog(null, "¡Ya existe un cliente registrado con este número de C.I!",
+                        "¡Acceso Denegado", JOptionPane.WARNING_MESSAGE);
 
-            jLabel_Telephone.setForeground(Color.red);
-            flag++;
+                jTextField_CI.setText("");
+                jTextField_CI.requestFocus();
 
-        } else {
+                cn.close();
 
-            jLabel_Telephone.setForeground(new Color(240, 240, 240));
+            } else {
 
-        }
+                cn.close();
 
-        if (ci.equals("")) {
+                try {
 
-            jLabel_CI.setForeground(Color.red);
-            flag++;
+                    String unformat_telephone = formattext.unFormatText(telephone);
+                    ci = ci.toUpperCase();
 
-        } else {
+                    Connection cn2 = BD_Connection.connection();
+                    PreparedStatement pst2 = cn2.prepareStatement(
+                            "update client set name_client = ?, telephone_client = ?, unformat_telephone_client = ?, "
+                            + "identity_card_client = ?, unformat_identity_card_client = ?,"
+                            + "direction_client = ?, direction_tienda = ?, last_modification = ? "
+                            + "where id_client = '" + Clients.ID + "'");
 
-            jLabel_CI.setForeground(new Color(240, 240, 240));
+                    pst2.setString(1, name);
+                    pst2.setString(2, telephone);
+                    pst2.setString(3, unformat_telephone);
+                    pst2.setString(4, formattext.Identity_Card_Client(ci));
+                    pst2.setString(5, ci);
+                    pst2.setString(6, direction_client);
+                    pst2.setString(7, Login.direction);
+                    pst2.setString(8, String.valueOf(Login.ID_User));
 
-        }
+                    pst2.executeUpdate();
+                    
+                    Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/C");
+                    Thread register = new Thread(movimiento);
+                    register.start();
 
-        if (direction_client.equals("")) {
+                    paintCampTextGreen();
 
-            jLabel_Direction_Client.setForeground(Color.red);
-            flag++;
+                    cleanCampText();
 
-        } else {
+                    JOptionPane.showMessageDialog(null, "Modificación exitosa.", "¡Exito!",
+                            JOptionPane.INFORMATION_MESSAGE);
 
-            jLabel_Direction_Client.setForeground(new Color(240, 240, 240));
+                    cn2.close();
 
-        }
+                    paneles.PanelClients();
 
-        if (flag == 0) {
+                } catch (SQLException e) {
 
-            try {
-
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement(
-                        "select unformat_identity_card_client from client where unformat_identity_card_client = '" + ci + "' and not id_client = '"
-                        + Clients.ID + "'");
-
-                ResultSet rs = pst.executeQuery();
-
-                if (rs.next()) {
-
-                    jLabel_CI.setForeground(Color.red);
-
-                    JOptionPane.showMessageDialog(null, "¡Ya existe un cliente registrado con este número de C.I!",
-                            "¡Acceso Denegado", JOptionPane.WARNING_MESSAGE);
-
-                    jTextField_Ci.setText("");
-                    jTextField_Ci.requestFocus();
-
-                    cn.close();
-
-                } else {
-
-                    cn.close();
-
-                    try {
-
-                        String unformat_telephone = formattext.unFormatText(telephone);
-                        ci = ci.toUpperCase();
-
-                        Connection cn2 = BD_Connection.connection();
-                        PreparedStatement pst2 = cn2.prepareStatement(
-                                "update client set name_client = ?, telephone_client = ?, unformat_telephone_client = ?, "
-                                + "identity_card_client = ?, unformat_identity_card_client = ?,"
-                                + "direction_client = ?, direction_tienda = ?, last_modification = ? "
-                                + "where id_client = '" + Clients.ID + "'");
-
-                        pst2.setString(1, name);
-                        pst2.setString(2, telephone);
-                        pst2.setString(3, unformat_telephone);
-                        pst2.setString(4, formattext.Identity_Card_Client(ci));
-                        pst2.setString(5, ci);
-                        pst2.setString(6, direction_client);
-                        pst2.setString(7, Login.direction);
-                        pst2.setString(8, String.valueOf(Login.ID_User));
-
-                        pst2.executeUpdate();
-
-                        paintCampTextGreen();
-
-                        cleanCampText();
-
-                        JOptionPane.showMessageDialog(null, "Modificación exitosa.", "¡Exito!",
-                                JOptionPane.INFORMATION_MESSAGE);
-
-                        cn2.close();
-
-                        paneles.PanelClients();
-
-                    } catch (SQLException e) {
-
-                        System.err.println("¡Error al modificar la información del cliente! " + e);
-                        JOptionPane.showMessageDialog(null, "¡Error al modificar la información del cliente!", "¡Error!",
-                                JOptionPane.OK_OPTION);
-
-                    }
+                    System.err.println("¡Error al modificar la información del cliente! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al modificar la información del cliente!", "¡Error!",
+                            JOptionPane.OK_OPTION);
 
                 }
 
-            } catch (SQLException e) {
-
-                System.err.println("¡Error al consultar la cédula del cliente! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al consultar la cédula del cliente!", "¡Error!",
-                        JOptionPane.OK_OPTION);
-
             }
 
-        } else {
+        } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(null, "¡Debes llenar todos los campos!", "¡Acceso Denegado!",
-                    JOptionPane.WARNING_MESSAGE);
+            System.err.println("¡Error al consultar la cédula del cliente! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al consultar la cédula del cliente!", "¡Error!",
+                    JOptionPane.OK_OPTION);
 
         }
 
@@ -303,14 +308,42 @@ public class Update_Client extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton1MousePressed
 
+    private void jTextField_NameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_NameKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jTextField_NameKeyReleased
+
+    private void jTextField_TelephoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_TelephoneKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jTextField_TelephoneKeyReleased
+
+    private void jTextField_CIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_CIKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jTextField_CIKeyReleased
+
+    private void jTextField_Direction_ClientKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_Direction_ClientKeyReleased
+
+        ValidateCamp();
+
+    }//GEN-LAST:event_jTextField_Direction_ClientKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_Update;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_CI;
+    private javax.swing.JLabel jLabel_Direction2;
     private javax.swing.JLabel jLabel_Direction_Client;
     private javax.swing.JLabel jLabel_Name;
+    private javax.swing.JLabel jLabel_Nombre2;
+    private javax.swing.JLabel jLabel_Rif2;
+    private javax.swing.JLabel jLabel_Telefono2;
     private javax.swing.JLabel jLabel_Telephone;
     private javax.swing.JLabel jLabel_Title;
     private javax.swing.JSeparator jSeparator1;
@@ -318,7 +351,7 @@ public class Update_Client extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    public javax.swing.JTextField jTextField_Ci;
+    public javax.swing.JTextField jTextField_CI;
     private javax.swing.JTextField jTextField_Direction_Client;
     private javax.swing.JTextField jTextField_Last_Modification;
     public javax.swing.JTextField jTextField_Name;
@@ -341,7 +374,7 @@ public class Update_Client extends javax.swing.JPanel {
 
         jTextField_Name.setText("");
         jTextField_Telephone.setText("");
-        jTextField_Ci.setText("");
+        jTextField_CI.setText("");
         jTextField_Direction_Client.setText("");
         jTextField_Last_Modification.setText(Login.user);
 
@@ -365,7 +398,7 @@ public class Update_Client extends javax.swing.JPanel {
                 jTextField_Name.setText(rs.getString("c.name_client"));
                 jTextField_Telephone.setText(rs.getString("c.telephone_client"));
                 jTextField_Direction_Client.setText(rs.getString("direction_client"));
-                jTextField_Ci.setText(rs.getString("c.unformat_identity_card_client"));
+                jTextField_CI.setText(rs.getString("c.unformat_identity_card_client"));
                 jTextField_Last_Modification.setText(rs.getString("u.username"));
 
             }
@@ -377,6 +410,91 @@ public class Update_Client extends javax.swing.JPanel {
             System.err.println("¡Error al consultar la información del cliente! " + e);
             JOptionPane.showMessageDialog(null, "¡Error al consultar la información del cliente!", "¡Error!",
                     JOptionPane.OK_OPTION);
+
+        }
+
+    }
+
+    private void ValidateCamp() {
+
+        if (jTextField_Name.getText().isEmpty()) {
+
+            jLabel_Nombre2.setText("*CAMPO REQUERIDO*");
+
+        } else if (!jTextField_Name.getText().contains(" ")) {
+
+            jLabel_Nombre2.setText("*FORMATO INVALIDO*");
+
+        } else {
+
+            jLabel_Nombre2.setText("");
+
+        }
+
+        if (jTextField_Telephone.getText().isEmpty()) {
+
+            jLabel_Telefono2.setText("*CAMPO REQUERIDO*");
+
+        } else if (jTextField_Telephone.getText().length() < 16) {
+
+            jLabel_Telefono2.setText("*FORMATO INVALIDO*");
+
+        } else if (!jTextField_Telephone.getText().contains("0412") && !jTextField_Telephone.getText().contains("0414")
+                && !jTextField_Telephone.getText().contains("0424") && !jTextField_Telephone.getText().contains("0416")
+                && !jTextField_Telephone.getText().contains("0426")) {
+
+            jLabel_Telefono2.setText("*FORMATO INVALIDO*");
+
+        } else {
+
+            jLabel_Telefono2.setText("");
+
+        }
+
+        if (jTextField_CI.getText().isEmpty()) {
+
+            jLabel_Rif2.setText("*CAMPO REQUERIDO*");
+
+        } else if (jTextField_CI.getText().contains("v") && jTextField_CI.getText().length() > 9 || jTextField_CI.getText().length() < 8
+                || jTextField_CI.getText().contains("V") && jTextField_CI.getText().length() > 9 || jTextField_CI.getText().length() < 8
+                || jTextField_CI.getText().contains("j") && jTextField_CI.getText().length() != 10
+                || jTextField_CI.getText().contains("J") && jTextField_CI.getText().length() != 10
+                || jTextField_CI.getText().contains("g") && jTextField_CI.getText().length() != 10
+                || jTextField_CI.getText().contains("G") && jTextField_CI.getText().length() != 10) {
+
+            jLabel_Rif2.setText("*FORMATO INVALIDO*");
+
+        } else {
+
+            jLabel_Rif2.setText("");
+
+        }
+
+        if (jTextField_Direction_Client.getText().isEmpty()) {
+
+            jLabel_Direction2.setText("*CAMPO REQUERIDO*");
+
+        } else {
+
+            jLabel_Direction2.setText("");
+
+        }
+
+        if (jTextField_Name.getText().isEmpty() || jTextField_Telephone.getText().isEmpty()
+                || jTextField_Telephone.getText().length() < 16
+                || jTextField_Direction_Client.getText().isEmpty()
+                || jTextField_CI.getText().contains("v") && jTextField_CI.getText().length() > 9 || jTextField_CI.getText().length() < 8
+                || jTextField_CI.getText().contains("V") && jTextField_CI.getText().length() > 9 || jTextField_CI.getText().length() < 8
+                || jTextField_CI.getText().contains("j") && jTextField_CI.getText().length() != 10
+                || jTextField_CI.getText().contains("J") && jTextField_CI.getText().length() != 10
+                || jTextField_CI.getText().contains("g") && jTextField_CI.getText().length() != 10
+                || jTextField_CI.getText().contains("G") && jTextField_CI.getText().length() != 10) {
+
+            jButton_Update.setVisible(false);
+
+        } else {
+
+            jButton_Update.setVisible(true);
 
         }
 
