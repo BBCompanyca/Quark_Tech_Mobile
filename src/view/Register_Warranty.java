@@ -381,7 +381,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
                         pst2.executeUpdate();
 
-                        Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/G");
+                        Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/G", serial, Login.direction);
                         Thread register = new Thread(movimiento);
                         register.start();
 

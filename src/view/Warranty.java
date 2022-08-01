@@ -4,6 +4,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.TextPrompt;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -31,6 +32,7 @@ public final class Warranty extends javax.swing.JPanel {
         TextPrompt search_user = new TextPrompt("Ingrese algún parametro", jTextField_Search_Warranty);
 
         getWarranty();
+        validateButton();
 
     }
 
@@ -186,11 +188,11 @@ public final class Warranty extends javax.swing.JPanel {
 
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
-      String search = jTextField_Search_Warranty.getText().trim();
+        String search = jTextField_Search_Warranty.getText().trim();
 
         searchClass.SearchWarranty(search);
 
-        jTextField_Search_Warranty.setText(""); 
+        jTextField_Search_Warranty.setText("");
 
     }//GEN-LAST:event_jButton_Search_UserMousePressed
 
@@ -204,7 +206,7 @@ public final class Warranty extends javax.swing.JPanel {
 
             jTextField_Search_Warranty.setText("");
 
-        } 
+        }
 
     }//GEN-LAST:event_jTextField_Search_WarrantyKeyPressed
 
@@ -243,6 +245,63 @@ public final class Warranty extends javax.swing.JPanel {
 
     private void jButton_Delete_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_UserMousePressed
 
+        int fila_point = jTable_Warranty.getSelectedRow();
+        int columna_point = 0;
+        String serial = "";
+
+        if (fila_point > -1) {
+
+            ID = (int) model.getValueAt(fila_point, columna_point);
+            serial = (String) model.getValueAt(fila_point, 3);
+
+            int value = JOptionPane.showConfirmDialog(null, "¿Desea eliminar esta Garantía?", "¡Selección!",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (value == 0) {
+
+                try {
+
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(
+                            "delete from warranty where id_warranty = '" + ID + "'");
+
+                    pst.executeUpdate();
+
+                    Register_Movimiento register_Movimiento = new Register_Movimiento(Login.ID_User, "E/G", serial, Login.direction);
+                    Thread hilo = new Thread(register_Movimiento);
+                    hilo.start();
+
+                    model.setRowCount(0);
+                    model.setColumnCount(0);
+
+                    JOptionPane.showMessageDialog(null, "Garantía eliminada.");
+
+                    getWarranty();
+
+                    cn.close();
+
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al eliminar el cliente! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al eliminar el cliente!", "¡Error!",
+                            JOptionPane.OK_OPTION);
+
+                }
+
+            } else {
+
+                model.setRowCount(0);
+                model.setColumnCount(0);
+                getWarranty();
+
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar una garantía!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
 
     }//GEN-LAST:event_jButton_Delete_UserMousePressed
 
@@ -277,7 +336,7 @@ public final class Warranty extends javax.swing.JPanel {
                     + "from warranty w "
                     + "join equipo e on e.id_equipo = w.id_equipo "
                     + "join client c on c.id_client = w.id_client "
-                    + "and not w.status = '" + "Entregado" + "' and not w.status_technical = '" + "Reemplazado" 
+                    + "and not w.status = '" + "Entregado" + "' and not w.status_technical = '" + "Reemplazado"
                     + "' and w.shop = '" + Login.direction + "'";
 
         }
@@ -347,6 +406,20 @@ public final class Warranty extends javax.swing.JPanel {
             System.err.println("¡Error al vaciar la tabla de garantías! " + e);
             JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla de garantías!", "¡Error!",
                     JOptionPane.OK_CANCEL_OPTION);
+
+        }
+
+    }
+
+    private void validateButton() {
+
+        if (!Login.type_account.equals("Moderador") && !Login.type_account.equals("Administrador")) {
+
+            jButton_Delete_User.setVisible(false);
+
+            add(jButton_Preliminar_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 100, 35));
+
+            add(jButton_New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
 
         }
 

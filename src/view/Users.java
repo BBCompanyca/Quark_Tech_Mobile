@@ -4,6 +4,7 @@ import clases.TextPrompt;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -12,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 public final class Users extends javax.swing.JPanel {
 
     public static int ID;
-    String direction, type_Account, permission;
+    String direction, type_Account, permission, username;
 
     Paneles paneles = new Paneles();
 
@@ -465,10 +466,12 @@ public final class Users extends javax.swing.JPanel {
             if (Login.type_account.equals("Moderador")) {
 
                 permission = (String) jTable_User.getValueAt(fila_point, 4);
+                username = (String) jTable_User.getValueAt(fila_point, 2);
 
             } else {
 
                 permission = (String) jTable_User.getValueAt(fila_point, 3);
+                username = (String) jTable_User.getValueAt(fila_point, 2);
 
             }
 
@@ -481,7 +484,7 @@ public final class Users extends javax.swing.JPanel {
 
                 } else {
 
-                    int selection = JOptionPane.showConfirmDialog(null, "¿Realmente desea eliminar este usuario?", "¡Confirmar!", 
+                    int selection = JOptionPane.showConfirmDialog(null, "¿Realmente desea eliminar este usuario?", "¡Confirmar!",
                             JOptionPane.YES_NO_OPTION);
 
                     if (selection == 0) {
@@ -493,7 +496,11 @@ public final class Users extends javax.swing.JPanel {
                                     "delete from user where id_user = '" + ID + "'");
 
                             pst.executeUpdate();
-
+                            
+                            Register_Movimiento register_Movimiento = new Register_Movimiento(Login.ID_User, "E/U", username, Login.direction);
+                            Thread hilo = new Thread(register_Movimiento);
+                            hilo.start();
+                            
                             model.setRowCount(0);
                             model.setColumnCount(0);
                             getUsers();

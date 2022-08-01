@@ -242,7 +242,7 @@ public class Register_Client extends javax.swing.JPanel {
 
                         pst2.executeUpdate();
 
-                        Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/C");
+                        Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/C", name_client, Login.direction);
                         Thread register = new Thread(movimiento);
                         register.start();
 
@@ -309,7 +309,7 @@ public class Register_Client extends javax.swing.JPanel {
 
                 pst2.executeUpdate();
 
-                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/C");
+                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/C", name_client, Login.direction);
                 Thread register = new Thread(movimiento);
                 register.start();
 

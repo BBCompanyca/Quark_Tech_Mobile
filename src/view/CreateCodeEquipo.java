@@ -4,6 +4,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import clases.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -269,9 +270,13 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
                                 pst3.setString(7, daywarranty);
                                 pst3.setString(8, Login.user);
                                 pst3.setString(9, "");
-
+                                
                                 pst3.executeUpdate();
 
+                                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/E", generateCode(), Login.direction);
+                                Thread register = new Thread(movimiento);
+                                register.start();
+                                
                                 PaintGreen();
 
                                 CleanCamp();

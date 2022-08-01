@@ -4,6 +4,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.TextPrompt;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +20,7 @@ public final class Equipos extends javax.swing.JPanel {
 
         //Objeto para el PlayHolders del jTextField buscar usuarios...
         TextPrompt search_user = new TextPrompt("Ingrese algún parametro", jTextField_Search_User);
-        
+
         //Método para llenar la tabla de equipos...
         getEquipos();
 
@@ -206,6 +207,62 @@ public final class Equipos extends javax.swing.JPanel {
 
     private void jButton_Delete_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_UserMousePressed
 
+        int fila_point = jTable_Equipo.getSelectedRow();
+        int columna_point = 0;
+        String code = "";
+
+        if (fila_point > -1) {
+
+            code = (String) model.getValueAt(fila_point, columna_point);
+
+            int value = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este equipo?", "¡Selección!",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (value == 0) {
+
+                try {
+
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(
+                            "delete from equipo where code = '" + code + "'");
+
+                    pst.executeUpdate();
+
+                    Register_Movimiento register_Movimiento = new Register_Movimiento(Login.ID_User, "E/E", code, Login.direction);
+                    Thread hilo = new Thread(register_Movimiento);
+                    hilo.start();
+
+                    model.setRowCount(0);
+                    model.setColumnCount(0);
+
+                    JOptionPane.showMessageDialog(null, "Equipo eliminado.");
+
+                    getEquipos();
+
+                    cn.close();
+
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al eliminar el equipo! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al eliminar el equipo!", "¡Error!",
+                            JOptionPane.OK_OPTION);
+
+                }
+
+            } else {
+
+                model.setRowCount(0);
+                model.setColumnCount(0);
+                getEquipos();
+
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un equipo!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
 
     }//GEN-LAST:event_jButton_Delete_UserMousePressed
 
@@ -231,7 +288,7 @@ public final class Equipos extends javax.swing.JPanel {
                     "select code, brand, model, color, day_warranty from equipo");
 
             ResultSet rs = pst.executeQuery();
-            
+
             jTable_Equipo = new JTable(model);
             jScrollPane.setViewportView(jTable_Equipo);
 

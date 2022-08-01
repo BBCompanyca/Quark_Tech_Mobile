@@ -13,6 +13,7 @@ import view.Warranty;
 import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
+import view.Movimientos;
 import view.Preliminar_History;
 import view.Preliminar_Warranty;
 import view.Principal;
@@ -337,6 +338,20 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(history, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+
+    //Panel para las el historico de los Movimientos...
+    public void Panel_Movimientos() {
+
+        Movimientos movimientos = new Movimientos();
+        movimientos.setSize(WidthPanel, HeigthPanel);
+        movimientos.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(movimientos, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

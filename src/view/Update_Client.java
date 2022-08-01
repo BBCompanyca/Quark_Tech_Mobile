@@ -266,7 +266,7 @@ public class Update_Client extends javax.swing.JPanel {
 
                     pst2.executeUpdate();
                     
-                    Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/C");
+                    Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/C", name, Login.direction);
                     Thread register = new Thread(movimiento);
                     register.start();
 
