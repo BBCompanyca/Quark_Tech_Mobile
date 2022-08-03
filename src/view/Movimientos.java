@@ -1,19 +1,19 @@
 package view;
 
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
 import clases.Search;
 import clases.TextPrompt;
+import javax.swing.JTextField;
 
 public class Movimientos extends javax.swing.JPanel {
-    
+
     Search searchMovimientos = new Search();
 
     public Movimientos() {
         initComponents();
 
         validateTypeAccount();
-        
+
         TextPrompt search = new TextPrompt("Ingrese algún nombre de usuario...", jTextField_Search_Movimiento);
 
     }
@@ -214,21 +214,15 @@ public class Movimientos extends javax.swing.JPanel {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String desde = ((JTextField) jDateChooser_Desde.getDateEditor().getUiComponent()).getText();
+            String hasta = ((JTextField) jDateChooser_Hasta.getDateEditor().getUiComponent()).getText();
 
-            java.util.Date desde = jDateChooser_Desde.getDate();
-            java.util.Date hasta = jDateChooser_Hasta.getDate();
-
-            String desde_stg = format.format(desde);
-            String hasta_stg = format.format(hasta);
-            
             String search = jTextField_Search_Movimiento.getText().trim();
             String shop = jComboBox1.getSelectedItem().toString();
-            
-            searchMovimientos.SearchMovimiento(search, shop, desde_stg, hasta_stg);
-            
+
+            searchMovimientos.SearchMovimiento(search, shop, desde, hasta);
             jTextField_Search_Movimiento.setText("");
-            
+
             jTextField_Search_Movimiento.requestFocus();
 
         }

@@ -781,6 +781,12 @@ public class Register_Warranty extends javax.swing.JPanel {
             RequestEquipo requestEquipo = new RequestEquipo();
             Thread hiloEquipo = new Thread(requestEquipo);
             hiloEquipo.start();
+            
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
 
             jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
 

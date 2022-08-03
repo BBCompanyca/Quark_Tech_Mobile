@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import clases.Paneles;
+import javax.swing.JTextField;
 
 public class History extends javax.swing.JPanel {
 
@@ -160,17 +161,12 @@ public class History extends javax.swing.JPanel {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-            java.util.Date desde = jDateChooser_Desde.getDate();
-            java.util.Date hasta = jDateChooser_Hasta.getDate();
-
-            String desde_stg = format.format(desde);
-            String hasta_stg = format.format(hasta);
+            String desde = ((JTextField) jDateChooser_Desde.getDateEditor().getUiComponent()).getText();
+            String hasta = ((JTextField) jDateChooser_Hasta.getDateEditor().getUiComponent()).getText();
 
             String search = jTextField_Search_Serial.getText().trim();
 
-            searchClass.SearchHistory(search, desde_stg, hasta_stg);
+            searchClass.SearchHistory(search, desde, hasta);
 
             jTextField_Search_Serial.setText("");
 
@@ -225,8 +221,6 @@ public class History extends javax.swing.JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                
-                
 
                 int fila_point = jTable_History_H.rowAtPoint(e.getPoint());
                 int columna_point = 0;
