@@ -124,17 +124,17 @@ public class Movimientos extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel4.setText("[Eliminación De Cliente | E/C]");
+        jLabel4.setText("[Eliminación De Cliente | \"E/C\"]");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 430, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel5.setText("[Registo De Cliente | R/C]");
+        jLabel5.setText("[Registo De Cliente | \"R/C\"]");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 390, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel6.setText("[Eliminación De Usuario | E/U]");
+        jLabel6.setText("[Eliminación De Usuario | \"E/U\"]");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 430, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -144,42 +144,42 @@ public class Movimientos extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel8.setText("[Registo De Equipo | R/E]");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 390, -1, -1));
+        jLabel8.setText("[Registo De Equipo | \"R/E\"]");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 390, 160, -1));
 
         jLabel9.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel9.setText("[Eliminación De Equipo | E/E]");
+        jLabel9.setText("[Eliminación De Equipo | \"E/E\"]");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 430, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel10.setText("[Registo De Garantía | R/G]");
+        jLabel10.setText("[Registo De Garantía | \"R/G\"]");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel11.setText("[Modificación De Usuario | M/U]");
+        jLabel11.setText("[Modificación De Usuario | \"M/U\"]");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 410, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel12.setText("[Modificación De Cliente | M/C]");
+        jLabel12.setText("[Modificación De Cliente | \"M/C\"]");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 410, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel13.setText("[Modificación De Equipo | M/E]");
+        jLabel13.setText("[Modificación De Equipo | \"M/E\"]");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 410, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel14.setText("[Modificación De Garantía | M/G]");
+        jLabel14.setText("[Modificación De Garantía | \"M/G\"]");
         add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel15.setText("[Eliminación De Garantía | E/G]");
+        jLabel15.setText("[Eliminación De Garantía | \"E/G\"]");
         add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, -1, -1));
 
         jSeparator2.setBackground(new java.awt.Color(240, 240, 240));

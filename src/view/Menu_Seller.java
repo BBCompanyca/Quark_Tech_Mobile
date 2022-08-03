@@ -213,7 +213,7 @@ public class Menu_Seller extends javax.swing.JPanel {
 
         if (Btn_Clients.getBackground().getRGB() != -11634567
                 || Btn_Warranty.getBackground().getRGB() != -11634567 || Btn_Historico.getBackground().getRGB() != -11634567
-                || Btn_Equipos.getBackground().getRGB() != -11634567) {
+                || Btn_Equipos.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_Main);
 
@@ -230,6 +230,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         resetColor(Btn_Warranty);
         resetColor(Btn_Equipos);
         resetColor(Btn_Historico);
+        resetColor(Btn_About_Me);
     }//GEN-LAST:event_Btn_MainMousePressed
 
     private void Btn_ClientsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ClientsMouseEntered
@@ -245,7 +246,7 @@ public class Menu_Seller extends javax.swing.JPanel {
 
         if (Btn_Main.getBackground().getRGB() != -11634567
                 || Btn_Warranty.getBackground().getRGB() != -11634567 || Btn_Historico.getBackground().getRGB() != -11634567
-                || Btn_Equipos.getBackground().getRGB() != -11634567) {
+                || Btn_Equipos.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_Clients);
 
@@ -261,6 +262,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         resetColor(Btn_Warranty);
         resetColor(Btn_Equipos);
         resetColor(Btn_Historico);
+        resetColor(Btn_About_Me);
 
         Consult_Cl_Client.flag = 0;
 
@@ -279,7 +281,7 @@ public class Menu_Seller extends javax.swing.JPanel {
 
         if (Btn_Main.getBackground().getRGB() != -11634567
                 || Btn_Clients.getBackground().getRGB() != -11634567 || Btn_Historico.getBackground().getRGB() != -11634567
-                || Btn_Equipos.getBackground().getRGB() != -11634567) {
+                || Btn_Equipos.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_Warranty);
 
@@ -293,6 +295,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         setColor(Btn_Warranty);
         resetColor(Btn_Equipos);
         resetColor(Btn_Historico);
+        resetColor(Btn_About_Me);
 
         paneles.PanelWarranty();
 
@@ -311,7 +314,7 @@ public class Menu_Seller extends javax.swing.JPanel {
 
         if (Btn_Main.getBackground().getRGB() != -11634567
                 || Btn_Clients.getBackground().getRGB() != -11634567 || Btn_Warranty.getBackground().getRGB() != -11634567
-                || Btn_Equipos.getBackground().getRGB() != -11634567) {
+                || Btn_Equipos.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_Historico);
 
@@ -325,6 +328,7 @@ public class Menu_Seller extends javax.swing.JPanel {
         resetColor(Btn_Warranty);
         resetColor(Btn_Equipos);
         setColor(Btn_Historico);
+        resetColor(Btn_About_Me);
         
         paneles.Panel_History();
 
@@ -343,7 +347,7 @@ public class Menu_Seller extends javax.swing.JPanel {
 
         if (Btn_Main.getBackground().getRGB() != -11634567
                 || Btn_Clients.getBackground().getRGB() != -11634567 || Btn_Warranty.getBackground().getRGB() != -11634567
-                || Btn_Historico.getBackground().getRGB() != -11634567) {
+                || Btn_Historico.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567) {
 
             resetColor(Btn_Equipos);
 
@@ -357,21 +361,45 @@ public class Menu_Seller extends javax.swing.JPanel {
         resetColor(Btn_Warranty);
         setColor(Btn_Equipos);
         resetColor(Btn_Historico);
+        resetColor(Btn_About_Me);
 
         paneles.PanelEquipos();
 
     }//GEN-LAST:event_Btn_EquiposMousePressed
 
     private void Btn_About_MeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMouseEntered
-        // TODO add your handling code here:
+        
+        if (Btn_About_Me.getBackground().getRGB() == -11634567) {
+
+            setColor(Btn_About_Me);
+
+        }
+        
     }//GEN-LAST:event_Btn_About_MeMouseEntered
 
     private void Btn_About_MeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMouseExited
-        // TODO add your handling code here:
+        
+        if (Btn_Main.getBackground().getRGB() != -11634567
+                || Btn_Clients.getBackground().getRGB() != -11634567 || Btn_Warranty.getBackground().getRGB() != -11634567
+                || Btn_Historico.getBackground().getRGB() != -11634567 || Btn_Equipos.getBackground().getRGB()!= -11634567 ) {
+
+            resetColor(Btn_About_Me);
+
+        }
+        
     }//GEN-LAST:event_Btn_About_MeMouseExited
 
     private void Btn_About_MeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_About_MeMousePressed
-        // TODO add your handling code here:
+       
+        resetColor(Btn_Main);
+        resetColor(Btn_Clients);
+        resetColor(Btn_Warranty);
+        resetColor(Btn_Equipos);
+        resetColor(Btn_Historico);
+        setColor(Btn_About_Me);
+        
+        paneles.Panel_Acerca_De();
+        
     }//GEN-LAST:event_Btn_About_MeMousePressed
 
 

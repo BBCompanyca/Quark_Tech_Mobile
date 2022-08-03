@@ -221,7 +221,7 @@ public class Search {
 
         String query = "";
 
-        if (Login.type_account.equals("Moderador") || Login.type_account.equals("Tecnico")) {
+        if (Login.type_account.equals("Moderador")) {
 
             if (search.isEmpty()) {
 
@@ -244,25 +244,47 @@ public class Search {
         } else if (Login.type_account.equals("Administrador") || Login.type_account.equals("Vendedor")) {
 
             if (search.isEmpty()) {
-                
+
                 query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
-                    + "from warranty w "
-                    + "join equipo e on e.id_equipo = w.id_equipo "
-                    + "join client c on c.id_client = w.id_client "
-                    + "join user u on u.id_user = w.id_registered_by "
-                    + "and u.direction = '" + Login.direction + "' and w.id_client = c.id_client and "
-                    + "w.date_register between '" + desde + "' and '" + hasta + "'";
-                
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "join user u on u.id_user = w.id_registered_by "
+                        + "and u.direction = '" + Login.direction + "' and w.id_client = c.id_client and "
+                        + "w.date_register between '" + desde + "' and '" + hasta + "'";
+
             } else {
-                
+
                 query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
-                    + "from warranty w "
-                    + "join equipo e on e.id_equipo = w.id_equipo "
-                    + "join client c on c.id_client = w.id_client "
-                    + "join user u on u.id_user = w.id_registered_by "
-                    + "and w.serial = '" + search + "' and u.direction = '" + Login.direction + "' and w.id_client = c.id_client and "
-                    + "w.date_register between '" + desde + "' and '" + hasta + "'";
-                
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "join user u on u.id_user = w.id_registered_by "
+                        + "and w.serial = '" + search + "' and u.direction = '" + Login.direction + "' and w.id_client = c.id_client and "
+                        + "w.date_register between '" + desde + "' and '" + hasta + "'";
+
+            }
+
+        } else {
+
+            if (search.isEmpty()) {
+
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and w.id_client = c.id_client and w.date_register between '" + desde + "' and '" + hasta + "' "
+                        + "and w.id_technical = '" + Login.ID_User + "'";
+
+            } else {
+
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and w.serial = '" + search + "' and w.id_client = c.id_client and w.date_register between '" + desde + "' and '" + hasta + "' "
+                        + "and w.id_technical = '" + Login.ID_User + "'";
+
             }
 
         }

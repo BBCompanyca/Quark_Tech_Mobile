@@ -47,6 +47,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton_Sent = new javax.swing.JButton();
         jLabel_Recibido2 = new javax.swing.JLabel();
         jLabel_Falla2 = new javax.swing.JLabel();
         jLabel_Serial2 = new javax.swing.JLabel();
@@ -68,7 +69,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_Recibido = new javax.swing.JTextArea();
         jLabel_Recibido = new javax.swing.JLabel();
-        jButton_Sent = new javax.swing.JButton();
         jButton_Cancelar = new javax.swing.JButton();
         jButton_Dowload_Report = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -81,6 +81,28 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton_Sent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Dark.png"))); // NOI18N
+        jButton_Sent.setBorder(null);
+        jButton_Sent.setBorderPainted(false);
+        jButton_Sent.setContentAreaFilled(false);
+        jButton_Sent.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Sent.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Ligth.png"))); // NOI18N
+        jButton_Sent.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Ligth.png"))); // NOI18N
+        jButton_Sent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton_SentMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_SentMousePressed(evt);
+            }
+        });
+        jButton_Sent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SentActionPerformed(evt);
+            }
+        });
+        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 150, 60));
 
         jLabel_Recibido2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel_Recibido2.setForeground(new java.awt.Color(255, 0, 0));
@@ -239,26 +261,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Recibido.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Recibido.setText("Se recibe con:");
         add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 120, -1));
-
-        jButton_Sent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Dark.png"))); // NOI18N
-        jButton_Sent.setBorder(null);
-        jButton_Sent.setBorderPainted(false);
-        jButton_Sent.setContentAreaFilled(false);
-        jButton_Sent.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_Sent.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton_SentMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton_SentMousePressed(evt);
-            }
-        });
-        jButton_Sent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_SentActionPerformed(evt);
-            }
-        });
-        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 150, 60));
 
         jButton_Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar btn dark.png"))); // NOI18N
         jButton_Cancelar.setBorder(null);
@@ -544,7 +546,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                     + "where id_warranty = '" + Warranty.ID + "'");
 
             pst.setString(1, jTextField_Serial.getText().trim());
-            pst.setString(2, jTextField_Serial.getText().trim());
+            pst.setString(2, jTextField_Falla.getText().trim());
             pst.setString(3, jTextArea_Recibido.getText().trim());
 
             pst.executeUpdate();

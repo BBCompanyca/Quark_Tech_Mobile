@@ -12,7 +12,7 @@ public class BD_Connection {
         try {
 
             Connection cn = DriverManager.getConnection(
-                     //"jdbc:mysql://localhost/quark_tech_mobile", "root", "");
+                    // "jdbc:mysql://localhost/quark_tech_mobile", "root", "");
 
                    "jdbc:mysql://quarktechmobileccs.online:3306/u972055873_quarktech",
                     "u972055873_globalpayment",
