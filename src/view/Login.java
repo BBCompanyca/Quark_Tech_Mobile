@@ -5,6 +5,9 @@ import clases.BD_Connection;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import clases.EncryptPassword;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class Login extends javax.swing.JFrame {
 
@@ -26,6 +29,12 @@ public class Login extends javax.swing.JFrame {
         jTextField1.setBackground(new java.awt.Color(0, 0, 0, 0));
         jPasswordField1.setBackground(new java.awt.Color(0, 0, 0, 0));
 
+        ImageIcon wallpaper = new ImageIcon("src/images/LOGO BBC.png");
+        Icon fondo = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
+                jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        jLabel_Wallpaper.setIcon(fondo);
+        this.repaint();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -43,7 +52,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel_Backgound_Down = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -123,11 +132,9 @@ public class Login extends javax.swing.JFrame {
         jLabel_Backgound_Down.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Vectors .png"))); // NOI18N
         jPanel_Background.add(jLabel_Backgound_Down, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 1160, 90));
 
-        jLabel3.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Quark Tech Mobile");
-        jPanel_Background.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 480, 80));
+        jLabel_Wallpaper.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LOGO BBC.png"))); // NOI18N
+        jPanel_Background.add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 80, 470, 380));
 
         getContentPane().add(jPanel_Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 630));
 
@@ -288,11 +295,11 @@ public class Login extends javax.swing.JFrame {
     public javax.swing.JButton jButton_Acceder;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     public javax.swing.JLabel jLabel_Anwser;
     private javax.swing.JLabel jLabel_Backgound_Down;
     private javax.swing.JLabel jLabel_Footer;
+    private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JPanel jPanel_Background;
     private javax.swing.JPanel jPanel_Exit;
     private javax.swing.JPasswordField jPasswordField1;

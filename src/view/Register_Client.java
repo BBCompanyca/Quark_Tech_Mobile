@@ -265,7 +265,7 @@ public class Register_Client extends javax.swing.JPanel {
                         }
 
                         cn2.close();
-                        
+
                     } catch (SQLException e) {
 
                         System.err.println("¡Error al registrar cliente! " + e);
@@ -275,7 +275,7 @@ public class Register_Client extends javax.swing.JPanel {
                     }
 
                 }
-                
+
                 cn.close();
 
             } catch (SQLException e) {
@@ -332,7 +332,7 @@ public class Register_Client extends javax.swing.JPanel {
                 }
 
                 cn2.close();
-                
+
             } catch (SQLException e) {
 
                 System.err.println("¡Error al registrar cliente! " + e);
@@ -499,9 +499,16 @@ public class Register_Client extends javax.swing.JPanel {
 
         }
 
-        if (jTextField_Name.getText().isEmpty() || jTextField_Telephone.getText().isEmpty()
-                || jTextField_Telephone.getText().length() < 16
+        if (jTextField_Name.getText().isEmpty() || !jTextField_Name.getText().contains(" ")
+                
+                || jTextField_Telephone.getText().isEmpty() || jTextField_Telephone.getText().length() < 16
+                || jTextField_Telephone.getText().length() < 16 || !jTextField_Name.getText().contains(" ")
+                || !jTextField_Telephone.getText().contains("0412") && !jTextField_Telephone.getText().contains("0414")
+                && !jTextField_Telephone.getText().contains("0424") && !jTextField_Telephone.getText().contains("0416")
+                && !jTextField_Telephone.getText().contains("0426")
+                
                 || jTextField_Direction_Client.getText().isEmpty()
+                
                 || jTextField_CI.getText().isEmpty()
                 || jTextField_CI.getText().contains("v") && jTextField_CI.getText().length() > 9 || jTextField_CI.getText().length() < 8
                 || jTextField_CI.getText().contains("V") && jTextField_CI.getText().length() > 9 || jTextField_CI.getText().length() < 8
