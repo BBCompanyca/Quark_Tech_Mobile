@@ -17,8 +17,8 @@ public class Update_User extends javax.swing.JPanel {
     //Objeto para darle formato a los campos de texto.
     FormatText formattext = new FormatText();
 
-    public static String name_user;
-    String username_login, username_this, type_Account, type_Account_this, status_this;
+    public static String name_user, username_this;
+    String username_login, type_Account, type_Account_this, status_this;
     int ID;
 
     public Update_User() {
@@ -356,7 +356,7 @@ public class Update_User extends javax.swing.JPanel {
                                 pst2.setString(8, status);
                                 pst2.executeUpdate();
                                 
-                                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/U");
+                                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/U", username, Login.direction);
                                 Thread register = new Thread(movimiento);
                                 register.start();
 

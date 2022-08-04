@@ -7,12 +7,13 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import clases.EncryptPassword;
 import clases.Paneles;
+import clases.Register_Movimiento;
 
 public class Reset_Password extends javax.swing.JPanel {
 
     int ID;
-    String name_user;
-    
+    String name_user, username;
+
     Paneles paneles = new Paneles();
     EncryptPassword encryptPassword = new EncryptPassword();
 
@@ -21,6 +22,7 @@ public class Reset_Password extends javax.swing.JPanel {
 
         ID = Users.ID;
         name_user = Update_User.name_user;
+        username = Update_User.username_this;
 
         //Titulo del panel...
         jLabel_Title.setText("Restaurar La Contraseña Del Usuario - " + name_user);
@@ -158,6 +160,10 @@ public class Reset_Password extends javax.swing.JPanel {
 
                 jLabel_newPass.setForeground(Color.GREEN);
                 jLabel_confirmPass.setForeground(Color.GREEN);
+
+                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/U", username, Login.direction);
+                Thread register = new Thread(movimiento);
+                register.start();
 
                 JOptionPane.showMessageDialog(null, "Contraseña restaurada.", "¡Exito!", JOptionPane.INFORMATION_MESSAGE);
 

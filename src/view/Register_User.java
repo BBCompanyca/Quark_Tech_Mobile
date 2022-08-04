@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import clases.FormatText;
 import clases.EncryptPassword;
 import clases.Register_Movimiento;
-import java.util.ArrayList;
 
 public class Register_User extends javax.swing.JPanel {
 
@@ -16,8 +15,6 @@ public class Register_User extends javax.swing.JPanel {
 
     FormatText formatText = new FormatText();
     EncryptPassword encryptPassword = new EncryptPassword();
-
-    Request_Username request_Username = new Request_Username();
 
     public Register_User() {
         initComponents();
@@ -41,10 +38,6 @@ public class Register_User extends javax.swing.JPanel {
         ValidateCamp();
 
         jButton_Register.setVisible(false);
-
-        Request_Username request_Username = new Request_Username();
-        Thread request = new Thread(request_Username);
-        request.start();
 
     }
 
@@ -323,7 +316,7 @@ public class Register_User extends javax.swing.JPanel {
                                 pst2.setString(11, "Activo");
                                 pst2.executeUpdate();
 
-                                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/U");
+                                Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/U", username, Login.direction);
                                 Thread register = new Thread(movimiento);
                                 register.start();
 
@@ -630,8 +623,6 @@ public class Register_User extends javax.swing.JPanel {
 
             jLabel_Username2.setText("*CAMPO REQUERIDO*");
 
-        } else if (true) {
-
         } else {
 
             jLabel_Username2.setText("");
@@ -660,46 +651,6 @@ public class Register_User extends javax.swing.JPanel {
         } else {
 
             jButton_Register.setVisible(true);
-
-        }
-
-    }
-
-    public class Request_Username implements Runnable {
-
-        @Override
-        public void run() {
-
-            request();
-
-        }
-
-        public void request() {
-
-            try {
-
-                ArrayList<String> username = new ArrayList<>();
-
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement("select username from user");
-
-                ResultSet rs = pst.executeQuery();
-
-                while (rs.next()) {
-
-                    username.add(rs.getString(1));
-
-                }
-
-                cn.close();
-
-                System.out.println(username);
-
-            } catch (SQLException e) {
-
-                System.err.println("¡Error al consultar los nombres de usuario! " + e);
-
-            }
 
         }
 

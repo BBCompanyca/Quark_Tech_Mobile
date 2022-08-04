@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import clases.Paneles;
+import javax.swing.JTextField;
 
 public class History extends javax.swing.JPanel {
 
@@ -120,9 +121,11 @@ public class History extends javax.swing.JPanel {
         add(jButton_Search_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 400, 80, 30));
 
         jDateChooser_Desde.setBackground(new java.awt.Color(9, 53, 69));
+        jDateChooser_Desde.setDateFormatString("yyyy-MM-dd");
         add(jDateChooser_Desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 29, 160, -1));
 
         jDateChooser_Hasta.setBackground(new java.awt.Color(9, 53, 69));
+        jDateChooser_Hasta.setDateFormatString("yyyy-MM-dd");
         add(jDateChooser_Hasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 80, 160, -1));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -160,17 +163,12 @@ public class History extends javax.swing.JPanel {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-            java.util.Date desde = jDateChooser_Desde.getDate();
-            java.util.Date hasta = jDateChooser_Hasta.getDate();
-
-            String desde_stg = format.format(desde);
-            String hasta_stg = format.format(hasta);
+            String desde = ((JTextField) jDateChooser_Desde.getDateEditor().getUiComponent()).getText();
+            String hasta = ((JTextField) jDateChooser_Hasta.getDateEditor().getUiComponent()).getText();
 
             String search = jTextField_Search_Serial.getText().trim();
 
-            searchClass.SearchHistory(search, desde_stg, hasta_stg);
+            searchClass.SearchHistory(search, desde, hasta);
 
             jTextField_Search_Serial.setText("");
 
@@ -225,8 +223,6 @@ public class History extends javax.swing.JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                
-                
 
                 int fila_point = jTable_History_H.rowAtPoint(e.getPoint());
                 int columna_point = 0;

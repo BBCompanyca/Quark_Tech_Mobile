@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class BD_Connection {
 
     public static Connection connection() {
-
+ 
         try {
 
             Connection cn = DriverManager.getConnection(
@@ -16,7 +16,7 @@ public class BD_Connection {
 
                    "jdbc:mysql://quarktechmobileccs.online:3306/u972055873_quarktech",
                     "u972055873_globalpayment",
-                    "~8d$:Vn7CdR");
+                    "~8d$:Vn7CdR"); 
 
             return cn;
 

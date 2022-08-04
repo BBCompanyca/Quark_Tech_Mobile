@@ -4,11 +4,14 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.TextPrompt;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public final class Equipos extends javax.swing.JPanel {
+
+    public static String code;
 
     Paneles paneles = new Paneles();
 
@@ -19,9 +22,12 @@ public final class Equipos extends javax.swing.JPanel {
 
         //Objeto para el PlayHolders del jTextField buscar usuarios...
         TextPrompt search_user = new TextPrompt("Ingrese algún parametro", jTextField_Search_User);
-        
+
         //Método para llenar la tabla de equipos...
         getEquipos();
+        
+        //Método para validar el acceso a los botones...
+        ValidateButtons();
 
     }
 
@@ -32,12 +38,12 @@ public final class Equipos extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jTextField_Search_User = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton_Delete_User = new javax.swing.JButton();
+        jButton_Delete_Equipo = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         jTable_Equipo = new javax.swing.JTable();
         jButton_Search_User = new javax.swing.JButton();
-        jButton_New_User = new javax.swing.JButton();
-        jButton_Update_User = new javax.swing.JButton();
+        jButton_New_Equipo = new javax.swing.JButton();
+        jButton_Update_Equipo = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(9, 53, 69));
         setPreferredSize(new java.awt.Dimension(790, 370));
@@ -74,13 +80,13 @@ public final class Equipos extends javax.swing.JPanel {
         add(jTextField_Search_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 690, 30));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 690, 10));
 
-        jButton_Delete_User.setText("BORRAR");
-        jButton_Delete_User.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton_Delete_Equipo.setText("BORRAR");
+        jButton_Delete_Equipo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton_Delete_UserMousePressed(evt);
+                jButton_Delete_EquipoMousePressed(evt);
             }
         });
-        add(jButton_Delete_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 100, 35));
+        add(jButton_Delete_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 100, 35));
 
         jScrollPane.setBackground(new java.awt.Color(9, 53, 69));
         jScrollPane.setBorder(null);
@@ -136,31 +142,31 @@ public final class Equipos extends javax.swing.JPanel {
         });
         add(jButton_Search_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 80, 30));
 
-        jButton_New_User.setText("NUEVO");
-        jButton_New_User.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton_New_Equipo.setText("NUEVO");
+        jButton_New_Equipo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton_New_UserMousePressed(evt);
+                jButton_New_EquipoMousePressed(evt);
             }
         });
-        jButton_New_User.addActionListener(new java.awt.event.ActionListener() {
+        jButton_New_Equipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_New_UserActionPerformed(evt);
+                jButton_New_EquipoActionPerformed(evt);
             }
         });
-        add(jButton_New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 100, 35));
+        add(jButton_New_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 100, 35));
 
-        jButton_Update_User.setText("MODIFICAR");
-        jButton_Update_User.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton_Update_Equipo.setText("MODIFICAR");
+        jButton_Update_Equipo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton_Update_UserMousePressed(evt);
+                jButton_Update_EquipoMousePressed(evt);
             }
         });
-        jButton_Update_User.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Update_Equipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Update_UserActionPerformed(evt);
+                jButton_Update_EquipoActionPerformed(evt);
             }
         });
-        add(jButton_Update_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
+        add(jButton_Update_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_Search_UserMousePressed
@@ -185,36 +191,107 @@ public final class Equipos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jTextField_Search_UserKeyPressed
 
-    private void jButton_New_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_New_UserMousePressed
+    private void jButton_New_EquipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_New_EquipoMousePressed
 
         paneles.PanelCreateCodeEquipo();
 
-    }//GEN-LAST:event_jButton_New_UserMousePressed
+    }//GEN-LAST:event_jButton_New_EquipoMousePressed
 
-    private void jButton_New_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_New_UserActionPerformed
+    private void jButton_New_EquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_New_EquipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_New_UserActionPerformed
+    }//GEN-LAST:event_jButton_New_EquipoActionPerformed
 
-    private void jButton_Update_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Update_UserActionPerformed
+    private void jButton_Update_EquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Update_EquipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_Update_UserActionPerformed
+    }//GEN-LAST:event_jButton_Update_EquipoActionPerformed
 
-    private void jButton_Update_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_UserMousePressed
+    private void jButton_Update_EquipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_EquipoMousePressed
 
+        int fila_point = jTable_Equipo.getSelectedRow();
+        int columna_point = 0;
 
-    }//GEN-LAST:event_jButton_Update_UserMousePressed
+        if (fila_point > -1) {
 
-    private void jButton_Delete_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_UserMousePressed
+            code = (String) model.getValueAt(fila_point, columna_point);
 
+            paneles.Panel_Update_Equipo();
 
-    }//GEN-LAST:event_jButton_Delete_UserMousePressed
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un cliente!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
+
+    }//GEN-LAST:event_jButton_Update_EquipoMousePressed
+
+    private void jButton_Delete_EquipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Delete_EquipoMousePressed
+
+        int fila_point = jTable_Equipo.getSelectedRow();
+        int columna_point = 0;
+        String code = "";
+
+        if (fila_point > -1) {
+
+            code = (String) model.getValueAt(fila_point, columna_point);
+
+            int value = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este equipo?", "¡Selección!",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (value == 0) {
+
+                try {
+
+                    Connection cn = BD_Connection.connection();
+                    PreparedStatement pst = cn.prepareStatement(
+                            "delete from equipo where code = '" + code + "'");
+
+                    pst.executeUpdate();
+
+                    Register_Movimiento register_Movimiento = new Register_Movimiento(Login.ID_User, "E/E", code, Login.direction);
+                    Thread hilo = new Thread(register_Movimiento);
+                    hilo.start();
+
+                    model.setRowCount(0);
+                    model.setColumnCount(0);
+
+                    JOptionPane.showMessageDialog(null, "Equipo eliminado.");
+
+                    getEquipos();
+
+                    cn.close();
+
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al eliminar el equipo! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al eliminar el equipo!", "¡Error!",
+                            JOptionPane.OK_OPTION);
+
+                }
+
+            } else {
+
+                model.setRowCount(0);
+                model.setColumnCount(0);
+                getEquipos();
+
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un equipo!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
+
+    }//GEN-LAST:event_jButton_Delete_EquipoMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_Delete_User;
-    private javax.swing.JButton jButton_New_User;
+    private javax.swing.JButton jButton_Delete_Equipo;
+    private javax.swing.JButton jButton_New_Equipo;
     private javax.swing.JButton jButton_Search_User;
-    private javax.swing.JButton jButton_Update_User;
+    private javax.swing.JButton jButton_Update_Equipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSeparator jSeparator1;
@@ -231,7 +308,7 @@ public final class Equipos extends javax.swing.JPanel {
                     "select code, brand, model, color, day_warranty from equipo");
 
             ResultSet rs = pst.executeQuery();
-            
+
             jTable_Equipo = new JTable(model);
             jScrollPane.setViewportView(jTable_Equipo);
 
@@ -262,6 +339,19 @@ public final class Equipos extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "¡Error al consultar la lista de equipos!", "¡Error!",
                     JOptionPane.OK_OPTION);
 
+        }
+
+    }
+
+    private void ValidateButtons() {
+        
+        if (Login.type_account.equals("Vendedor")) {
+            
+            jButton_Delete_Equipo.setVisible(false);
+            
+            add(jButton_New_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
+            add(jButton_Update_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 100, 35));
+            
         }
 
     }

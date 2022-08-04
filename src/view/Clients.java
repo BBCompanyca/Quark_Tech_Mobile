@@ -3,6 +3,7 @@ package view;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.Paneles;
+import clases.Register_Movimiento;
 import clases.TextPrompt;
 import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
@@ -197,7 +198,7 @@ public class Clients extends javax.swing.JPanel {
         searchClients.SearchClient(search);
 
         jTextField_Search_Client.setText("");
-        
+
         jTextField_Search_Client.requestFocus();
 
     }//GEN-LAST:event_jButton_Search_ClientMousePressed
@@ -240,10 +241,12 @@ public class Clients extends javax.swing.JPanel {
 
         int fila_point = jTable_Client.getSelectedRow();
         int columna_point = 0;
+        String name = "";
 
         if (fila_point > -1) {
-            
+
             ID = (int) model.getValueAt(fila_point, columna_point);
+            name = (String) model.getValueAt(fila_point, 1);
 
             int value = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este cliente?", "¡Selección!",
                     JOptionPane.YES_NO_OPTION);
@@ -257,6 +260,10 @@ public class Clients extends javax.swing.JPanel {
                             "delete from client where id_client = '" + ID + "'");
 
                     pst.executeUpdate();
+
+                    Register_Movimiento register_Movimiento = new Register_Movimiento(Login.ID_User, "E/C", name, Login.direction);
+                    Thread hilo = new Thread(register_Movimiento);
+                    hilo.start();
 
                     model.setRowCount(0);
                     model.setColumnCount(0);

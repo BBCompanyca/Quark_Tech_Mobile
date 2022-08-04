@@ -13,6 +13,8 @@ import static view.Clients.jTable_Client;
 import static view.Clients.jScrollPane_C;
 import static view.History.jScrollPane_H;
 import static view.History.jTable_History_H;
+import static view.Movimientos.jScrollPane_M;
+import static view.Movimientos.jTable_Movimientos;
 
 public class Search {
 
@@ -219,23 +221,71 @@ public class Search {
 
         String query = "";
 
-        if (Login.type_account.equals("Moderador") || Login.type_account.equals("Tecnico")) {
+        if (Login.type_account.equals("Moderador")) {
 
-            query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
-                    + "from warranty w "
-                    + "join equipo e on e.id_equipo = w.id_equipo "
-                    + "join client c on c.id_client = w.id_client "
-                    + "and w.serial = '" + search + "' and w.id_client = c.id_client and w.date_register between '" + desde + "' and '" + hasta + "'";
+            if (search.isEmpty()) {
+
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and w.id_client = c.id_client and w.date_format_register between '" + desde + "' and '" + hasta + "'";
+
+            } else {
+
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and w.serial = '" + search + "' and w.id_client = c.id_client and w.date_format_register between '" + desde + "' and '" + hasta + "'";
+
+            }
 
         } else if (Login.type_account.equals("Administrador") || Login.type_account.equals("Vendedor")) {
 
-            query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
-                    + "from warranty w "
-                    + "join equipo e on e.id_equipo = w.id_equipo "
-                    + "join client c on c.id_client = w.id_client "
-                    + "join user u on u.id_user = w.id_registered_by "
-                    + "and w.serial = '" + search + "' and u.direction = '" + Login.direction + "' and w.id_client = c.id_client and "
-                    + "w.date_register between '" + desde + "' and '" + hasta + "'";
+            if (search.isEmpty()) {
+
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "join user u on u.id_user = w.id_registered_by "
+                        + "and u.direction = '" + Login.direction + "' and w.id_client = c.id_client and "
+                        + "w.date_format_register between '" + desde + "' and '" + hasta + "'";
+
+            } else {
+
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "join user u on u.id_user = w.id_registered_by "
+                        + "and w.serial = '" + search + "' and u.direction = '" + Login.direction + "' and w.id_client = c.id_client and "
+                        + "w.date_format_register between '" + desde + "' and '" + hasta + "'";
+
+            }
+
+        } else {
+
+            if (search.isEmpty()) {
+
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and w.id_client = c.id_client and w.date_format_acepted between '" + desde + "' and '" + hasta + "' "
+                        + "and w.id_technical = '" + Login.ID_User + "'";
+
+            } else {
+
+                query = "select w.id_warranty, e.brand, e.model, w.serial, c.name_client, c.identity_card_client, w.status_technical "
+                        + "from warranty w "
+                        + "join equipo e on e.id_equipo = w.id_equipo "
+                        + "join client c on c.id_client = w.id_client "
+                        + "and w.serial = '" + search + "' and w.id_client = c.id_client and w.date_format_acepted between '" + desde + "' and '" + hasta + "' "
+                        + "and w.id_technical = '" + Login.ID_User + "'";
+
+            }
 
         }
 
@@ -279,6 +329,144 @@ public class Search {
 
             System.err.println("¡Error al vaciar la tabla del historico! " + e);
             JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla! ", "¡Error!", JOptionPane.OK_OPTION);
+
+        }
+
+    }
+
+    public void SearchMovimiento(String search, String shop, String desde, String hasta) {
+
+        String query = "";
+
+        if (Login.type_account.equals("Moderador")) {
+
+            if (shop.equals("Todos") && search.equals("")) {
+
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia, m.shop from movimientos m "
+                        + "join user u on u.id_user = m.id_user and m.fecha between '" + desde + "' and '" + hasta + "'";
+
+            } else if (shop.equals("Todos") && !search.equals("")) {
+
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia, m.shop from movimientos m "
+                        + "join user u on u.id_user = m.id_user and u.username = '" + search + "' and m.fecha between '" + desde + "' and '" + hasta + "'";
+
+            } else if (!shop.equals("Todos") && search.equals("")) {
+
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia, m.shop from movimientos m "
+                        + "join user u on u.id_user = m.id_user and shop = '" + shop + "' and m.fecha between '" + desde + "' and '" + hasta + "'";
+
+            } else {
+
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia, m.shop from movimientos m "
+                        + "join user u on u.id_user = m.id_user and shop = '" + shop + "' and u.username = '" + search + "' "
+                        + "and m.fecha between '" + desde + "' and '" + hasta + "'";
+
+            }
+
+        } else {
+
+            if (search.isEmpty()) {
+
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia from movimientos m "
+                        + "join user u on u.id_user = m.id_user and shop = '" + Login.direction + "' "
+                        + "and m.id_movimiento between '" + desde + "' and '" + hasta + "'";
+
+            } else {
+
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia from movimientos m "
+                        + "join user u on u.id_user = m.id_user and shop = '" + Login.direction + "' and u.username = '" + search + "' "
+                        + "and m.id_movimiento between '" + desde + "' and '" + hasta + "'";
+
+            }
+
+        }
+
+        if (Login.type_account.equals("Moderador")) {
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(query);
+
+                ResultSet rs = pst.executeQuery();
+
+                jTable_Movimientos = new JTable(model);
+                jScrollPane_M.setViewportView(jTable_Movimientos);
+
+                model.setColumnCount(0);
+                model.setRowCount(0);
+
+                model.addColumn("ID");
+                model.addColumn("Operación");
+                model.addColumn("Fecha");
+                model.addColumn("Usuario");
+                model.addColumn("Referencia");
+                model.addColumn("Tienda");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[6];
+                    for (int i = 0; i < 6; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+                cn.close();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al vaciar la tabla del historico! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla! ", "¡Error!", JOptionPane.OK_OPTION);
+
+            }
+
+        } else {
+
+            try {
+
+                Connection cn = BD_Connection.connection();
+                PreparedStatement pst = cn.prepareStatement(query);
+
+                ResultSet rs = pst.executeQuery();
+
+                jTable_Movimientos = new JTable(model);
+                jScrollPane_M.setViewportView(jTable_Movimientos);
+
+                model.setColumnCount(0);
+                model.setRowCount(0);
+
+                model.addColumn("ID");
+                model.addColumn("Operación");
+                model.addColumn("Fecha");
+                model.addColumn("Usuario");
+                model.addColumn("Referencia");
+
+                while (rs.next()) {
+
+                    Object[] fila = new Object[5];
+                    for (int i = 0; i < 5; i++) {
+
+                        fila[i] = rs.getObject(i + 1);
+
+                    }
+
+                    model.addRow(fila);
+
+                }
+
+                cn.close();
+
+            } catch (SQLException e) {
+
+                System.err.println("¡Error al vaciar la tabla del historico! " + e);
+                JOptionPane.showMessageDialog(null, "¡Error al vaciar la tabla! ", "¡Error!", JOptionPane.OK_OPTION);
+
+            }
 
         }
 

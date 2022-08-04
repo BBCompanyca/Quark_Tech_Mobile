@@ -171,13 +171,24 @@ public class Update_Client extends javax.swing.JPanel {
         add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 240, -1));
         add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, 240, -1));
 
-        jButton_Update.setText("Modificar");
+        jButton_Update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Update_Dark_C.png"))); // NOI18N
+        jButton_Update.setBorder(null);
+        jButton_Update.setBorderPainted(false);
+        jButton_Update.setContentAreaFilled(false);
+        jButton_Update.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Update.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Update_Ligth_C.png"))); // NOI18N
+        jButton_Update.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Update_Ligth_C.png"))); // NOI18N
         jButton_Update.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton_UpdateMousePressed(evt);
             }
         });
-        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 140, 40));
+        jButton_Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_UpdateActionPerformed(evt);
+            }
+        });
+        add(jButton_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 290, 140, 50));
 
         jLabel_Nombre2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel_Nombre2.setForeground(new java.awt.Color(255, 0, 0));
@@ -208,100 +219,6 @@ public class Update_Client extends javax.swing.JPanel {
         add(jLabel_Direction2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 165, 220, 20));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_UpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_UpdateMousePressed
-
-        String name, telephone, ci, direction_client;
-
-        //Algoritmo por si no es moderador...
-        name = jTextField_Name.getText().trim();
-        telephone = jTextField_Telephone.getText().trim();
-        ci = jTextField_CI.getText().trim();
-        direction_client = jTextField_Direction_Client.getText().trim();
-
-        try {
-
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select unformat_identity_card_client from client where unformat_identity_card_client = '" + ci + "' and not id_client = '"
-                    + Clients.ID + "'");
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-
-                jLabel_CI.setForeground(Color.red);
-
-                JOptionPane.showMessageDialog(null, "¡Ya existe un cliente registrado con este número de C.I!",
-                        "¡Acceso Denegado", JOptionPane.WARNING_MESSAGE);
-
-                jTextField_CI.setText("");
-                jTextField_CI.requestFocus();
-
-                cn.close();
-
-            } else {
-
-                cn.close();
-
-                try {
-
-                    String unformat_telephone = formattext.unFormatText(telephone);
-                    ci = ci.toUpperCase();
-
-                    Connection cn2 = BD_Connection.connection();
-                    PreparedStatement pst2 = cn2.prepareStatement(
-                            "update client set name_client = ?, telephone_client = ?, unformat_telephone_client = ?, "
-                            + "identity_card_client = ?, unformat_identity_card_client = ?,"
-                            + "direction_client = ?, direction_tienda = ?, last_modification = ? "
-                            + "where id_client = '" + Clients.ID + "'");
-
-                    pst2.setString(1, name);
-                    pst2.setString(2, telephone);
-                    pst2.setString(3, unformat_telephone);
-                    pst2.setString(4, formattext.Identity_Card_Client(ci));
-                    pst2.setString(5, ci);
-                    pst2.setString(6, direction_client);
-                    pst2.setString(7, Login.direction);
-                    pst2.setString(8, String.valueOf(Login.ID_User));
-
-                    pst2.executeUpdate();
-                    
-                    Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/C");
-                    Thread register = new Thread(movimiento);
-                    register.start();
-
-                    paintCampTextGreen();
-
-                    cleanCampText();
-
-                    JOptionPane.showMessageDialog(null, "Modificación exitosa.", "¡Exito!",
-                            JOptionPane.INFORMATION_MESSAGE);
-
-                    cn2.close();
-
-                    paneles.PanelClients();
-
-                } catch (SQLException e) {
-
-                    System.err.println("¡Error al modificar la información del cliente! " + e);
-                    JOptionPane.showMessageDialog(null, "¡Error al modificar la información del cliente!", "¡Error!",
-                            JOptionPane.OK_OPTION);
-
-                }
-
-            }
-
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al consultar la cédula del cliente! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la cédula del cliente!", "¡Error!",
-                    JOptionPane.OK_OPTION);
-
-        }
-
-
-    }//GEN-LAST:event_jButton_UpdateMousePressed
-
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
 
         paneles.PanelClients();
@@ -331,6 +248,103 @@ public class Update_Client extends javax.swing.JPanel {
         ValidateCamp();
 
     }//GEN-LAST:event_jTextField_Direction_ClientKeyReleased
+
+    private void jButton_UpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_UpdateMousePressed
+
+        String name, telephone, ci, direction_client;
+
+        //Algoritmo por si no es moderador...
+        name = jTextField_Name.getText().trim();
+        telephone = jTextField_Telephone.getText().trim();
+        ci = jTextField_CI.getText().trim();
+        direction_client = jTextField_Direction_Client.getText().trim();
+
+        try {
+
+            Connection cn = BD_Connection.connection();
+            PreparedStatement pst = cn.prepareStatement(
+                "select unformat_identity_card_client from client where unformat_identity_card_client = '" + ci + "' and not id_client = '"
+                + Clients.ID + "'");
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                jLabel_CI.setForeground(Color.red);
+
+                JOptionPane.showMessageDialog(null, "¡Ya existe un cliente registrado con este número de C.I!",
+                    "¡Acceso Denegado", JOptionPane.WARNING_MESSAGE);
+
+                jTextField_CI.setText("");
+                jTextField_CI.requestFocus();
+
+                cn.close();
+
+            } else {
+
+                cn.close();
+
+                try {
+
+                    String unformat_telephone = formattext.unFormatText(telephone);
+                    ci = ci.toUpperCase();
+
+                    Connection cn2 = BD_Connection.connection();
+                    PreparedStatement pst2 = cn2.prepareStatement(
+                        "update client set name_client = ?, telephone_client = ?, unformat_telephone_client = ?, "
+                        + "identity_card_client = ?, unformat_identity_card_client = ?,"
+                        + "direction_client = ?, direction_tienda = ?, last_modification = ? "
+                        + "where id_client = '" + Clients.ID + "'");
+
+                    pst2.setString(1, name);
+                    pst2.setString(2, telephone);
+                    pst2.setString(3, unformat_telephone);
+                    pst2.setString(4, formattext.Identity_Card_Client(ci));
+                    pst2.setString(5, ci);
+                    pst2.setString(6, direction_client);
+                    pst2.setString(7, Login.direction);
+                    pst2.setString(8, String.valueOf(Login.ID_User));
+
+                    pst2.executeUpdate();
+
+                    Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "M/C", name, Login.direction);
+                    Thread register = new Thread(movimiento);
+                    register.start();
+
+                    paintCampTextGreen();
+
+                    cleanCampText();
+
+                    JOptionPane.showMessageDialog(null, "Modificación exitosa.", "¡Exito!",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                    cn2.close();
+
+                    paneles.PanelClients();
+
+                } catch (SQLException e) {
+
+                    System.err.println("¡Error al modificar la información del cliente! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al modificar la información del cliente!", "¡Error!",
+                        JOptionPane.OK_OPTION);
+
+                }
+
+            }
+
+        } catch (SQLException e) {
+
+            System.err.println("¡Error al consultar la cédula del cliente! " + e);
+            JOptionPane.showMessageDialog(null, "¡Error al consultar la cédula del cliente!", "¡Error!",
+                JOptionPane.OK_OPTION);
+
+        }
+
+    }//GEN-LAST:event_jButton_UpdateMousePressed
+
+    private void jButton_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_UpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_UpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -480,9 +494,17 @@ public class Update_Client extends javax.swing.JPanel {
 
         }
 
-        if (jTextField_Name.getText().isEmpty() || jTextField_Telephone.getText().isEmpty()
-                || jTextField_Telephone.getText().length() < 16
+        if (jTextField_Name.getText().isEmpty() || !jTextField_Name.getText().contains(" ")
+                
+                || jTextField_Telephone.getText().isEmpty() || jTextField_Telephone.getText().length() < 16
+                || jTextField_Telephone.getText().length() < 16 || !jTextField_Name.getText().contains(" ")
+                || !jTextField_Telephone.getText().contains("0412") && !jTextField_Telephone.getText().contains("0414")
+                && !jTextField_Telephone.getText().contains("0424") && !jTextField_Telephone.getText().contains("0416")
+                && !jTextField_Telephone.getText().contains("0426")
+                
                 || jTextField_Direction_Client.getText().isEmpty()
+                
+                || jTextField_CI.getText().isEmpty()
                 || jTextField_CI.getText().contains("v") && jTextField_CI.getText().length() > 9 || jTextField_CI.getText().length() < 8
                 || jTextField_CI.getText().contains("V") && jTextField_CI.getText().length() > 9 || jTextField_CI.getText().length() < 8
                 || jTextField_CI.getText().contains("j") && jTextField_CI.getText().length() != 10
