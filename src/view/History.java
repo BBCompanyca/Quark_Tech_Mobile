@@ -121,9 +121,11 @@ public class History extends javax.swing.JPanel {
         add(jButton_Search_Client, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 400, 80, 30));
 
         jDateChooser_Desde.setBackground(new java.awt.Color(9, 53, 69));
+        jDateChooser_Desde.setDateFormatString("yyyy-MM-dd");
         add(jDateChooser_Desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 29, 160, -1));
 
         jDateChooser_Hasta.setBackground(new java.awt.Color(9, 53, 69));
+        jDateChooser_Hasta.setDateFormatString("yyyy-MM-dd");
         add(jDateChooser_Hasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 80, 160, -1));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N

@@ -25,24 +25,26 @@ public class Register_Movimiento implements Runnable {
     }
 
     public void Register() {
-        
+
         try {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "insert into movimientos values (?, ?, ?, ?, ?, ?)");
+                    "insert into movimientos values (?, ?, ?, ?, ?, ?, ?)");
 
             pst.setInt(1, 0);
             pst.setString(2, fecha());
-            pst.setString(3, operation);
-            pst.setInt(4, id_user);
-            pst.setString(5, referencia);
-            pst.setString(6, shop);
+            pst.setString(3, fecha_format());
+            pst.setString(4, operation);
+            pst.setInt(5, id_user);
+            pst.setString(6, referencia);
+            pst.setString(7, shop);
 
             pst.executeUpdate();
 
             cn.close();
 
+            System.out.println(fecha_format());
             System.out.println("Registrado con exito.!!");
 
         } catch (SQLException e) {
@@ -52,13 +54,20 @@ public class Register_Movimiento implements Runnable {
         }
     }
 
-    public static String fecha() {
+    public String fecha() {
 
         java.util.Date Datenow = new java.util.Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         return format.format(Datenow);
 
+    }
+
+    public String fecha_format() {
+
+       String fecha_format = fecha().substring(8, 10) + "/" + fecha().substring(5, 7) + "/" + fecha().substring(0, 4);
+
+        return fecha_format;
     }
 
 }

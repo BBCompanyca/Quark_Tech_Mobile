@@ -229,7 +229,7 @@ public class Search {
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
-                        + "and w.id_client = c.id_client and w.date_register between '" + desde + "' and '" + hasta + "'";
+                        + "and w.id_client = c.id_client and w.date_format_register between '" + desde + "' and '" + hasta + "'";
 
             } else {
 
@@ -237,7 +237,7 @@ public class Search {
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
-                        + "and w.serial = '" + search + "' and w.id_client = c.id_client and w.date_register between '" + desde + "' and '" + hasta + "'";
+                        + "and w.serial = '" + search + "' and w.id_client = c.id_client and w.date_format_register between '" + desde + "' and '" + hasta + "'";
 
             }
 
@@ -251,7 +251,7 @@ public class Search {
                         + "join client c on c.id_client = w.id_client "
                         + "join user u on u.id_user = w.id_registered_by "
                         + "and u.direction = '" + Login.direction + "' and w.id_client = c.id_client and "
-                        + "w.date_register between '" + desde + "' and '" + hasta + "'";
+                        + "w.date_format_register between '" + desde + "' and '" + hasta + "'";
 
             } else {
 
@@ -261,7 +261,7 @@ public class Search {
                         + "join client c on c.id_client = w.id_client "
                         + "join user u on u.id_user = w.id_registered_by "
                         + "and w.serial = '" + search + "' and u.direction = '" + Login.direction + "' and w.id_client = c.id_client and "
-                        + "w.date_register between '" + desde + "' and '" + hasta + "'";
+                        + "w.date_format_register between '" + desde + "' and '" + hasta + "'";
 
             }
 
@@ -273,7 +273,7 @@ public class Search {
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
-                        + "and w.id_client = c.id_client and w.date_register between '" + desde + "' and '" + hasta + "' "
+                        + "and w.id_client = c.id_client and w.date_format_acepted between '" + desde + "' and '" + hasta + "' "
                         + "and w.id_technical = '" + Login.ID_User + "'";
 
             } else {
@@ -282,7 +282,7 @@ public class Search {
                         + "from warranty w "
                         + "join equipo e on e.id_equipo = w.id_equipo "
                         + "join client c on c.id_client = w.id_client "
-                        + "and w.serial = '" + search + "' and w.id_client = c.id_client and w.date_register between '" + desde + "' and '" + hasta + "' "
+                        + "and w.serial = '" + search + "' and w.id_client = c.id_client and w.date_format_acepted between '" + desde + "' and '" + hasta + "' "
                         + "and w.id_technical = '" + Login.ID_User + "'";
 
             }
@@ -342,22 +342,22 @@ public class Search {
 
             if (shop.equals("Todos") && search.equals("")) {
 
-                query = "select m.id_movimiento, m.operation, m.fecha, u.username, m.referencia, m.shop from movimientos m "
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia, m.shop from movimientos m "
                         + "join user u on u.id_user = m.id_user and m.fecha between '" + desde + "' and '" + hasta + "'";
 
             } else if (shop.equals("Todos") && !search.equals("")) {
 
-                query = "select m.id_movimiento, m.operation, m.fecha, u.username, m.referencia, m.shop from movimientos m "
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia, m.shop from movimientos m "
                         + "join user u on u.id_user = m.id_user and u.username = '" + search + "' and m.fecha between '" + desde + "' and '" + hasta + "'";
 
             } else if (!shop.equals("Todos") && search.equals("")) {
 
-                query = "select m.id_movimiento, m.operation, m.fecha, u.username, m.referencia, m.shop from movimientos m "
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia, m.shop from movimientos m "
                         + "join user u on u.id_user = m.id_user and shop = '" + shop + "' and m.fecha between '" + desde + "' and '" + hasta + "'";
 
             } else {
 
-                query = "select m.id_movimiento, m.operation, m.fecha, u.username, m.referencia, m.shop from movimientos m "
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia, m.shop from movimientos m "
                         + "join user u on u.id_user = m.id_user and shop = '" + shop + "' and u.username = '" + search + "' "
                         + "and m.fecha between '" + desde + "' and '" + hasta + "'";
 
@@ -367,13 +367,13 @@ public class Search {
 
             if (search.isEmpty()) {
 
-                query = "select m.id_movimiento, m.operation, m.fecha, u.username, m.referencia from movimientos m "
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia from movimientos m "
                         + "join user u on u.id_user = m.id_user and shop = '" + Login.direction + "' "
                         + "and m.id_movimiento between '" + desde + "' and '" + hasta + "'";
 
             } else {
 
-                query = "select m.id_movimiento, m.operation, m.fecha, u.username, m.referencia from movimientos m "
+                query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia from movimientos m "
                         + "join user u on u.id_user = m.id_user and shop = '" + Login.direction + "' and u.username = '" + search + "' "
                         + "and m.id_movimiento between '" + desde + "' and '" + hasta + "'";
 

@@ -354,7 +354,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
                         Connection cn2 = BD_Connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
-                                "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                                "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
                         pst2.setInt(1, 0);
                         pst2.setInt(2, id_client);
@@ -377,6 +377,8 @@ public class Register_Warranty extends javax.swing.JPanel {
                         pst2.setString(19, "");
                         pst2.setString(20, "");
                         pst2.setString(21, "");
+                        pst2.setString(22, DateFormat());
+                        pst2.setString(23, "000-00-00");
 
                         pst2.executeUpdate();
 
@@ -694,6 +696,14 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     }
 
+    private String DateFormat() {
+
+        String dateFormat = DateNow().substring(6, 10) + "-" + DateNow().substring(3, 5) + "-" + DateNow().substring(0, 2);
+
+        return dateFormat;
+
+    }
+
     private void validateCamp() {
 
         if (jTextField_Code.getText().isEmpty()) {
@@ -780,7 +790,7 @@ public class Register_Warranty extends javax.swing.JPanel {
             RequestEquipo requestEquipo = new RequestEquipo();
             Thread hiloEquipo = new Thread(requestEquipo);
             hiloEquipo.start();
-            
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
