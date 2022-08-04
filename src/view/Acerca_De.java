@@ -9,7 +9,7 @@ public class Acerca_De extends javax.swing.JPanel {
     public Acerca_De() {
         initComponents();
 
-        ImageIcon wallpaper = new ImageIcon("src/images/LOGO BBC.png");
+        ImageIcon wallpaper = new ImageIcon(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\LOGO BBC.png");
         Icon fondo = new ImageIcon(wallpaper.getImage().getScaledInstance(470, 380, Image.SCALE_DEFAULT));
         jLabel_Wallpaper2.setIcon(fondo);
         this.repaint();

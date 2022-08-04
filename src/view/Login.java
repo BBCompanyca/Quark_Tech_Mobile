@@ -6,6 +6,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import clases.EncryptPassword;
 import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -29,12 +30,21 @@ public class Login extends javax.swing.JFrame {
         jTextField1.setBackground(new java.awt.Color(0, 0, 0, 0));
         jPasswordField1.setBackground(new java.awt.Color(0, 0, 0, 0));
 
-        ImageIcon wallpaper = new ImageIcon("src/images/LOGO BBC.png");
+        ImageIcon wallpaper = new ImageIcon(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\LOGO BBC.png");
         Icon fondo = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Wallpaper.setIcon(fondo);
         this.repaint();
 
+    }
+
+    @Override
+    public Image getIconImage() {
+
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/LOGO BBC64.png"));
+
+        return retValue;
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -55,6 +65,7 @@ public class Login extends javax.swing.JFrame {
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
