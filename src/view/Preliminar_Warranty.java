@@ -2,7 +2,7 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
-import clases.Reports;
+import clases.ReportsPDF;
 import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -19,8 +19,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     public static int flag = 0;
 
-    Reports reports = new Reports();
-
     Paneles paneles = new Paneles();
 
     public Preliminar_Warranty() {
@@ -31,9 +29,9 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         ValidateButton();
 
         UpdateInformation();
-        
+
         ValidateCamp();
-        
+
         jButton_Save.setVisible(false);
 
         jTextArea_Recibido.setBorder(BorderFactory.createCompoundBorder(jTextArea_Recibido.getBorder(),
@@ -410,8 +408,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         if (seleccion == JFileChooser.APPROVE_OPTION) {
 
             File fichero = fc.getSelectedFile();
-
-            reports.ReportWarranty(fichero, Warranty.ID, brand, model, serial, received, falla, time, comments_technical, status_technical);
+            
+            ReportsPDF reports = new ReportsPDF(fichero, Warranty.ID, brand, model, serial, received, falla, time, comments_technical, status_technical);
+            Thread hilo = new Thread(reports);
+            hilo.start();
+            
+            JOptionPane.showMessageDialog(null, "¡Se está generando el reporte!", "Por favor espere", JOptionPane.WARNING_MESSAGE);
+            
         }
 
     }//GEN-LAST:event_jButton_Dowload_ReportMousePressed
@@ -560,7 +563,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Modificación exitosa.");
 
             ValidateButton();
-            
+
             jButton_Dowload_Report.setVisible(true);
             jButton_Update_Information.setVisible(true);
 
@@ -577,21 +580,21 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_SaveMousePressed
 
     private void jTextField_SerialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_SerialKeyReleased
-        
+
         ValidateCamp();
-        
+
     }//GEN-LAST:event_jTextField_SerialKeyReleased
 
     private void jTextField_FallaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_FallaKeyReleased
-        
+
         ValidateCamp();
-        
+
     }//GEN-LAST:event_jTextField_FallaKeyReleased
 
     private void jTextArea_RecibidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea_RecibidoKeyReleased
-        
+
         ValidateCamp();
-        
+
     }//GEN-LAST:event_jTextArea_RecibidoKeyReleased
 
 
@@ -793,14 +796,14 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
             jLabel_Recibido2.setText("");
 
         }
-        
-        if (jTextField_Serial.getText().isEmpty() || jTextField_Falla.getText().isEmpty() 
+
+        if (jTextField_Serial.getText().isEmpty() || jTextField_Falla.getText().isEmpty()
                 || jTextArea_Recibido.getText().isEmpty()) {
-            
+
             jButton_Save.setVisible(false);
-            
+
         } else {
-            
+
             jButton_Save.setVisible(true);
 
         }
