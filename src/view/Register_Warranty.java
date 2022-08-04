@@ -7,7 +7,6 @@ import clases.Paneles;
 import clases.Register_Movimiento;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import java.util.Date;

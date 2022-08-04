@@ -75,6 +75,9 @@
       </Constraints>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser_Hasta">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="740" y="50" width="140" height="-1"/>
@@ -82,6 +85,9 @@
       </Constraints>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser_Desde">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="590" y="50" width="140" height="-1"/>

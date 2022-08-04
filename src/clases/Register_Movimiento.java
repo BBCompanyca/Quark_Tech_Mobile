@@ -55,7 +55,7 @@ public class Register_Movimiento implements Runnable {
     public static String fecha() {
 
         java.util.Date Datenow = new java.util.Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         return format.format(Datenow);
 

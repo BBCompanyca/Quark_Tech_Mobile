@@ -27,6 +27,7 @@ import view.SentWarranty;
 import view.Solicitudes;
 import view.Table_Technical;
 import view.Update_Client;
+import view.Update_Equipo;
 import view.Update_User;
 import view.Users;
 import view.Warranty_Technical;
@@ -157,6 +158,20 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(equipos, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    //Panel para mostrar la información para modificar equipos...
+    public void Panel_Update_Equipo() {
+
+        Update_Equipo update_Equipo = new Update_Equipo();
+        update_Equipo.setSize(890, 600);
+        update_Equipo.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(update_Equipo, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

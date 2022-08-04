@@ -10,6 +10,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public final class Equipos extends javax.swing.JPanel {
+        
+    public static String code;
 
     Paneles paneles = new Paneles();
 
@@ -201,7 +203,22 @@ public final class Equipos extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_Update_UserActionPerformed
 
     private void jButton_Update_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Update_UserMousePressed
+        
+        int fila_point = jTable_Equipo.getSelectedRow();
+        int columna_point = 0;
 
+        if (fila_point > -1) {
+
+            code = (String) model.getValueAt(fila_point, columna_point);
+
+            paneles.Panel_Update_Equipo();
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "¡Debes seleccionar un cliente!", "¡Acceso Denegado!",
+                    JOptionPane.OK_OPTION);
+
+        }
 
     }//GEN-LAST:event_jButton_Update_UserMousePressed
 

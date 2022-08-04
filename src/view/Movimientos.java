@@ -81,7 +81,11 @@ public class Movimientos extends javax.swing.JPanel {
         });
         add(jTextField_Search_Movimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 520, 30));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 520, 10));
+
+        jDateChooser_Hasta.setDateFormatString("yyyy-MM-dd");
         add(jDateChooser_Hasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 140, -1));
+
+        jDateChooser_Desde.setDateFormatString("yyyy-MM-dd");
         add(jDateChooser_Desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 140, -1));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
