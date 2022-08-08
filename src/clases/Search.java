@@ -1,9 +1,11 @@
 package clases;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +15,7 @@ import static view.Clients.jTable_Client;
 import static view.Clients.jScrollPane_C;
 import static view.History.jScrollPane_H;
 import static view.History.jTable_History_H;
+import view.Movimientos;
 import static view.Movimientos.jScrollPane_M;
 import static view.Movimientos.jTable_Movimientos;
 
@@ -369,13 +372,13 @@ public class Search {
 
                 query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia from movimientos m "
                         + "join user u on u.id_user = m.id_user and shop = '" + Login.direction + "' "
-                        + "and m.id_movimiento between '" + desde + "' and '" + hasta + "'";
+                        + "and m.fecha between '" + desde + "' and '" + hasta + "'";
 
             } else {
 
                 query = "select m.id_movimiento, m.operation, m.fecha_format, u.username, m.referencia from movimientos m "
                         + "join user u on u.id_user = m.id_user and shop = '" + Login.direction + "' and u.username = '" + search + "' "
-                        + "and m.id_movimiento between '" + desde + "' and '" + hasta + "'";
+                        + "and m.fecha between '" + desde + "' and '" + hasta + "'";
 
             }
 
@@ -469,6 +472,8 @@ public class Search {
             }
 
         }
+        
+        Movimientos.flag = 1;
 
     }
 

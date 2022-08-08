@@ -1,11 +1,18 @@
 package view;
 
+import clases.ReportsExcel;
 import java.awt.event.KeyEvent;
 import clases.Search;
 import clases.TextPrompt;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class Movimientos extends javax.swing.JPanel {
+
+    public static String searchpublic, shoppubblic, desdepublic, hastapublic;
+    public static int flag = 0;
 
     Search searchMovimientos = new Search();
 
@@ -15,6 +22,8 @@ public class Movimientos extends javax.swing.JPanel {
         validateTypeAccount();
 
         TextPrompt search = new TextPrompt("Ingrese algún nombre de usuario...", jTextField_Search_Movimiento);
+        
+        flag = 0;
 
     }
 
@@ -224,13 +233,51 @@ public class Movimientos extends javax.swing.JPanel {
             String search = jTextField_Search_Movimiento.getText().trim();
             String shop = jComboBox1.getSelectedItem().toString();
 
-            searchMovimientos.SearchMovimiento(search, shop, desde, hasta);
-            jTextField_Search_Movimiento.setText("");
+            if (!search.equalsIgnoreCase("Excel")) {
 
-            jTextField_Search_Movimiento.requestFocus();
+                searchpublic = search;
+                shoppubblic = shop;
+                desdepublic = desde;
+                hastapublic = hasta;
+
+                searchMovimientos.SearchMovimiento(search, shop, desde, hasta);
+
+                jTextField_Search_Movimiento.setText("");
+                jTextField_Search_Movimiento.requestFocus();
+
+            } else {
+
+                if (flag != 0) {
+
+                    JFileChooser fc = new JFileChooser();
+
+                    int seleccion = fc.showSaveDialog(this);
+
+                    if (seleccion == JFileChooser.APPROVE_OPTION) {
+
+                        File fichero = fc.getSelectedFile();
+
+                        ReportsExcel reportsExcel = new ReportsExcel(fichero, searchpublic, shoppubblic, desdepublic, hastapublic);
+                        Thread hilo = new Thread(reportsExcel);
+                        hilo.start();
+
+                        jTextField_Search_Movimiento.setText("");
+                        jTextField_Search_Movimiento.requestFocus();
+
+                        JOptionPane.showMessageDialog(null, "¡Se está generando el reporte!", "Por favor espere", JOptionPane.WARNING_MESSAGE);
+
+                    }
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Primero debes realizar la busqueda.", "Acceso Denegado",
+                            JOptionPane.OK_OPTION);
+
+                }
+
+            }
 
         }
-
     }//GEN-LAST:event_jTextField_Search_MovimientoKeyPressed
 
 
