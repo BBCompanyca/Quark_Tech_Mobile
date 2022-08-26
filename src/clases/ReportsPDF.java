@@ -26,7 +26,7 @@ public class ReportsPDF implements Runnable {
     public ReportsPDF(File fichero, int ID, String brand, String model, String serial, String received, String falla, String time, String comments_technical, String status_technical) {
 
         this.ID = ID;
-        this.ruta = ruta;
+        this.ruta = fichero;
         this.brand = brand;
         this.model = model;
         this.serial = serial;
@@ -51,7 +51,6 @@ public class ReportsPDF implements Runnable {
 
         try {
 
-            //String rutaa = System.getProperty("user.home");
             PdfWriter.getInstance(document, new FileOutputStream(ruta + ".pdf"));
 
             com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\BannerPDF2.jpg");
