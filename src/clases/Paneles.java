@@ -1,6 +1,7 @@
 package clases;
 
 import java.awt.BorderLayout;
+import view.Acerca_De;
 import view.Clients;
 import view.CodeEquipos;
 import view.Consult_Cl_Client;
@@ -26,6 +27,7 @@ import view.SentWarranty;
 import view.Solicitudes;
 import view.Table_Technical;
 import view.Update_Client;
+import view.Update_Equipo;
 import view.Update_User;
 import view.Users;
 import view.Warranty_Technical;
@@ -156,6 +158,20 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(equipos, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    //Panel para mostrar la información para modificar equipos...
+    public void Panel_Update_Equipo() {
+
+        Update_Equipo update_Equipo = new Update_Equipo();
+        update_Equipo.setSize(890, 600);
+        update_Equipo.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(update_Equipo, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 
@@ -366,6 +382,20 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(preliminar_History, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    //Panel para mostrar la información de acerca de...
+    public void Panel_Acerca_De() {
+
+        Acerca_De acerca_De = new Acerca_De();
+        acerca_De.setSize(890, 600);
+        acerca_De.setLocation(0, 0);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(acerca_De, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

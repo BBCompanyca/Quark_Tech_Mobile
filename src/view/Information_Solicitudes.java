@@ -170,10 +170,12 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                         Connection cn2 = BD_Connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
-                                "update warranty set status = ?, date_received_technical = ? where id_warranty = '" + id_warranty + "'");
+                                "update warranty set status = ?, date_received_technical = ?, date_format_acepted = ?"
+                                        + " where id_warranty = '" + id_warranty + "'");
 
                         pst2.setString(1, "En Revisión");
                         pst2.setString(2, date.DateToDay());
+                        pst2.setString(3, DateFormat());
 
                         pst2.executeUpdate();
 
@@ -350,6 +352,14 @@ public class Information_Solicitudes extends javax.swing.JPanel {
             System.err.println("¡Error al consultar la información de la garantía! " + e);
 
         }
+
+    }
+    
+    private String DateFormat() {
+
+        String dateFormat = date.DateToDay().substring(6, 10) + "-" + date.DateToDay().substring(3, 5) + "-" + date.DateToDay().substring(0, 2);
+
+        return dateFormat;
 
     }
 

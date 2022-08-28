@@ -15,19 +15,44 @@ import java.io.FileOutputStream;
 import clases.Date;
 import javax.swing.JOptionPane;
 
-public class Reports {
+public class ReportsPDF implements Runnable {
 
     Date date = new Date();
 
-    public void ReportWarranty(File Ruta, int ID, String brand, String model, String serial, String received, String falla, String time, 
-            String comments_technical, String status_technical) {
+    int ID;
+    File ruta;
+    String brand, model, serial, received, falla, time, comments_technical, status_technical;
+
+    public ReportsPDF(File fichero, int ID, String brand, String model, String serial, String received, String falla, String time, String comments_technical, String status_technical) {
+
+        this.ID = ID;
+        this.ruta = ruta;
+        this.brand = brand;
+        this.model = model;
+        this.serial = serial;
+        this.received = received;
+        this.falla = falla;
+        this.time = time;
+        this.comments_technical = comments_technical;
+        this.status_technical = status_technical;
+
+    }
+
+    @Override
+    public void run() {
+
+        ReportWarranty();
+
+    }
+
+    public void ReportWarranty() {
 
         Document document = new Document();
 
         try {
 
             //String rutaa = System.getProperty("user.home");
-            PdfWriter.getInstance(document, new FileOutputStream(Ruta + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(ruta + ".pdf"));
 
             com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\BannerPDF2.jpg");
             header.scaleToFit(600, 700);
@@ -181,7 +206,7 @@ public class Reports {
                 ParagraphCommets_Technical.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
                 ParagraphCommets_Technical.add(comments_technical);
                 document.add(ParagraphCommets_Technical);
-                
+
                 Paragraph ParagraphStatus_Technical = new Paragraph();
                 ParagraphStatus_Technical.setAlignment(Paragraph.ALIGN_LEFT);
                 ParagraphStatus_Technical.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));

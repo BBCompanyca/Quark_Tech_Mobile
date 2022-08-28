@@ -266,17 +266,27 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
                                 pst3.setString(3, brand);
                                 pst3.setString(4, model);
                                 pst3.setString(5, color);
-                                pst3.setString(6, capacity + "GB");
+
+                                if (capacity.length() < 3 || capacity.length() > 4) {
+
+                                    pst3.setString(6, "N/A");
+
+                                } else {
+
+                                    pst3.setString(6, capacity + "GB");
+
+                                }
+
                                 pst3.setString(7, daywarranty);
                                 pst3.setString(8, Login.user);
                                 pst3.setString(9, "");
-                                
+
                                 pst3.executeUpdate();
 
                                 Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/E", generateCode(), Login.direction);
                                 Thread register = new Thread(movimiento);
                                 register.start();
-                                
+
                                 PaintGreen();
 
                                 CleanCamp();

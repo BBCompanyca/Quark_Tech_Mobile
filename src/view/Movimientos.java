@@ -1,19 +1,19 @@
 package view;
 
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
 import clases.Search;
 import clases.TextPrompt;
+import javax.swing.JTextField;
 
 public class Movimientos extends javax.swing.JPanel {
-    
+
     Search searchMovimientos = new Search();
 
     public Movimientos() {
         initComponents();
 
         validateTypeAccount();
-        
+
         TextPrompt search = new TextPrompt("Ingrese algún nombre de usuario...", jTextField_Search_Movimiento);
 
     }
@@ -81,7 +81,11 @@ public class Movimientos extends javax.swing.JPanel {
         });
         add(jTextField_Search_Movimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 520, 30));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 520, 10));
+
+        jDateChooser_Hasta.setDateFormatString("yyyy-MM-dd");
         add(jDateChooser_Hasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 140, -1));
+
+        jDateChooser_Desde.setDateFormatString("yyyy-MM-dd");
         add(jDateChooser_Desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 140, -1));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
@@ -124,17 +128,17 @@ public class Movimientos extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel4.setText("[Eliminación De Cliente | E/C]");
+        jLabel4.setText("[Eliminación De Cliente | \"E/C\"]");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 430, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel5.setText("[Registo De Cliente | R/C]");
+        jLabel5.setText("[Registo De Cliente | \"R/C\"]");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 390, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel6.setText("[Eliminación De Usuario | E/U]");
+        jLabel6.setText("[Eliminación De Usuario | \"E/U\"]");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 430, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -144,42 +148,42 @@ public class Movimientos extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel8.setText("[Registo De Equipo | R/E]");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 390, -1, -1));
+        jLabel8.setText("[Registo De Equipo | \"R/E\"]");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 390, 160, -1));
 
         jLabel9.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel9.setText("[Eliminación De Equipo | E/E]");
+        jLabel9.setText("[Eliminación De Equipo | \"E/E\"]");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 430, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel10.setText("[Registo De Garantía | R/G]");
+        jLabel10.setText("[Registo De Garantía | \"R/G\"]");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel11.setText("[Modificación De Usuario | M/U]");
+        jLabel11.setText("[Modificación De Usuario | \"M/U\"]");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 410, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel12.setText("[Modificación De Cliente | M/C]");
+        jLabel12.setText("[Modificación De Cliente | \"M/C\"]");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 410, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel13.setText("[Modificación De Equipo | M/E]");
+        jLabel13.setText("[Modificación De Equipo | \"M/E\"]");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(685, 410, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel14.setText("[Modificación De Garantía | M/G]");
+        jLabel14.setText("[Modificación De Garantía | \"M/G\"]");
         add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel15.setText("[Eliminación De Garantía | E/G]");
+        jLabel15.setText("[Eliminación De Garantía | \"E/G\"]");
         add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, -1, -1));
 
         jSeparator2.setBackground(new java.awt.Color(240, 240, 240));
@@ -214,21 +218,15 @@ public class Movimientos extends javax.swing.JPanel {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String desde = ((JTextField) jDateChooser_Desde.getDateEditor().getUiComponent()).getText();
+            String hasta = ((JTextField) jDateChooser_Hasta.getDateEditor().getUiComponent()).getText();
 
-            java.util.Date desde = jDateChooser_Desde.getDate();
-            java.util.Date hasta = jDateChooser_Hasta.getDate();
-
-            String desde_stg = format.format(desde);
-            String hasta_stg = format.format(hasta);
-            
             String search = jTextField_Search_Movimiento.getText().trim();
             String shop = jComboBox1.getSelectedItem().toString();
-            
-            searchMovimientos.SearchMovimiento(search, shop, desde_stg, hasta_stg);
-            
+
+            searchMovimientos.SearchMovimiento(search, shop, desde, hasta);
             jTextField_Search_Movimiento.setText("");
-            
+
             jTextField_Search_Movimiento.requestFocus();
 
         }

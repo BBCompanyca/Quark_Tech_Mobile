@@ -2,7 +2,7 @@ package view;
 
 import java.sql.*;
 import clases.BD_Connection;
-import clases.Reports;
+import clases.ReportsPDF;
 import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -19,8 +19,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     public static int flag = 0;
 
-    Reports reports = new Reports();
-
     Paneles paneles = new Paneles();
 
     public Preliminar_Warranty() {
@@ -31,9 +29,9 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         ValidateButton();
 
         UpdateInformation();
-        
+
         ValidateCamp();
-        
+
         jButton_Save.setVisible(false);
 
         jTextArea_Recibido.setBorder(BorderFactory.createCompoundBorder(jTextArea_Recibido.getBorder(),
@@ -47,6 +45,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton_Sent = new javax.swing.JButton();
         jLabel_Recibido2 = new javax.swing.JLabel();
         jLabel_Falla2 = new javax.swing.JLabel();
         jLabel_Serial2 = new javax.swing.JLabel();
@@ -68,7 +67,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_Recibido = new javax.swing.JTextArea();
         jLabel_Recibido = new javax.swing.JLabel();
-        jButton_Sent = new javax.swing.JButton();
         jButton_Cancelar = new javax.swing.JButton();
         jButton_Dowload_Report = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -81,6 +79,28 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(9, 53, 69));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton_Sent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Dark.png"))); // NOI18N
+        jButton_Sent.setBorder(null);
+        jButton_Sent.setBorderPainted(false);
+        jButton_Sent.setContentAreaFilled(false);
+        jButton_Sent.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Sent.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Ligth.png"))); // NOI18N
+        jButton_Sent.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Ligth.png"))); // NOI18N
+        jButton_Sent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton_SentMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton_SentMousePressed(evt);
+            }
+        });
+        jButton_Sent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SentActionPerformed(evt);
+            }
+        });
+        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 150, 60));
 
         jLabel_Recibido2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel_Recibido2.setForeground(new java.awt.Color(255, 0, 0));
@@ -240,26 +260,6 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         jLabel_Recibido.setText("Se recibe con:");
         add(jLabel_Recibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 120, -1));
 
-        jButton_Sent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_Sent_Dark.png"))); // NOI18N
-        jButton_Sent.setBorder(null);
-        jButton_Sent.setBorderPainted(false);
-        jButton_Sent.setContentAreaFilled(false);
-        jButton_Sent.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_Sent.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton_SentMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton_SentMousePressed(evt);
-            }
-        });
-        jButton_Sent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_SentActionPerformed(evt);
-            }
-        });
-        add(jButton_Sent, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 150, 60));
-
         jButton_Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancelar btn dark.png"))); // NOI18N
         jButton_Cancelar.setBorder(null);
         jButton_Cancelar.setBorderPainted(false);
@@ -408,8 +408,13 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         if (seleccion == JFileChooser.APPROVE_OPTION) {
 
             File fichero = fc.getSelectedFile();
-
-            reports.ReportWarranty(fichero, Warranty.ID, brand, model, serial, received, falla, time, comments_technical, status_technical);
+            
+            ReportsPDF reports = new ReportsPDF(fichero, Warranty.ID, brand, model, serial, received, falla, time, comments_technical, status_technical);
+            Thread hilo = new Thread(reports);
+            hilo.start();
+            
+            JOptionPane.showMessageDialog(null, "¡Se está generando el reporte!", "Por favor espere", JOptionPane.WARNING_MESSAGE);
+            
         }
 
     }//GEN-LAST:event_jButton_Dowload_ReportMousePressed
@@ -544,7 +549,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                     + "where id_warranty = '" + Warranty.ID + "'");
 
             pst.setString(1, jTextField_Serial.getText().trim());
-            pst.setString(2, jTextField_Serial.getText().trim());
+            pst.setString(2, jTextField_Falla.getText().trim());
             pst.setString(3, jTextArea_Recibido.getText().trim());
 
             pst.executeUpdate();
@@ -558,7 +563,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Modificación exitosa.");
 
             ValidateButton();
-            
+
             jButton_Dowload_Report.setVisible(true);
             jButton_Update_Information.setVisible(true);
 
@@ -575,21 +580,21 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton_SaveMousePressed
 
     private void jTextField_SerialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_SerialKeyReleased
-        
+
         ValidateCamp();
-        
+
     }//GEN-LAST:event_jTextField_SerialKeyReleased
 
     private void jTextField_FallaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_FallaKeyReleased
-        
+
         ValidateCamp();
-        
+
     }//GEN-LAST:event_jTextField_FallaKeyReleased
 
     private void jTextArea_RecibidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea_RecibidoKeyReleased
-        
+
         ValidateCamp();
-        
+
     }//GEN-LAST:event_jTextArea_RecibidoKeyReleased
 
 
@@ -791,14 +796,14 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
             jLabel_Recibido2.setText("");
 
         }
-        
-        if (jTextField_Serial.getText().isEmpty() || jTextField_Falla.getText().isEmpty() 
+
+        if (jTextField_Serial.getText().isEmpty() || jTextField_Falla.getText().isEmpty()
                 || jTextArea_Recibido.getText().isEmpty()) {
-            
+
             jButton_Save.setVisible(false);
-            
+
         } else {
-            
+
             jButton_Save.setVisible(true);
 
         }

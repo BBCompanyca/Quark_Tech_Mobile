@@ -65,11 +65,9 @@ public final class Solicitudes extends javax.swing.JPanel {
             while (rs.next()) {
 
                 int id_warranty_consult = rs.getInt("id_warranty");
-
-                view.Information_Solicitudes info = new view.Information_Solicitudes(id_warranty_consult);
-                jPanel_Content.add(info);
-                jPanel_Content.revalidate();
-                info.setVisible(true);
+                RequestView requestView = new RequestView(id_warranty_consult);
+                Thread hilo = new Thread(requestView);
+                hilo.start();
 
             }
 
@@ -78,6 +76,28 @@ public final class Solicitudes extends javax.swing.JPanel {
             System.err.println("¡Error al mostrar notificaciones! " + e);
             JOptionPane.showMessageDialog(null, "¡Error al mostrar las solicitudes!", "¡Error!",
                     JOptionPane.OK_OPTION);
+
+        }
+
+    }
+
+    public class RequestView implements Runnable {
+        
+        int id_warranty_consult;
+        
+        public RequestView(int id_warranty_consult){
+            
+           this.id_warranty_consult = id_warranty_consult;
+            
+        }
+
+        @Override
+        public void run() {
+
+            view.Information_Solicitudes info = new view.Information_Solicitudes(id_warranty_consult);
+            jPanel_Content.add(info);
+            jPanel_Content.revalidate();
+            info.setVisible(true);
 
         }
 

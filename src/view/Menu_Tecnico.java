@@ -80,7 +80,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-outline.png"))); // NOI18N
         Btn_Main.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 165, 210, 50));
+        add(Btn_Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 210, 50));
 
         Btn_Warranty.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Warranty.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,7 +105,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         jLabel10.setText("Garantías");
         Btn_Warranty.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
 
-        add(Btn_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 215, 210, 50));
+        add(Btn_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 210, 50));
 
         Btn_Notification.setBackground(new java.awt.Color(78, 120, 121));
         Btn_Notification.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -135,7 +135,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         jLabel15.setText("Solicitudes");
         Btn_Notification.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 80, 30));
 
-        add(Btn_Notification, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 265, 210, 50));
+        add(Btn_Notification, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 210, 50));
 
         Btn_History.setBackground(new java.awt.Color(78, 120, 121));
         Btn_History.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -160,7 +160,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/statistc_24px.png"))); // NOI18N
         Btn_History.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_History, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 315, 210, 50));
+        add(Btn_History, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 210, 50));
 
         Btn_About_Me.setBackground(new java.awt.Color(78, 120, 121));
         Btn_About_Me.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -185,7 +185,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/management_client_24px.png"))); // NOI18N
         Btn_About_Me.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 365, 210, 50));
+        add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 210, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_WarrantyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_WarrantyMouseEntered
@@ -243,6 +243,8 @@ public class Menu_Tecnico extends javax.swing.JPanel {
         resetColor(Btn_Warranty);
         setColor(Btn_About_Me);
         resetColor(Btn_Notification);
+        
+        paneles.Panel_Acerca_De();
 
     }//GEN-LAST:event_Btn_About_MeMousePressed
 
