@@ -45,6 +45,13 @@ public class Dashboard extends javax.swing.JFrame {
         Thread hilo = new Thread(consutlBD);
         hilo.start();
 
+        if (type_Account.equals("Tecnico")) {
+
+            jLabel_NumberNotification.setText("");
+            jLabel_IconNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("")));
+
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -135,6 +142,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Head.add(jLabel_NumberNotification, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 50, 20, 20));
 
         jLabel_IconNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/notification_24px.png"))); // NOI18N
+        jLabel_IconNotification.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel_IconNotification.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel_IconNotificationMousePressed(evt);
@@ -390,8 +398,6 @@ public class Dashboard extends javax.swing.JFrame {
             if (type_Account.equals("Tecnico")) {
 
                 paneles.PanelMenu_Tecnico();
-                jLabel_NumberNotification.setVisible(false);
-                jLabel_IconNotification.setVisible(false);
 
             }
 
