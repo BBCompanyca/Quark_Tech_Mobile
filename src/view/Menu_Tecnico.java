@@ -316,7 +316,7 @@ public class Menu_Tecnico extends javax.swing.JPanel {
 
         paneles.Panel_Solicitudes();
 
-        consutlBD.getNotification();
+        consutlBD.getSolicitudes();
 
     }//GEN-LAST:event_Btn_NotificationMousePressed
 

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.sql.*;
 import clases.BD_Connection;
+import clases.Consult_Notifications;
 import javax.swing.JOptionPane;
 import clases.Paneles;
 
@@ -40,6 +41,10 @@ public class Dashboard extends javax.swing.JFrame {
         //Método para consultar la información del usuario que ha iniciado sesión...
         BD_Consult();
 
+        Consult_Notifications consutlBD = new Consult_Notifications();
+        Thread hilo = new Thread(consutlBD);
+        hilo.start();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -56,6 +61,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Fecha = new javax.swing.JLabel();
         jLabel_ID = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel_NumberNotification = new javax.swing.JLabel();
+        jLabel_IconNotification = new javax.swing.JLabel();
         jPanel_Exit = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel_Content = new javax.swing.JPanel();
@@ -110,7 +117,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Fecha.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Fecha.setText("Fecha:");
-        jPanel_Head.add(jLabel_Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 340, 40));
+        jPanel_Head.add(jLabel_Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 400, 40));
 
         jLabel_ID.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_ID.setForeground(new java.awt.Color(240, 240, 240));
@@ -121,6 +128,19 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(240, 240, 240));
         jLabel3.setText("ID User:");
         jPanel_Head.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 55, -1, -1));
+
+        jLabel_NumberNotification.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel_NumberNotification.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_NumberNotification.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel_Head.add(jLabel_NumberNotification, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 50, 20, 20));
+
+        jLabel_IconNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/notification_24px.png"))); // NOI18N
+        jLabel_IconNotification.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel_IconNotificationMousePressed(evt);
+            }
+        });
+        jPanel_Head.add(jLabel_IconNotification, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 55, -1, 30));
 
         jPanel_Background.add(jPanel_Head, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 35, 890, 100));
 
@@ -259,6 +279,12 @@ public class Dashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel1MousePressed
 
+    private void jLabel_IconNotificationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_IconNotificationMousePressed
+
+        paneles.Panel_Notifications();
+
+    }//GEN-LAST:event_jLabel_IconNotificationMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -301,7 +327,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Fecha;
     private javax.swing.JLabel jLabel_Footer;
     public javax.swing.JLabel jLabel_ID;
+    private javax.swing.JLabel jLabel_IconNotification;
     public javax.swing.JLabel jLabel_Name;
+    public static javax.swing.JLabel jLabel_NumberNotification;
     public javax.swing.JLabel jLabel_Type_Account;
     public javax.swing.JLabel jLabel_Username;
     private javax.swing.JLabel jLabel_background_Down;
@@ -320,7 +348,7 @@ public class Dashboard extends javax.swing.JFrame {
         int year = now.getYear();
         int dia = now.getDayOfMonth();
         int month = now.getMonthValue();
-        String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", " ;Septiembre",
+        String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
             "Octubre", "Noviembre", "Diciemrbre"};
         jLabel_Fecha.setText("Fecha: " + dia + " de " + meses[month - 1] + " de " + year);
 
@@ -362,6 +390,8 @@ public class Dashboard extends javax.swing.JFrame {
             if (type_Account.equals("Tecnico")) {
 
                 paneles.PanelMenu_Tecnico();
+                jLabel_NumberNotification.setVisible(false);
+                jLabel_IconNotification.setVisible(false);
 
             }
 
@@ -406,4 +436,5 @@ public class Dashboard extends javax.swing.JFrame {
 
         }
     }
+
 }

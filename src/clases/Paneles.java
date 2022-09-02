@@ -15,6 +15,7 @@ import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
 import view.Movimientos;
+import view.Notifications;
 import view.Preliminar_History;
 import view.Preliminar_Warranty;
 import view.Principal;
@@ -396,6 +397,20 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(acerca_De, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    //Panel para mostrar las notificaciones...
+    public void Panel_Notifications() {
+
+        Notifications notifications = new Notifications();
+        notifications.setSize(400, 400);
+        notifications.setLocation(235, 35);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(notifications, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

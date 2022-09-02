@@ -1,23 +1,25 @@
 package clases;
 
+import static java.lang.Thread.sleep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import static view.Dashboard.jLabel_NumberNotification;
 import view.Login;
-import static view.Menu_Tecnico.jLabel_Index;
 
-public class Consut_Notification extends Thread {
 
-    public static int indexSolicitudes = 0;
-
+public class Consult_Notifications implements Runnable{
+    
+    public static int indexNotification = 0;
+    
     @Override
     public void run() {
 
         while (true) {
 
-            getSolicitudes();
+            getNotifications();
 
             try {
 
@@ -32,34 +34,35 @@ public class Consut_Notification extends Thread {
         }
 
     }
-
-    public void getSolicitudes() {
+    
+    
+    public void getNotifications() {
 
         try {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select id_warranty from warranty where id_technical = '" + Login.ID_User + "' "
-                    + "and status = '" + "Solicitud Enviada - En Espera" + "'");
+                    "select id_notification from notifications where id_userReceived = '" + Login.ID_User + "' "
+                    + "and status = '" + "unread" + "'");
 
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
 
-                indexSolicitudes++;
+                indexNotification++;
 
             }
 
-            if (indexSolicitudes != 0) {
+            if (indexNotification != 0) {
 
-                jLabel_Index.setText(String.valueOf(indexSolicitudes));
+                jLabel_NumberNotification.setText(String.valueOf(indexNotification));
 
-                indexSolicitudes = 0;
+                indexNotification = 0;
 
             } else {
 
-                jLabel_Index.setText("");
-                indexSolicitudes = 0;
+                jLabel_NumberNotification.setText("");
+                indexNotification = 0;
 
             }
 
@@ -75,6 +78,4 @@ public class Consut_Notification extends Thread {
 
     }
     
-    
-
 }
