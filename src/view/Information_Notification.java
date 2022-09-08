@@ -138,7 +138,7 @@ public class Information_Notification extends javax.swing.JPanel {
 
                 }
 
-                jLabel_Title22.setText(rs.getString(2) + " ha " + rs.getString(3) + " tu solicitud del equipo:");
+                jLabel_Title22.setText(rs.getString(2) + " " + rs.getString(3));
                 jLabel_Equipo.setText(rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6));
                 jLabel_Serial.setText("Serial: " + rs.getString(7));
                 jLabel_Falla.setText("Falla: " + rs.getString(8));

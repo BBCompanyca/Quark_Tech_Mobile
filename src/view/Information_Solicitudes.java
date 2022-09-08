@@ -191,7 +191,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                         }
 
-                        Notification notification = new Notification("aceptado");
+                        Notification notification = new Notification("ha aceptado tu solicitud del equipo:");
                         Thread t = new Thread(notification);
                         t.start();
                         
@@ -274,7 +274,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                         JOptionPane.showMessageDialog(null, "Equipo rechazado con exito...");
                         
-                        Notification notification = new Notification("rechazado");
+                        Notification notification = new Notification("ha rechazado tu solicitud del equipo:");
                         Thread t = new Thread(notification);
                         t.start();
 
@@ -408,8 +408,6 @@ public class Information_Solicitudes extends javax.swing.JPanel {
                 pst.setString(7, "unread");
                 pst.setString(8, date.DateToDay());
                 pst.executeUpdate();
-                
-                System.out.println("Inserted the notification");
 
             } catch (SQLException e) {
                 
