@@ -136,7 +136,7 @@ public class ReportsPDF implements Runnable {
             Paragraph ParagraphEquipo = new Paragraph();
             ParagraphEquipo.setAlignment(Paragraph.ALIGN_LEFT);
             ParagraphEquipo.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-            ParagraphEquipo.add("\n \n               EQUIPO: ");
+            ParagraphEquipo.add("\n \nEQUIPO: ");
             ParagraphEquipo.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
             ParagraphEquipo.add(brand + " " + model);
             document.add(ParagraphEquipo);
@@ -144,7 +144,7 @@ public class ReportsPDF implements Runnable {
             Paragraph ParagraphSerial = new Paragraph();
             ParagraphSerial.setAlignment(Paragraph.ALIGN_LEFT);
             ParagraphSerial.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-            ParagraphSerial.add("\n               SERIAL: ");
+            ParagraphSerial.add("\nSERIAL: ");
             ParagraphSerial.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
             ParagraphSerial.add(serial);
             document.add(ParagraphSerial);
@@ -152,7 +152,7 @@ public class ReportsPDF implements Runnable {
             Paragraph ParagraphReceived = new Paragraph();
             ParagraphReceived.setAlignment(Paragraph.ALIGN_LEFT);
             ParagraphReceived.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-            ParagraphReceived.add("\n               SE RECIBE CON: ");
+            ParagraphReceived.add("\nSE RECIBE CON: ");
             ParagraphReceived.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
             ParagraphReceived.add(received);
             document.add(ParagraphReceived);
@@ -160,7 +160,7 @@ public class ReportsPDF implements Runnable {
             Paragraph ParagraphFalla = new Paragraph();
             ParagraphFalla.setAlignment(Paragraph.ALIGN_LEFT);
             ParagraphFalla.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-            ParagraphFalla.add("\n               FALLA: ");
+            ParagraphFalla.add("\nFALLA: ");
             ParagraphFalla.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
             ParagraphFalla.add(falla);
             document.add(ParagraphFalla);
@@ -201,7 +201,7 @@ public class ReportsPDF implements Runnable {
                 Paragraph ParagraphCommets_Technical = new Paragraph();
                 ParagraphCommets_Technical.setAlignment(Paragraph.ALIGN_LEFT);
                 ParagraphCommets_Technical.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-                ParagraphCommets_Technical.add("\n               OBSERVACIÓN TÉCNICA: ");
+                ParagraphCommets_Technical.add("\nOBSERVACIÓN TÉCNICA: ");
                 ParagraphCommets_Technical.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
                 ParagraphCommets_Technical.add(comments_technical);
                 document.add(ParagraphCommets_Technical);
@@ -209,7 +209,7 @@ public class ReportsPDF implements Runnable {
                 Paragraph ParagraphStatus_Technical = new Paragraph();
                 ParagraphStatus_Technical.setAlignment(Paragraph.ALIGN_LEFT);
                 ParagraphStatus_Technical.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-                ParagraphStatus_Technical.add("\n               (" + status_technical + ")");
+                ParagraphStatus_Technical.add("\n(" + status_technical + ")");
                 document.add(ParagraphStatus_Technical);
 
             }

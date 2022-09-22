@@ -1,18 +1,10 @@
-package view;
+package Notifications.View;
 
-import clases.BD_Connection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
+import Notifications.model.Request_Notifications;
 
+public final class Contain_Notification extends javax.swing.JPanel {
 
-public final class Notifications extends javax.swing.JPanel {
-
-    int index;
-
-    public Notifications() {
+    public Contain_Notification() {
         initComponents();
 
         View_Window();
@@ -58,41 +50,30 @@ public final class Notifications extends javax.swing.JPanel {
 
     public void View_Window() {
 
-        try {
+        for (int i = 0; i < Request_Notifications.ejemploLista.size(); i++) {
 
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement("select id_notification from notifications "
-                    + "where id_userReceived = '" + Login.ID_User + "'");
-
-            ResultSet rs = pst.executeQuery();
-
-            while (rs.next()) {
-
-                int id_warranty_consult = rs.getInt("id_notification");
-                RequestView requestView = new RequestView(id_warranty_consult);
-                Thread hilo = new Thread(requestView);
-                hilo.start();
-
-            }
-
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al mostrar notificaciones! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al mostrar las solicitudes!", "¡Error!",
-                    JOptionPane.OK_OPTION);
+            Information_Notification info = new Information_Notification(
+                    Request_Notifications.ejemploLista.get(i).getID(), Request_Notifications.ejemploLista.get(i).getUsername_technical(),
+                    Request_Notifications.ejemploLista.get(i).getMessage(), Request_Notifications.ejemploLista.get(i).getBrand(),
+                    Request_Notifications.ejemploLista.get(i).getModel(), Request_Notifications.ejemploLista.get(i).getColor(),
+                    Request_Notifications.ejemploLista.get(i).getSerial(), Request_Notifications.ejemploLista.get(i).getFalla(),
+                    Request_Notifications.ejemploLista.get(i).getStatus_notification());
+            jPanel_Content.add(info);
+            jPanel_Content.revalidate();
+            info.setVisible(true);
 
         }
 
     }
-    
-    public class RequestView implements Runnable {
-        
+
+    /*public class RequestView implements Runnable {
+
         int id_warranty_consult;
-        
-        public RequestView(int id_warranty_consult){
-            
-           this.id_warranty_consult = id_warranty_consult;
-            
+
+        public RequestView(int id_warranty_consult) {
+
+            this.id_warranty_consult = id_warranty_consult;
+
         }
 
         @Override
@@ -101,11 +82,9 @@ public final class Notifications extends javax.swing.JPanel {
             Information_Notification info = new Information_Notification(id_warranty_consult);
             jPanel_Content.add(info);
             jPanel_Content.revalidate();
-            info.setVisible(true); 
-           
+            info.setVisible(true);
 
         }
 
-    }
-
+    }*/
 }

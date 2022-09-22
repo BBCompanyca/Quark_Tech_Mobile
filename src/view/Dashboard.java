@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.sql.*;
 import clases.BD_Connection;
-import clases.Consult_Notifications;
+import Notifications.model.Consult_Notifications;
+import Notifications.model.Request_Notifications;
 import javax.swing.JOptionPane;
 import clases.Paneles;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class Dashboard extends javax.swing.JFrame {
 
@@ -45,6 +48,10 @@ public class Dashboard extends javax.swing.JFrame {
         Thread hilo = new Thread(consutlBD);
         hilo.start();
 
+        Request_Notifications request_notification = new Request_Notifications();
+        Thread hilo2 = new Thread(request_notification);
+        hilo2.start();
+
         if (type_Account.equals("Tecnico")) {
 
             jLabel_NumberNotification.setText("");
@@ -52,6 +59,15 @@ public class Dashboard extends javax.swing.JFrame {
 
         }
 
+    }
+    
+    @Override
+    public Image getIconImage() {
+
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/LOGO BBC64.png"));
+
+        return retValue;
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -78,6 +94,7 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         jPanel_Background.setBackground(new java.awt.Color(9, 53, 69));

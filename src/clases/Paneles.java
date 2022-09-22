@@ -15,7 +15,7 @@ import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
 import view.Movimientos;
-import view.Notifications;
+import Notifications.View.Contain_Notification;
 import view.Preliminar_History;
 import view.Preliminar_Warranty;
 import view.Principal;
@@ -405,7 +405,7 @@ public class Paneles {
     //Panel para mostrar las notificaciones...
     public void Panel_Notifications() {
 
-        Notifications notifications = new Notifications();
+        Contain_Notification notifications = new Contain_Notification();
         notifications.setSize(400, 400);
         notifications.setLocation(235, 35);
 

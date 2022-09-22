@@ -1,5 +1,6 @@
-package clases;
+package Notifications.model;
 
+import clases.BD_Connection;
 import static java.lang.Thread.sleep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,21 +10,22 @@ import javax.swing.JOptionPane;
 import static view.Dashboard.jLabel_NumberNotification;
 import view.Login;
 
+public class Consult_Notifications implements Runnable {
 
-public class Consult_Notifications implements Runnable{
-    
     public static int indexNotification = 0;
-    
+
     @Override
     public void run() {
 
+        //Se ejecuta n veces mintras la app esté abierta...
         while (true) {
 
-            getNotifications();
+            getIndexNotification();
 
             try {
 
-                sleep(10000);
+                //Tiempo de espera para volver a consultar (30s)...
+                sleep(30000);
 
             } catch (InterruptedException e) {
 
@@ -34,24 +36,29 @@ public class Consult_Notifications implements Runnable{
         }
 
     }
-    
-    
-    public void getNotifications() {
+
+    //Obtiene el numero de notificaciones no leídas...
+    public void getIndexNotification() {
 
         try {
 
             Connection cn = BD_Connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select id_notification from notifications where id_userReceived = '" + Login.ID_User + "' "
-                    + "and status = '" + "unread" + "'");
+                    "select status from notifications where id_userReceived = '" + Login.ID_User + "' "
+                    + "ORDER BY id_notification DESC LIMIT 10");
 
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-
-                indexNotification++;
+                
+                if (rs.getString(1).equals("unread")) {
+                    
+                    indexNotification++;
+                    
+                }
 
             }
+
 
             if (indexNotification != 0) {
 
@@ -77,5 +84,5 @@ public class Consult_Notifications implements Runnable{
         }
 
     }
-    
+
 }

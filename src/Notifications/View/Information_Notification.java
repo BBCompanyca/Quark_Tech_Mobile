@@ -1,26 +1,31 @@
-package view;
+package Notifications.View;
 
 import clases.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import static view.Dashboard.jLabel_NumberNotification;
 
 public class Information_Notification extends javax.swing.JPanel {
 
-    private int id_notification_consutl;
-    String view;
+    private int ID;
+    private String username_technical, brand, model, color, serial, falla, status_notification, message;
 
-    public Information_Notification(int id_notification_consutl) {
+    public Information_Notification(int ID, String username_technical, String message, String brand, String model, String color, String serial, String falla, String status_notification) {
 
         initComponents();
 
-        this.id_notification_consutl = id_notification_consutl;
+        this.ID = ID;
+        this.username_technical = username_technical;
+        this.brand = brand;
+        this.model = model;
+        this.color = color;
+        this.serial = serial;
+        this.falla = falla;
+        this.status_notification = status_notification;
+        this.message = message;
 
-        getNotifications();
-
-        this.setSize(400, 200);
+        DataNotification();
 
     }
 
@@ -29,7 +34,7 @@ public class Information_Notification extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel_Falla = new javax.swing.JLabel();
-        jLabel_Title22 = new javax.swing.JLabel();
+        jLabel_Title = new javax.swing.JLabel();
         jLabel_Equipo = new javax.swing.JLabel();
         jLabel_Serial = new javax.swing.JLabel();
         jLabel_Read = new javax.swing.JLabel();
@@ -42,25 +47,21 @@ public class Information_Notification extends javax.swing.JPanel {
         jLabel_Falla.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Falla.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Falla.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel_Falla.setText("Falla: Pantalla Dañada");
         add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 380, 30));
 
-        jLabel_Title22.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        jLabel_Title22.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Title22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel_Title22.setText("Alex ha aceptado tu solicitud del equipo:");
-        add(jLabel_Title22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 40));
+        jLabel_Title.setFont(new java.awt.Font("Roboto", 1, 15)); // NOI18N
+        jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Title.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        add(jLabel_Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 40));
 
         jLabel_Equipo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Equipo.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Equipo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel_Equipo.setText("REDMI 9A VERDE ");
         add(jLabel_Equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 380, 30));
 
         jLabel_Serial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Serial.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Serial.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel_Serial.setText("Serial: 1525555555548");
         add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 380, 30));
 
         jLabel_Read.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
@@ -77,9 +78,10 @@ public class Information_Notification extends javax.swing.JPanel {
 
     private void jLabel_ReadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_ReadMousePressed
 
-        if (view.equals("unread")) {
+        //Si está marcada como no vista, la marca en vista.
+        if (status_notification.equals("unread")) {
 
-            jLabel_Title22.setFont(new java.awt.Font("Roboto", 0, 18));
+            jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 15));
             jLabel_Read.setFont(new java.awt.Font("Roboto", 0, 12));
 
             int numNotification = Integer.parseInt(jLabel_NumberNotification.getText());
@@ -96,7 +98,8 @@ public class Information_Notification extends javax.swing.JPanel {
 
             }
 
-            UpdateViewNotifications updateViewNotifications = new UpdateViewNotifications(id_notification_consutl);
+            //Envia el ID de la notificación para ser marcada como vista.
+            UpdateViewNotifications updateViewNotifications = new UpdateViewNotifications(ID);
             Thread thread = new Thread(updateViewNotifications);
             thread.start();
 
@@ -110,52 +113,25 @@ public class Information_Notification extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_Falla;
     private javax.swing.JLabel jLabel_Read;
     private javax.swing.JLabel jLabel_Serial;
-    private javax.swing.JLabel jLabel_Title22;
+    private javax.swing.JLabel jLabel_Title;
     // End of variables declaration//GEN-END:variables
 
-    private void getNotifications() {
+    private void DataNotification() {
 
-        try {
+        jLabel_Title.setText(username_technical + " " + message);
+        jLabel_Equipo.setText(brand + " " + model + " " + color);
+        jLabel_Serial.setText("Serial: " + serial);
+        jLabel_Falla.setText("Falla: " + falla);
 
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select n.id_notification, u.username, n.notification, e.brand, e.model, e.color, w.serial, "
-                    + "w.falla, n.status "
-                    + "from notifications n "
-                    + "join user u on u.id_user = n.id_userSent and n.id_notification = '" + id_notification_consutl + "' "
-                    + "join equipo e on e.id_equipo = n.id_equipo and n.id_notification = '" + id_notification_consutl + "'"
-                    + "join warranty w on w.id_warranty = n.id_warranty and n.id_notification = '" + id_notification_consutl + "' "
-                    + "order by id_notification ASC");
+        if (!status_notification.equals("unread")) {
 
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-
-                if (!rs.getString(9).equals("unread")) {
-
-                    jLabel_Title22.setFont(new java.awt.Font("Roboto", 0, 18));
-                    jLabel_Read.setFont(new java.awt.Font("Roboto", 0, 12));
-
-                }
-
-                jLabel_Title22.setText(rs.getString(2) + " " + rs.getString(3));
-                jLabel_Equipo.setText(rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6));
-                jLabel_Serial.setText("Serial: " + rs.getString(7));
-                jLabel_Falla.setText("Falla: " + rs.getString(8));
-                view = rs.getString(9);
-
-            }
-
-            cn.close();
-
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al consultar la información de las notificaciones! " + e);
+            jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 15));
+            jLabel_Read.setFont(new java.awt.Font("Roboto", 0, 12));
 
         }
-
     }
 
+    //Modifica en la base de datos que una notificación fue marcada como leia...
     class UpdateViewNotifications implements Runnable {
 
         private int id_Notification;

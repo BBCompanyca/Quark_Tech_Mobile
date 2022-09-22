@@ -8,10 +8,12 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import clases.Paneles;
 import clases.Date;
+import clases.Register_Notification;
 import static view.Menu_Tecnico.jLabel_Index;
 
 public class Information_Solicitudes extends javax.swing.JPanel {
 
+    String message;
     int id_warranty_consult, id_warranty, id_registered_by, id_equipo;
 
     Paneles paneles = new Paneles();
@@ -191,7 +193,9 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                         }
 
-                        Notification notification = new Notification("ha aceptado tu solicitud del equipo:");
+                        //Registra una notificación de que el equipo fue aceptado...
+                        message = "ha aceptado tu solicitud del equipo:";
+                        Register_Notification notification = new Register_Notification(id_registered_by, id_warranty, id_equipo, message);
                         Thread t = new Thread(notification);
                         t.start();
                         
@@ -274,7 +278,9 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                         JOptionPane.showMessageDialog(null, "Equipo rechazado con exito...");
                         
-                        Notification notification = new Notification("ha rechazado tu solicitud del equipo:");
+                        //Registra una notificación de que el equipo fue rechazado...
+                        message = "ha rechazado tu solicitud del equipo:";
+                        Register_Notification notification = new Register_Notification(id_registered_by, id_warranty, id_equipo, message);
                         Thread t = new Thread(notification);
                         t.start();
 
@@ -371,51 +377,6 @@ public class Information_Solicitudes extends javax.swing.JPanel {
         String dateFormat = date.DateToDay().substring(6, 10) + "-" + date.DateToDay().substring(3, 5) + "-" + date.DateToDay().substring(0, 2);
 
         return dateFormat;
-
-    }
-
-    class Notification implements Runnable {
-
-        String value;
-
-        public Notification(String value) {
-
-            this.value = value;
-
-        }
-
-        @Override
-        public void run() {
-            
-            InsertNotification();
-
-        }
-
-        public void InsertNotification() {
-
-            try {
-
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement(
-                        "insert into notifications values(?, ?, ?, ?, ?, ?, ?, ?)");
-
-                pst.setInt(1, 0);
-                pst.setInt(2, Login.ID_User);
-                pst.setInt(3, id_registered_by);
-                pst.setInt(4, id_warranty);
-                pst.setInt(5, id_equipo);
-                pst.setString(6, value);
-                pst.setString(7, "unread");
-                pst.setString(8, date.DateToDay());
-                pst.executeUpdate();
-
-            } catch (SQLException e) {
-                
-                System.err.println("¡Error en registrar notificación! " + e);
-                
-            }
-
-        }
 
     }
 
