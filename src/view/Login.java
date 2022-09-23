@@ -36,6 +36,8 @@ public class Login extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(fondo);
         this.repaint();
 
+        Frase();
+
     }
 
     @Override
@@ -44,7 +46,7 @@ public class Login extends javax.swing.JFrame {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/LOGO BBC64.png"));
 
         return retValue;
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -59,6 +61,7 @@ public class Login extends javax.swing.JFrame {
         jButton_Acceder = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
+        jLabel_Frase = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel_Backgound_Down = new javax.swing.JLabel();
@@ -133,15 +136,20 @@ public class Login extends javax.swing.JFrame {
         jPasswordField1.setBorder(null);
         jPanel_Background.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 333, 400, 45));
 
+        jLabel_Frase.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jLabel_Frase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Frase.setAutoscrolls(true);
+        jPanel_Background.add(jLabel_Frase, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 490, 460, 50));
+
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel_Background.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 390, 160, 20));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Login (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Login.png"))); // NOI18N
         jPanel_Background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 480, 500));
 
         jLabel_Backgound_Down.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Backgound_Down.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Vectors .png"))); // NOI18N
-        jPanel_Background.add(jLabel_Backgound_Down, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 1160, 90));
+        jPanel_Background.add(jLabel_Backgound_Down, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 1160, 90));
 
         jLabel_Wallpaper.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LOGO BBC.png"))); // NOI18N
@@ -310,10 +318,75 @@ public class Login extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel_Anwser;
     private javax.swing.JLabel jLabel_Backgound_Down;
     private javax.swing.JLabel jLabel_Footer;
+    private javax.swing.JLabel jLabel_Frase;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JPanel jPanel_Background;
     private javax.swing.JPanel jPanel_Exit;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    private void Frase() {
+
+        int numero = (int) (Math.random() * 10);
+
+        switch (numero) {
+
+            case 0:
+
+                jLabel_Frase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/0.png")));
+                break;
+
+            case 1:
+
+                jLabel_Frase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1.png")));
+                break;
+
+            case 2:
+
+                jLabel_Frase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/2.png")));
+                break;
+
+            case 3:
+
+                jLabel_Frase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/3.png")));
+                break;
+
+            case 4:
+
+                jLabel_Frase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/4.png")));
+                break;
+
+            case 5:
+
+                jLabel_Frase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/5.png")));
+                break;
+
+            case 6:
+
+                jLabel_Frase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/6.png")));
+                break;
+
+            case 7:
+
+                jLabel_Frase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/7.png")));
+                break;
+
+            case 8:
+
+                jLabel_Frase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/8.png")));
+                break;
+
+            case 9:
+
+                jLabel_Frase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/9.png")));
+                break;
+
+            default:
+                System.out.println("El numero que salio fue: " + numero);
+                break;
+        }
+
+    }
+
 }
