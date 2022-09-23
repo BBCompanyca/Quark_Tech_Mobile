@@ -4,8 +4,7 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.sql.*;
 import clases.BD_Connection;
-import Notifications.model.Consult_Notifications;
-import Notifications.model.Request_Notifications;
+import notifications.Request_Notifications;
 import javax.swing.JOptionPane;
 import clases.Paneles;
 import java.awt.Image;
@@ -43,10 +42,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         //Método para consultar la información del usuario que ha iniciado sesión...
         BD_Consult();
-
-        Consult_Notifications consutlBD = new Consult_Notifications();
-        Thread hilo = new Thread(consutlBD);
-        hilo.start();
 
         Request_Notifications request_notification = new Request_Notifications();
         Thread hilo2 = new Thread(request_notification);

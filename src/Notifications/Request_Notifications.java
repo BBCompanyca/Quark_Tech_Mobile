@@ -1,20 +1,19 @@
-package Notifications.model;
+package notifications;
 
 import clases.BD_Connection;
-import java.awt.List;
-import static java.lang.Thread.sleep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import static view.Dashboard.jLabel_NumberNotification;
 import view.Login;
 
 public class Request_Notifications implements Runnable {
 
-    int index_notification = 0;
+    int numberNotification = 0;
 
-    public static ArrayList<Notification> ejemploLista = new ArrayList<>();
+    public static ArrayList<Notification> noficationList = new ArrayList<>();
 
     @Override
     public void run() {
@@ -22,16 +21,6 @@ public class Request_Notifications implements Runnable {
         while (true) {
 
             Consult_Notifications();
-
-            try {
-
-                sleep(30000);
-
-            } catch (Exception e) {
-
-                System.err.println("¡Error en el Sleep del Request_Notifications! " + e);
-
-            }
 
         }
 
@@ -53,18 +42,40 @@ public class Request_Notifications implements Runnable {
 
             ResultSet rs = pst.executeQuery();
 
-            if (!ejemploLista.isEmpty()) {
+            if (!noficationList.isEmpty()) {
 
-                ejemploLista.clear();
+                noficationList.clear();
 
             }
 
             while (rs.next()) {
 
+                if (rs.getString("n.status").equals("unread")) {
+
+                    numberNotification++;
+
+                }
+
                 Notification notification = new Notification(rs.getInt(1), rs.getString(2), rs.getString(3),
                         rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
 
-                ejemploLista.add(notification);
+                noficationList.add(notification);
+
+            }
+
+            if (ValidateRequest(numberNotification)) {
+
+                jLabel_NumberNotification.setText(String.valueOf(numberNotification));
+
+                numberNotification = 0;
+
+            } else {
+
+                if (numberNotification == 0) {
+
+                    jLabel_NumberNotification.setText("");
+
+                }
 
             }
 
@@ -75,6 +86,22 @@ public class Request_Notifications implements Runnable {
             System.err.println("¡Error al consultar notificaciones! " + e);
 
         }
+
+    }
+
+    public boolean ValidateRequest(int numberNotification) {
+
+        boolean flag = false;
+        int aux = 0;
+
+        if (aux != numberNotification) {
+
+            aux = numberNotification;
+
+            flag = true;
+        }
+
+        return flag;
 
     }
 
