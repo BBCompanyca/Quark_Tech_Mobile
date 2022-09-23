@@ -1,10 +1,9 @@
-package Notifications.View;
+package notifications;
 
 import clases.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import static view.Dashboard.jLabel_NumberNotification;
 
 public class Information_Notification extends javax.swing.JPanel {
 
@@ -83,20 +82,6 @@ public class Information_Notification extends javax.swing.JPanel {
 
             jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 15));
             jLabel_Read.setFont(new java.awt.Font("Roboto", 0, 12));
-
-            int numNotification = Integer.parseInt(jLabel_NumberNotification.getText());
-
-            numNotification = numNotification - 1;
-
-            if (numNotification == 0) {
-
-                jLabel_NumberNotification.setText("");
-
-            } else {
-
-                jLabel_NumberNotification.setText(String.valueOf(numNotification));
-
-            }
 
             //Envia el ID de la notificación para ser marcada como vista.
             UpdateViewNotifications updateViewNotifications = new UpdateViewNotifications(ID);

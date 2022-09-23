@@ -15,7 +15,7 @@ import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
 import view.Movimientos;
-import Notifications.View.Contain_Notification;
+import notifications.Contain_Notification;
 import view.Preliminar_History;
 import view.Preliminar_Warranty;
 import view.Principal;

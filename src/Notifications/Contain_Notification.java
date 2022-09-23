@@ -1,6 +1,4 @@
-package Notifications.View;
-
-import Notifications.model.Request_Notifications;
+package notifications;
 
 public final class Contain_Notification extends javax.swing.JPanel {
 
@@ -50,14 +48,14 @@ public final class Contain_Notification extends javax.swing.JPanel {
 
     public void View_Window() {
 
-        for (int i = 0; i < Request_Notifications.ejemploLista.size(); i++) {
+        for (int i = 0; i < Request_Notifications.noficationList.size(); i++) {
 
             Information_Notification info = new Information_Notification(
-                    Request_Notifications.ejemploLista.get(i).getID(), Request_Notifications.ejemploLista.get(i).getUsername_technical(),
-                    Request_Notifications.ejemploLista.get(i).getMessage(), Request_Notifications.ejemploLista.get(i).getBrand(),
-                    Request_Notifications.ejemploLista.get(i).getModel(), Request_Notifications.ejemploLista.get(i).getColor(),
-                    Request_Notifications.ejemploLista.get(i).getSerial(), Request_Notifications.ejemploLista.get(i).getFalla(),
-                    Request_Notifications.ejemploLista.get(i).getStatus_notification());
+                    Request_Notifications.noficationList.get(i).getID(), Request_Notifications.noficationList.get(i).getUsername_technical(),
+                    Request_Notifications.noficationList.get(i).getMessage(), Request_Notifications.noficationList.get(i).getBrand(),
+                    Request_Notifications.noficationList.get(i).getModel(), Request_Notifications.noficationList.get(i).getColor(),
+                    Request_Notifications.noficationList.get(i).getSerial(), Request_Notifications.noficationList.get(i).getFalla(),
+                    Request_Notifications.noficationList.get(i).getStatus_notification());
             jPanel_Content.add(info);
             jPanel_Content.revalidate();
             info.setVisible(true);
@@ -66,25 +64,4 @@ public final class Contain_Notification extends javax.swing.JPanel {
 
     }
 
-    /*public class RequestView implements Runnable {
-
-        int id_warranty_consult;
-
-        public RequestView(int id_warranty_consult) {
-
-            this.id_warranty_consult = id_warranty_consult;
-
-        }
-
-        @Override
-        public void run() {
-
-            Information_Notification info = new Information_Notification(id_warranty_consult);
-            jPanel_Content.add(info);
-            jPanel_Content.revalidate();
-            info.setVisible(true);
-
-        }
-
-    }*/
 }
