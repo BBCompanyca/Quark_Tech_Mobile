@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static view.Warranty.jScrollPane_W;
-import view.Login;
+import login.Login;
 import static view.Clients.jTable_Client;
 import static view.Clients.jScrollPane_C;
 import static view.History.jScrollPane_H;
