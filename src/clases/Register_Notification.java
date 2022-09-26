@@ -3,7 +3,7 @@ package clases;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import view.Login;
+import login.Login;
 
 public class Register_Notification implements Runnable {
 

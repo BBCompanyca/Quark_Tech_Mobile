@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import view.Login;
+import login.Login;
 import static view.Menu_Tecnico.jLabel_Index;
 
 public class Consut_Notification extends Thread {
