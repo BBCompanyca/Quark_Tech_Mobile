@@ -1,21 +1,17 @@
-package view;
+package login;
 
-import java.sql.*;
-import clases.BD_Connection;
 import java.awt.Color;
-import javax.swing.JOptionPane;
 import clases.EncryptPassword;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import view.Dashboard;
 
 public class Login extends javax.swing.JFrame {
 
     public static int ID_User;
-    public static String user;
-    public static String type_account;
-    public static String direction;
+    public static String user, type_account, direction, name;
     public String pass;
 
     EncryptPassword encryptPassword = new EncryptPassword();
@@ -37,6 +33,10 @@ public class Login extends javax.swing.JFrame {
         this.repaint();
 
         Frase();
+
+        Request_User_Login request_User_Login = new Request_User_Login();
+        Thread hilo = new Thread(request_User_Login);
+        hilo.start();
 
     }
 
@@ -165,7 +165,7 @@ public class Login extends javax.swing.JFrame {
         //Obtención de los datos ingresados por el usuario...
         String user2 = jTextField1.getText().trim();
         String pass2 = jPasswordField1.getText().trim();
-        String status;
+        int validateIsEmpty = 0;
 
         //Validación de que todos los campos estén llenos.
         if (!user2.equals("") && !pass2.equals("")) {
@@ -173,35 +173,30 @@ public class Login extends javax.swing.JFrame {
             //Instancia para encriptar la contraseña...
             pass2 = encryptPassword.ecnode("@BBCompany.ca", pass2);
 
-            try {
+            do {
 
-                //Conexión a la base de datos para consultar los datos del usuario...
-                Connection cn = BD_Connection.connection();
-                PreparedStatement pst = cn.prepareStatement(
-                        "select id_user, username, password, direction, type_account, status from user where "
-                        + "username = '" + user2 + "' and password = '" + pass2 + "'");
+                if (!Request_User_Login.user_Login_List.isEmpty()) {
 
-                ResultSet rs = pst.executeQuery();
+                    for (int i = 0; i < Request_User_Login.user_Login_List.size(); i++) {
 
-                if (rs.next()) {
+                        User_Login user_Login = new User_Login();
+                        user_Login = Request_User_Login.user_Login_List.get(i);
 
-                    ID_User = rs.getInt("id_user");
-                    status = rs.getString("status");
-                    type_account = rs.getString("type_account");
-                    user = rs.getString("username");
-                    pass = rs.getString("password");
-                    direction = rs.getString("direction");
+                        if (user_Login.Compare_Login(user2, pass2) == 1) {
 
-                    if (user.equals(user2) && pass.equals(pass2)) {
-
-                        //Condicional para validar que el usuario esté activo...
-                        if (status.equals("Activo")) {
-
+                            ID_User = user_Login.getID();
+                            user = user_Login.getUsername();
+                            type_account = user_Login.getPermission();
+                            direction = user_Login.getDirection();
+                            name = user_Login.getName();
+                            
                             this.dispose();
                             Dashboard window = new Dashboard();
                             window.setVisible(true);
 
-                        } else {
+                            break;
+
+                        } else if (user_Login.Compare_Login(user2, pass2) == 2) {
 
                             //Si el usuario está inactivo dejará un mensaje y limpiará los campos...
                             jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 22));
@@ -212,42 +207,28 @@ public class Login extends javax.swing.JFrame {
                             jTextField1.requestFocus();
                             jPasswordField1.setText("");
 
+                        } else {
+
+                            //Si no encuentra los valores dejará un mensaje y limpiará los campos...
+                            jLabel_Anwser.setText("¡Datos de acceso incorrectos!");
+
+                            jTextField1.setText("");
+                            jTextField1.requestFocus();
+                            jPasswordField1.setText("");
+
                         }
-
-                    } else {
-
-                        //Si los valores no son exactamente iguales...
-                        jLabel_Anwser.setText("¡Datos de acceso incorrectos!");
-
-                        jTextField1.setText("");
-                        jTextField1.requestFocus();
-                        jPasswordField1.setText("");
-
-                        jLabel_Anwser.setForeground(Color.WHITE);
-                        jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 24));
 
                     }
 
+                    validateIsEmpty = 1;
+
                 } else {
 
-                    //Si no encuentra los valores dejará un mensaje y limpiará los campos...
-                    jLabel_Anwser.setText("¡Datos de acceso incorrectos!");
-
-                    jTextField1.setText("");
-                    jTextField1.requestFocus();
-                    jPasswordField1.setText("");
+                    System.out.println("Está vacia...");
 
                 }
 
-                cn.close();
-
-            } catch (SQLException e) {
-
-                //Mensaje de error para alertar que algo no funciona en el Login...
-                System.err.println("¡Error en el botón de acceder! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error en el boton acceder!");
-
-            }
+            } while (validateIsEmpty == 0);
 
         } else {
 
@@ -255,6 +236,8 @@ public class Login extends javax.swing.JFrame {
             jLabel_Anwser.setText("¡Debes llenar todos los campos!");
 
         }
+        
+        
 
 
     }//GEN-LAST:event_jButton_AccederMousePressed
@@ -288,16 +271,24 @@ public class Login extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
