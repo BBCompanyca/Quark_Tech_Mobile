@@ -1,7 +1,7 @@
 package clases;
 
 import javax.swing.UIManager;
-import view.Login;
+import login.Login;
 
 public class OptionWindow {
 

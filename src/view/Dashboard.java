@@ -1,11 +1,9 @@
 package view;
 
+import login.Login;
 import java.awt.Color;
 import java.time.LocalDate;
-import java.sql.*;
-import clases.BD_Connection;
 import notifications.Request_Notifications;
-import javax.swing.JOptionPane;
 import clases.Paneles;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -15,7 +13,6 @@ public class Dashboard extends javax.swing.JFrame {
     //Objeto para llamar a la clase que tiene todo los paneles...
     Paneles paneles = new Paneles();
 
-    String user, type_Account;
     int xMouse, yMouse;
 
     public Dashboard() {
@@ -25,10 +22,6 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setSize(1100, 700);
-
-        //Nombre de usuario y tipo de cuenta del usuario que ha iniciado sesión...
-        user = Login.user;
-        type_Account = Login.type_account;
 
         //Los siguientes metodos están al final de está clase...
         //Método para obtener la fecha actual...
@@ -40,14 +33,13 @@ public class Dashboard extends javax.swing.JFrame {
         //Método para llamar al menu correspondiente a quien inició sesión...
         PanelMenuStart();
 
-        //Método para consultar la información del usuario que ha iniciado sesión...
-        BD_Consult();
+        Print_Info_user();
 
         Request_Notifications request_notification = new Request_Notifications();
         Thread hilo2 = new Thread(request_notification);
         hilo2.start();
 
-        if (type_Account.equals("Tecnico")) {
+        if (Login.type_account.equals("Tecnico")) {
 
             jLabel_NumberNotification.setText("");
             jLabel_IconNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("")));
@@ -55,14 +47,14 @@ public class Dashboard extends javax.swing.JFrame {
         }
 
     }
-    
+
     @Override
     public Image getIconImage() {
 
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/LOGO BBC64.png"));
 
         return retValue;
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -78,7 +70,6 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Type_Account = new javax.swing.JLabel();
         jLabel_Fecha = new javax.swing.JLabel();
         jLabel_ID = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel_NumberNotification = new javax.swing.JLabel();
         jLabel_IconNotification = new javax.swing.JLabel();
         jPanel_Exit = new javax.swing.JPanel();
@@ -140,13 +131,8 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel_ID.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_ID.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_ID.setText("N°");
-        jPanel_Head.add(jLabel_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 55, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel3.setText("ID User:");
-        jPanel_Head.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 55, -1, -1));
+        jLabel_ID.setText("ID User:");
+        jPanel_Head.add(jLabel_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 55, -1, -1));
 
         jLabel_NumberNotification.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel_NumberNotification.setForeground(new java.awt.Color(240, 240, 240));
@@ -342,11 +328,10 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_Fecha;
     private javax.swing.JLabel jLabel_Footer;
-    public javax.swing.JLabel jLabel_ID;
+    private javax.swing.JLabel jLabel_ID;
     private javax.swing.JLabel jLabel_IconNotification;
     public javax.swing.JLabel jLabel_Name;
     public static javax.swing.JLabel jLabel_NumberNotification;
@@ -379,7 +364,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         try {
 
-            if (type_Account.equals("Moderador") || type_Account.equals("Administrador")) {
+            if (Login.type_account.equals("Moderador") || Login.type_account.equals("Administrador")) {
 
                 paneles.PanelMenu_Mod_Admin();
 
@@ -393,7 +378,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         try {
 
-            if (type_Account.equals("Vendedor")) {
+            if (Login.type_account.equals("Vendedor")) {
 
                 paneles.PanelMenu_Seller();
 
@@ -407,7 +392,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         try {
 
-            if (type_Account.equals("Tecnico")) {
+            if (Login.type_account.equals("Tecnico")) {
 
                 paneles.PanelMenu_Tecnico();
 
@@ -421,38 +406,13 @@ public class Dashboard extends javax.swing.JFrame {
 
     }
 
-    //Método para consultar la información del usuario que inició sesión...
-    private void BD_Consult() {
+    private void Print_Info_user() {
 
-        try {
+        jLabel_Username.setText(Login.user);
+        jLabel_Type_Account.setText(Login.type_account);
+        jLabel_Name.setText(Login.name);
+        jLabel_ID.setText("ID User: " + Login.ID_User);
 
-            //Conexión y consulta a la BD...
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select id_user, name_user, type_account from user where username = '" + user + "'");
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-
-                //Llenado de los campos con la información del usuario...
-                jLabel_Username.setText(user);
-                jLabel_Type_Account.setText(rs.getString("type_account"));
-                jLabel_Name.setText(rs.getString("name_user"));
-                jLabel_ID.setText(rs.getString("id_user"));
-
-            }
-
-            cn.close();
-
-        } catch (SQLException e) {
-
-            //Alerta de que algo no funciona en la consulta de la información del usuario...
-            System.err.println("¡Error al consultar la información del usuario! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del usuario!", "¡Error!",
-                    JOptionPane.OK_CANCEL_OPTION);
-
-        }
     }
 
 }

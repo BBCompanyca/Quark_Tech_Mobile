@@ -12,8 +12,6 @@ public class BD_Connection {
         try {
 
             Connection cn = DriverManager.getConnection(
-                    
-                   //"jdbc:mysql://localhost/quark_tech_mobile", "root", "");
                   
                     //Base De Datos para desarrollo...
                     "jdbc:mysql://quarktechmobileccs.online:3306/u972055873_developerqtm",

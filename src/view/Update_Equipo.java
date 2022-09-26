@@ -1,5 +1,6 @@
 package view;
 
+import login.Login;
 import clases.BD_Connection;
 import clases.Paneles;
 import clases.Register_Movimiento;
