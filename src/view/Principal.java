@@ -10,11 +10,6 @@ public class Principal extends javax.swing.JPanel {
     public Principal() {
         initComponents();
         
-   /*   ImageIcon wallpaper = new ImageIcon(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\logo_sinFondo_QTM.png");
-        Icon fondo = new ImageIcon(wallpaper.getImage().getScaledInstance(450,
-                100, Image.SCALE_DEFAULT));
-        jLabel_Wallpaper.setIcon(fondo);
-        this.repaint(); */
              
     }
 
@@ -23,7 +18,6 @@ public class Principal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel_Wallpaper = new javax.swing.JLabel();
         Title_Welcome = new javax.swing.JLabel();
         Text1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -38,9 +32,6 @@ public class Principal extends javax.swing.JPanel {
         setBackground(new java.awt.Color(9, 53, 69));
         setPreferredSize(new java.awt.Dimension(790, 470));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel_Wallpaper.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 480, 150));
 
         Title_Welcome.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         Title_Welcome.setForeground(new java.awt.Color(240, 240, 240));
@@ -105,6 +96,5 @@ public class Principal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabel_Wallpaper;
     // End of variables declaration//GEN-END:variables
 }
