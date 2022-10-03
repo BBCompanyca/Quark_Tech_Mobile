@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
 public class ReportsPDF implements Runnable {
 
     Date date = new Date();
+    
+    BD_Connection connection = new BD_Connection();
 
     int ID;
     File ruta;
@@ -78,7 +80,7 @@ public class ReportsPDF implements Runnable {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "select c.name_client, c.identity_card_client, c.direction_client, w.date_purchase from warranty w join client c on "
                         + "c.id_client = w.id_client and w.id_warranty = '" + ID + "'");
@@ -168,7 +170,7 @@ public class ReportsPDF implements Runnable {
             try {
 
                 //Consulta al servidor de la cantidad de días de garantía del equipo...
-                Connection cn2 = BD_Connection.connection();
+                Connection cn2 = connection.connection();
                 PreparedStatement pst2 = cn2.prepareStatement("select day_warranty from warranty where id_warranty = '" + ID + "'");
 
                 ResultSet rs2 = pst2.executeQuery();

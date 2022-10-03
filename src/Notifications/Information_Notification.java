@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Information_Notification extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     private int ID;
     private String username_technical, brand, model, color, serial, falla, status_notification, message;
@@ -138,7 +140,7 @@ public class Information_Notification extends javax.swing.JPanel {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "update notifications set status = ? where id_notification = '" + id_Notification + "'");
 

@@ -10,6 +10,8 @@ public class Register_Notification implements Runnable {
     private String message;
     int RegisteredID, warrantyID, equipoID;
     
+    BD_Connection connection = new BD_Connection();
+    
     Date date = new Date();
 
     public Register_Notification(int RegisteredID, int warrantyID, int equipoID, String message) {
@@ -32,7 +34,7 @@ public class Register_Notification implements Runnable {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "insert into notifications values(?, ?, ?, ?, ?, ?, ?, ?)");
 

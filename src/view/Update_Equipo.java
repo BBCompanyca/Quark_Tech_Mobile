@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class Update_Equipo extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     int ID;
     Paneles paneles = new Paneles();
@@ -218,7 +220,7 @@ public class Update_Equipo extends javax.swing.JPanel {
 
         try {
 
-            Connection cn2 = BD_Connection.connection();
+            Connection cn2 = connection.connection();
             PreparedStatement pst2 = cn2.prepareStatement(
                     "select code from equipo where code = '" + generateCode() + "' and not id_equipo = '" + ID + "'");
 
@@ -237,7 +239,7 @@ public class Update_Equipo extends javax.swing.JPanel {
 
                 try {
 
-                    Connection cn = BD_Connection.connection();
+                    Connection cn = connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
                             "update equipo set code = ?, brand = ?, model = ?, color = ?, capacity = ?, day_warranty = ?, "
                             + "last_modification = ? where code = '" + Equipos.code + "'");
@@ -384,7 +386,7 @@ public class Update_Equipo extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("select id_equipo, brand, model, color, capacity, day_warranty "
                     + "from equipo where code = '" + Equipos.code + "'");
 

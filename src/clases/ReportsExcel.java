@@ -25,6 +25,8 @@ public class ReportsExcel implements Runnable {
 
     String search, shop, desde, hasta;
     File fichero;
+    
+    BD_Connection connection = new BD_Connection();
 
     public ReportsExcel(File fichero, String search, String shop, String desde, String hasta) {
 
@@ -151,7 +153,7 @@ public class ReportsExcel implements Runnable {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(Query());
 
                 ResultSet rs = pst.executeQuery();
@@ -250,7 +252,7 @@ public class ReportsExcel implements Runnable {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(Query());
 
                 ResultSet rs = pst.executeQuery();
