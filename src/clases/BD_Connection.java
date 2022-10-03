@@ -3,32 +3,61 @@ package clases;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class BD_Connection {
 
-    public static Connection connection() {
- 
+    private int flag = 0;
+
+    public Connection connection() {
+
         try {
 
             Connection cn = DriverManager.getConnection(
-                  
                     //Base De Datos para desarrollo...
                     "jdbc:mysql://quarktechmobileccs.online:3306/u972055873_developerqtm",
                     "u972055873_developer",
-                    "V3]gdibBdFjw"); 
-                    
-                    //Base De Datos De Producción...
-                   /*"jdbc:mysql://quarktechmobileccs.online:3306/u972055873_quarktech",
+                    "V3]gdibBdFjw");
+
+            //Base De Datos De Producción...
+            /*"jdbc:mysql://quarktechmobileccs.online:3306/u972055873_quarktech",
                     "u972055873_globalpayment",
                     "~8d$:Vn7CdR"); */
+            setFlag(0);
 
             return cn;
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(null, "¡Error al conectar con el servidor!", "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            if (getFlag() < 1) {
+
+                try {
+
+                    setFlag(getFlag() + 1);
+
+                    Thread.sleep(3000);
+
+                    connection();
+
+                } catch (InterruptedException ex) {
+
+                    Logger.getLogger(BD_Connection.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, 
+                        "¡Ops... Tenemos problemas para conectar con el servidor!\n"
+                      + "                        ¡Se cerrará la aplicación!\n"
+                        + "           -Por favor consulta tu conexión a internet-",
+                        "¡Error!", JOptionPane.ERROR_MESSAGE);
+
+                System.exit(0);
+
+            }
 
             System.out.println("¡Error al conectar con la base de datos! " + e);
 
@@ -36,7 +65,14 @@ public class BD_Connection {
 
         return (null);
 
-    } 
-       
-       
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
+
 }

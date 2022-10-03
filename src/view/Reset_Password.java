@@ -11,6 +11,8 @@ import clases.Paneles;
 import clases.Register_Movimiento;
 
 public class Reset_Password extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     int ID;
     String name_user, username;
@@ -150,7 +152,7 @@ public class Reset_Password extends javax.swing.JPanel {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement("update user set password = ? where id_user = '" + ID + "'");
 
                 pst.setString(1, newPass);

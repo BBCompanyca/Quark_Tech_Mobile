@@ -11,6 +11,8 @@ import static view.Menu_Tecnico.jLabel_Index;
 public class Consut_Notification extends Thread {
 
     public static int indexSolicitudes = 0;
+    
+    BD_Connection connection = new BD_Connection();
 
     @Override
     public void run() {
@@ -37,7 +39,7 @@ public class Consut_Notification extends Thread {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select id_warranty from warranty where id_technical = '" + Login.ID_User + "' "
                     + "and status = '" + "Solicitud Enviada - En Espera" + "'");

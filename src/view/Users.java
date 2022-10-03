@@ -12,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public final class Users extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     public static int ID;
     String direction, type_Account, permission, username;
@@ -229,7 +231,7 @@ public final class Users extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(query);
 
             ResultSet rs = pst.executeQuery();
@@ -347,7 +349,7 @@ public final class Users extends javax.swing.JPanel {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(query);
 
                 ResultSet rs = pst.executeQuery();
@@ -492,7 +494,7 @@ public final class Users extends javax.swing.JPanel {
 
                         try {
 
-                            Connection cn = BD_Connection.connection();
+                            Connection cn = connection.connection();
                             PreparedStatement pst = cn.prepareStatement(
                                     "delete from user where id_user = '" + ID + "'");
 
@@ -558,7 +560,7 @@ public final class Users extends javax.swing.JPanel {
             try {
 
                 //Conexión a la BD para consultar la lista de los usuarios para administradores...
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "select id_user, name_user, username, direction, type_account, status from user");
 
@@ -603,7 +605,7 @@ public final class Users extends javax.swing.JPanel {
             try {
 
                 //Conexión a la BD para consultar la lista de los usuarios para administradores...
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "select id_user, name_user, username, type_account, status from user where direction = '"
                         + direction + "'");

@@ -4,6 +4,8 @@ import java.awt.Color;
 import clases.EncryptPassword;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import view.Dashboard;
@@ -165,7 +167,7 @@ public class Login extends javax.swing.JFrame {
         //Obtención de los datos ingresados por el usuario...
         String user2 = jTextField1.getText().trim();
         String pass2 = jPasswordField1.getText().trim();
-        int validateIsEmpty = 0;
+        int validateIsEmpty = 0, flag = 0;
 
         //Validación de que todos los campos estén llenos.
         if (!user2.equals("") && !pass2.equals("")) {
@@ -189,7 +191,7 @@ public class Login extends javax.swing.JFrame {
                             type_account = user_Login.getPermission();
                             direction = user_Login.getDirection();
                             name = user_Login.getName();
-                            
+
                             this.dispose();
                             Dashboard window = new Dashboard();
                             window.setVisible(true);
@@ -224,7 +226,21 @@ public class Login extends javax.swing.JFrame {
 
                 } else {
 
-                    System.out.println("Está vacia...");
+                    if (flag < 2) {
+                        
+                        flag += 1;
+
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    } else {
+                        
+                        validateIsEmpty = 1;
+                        
+                    }
 
                 }
 
@@ -236,8 +252,6 @@ public class Login extends javax.swing.JFrame {
             jLabel_Anwser.setText("¡Debes llenar todos los campos!");
 
         }
-        
-        
 
 
     }//GEN-LAST:event_jButton_AccederMousePressed

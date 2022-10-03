@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import clases.Search;
 
 public final class Warranty extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     public static int ID;
     String direction, type_Account, permission;
@@ -262,7 +264,7 @@ public final class Warranty extends javax.swing.JPanel {
 
                 try {
 
-                    Connection cn = BD_Connection.connection();
+                    Connection cn = connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
                             "delete from warranty where id_warranty = '" + ID + "'");
 
@@ -344,7 +346,7 @@ public final class Warranty extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(query);
 
             ResultSet rs = pst.executeQuery();

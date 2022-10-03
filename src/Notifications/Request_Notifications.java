@@ -14,6 +14,8 @@ public class Request_Notifications implements Runnable {
     int numberNotification = 0;
 
     public static ArrayList<Notification> noficationList = new ArrayList<>();
+    
+    BD_Connection connection = new BD_Connection();
 
     @Override
     public void run() {
@@ -30,7 +32,7 @@ public class Request_Notifications implements Runnable {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select n.id_notification, us.username, n.notification, e.brand, e.model, e.color, "
                     + "w.serial, w.falla, n.status "

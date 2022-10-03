@@ -12,6 +12,8 @@ import clases.Register_Notification;
 import static view.Menu_Tecnico.jLabel_Index;
 
 public class Information_Solicitudes extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     String message;
     int id_warranty_consult, id_warranty, id_registered_by, id_equipo;
@@ -155,7 +157,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select status from warranty where id_warranty = '" + id_warranty + "'");
 
@@ -169,7 +171,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                     try {
 
-                        Connection cn2 = BD_Connection.connection();
+                        Connection cn2 = connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "update warranty set status = ?, date_received_technical = ?, date_format_acepted = ?"
                                 + " where id_warranty = '" + id_warranty + "'");
@@ -240,7 +242,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select status from warranty where id_warranty = '" + id_warranty + "'");
 
@@ -254,7 +256,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                     try {
 
-                        Connection cn2 = BD_Connection.connection();
+                        Connection cn2 = connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "update warranty set status = ?, date_received_technical = ? where id_warranty = '" + id_warranty + "'");
 
@@ -341,7 +343,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.received, "
                     + "w.id_registered_by, w.id_equipo "

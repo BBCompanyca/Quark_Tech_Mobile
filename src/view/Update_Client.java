@@ -11,6 +11,8 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class Update_Client extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     Paneles paneles = new Paneles();
 
@@ -262,7 +264,7 @@ public class Update_Client extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                 "select unformat_identity_card_client from client where unformat_identity_card_client = '" + ci + "' and not id_client = '"
                 + Clients.ID + "'");
@@ -290,7 +292,7 @@ public class Update_Client extends javax.swing.JPanel {
                     String unformat_telephone = formattext.unFormatText(telephone);
                     ci = ci.toUpperCase();
 
-                    Connection cn2 = BD_Connection.connection();
+                    Connection cn2 = connection.connection();
                     PreparedStatement pst2 = cn2.prepareStatement(
                         "update client set name_client = ?, telephone_client = ?, unformat_telephone_client = ?, "
                         + "identity_card_client = ?, unformat_identity_card_client = ?,"
@@ -400,7 +402,7 @@ public class Update_Client extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("select c.name_client, c.telephone_client, "
                     + "c.direction_client, c.unformat_identity_card_client, u.username from client c join "
                     + "user u on id_client = '" + Clients.ID + "'");

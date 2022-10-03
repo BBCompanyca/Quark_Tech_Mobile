@@ -1,11 +1,9 @@
 package clases;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +20,8 @@ import static view.Movimientos.jTable_Movimientos;
 public class Search {
 
     DefaultTableModel model = new DefaultTableModel();
+    
+    BD_Connection connection = new BD_Connection();
 
     public void SearchClient(String search) {
 
@@ -47,7 +47,7 @@ public class Search {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(query);
 
             ResultSet rs = pst.executeQuery();
@@ -149,7 +149,7 @@ public class Search {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(query);
 
             ResultSet rs = pst.executeQuery();
@@ -294,7 +294,7 @@ public class Search {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(query);
 
             ResultSet rs = pst.executeQuery();
@@ -388,7 +388,7 @@ public class Search {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(query);
 
                 ResultSet rs = pst.executeQuery();
@@ -432,7 +432,7 @@ public class Search {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(query);
 
                 ResultSet rs = pst.executeQuery();

@@ -5,10 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Preliminar_History extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     public Preliminar_History() {
         initComponents();
@@ -211,7 +212,7 @@ public class Preliminar_History extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select * from warranty where id_warranty = '" + History.ID + "'");
 
@@ -288,7 +289,7 @@ public class Preliminar_History extends javax.swing.JPanel {
 
             try {
 
-                Connection cn2 = BD_Connection.connection();
+                Connection cn2 = connection.connection();
                 PreparedStatement pst2 = cn2.prepareStatement("select brand, model, capacity, color from equipo where "
                         + "id_equipo = '" + id_equipo + "'");
 
@@ -351,7 +352,7 @@ public class Preliminar_History extends javax.swing.JPanel {
 
             try {
 
-                Connection cn3 = BD_Connection.connection();
+                Connection cn3 = connection.connection();
                 PreparedStatement pst3 = cn3.prepareStatement("select name_user from user where id_user = '"
                         + id_registered_by + "'");
 
@@ -402,7 +403,7 @@ public class Preliminar_History extends javax.swing.JPanel {
 
             try {
 
-                Connection cn4 = BD_Connection.connection();
+                Connection cn4 = connection.connection();
                 PreparedStatement pst4 = cn4.prepareStatement("select name_user from user where id_user = '"
                         + id_technical + "'");
 

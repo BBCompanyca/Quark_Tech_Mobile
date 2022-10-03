@@ -14,6 +14,8 @@ import java.util.Date;
 import javax.swing.BorderFactory;
 
 public class Register_Warranty extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     public static int flag = 0, flag_AddressRegisterAndConsult = 0, flag_calendar = 0, day_warranty = 0, flag_register = 0, time_Warranty = 0, id_client = 0;
 
@@ -330,7 +332,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "select serial from warranty where serial = '" + serial + "' and not status = '" + "Entregado" + "'");
 
@@ -353,7 +355,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
                     try {
 
-                        Connection cn2 = BD_Connection.connection();
+                        Connection cn2 = connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
@@ -818,7 +820,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("select id_client from client where "
                     + "unformat_identity_card_client = '" + Register_Client.identity_card_client + "'");
 
@@ -846,7 +848,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("select code, brand, model, color, capacity, day_warranty from equipo "
                     + "where id_equipo = '" + CodeEquipos.id_equipo + "'");
 
