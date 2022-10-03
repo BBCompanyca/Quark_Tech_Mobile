@@ -3,10 +3,7 @@ package view;
 import login.Login;
 import java.awt.Color;
 import java.time.LocalDate;
-import java.sql.*;
-import clases.BD_Connection;
 import notifications.Request_Notifications;
-import javax.swing.JOptionPane;
 import clases.Paneles;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -75,6 +72,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_ID = new javax.swing.JLabel();
         jLabel_NumberNotification = new javax.swing.JLabel();
         jLabel_IconNotification = new javax.swing.JLabel();
+        jPanel_Min = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel_Exit = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel_Content = new javax.swing.JPanel();
@@ -152,6 +151,29 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Head.add(jLabel_IconNotification, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 55, -1, 30));
 
         jPanel_Background.add(jPanel_Head, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 35, 890, 100));
+
+        jPanel_Min.setBackground(new java.awt.Color(9, 53, 69));
+        jPanel_Min.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel_Min.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("><");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel5MouseExited(evt);
+            }
+        });
+        jPanel_Min.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
+
+        jPanel_Background.add(jPanel_Min, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 2, 30, 30));
 
         jPanel_Exit.setBackground(new java.awt.Color(9, 53, 69));
         jPanel_Exit.setForeground(new java.awt.Color(255, 255, 255));
@@ -294,6 +316,24 @@ public class Dashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel_IconNotificationMousePressed
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        
+        this.setState(Dashboard.ICONIFIED);
+                
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
+        
+        jPanel_Min.setBackground(Color.red);
+        
+    }//GEN-LAST:event_jLabel5MouseEntered
+
+    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
+        
+        jPanel_Min.setBackground(new java.awt.Color(9, 53, 69));
+        
+    }//GEN-LAST:event_jLabel5MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -332,6 +372,7 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel_Fecha;
     private javax.swing.JLabel jLabel_Footer;
     private javax.swing.JLabel jLabel_ID;
@@ -346,6 +387,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel jPanel_Content_Menu;
     private javax.swing.JPanel jPanel_Exit;
     private javax.swing.JPanel jPanel_Head;
+    private javax.swing.JPanel jPanel_Min;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 

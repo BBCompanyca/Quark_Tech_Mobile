@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class Request_User_Login implements Runnable {
 
+    BD_Connection connection = new BD_Connection();
+
     public static ArrayList<User_Login> user_Login_List = new ArrayList<>();
 
     @Override
@@ -22,7 +24,7 @@ public class Request_User_Login implements Runnable {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select id_user, username, password, name_user, direction, type_account, status from user");
 

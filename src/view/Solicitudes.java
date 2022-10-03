@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public final class Solicitudes extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     int index;
 
@@ -57,7 +59,7 @@ public final class Solicitudes extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("select id_warranty from warranty where id_technical = '" + Login.ID_User + "' "
                     + "and status = '" + "Solicitud Enviada - En Espera" + "'");
 

@@ -12,6 +12,8 @@ import clases.Paneles;
 import javax.swing.BorderFactory;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     String status = "", status_technical = "", brand = "", model = "", color = "", serial = "", falla = "", date_register = "",
             received = "", comments_technical = "";
@@ -428,7 +430,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("select status from warranty where id_warranty = '" + Warranty.ID + "'");
 
             ResultSet rs = pst.executeQuery();
@@ -443,7 +445,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
                     try {
 
-                        Connection cn2 = BD_Connection.connection();
+                        Connection cn2 = connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "update warranty set status = ? where id_warranty = '" + Warranty.ID + "'");
 
@@ -496,7 +498,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         try {
 
-            Connection cn2 = BD_Connection.connection();
+            Connection cn2 = connection.connection();
             PreparedStatement pst2 = cn2.prepareStatement(
                     "update warranty set status = ? where id_warranty = '" + Warranty.ID + "'");
 
@@ -545,7 +547,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("update warranty set serial = ?, falla = ?, received = ? "
                     + "where id_warranty = '" + Warranty.ID + "'");
 
@@ -637,7 +639,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("select c.name_client, e.brand, e.model, e.color, w.serial, w.falla, w.date_register, w.received, w.comments_technical, "
                     + "w.status, w.status_technical, w.day_warranty, w.date_purchase, w.id_registered_by from warranty w join client c on w.id_client = c.id_client and w.id_warranty = '" + Warranty.ID + "' "
                     + "join equipo e on w.id_equipo = e.id_equipo and w.id_warranty = '" + Warranty.ID + "'");

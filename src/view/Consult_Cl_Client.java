@@ -14,6 +14,8 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
     FormatText formattext = new FormatText();
 
     Paneles paneles = new Paneles();
+    
+    BD_Connection connection = new BD_Connection();
 
     public static int flag = 0, id_client = 0;
     public static String name_client, ci_client;
@@ -89,7 +91,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "select id_client, name_client, telephone_client, direction_client from client where "
                         + "unformat_identity_card_client = '" + ci_client + "'");
@@ -175,7 +177,7 @@ public class Consult_Cl_Client extends javax.swing.JPanel {
 
                 try {
 
-                    Connection cn = BD_Connection.connection();
+                    Connection cn = connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
                             "select id_client, name_client, telephone_client, direction_client from client where "
                             + "unformat_identity_card_client = '" + ci_client + "'");

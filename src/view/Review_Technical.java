@@ -11,6 +11,8 @@ import clases.Register_Notification;
 import javax.swing.BorderFactory;
 
 public class Review_Technical extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     Paneles paneles = new Paneles();
 
@@ -266,7 +268,7 @@ public class Review_Technical extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.shop, w.comments_technical, "
                     + "w.status_technical, w.id_equipo, w.id_registered_by from warranty w join equipo e on w.id_warranty = '"
@@ -313,7 +315,7 @@ public class Review_Technical extends javax.swing.JPanel {
 
                 try {
 
-                    Connection cn = BD_Connection.connection();
+                    Connection cn = connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
                             "update warranty set comments_technical = ?, status_technical = ? where "
                             + "id_warranty = '" + Warranty_Technical.ID_Warranty + "'");
@@ -355,7 +357,7 @@ public class Review_Technical extends javax.swing.JPanel {
 
                 try {
 
-                    Connection cn = BD_Connection.connection();
+                    Connection cn = connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
                             "update warranty set comments_technical = ?, status_technical = ? where "
                             + "id_warranty = '" + Warranty_Technical.ID_Warranty + "'");

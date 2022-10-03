@@ -11,6 +11,8 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class Register_Client extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     public static String name_client, identity_card_client;
 
@@ -199,7 +201,7 @@ public class Register_Client extends javax.swing.JPanel {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "select identity_card_client from client where unformat_identity_card_client = '" + identity_card_client + "'");
 
@@ -226,7 +228,7 @@ public class Register_Client extends javax.swing.JPanel {
                         String unformat_telphone = formattext.unFormatText(telephone);
                         identity_card_client = identity_card_client.toUpperCase();
 
-                        Connection cn2 = BD_Connection.connection();
+                        Connection cn2 = connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "insert into client values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -293,7 +295,7 @@ public class Register_Client extends javax.swing.JPanel {
                 String unformat_telphone = formattext.unFormatText(telephone);
                 identity_card_client = identity_card_client.toUpperCase();
 
-                Connection cn2 = BD_Connection.connection();
+                Connection cn2 = connection.connection();
                 PreparedStatement pst2 = cn2.prepareStatement(
                         "insert into client values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 

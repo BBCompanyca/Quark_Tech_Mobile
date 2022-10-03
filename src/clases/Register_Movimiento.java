@@ -7,6 +7,8 @@ public class Register_Movimiento implements Runnable {
 
     private int id_user;
     private String operation, referencia, shop;
+    
+    BD_Connection connection = new BD_Connection();
 
     public Register_Movimiento(int id_user, String operation, String referencia, String shop) {
 
@@ -28,7 +30,7 @@ public class Register_Movimiento implements Runnable {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "insert into movimientos values (?, ?, ?, ?, ?, ?, ?)");
 
