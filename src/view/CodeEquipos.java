@@ -1,5 +1,6 @@
 package view;
 
+import warranty.Register_Warranty;
 import clases.BD_Connection;
 import clases.Paneles;
 import java.awt.event.KeyEvent;

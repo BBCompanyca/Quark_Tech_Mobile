@@ -14,12 +14,12 @@ public class User_Login {
         this.direction = direction;
         this.name = name;
     }
+    
+     public User_Login() {
+    }
 
     public String getName() {
         return name;
-    }
-
-    public User_Login() {
     }
 
     public int getID() {
