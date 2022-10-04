@@ -16,15 +16,17 @@ public class BD_Connection {
         try {
 
             Connection cn = DriverManager.getConnection(
+                    
                     //Base De Datos para desarrollo...
                     /* "jdbc:mysql://quarktechmobileccs.online:3306/u972055873_developerqtm",
                     "u972055873_developer",
                     "V3]gdibBdFjw"); */
+                    
                     //Base De Datos De Producción...
                     "jdbc:mysql://quarktechmobileccs.online:3306/u972055873_quarktech",
                     "u972055873_globalpayment",
                     "~8d$:Vn7CdR");
-
+                    
             setFlag(0);
 
             return cn;
