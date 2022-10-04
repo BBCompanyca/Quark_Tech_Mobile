@@ -1,5 +1,6 @@
 package view;
 
+import warranty.Consult_Cl_Client;
 import java.awt.Color;
 import javax.swing.JPanel;
 import clases.Paneles;
