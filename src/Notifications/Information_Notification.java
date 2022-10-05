@@ -6,28 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Information_Notification extends javax.swing.JPanel {
-    
+
     BD_Connection connection = new BD_Connection();
+    Notification notification;
 
-    private int ID;
-    private String username_technical, brand, model, color, serial, falla, status_notification, message;
-
-    public Information_Notification(int ID, String username_technical, String message, String brand, String model, String color, String serial, String falla, String status_notification) {
+    public Information_Notification(Notification notification) {
 
         initComponents();
 
-        this.ID = ID;
-        this.username_technical = username_technical;
-        this.brand = brand;
-        this.model = model;
-        this.color = color;
-        this.serial = serial;
-        this.falla = falla;
-        this.status_notification = status_notification;
-        this.message = message;
+        this.notification = notification;
 
         DataNotification();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -80,13 +69,13 @@ public class Information_Notification extends javax.swing.JPanel {
     private void jLabel_ReadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_ReadMousePressed
 
         //Si está marcada como no vista, la marca en vista.
-        if (status_notification.equals("unread")) {
+        if (notification.getStatus_notification().equals("unread")) {
 
             jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 15));
             jLabel_Read.setFont(new java.awt.Font("Roboto", 0, 12));
 
-            //Envia el ID de la notificación para ser marcada como vista.
-            UpdateViewNotifications updateViewNotifications = new UpdateViewNotifications(ID);
+            //Envia el ID de la notificación para ser marcada como leída.
+            UpdateViewNotifications updateViewNotifications = new UpdateViewNotifications(notification.getID());
             Thread thread = new Thread(updateViewNotifications);
             thread.start();
 
@@ -105,12 +94,12 @@ public class Information_Notification extends javax.swing.JPanel {
 
     private void DataNotification() {
 
-        jLabel_Title.setText(username_technical + " " + message);
-        jLabel_Equipo.setText(brand + " " + model + " " + color);
-        jLabel_Serial.setText("Serial: " + serial);
-        jLabel_Falla.setText("Falla: " + falla);
+        jLabel_Title.setText(notification.getUsername_technical() + " " + notification.getMessage());
+        jLabel_Equipo.setText(notification.getBrand() + " " + notification.getModel() + " " + notification.getColor());
+        jLabel_Serial.setText("Serial: " + notification.getSerial());
+        jLabel_Falla.setText("Falla: " + notification.getFalla());
 
-        if (!status_notification.equals("unread")) {
+        if (!notification.getStatus_notification().equals("unread")) {
 
             jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 15));
             jLabel_Read.setFont(new java.awt.Font("Roboto", 0, 12));

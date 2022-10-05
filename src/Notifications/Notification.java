@@ -53,5 +53,11 @@ public class Notification {
     public String getMessage() {
         return message;
     }
+
+    public void setStatus_notification(String status_notification) {
+        this.status_notification = status_notification;
+    }
+    
+    
     
 }

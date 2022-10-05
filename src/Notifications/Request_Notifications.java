@@ -40,7 +40,7 @@ public class Request_Notifications implements Runnable {
                     + "join user us on us.id_user = n.id_userSent "
                     + "join equipo e on e.id_equipo = n.id_equipo "
                     + "join warranty w on w.id_warranty = n.id_warranty "
-                    + "and n.id_userReceived = '" + Login.ID_User + "' ORDER BY n.id_notification DESC LIMIT 10");
+                    + "and n.id_userReceived = '" + Login.ID_User + "' ORDER BY n.id_notification DESC LIMIT 20");
 
             ResultSet rs = pst.executeQuery();
 
