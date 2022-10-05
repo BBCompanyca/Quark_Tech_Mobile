@@ -22,7 +22,7 @@ public class Request_Notifications implements Runnable {
 
         while (true) {
 
-            Consult_Notifications();
+           // Consult_Notifications();
 
         }
 

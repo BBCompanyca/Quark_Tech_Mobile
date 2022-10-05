@@ -16,10 +16,10 @@ import view.CodeEquipos;
 import view.Register_Client;
 
 public class Register_Warranty extends javax.swing.JPanel {
-    
+
     BD_Connection connection = new BD_Connection();
 
-    public static int flag = 0, flag_AddressRegisterAndConsult = 0, flag_calendar = 0, day_warranty = 0, flag_register = 0, time_Warranty = 0, id_client = 0;
+    public static int flag = 0, flag_AddressRegisterAndConsult = 0, flag_calendar = 0, day_warranty = 0, flag_register = 0, id_client = 0;
 
     String brand, model, color, date_register, date_purchase, day, month, year, time_Warranty_STG, identity_card_client;
     public static String serial, falla, received, name_client;
@@ -46,6 +46,10 @@ public class Register_Warranty extends javax.swing.JPanel {
         jButton_Register.setVisible(false);
 
         validateCamp();
+
+        Request_Serial_On request_Serial_On = new Request_Serial_On();
+        Thread hilo = new Thread(request_Serial_On);
+        hilo.start();
 
     }
 
@@ -318,13 +322,10 @@ public class Register_Warranty extends javax.swing.JPanel {
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
         clases.Date date = new clases.Date();
+        Request_Serial_On request_Serial_On = new Request_Serial_On();
 
-        int flag = 0;
+        String date_purchase;
 
-        String code, equipo, date_purchase;
-
-        code = jTextField_Code.getText().trim();
-        equipo = jTextField_Equipo.getText().trim();
         serial = jTextField_Serial.getText().trim();
         falla = jTextField_Falla.getText().trim();
         date_purchase = jTextField_Calendar.getText().trim();
@@ -332,93 +333,73 @@ public class Register_Warranty extends javax.swing.JPanel {
 
         if (flag_register == 0) {
 
-            try {
+            if (request_Serial_On.validateSerial(serial)) {
 
-                Connection cn = connection.connection();
-                PreparedStatement pst = cn.prepareStatement(
-                        "select serial from warranty where serial = '" + serial + "' and not status = '" + "Entregado" + "'");
+                try {
 
-                ResultSet rs = pst.executeQuery();
+                    Connection cn2 = connection.connection();
+                    PreparedStatement pst2 = cn2.prepareStatement(
+                            "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-                if (rs.next()) {
+                    pst2.setInt(1, 0);
+                    pst2.setInt(2, id_client);
+                    pst2.setInt(3, CodeEquipos.id_equipo);
+                    pst2.setInt(4, 0);
+                    pst2.setInt(5, Login.ID_User);
+                    pst2.setString(6, Login.direction);
+                    pst2.setString(7, serial);
+                    pst2.setString(8, falla);
+                    pst2.setString(9, date.DateToDay());
+                    pst2.setString(10, received);
+                    pst2.setInt(11, dayWarranty());
+                    pst2.setString(12, date_purchase);
+                    pst2.setString(13, "");
+                    pst2.setString(14, "");
+                    pst2.setString(15, "");
+                    pst2.setString(16, "");
+                    pst2.setString(17, "Nuevo Ingreso");
+                    pst2.setString(18, "");
+                    pst2.setString(19, "");
+                    pst2.setString(20, "");
+                    pst2.setString(21, "");
+                    pst2.setString(22, DateFormat());
+                    pst2.setString(23, "000-00-00");
 
-                    jLabel_Serial.setForeground(Color.red);
+                    pst2.executeUpdate();
 
-                    JOptionPane.showMessageDialog(null, "¡Ya existe un equipo con este serial registrado en el sistema!",
-                            "¡Acceso Denegado!", JOptionPane.OK_OPTION);
+                    Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/G", serial, Login.direction);
+                    Thread register = new Thread(movimiento);
+                    register.start();
 
-                    jTextField_Serial.setText("");
+                    PaintAndCleanCamp();
 
-                    cn.close();
+                    JOptionPane.showMessageDialog(null, "Registro Exitoso", "¡Exito!",
+                            JOptionPane.INFORMATION_MESSAGE);
 
-                } else {
+                    serial = "";
+                    falla = "";
+                    received = "";
+                    jTextField_Code.setText("");
+                    jTextField_Equipo.setText("");
 
-                    cn.close();
+                    paneles.PanelWarranty();
 
-                    try {
+                } catch (SQLException e) {
 
-                        Connection cn2 = connection.connection();
-                        PreparedStatement pst2 = cn2.prepareStatement(
-                                "insert into warranty values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-
-                        pst2.setInt(1, 0);
-                        pst2.setInt(2, id_client);
-                        pst2.setInt(3, CodeEquipos.id_equipo);
-                        pst2.setInt(4, 0);
-                        pst2.setInt(5, Login.ID_User);
-                        pst2.setString(6, Login.direction);
-                        pst2.setString(7, serial);
-                        pst2.setString(8, falla);
-                        pst2.setString(9, date.DateToDay());
-                        pst2.setString(10, received);
-                        pst2.setInt(11, time_Warranty);
-                        pst2.setString(12, date_purchase);
-                        pst2.setString(13, "");
-                        pst2.setString(14, "");
-                        pst2.setString(15, "");
-                        pst2.setString(16, "");
-                        pst2.setString(17, "Nuevo Ingreso");
-                        pst2.setString(18, "");
-                        pst2.setString(19, "");
-                        pst2.setString(20, "");
-                        pst2.setString(21, "");
-                        pst2.setString(22, DateFormat());
-                        pst2.setString(23, "000-00-00");
-
-                        pst2.executeUpdate();
-
-                        Register_Movimiento movimiento = new Register_Movimiento(Login.ID_User, "R/G", serial, Login.direction);
-                        Thread register = new Thread(movimiento);
-                        register.start();
-
-                        PaintAndCleanCamp();
-
-                        JOptionPane.showMessageDialog(null, "Registro Exitoso", "¡Exito!",
-                                JOptionPane.INFORMATION_MESSAGE);
-
-                        serial = "";
-                        falla = "";
-                        received = "";
-                        jTextField_Code.setText("");
-                        jTextField_Equipo.setText("");
-
-                        paneles.PanelWarranty();;
-
-                    } catch (SQLException e) {
-
-                        System.err.println("¡Error al registrar el equipo! " + e);
-                        JOptionPane.showMessageDialog(null, "¡Error al registrar el equipo!",
-                                "¡Error!", JOptionPane.OK_OPTION);
-
-                    }
+                    System.err.println("¡Error al registrar el equipo! " + e);
+                    JOptionPane.showMessageDialog(null, "¡Error al registrar el equipo!",
+                            "¡Error!", JOptionPane.OK_OPTION);
 
                 }
 
-            } catch (SQLException e) {
+            } else {
 
-                System.err.println("¡Error al validar la información del equipo! " + e);
-                JOptionPane.showMessageDialog(null, "¡Error al validar la información del equipo!",
-                        "¡Error!", JOptionPane.OK_OPTION);
+                jLabel_Serial.setForeground(Color.red);
+
+                JOptionPane.showMessageDialog(null, "¡Ya existe un equipo con este serial registrado en el sistema!",
+                        "¡Acceso Denegado!", JOptionPane.OK_OPTION);
+
+                jTextField_Serial.setText("");
 
             }
 
@@ -590,70 +571,50 @@ public class Register_Warranty extends javax.swing.JPanel {
     }
 
     // Método para calcular cuantos días de garantías tiene un equipo...
-    private void dayWarranty() {
+    private int dayWarranty() {
+        
+        int time_Warranty = 0;
 
-        // Variables para guardar el día, mes y año en que fue comprado el equipo...
         int day = 0, month = 0, year = 0;
 
-        // Esto es para obtener la fecha completa en que fue comprado el equipo...
         String date = jTextField_Calendar.getText().trim();
 
-        // Aquí estoy asignando el día, mes y año a cada variable correspondiente...
         day = Integer.parseInt(date.substring(0, 2));
         month = Integer.parseInt(date.substring(3, 5));
         year = Integer.parseInt(date.substring(6, 10));
 
-        // Aquí estoy creando un calendario...
         Calendar calendarPurachase = Calendar.getInstance();
 
-        // Aquí estooy asiganandole el día, mes y año al calendario creado arriba...
         calendarPurachase.set(Calendar.DATE, day);
         calendarPurachase.set(Calendar.MONTH, month - 1);
         calendarPurachase.set(Calendar.YEAR, year);
 
-        // En esta linea estoy creando otro calendario y obteniendo la fecha actual...
         Calendar dateNow = Calendar.getInstance();
 
-        // Esto es una condicion o pregunta donde me estoy preguntado...
-        // ¿La fecha que se compró al equipo es mayor a la fecha actual?
         if (calendarPurachase.after(dateNow)) {
 
-            // Es esta condición se cumple, osea... si la fecha que compraron el teléfono,
-            // es mayor a hoy, deja un mensaje de error porque es imposible que el teléfono
-            // lo compren mañana o pasado o ETC...
             jLabel_garantia.setForeground(Color.red);
             jLabel_garantia.setText("¡Error en formato de fecha!"); //Deja este mensaje.
 
-            // Esto es una variable bandera, eso es para comicarle a otro método que está pasando aqui...
-            // si el valor es uno 1 es porque no es valido el formato...
             flag_register = 1;
 
-        } else { // Si no se cumple la condición de la imagen anterior entra a este bloque...
+        } else {
 
-            // Si el valor es 0 es porque si hay un valor valido en la fecha...
             flag_register = 0;
 
-            // Aquí estoy sumando los días que hay entre la fecha que se compró y la fecha actual...
             calendarPurachase.add(Calendar.DATE, day_warranty);
 
-            // Si el resultado de la suma, es una fecha mayor a la fecha actual es porque el equipo
-            // aun tiene garantía...
             if (calendarPurachase.after(dateNow)) {
 
-                // Aquí estoy calculando en mili segundos cuantos milisegundos han pasado desde el día
-                // en que se compró el equipo, y cuantos milisegundos han pasado hoy...
                 long timePurchase = calendarPurachase.getTimeInMillis();
                 long timeNow = dateNow.getTimeInMillis();
 
-                // Luego de obtener los mili segundos hago una resta de los milisegundo de haber comprado el equipo
-                // y hoy y eso lo divido entre 86400000 que es la cantidad de milisegundos que tiene un día.
                 time_Warranty = (int) ((Math.abs(timeNow - timePurchase)) / 86400000);
 
-                // Luego dejo este mensaje donde indica cuantos días le quedan de garantía al equipo...
                 jLabel_garantia.setForeground(new Color(240, 240, 240));
                 jLabel_garantia.setText("El equipo tiene: " + time_Warranty + " días de garantía...");
 
-            } else { // Si la suma de la condición de arriba es menor a la fecha actual, entra en este bloque...
+            } else {
 
                 time_Warranty = 0;
 
@@ -670,6 +631,8 @@ public class Register_Warranty extends javax.swing.JPanel {
         calendarPurachase.set(Calendar.YEAR, year);
 
         validateCamp();
+
+        return time_Warranty;
 
     }
 
