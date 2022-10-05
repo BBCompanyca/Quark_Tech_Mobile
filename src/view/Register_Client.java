@@ -404,7 +404,6 @@ public class Register_Client extends javax.swing.JPanel {
             jTextField_Name.requestFocus();
 
             jTextField_CI.setText(Consult_Cl_Client.ci_client);
-            jTextField_CI.setEditable(false);
 
         }
 

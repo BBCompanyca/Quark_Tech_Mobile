@@ -14,8 +14,8 @@ public class User_Login {
         this.direction = direction;
         this.name = name;
     }
-    
-     public User_Login() {
+
+    public User_Login() {
     }
 
     public String getName() {
@@ -46,21 +46,45 @@ public class User_Login {
         return status;
     }
 
-    public int Compare_Login(String user, String pass) {
+    public User_Login Compare_Login(String user, String pass) throws InterruptedException {
 
-        int flag = 0;
+        User_Login user_Login = null;
+        int index = 0, count = 0;
 
-        if (user.equals(getUsername()) && pass.equals(getPassword()) && getStatus().equals("Activo")) {
+        do {
 
-            flag = 1;
+            if (!Request_User_Login.user_Login_List.isEmpty()) {
 
-        } else if (user.equals(getUsername()) && pass.equals(getPassword()) && getStatus().equals("Inactivo")) {
+                for (int i = 0; i < Request_User_Login.user_Login_List.size(); i++) {
 
-            flag = 2;
+                    if (Request_User_Login.user_Login_List.get(i).getUsername().equalsIgnoreCase(user)
+                            && Request_User_Login.user_Login_List.get(i).getPassword().equalsIgnoreCase(pass)) {
 
-        }
+                        return user_Login = Request_User_Login.user_Login_List.get(i);
 
-        return flag;
+                    }
+
+                }
+
+            } else {
+
+                if (count < 3) {
+
+                    count = +1;
+
+                    Thread.sleep(1000);
+
+                } else {
+
+                    return user_Login;
+
+                }
+
+            }
+
+        } while (index != 0);
+
+        return null;
     }
 
 }

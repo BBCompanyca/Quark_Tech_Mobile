@@ -4,6 +4,7 @@ import java.awt.Color;
 import clases.EncryptPassword;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -131,11 +132,21 @@ public class Login extends javax.swing.JFrame {
         jTextField1.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(240, 240, 240));
         jTextField1.setBorder(null);
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
         jPanel_Background.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 400, 45));
 
         jPasswordField1.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
         jPasswordField1.setForeground(new java.awt.Color(240, 240, 240));
         jPasswordField1.setBorder(null);
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyPressed(evt);
+            }
+        });
         jPanel_Background.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 333, 400, 45));
 
         jLabel_Frase.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -167,8 +178,8 @@ public class Login extends javax.swing.JFrame {
         //Obtención de los datos ingresados por el usuario...
         String user2 = jTextField1.getText().trim();
         String pass2 = jPasswordField1.getText().trim();
-        
-        int validateIsEmpty = 0, flag = 0;
+
+        User_Login user_Login = new User_Login();
 
         //Validación de que todos los campos estén llenos.
         if (!user2.equals("") && !pass2.equals("")) {
@@ -176,76 +187,53 @@ public class Login extends javax.swing.JFrame {
             //Instancia para encriptar la contraseña...
             pass2 = encryptPassword.ecnode("@BBCompany.ca", pass2);
 
-            do {
+            try {
 
-                if (!Request_User_Login.user_Login_List.isEmpty()) {
+                user_Login = user_Login.Compare_Login(user2, pass2);
 
-                    for (int i = 0; i < Request_User_Login.user_Login_List.size(); i++) {
+            } catch (InterruptedException ex) {
 
-                        User_Login user_Login = new User_Login();
-                        user_Login = Request_User_Login.user_Login_List.get(i);
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
 
-                        if (user_Login.Compare_Login(user2, pass2) == 1) {
+            }
 
-                            ID_User = user_Login.getID();
-                            user = user_Login.getUsername();
-                            type_account = user_Login.getPermission();
-                            direction = user_Login.getDirection();
-                            name = user_Login.getName();
-                            
-                            this.dispose();
-                            Dashboard window = new Dashboard();
-                            window.setVisible(true);
+            if (user_Login != null) {
 
-                            break;
+                if (user_Login.getStatus().equals("Activo")) {
 
-                        } else if (user_Login.Compare_Login(user2, pass2) == 2) {
+                    ID_User = user_Login.getID();
+                    user = user_Login.getUsername();
+                    type_account = user_Login.getPermission();
+                    direction = user_Login.getDirection();
+                    name = user_Login.getName();
 
-                            //Si el usuario está inactivo dejará un mensaje y limpiará los campos...
-                            jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 22));
-                            jLabel_Anwser.setForeground(Color.red);
-                            jLabel_Anwser.setText("¡Usuario inactivo! contacte a un Administrador...");
-
-                            jTextField1.setText("");
-                            jTextField1.requestFocus();
-                            jPasswordField1.setText("");
-
-                        } else {
-
-                            //Si no encuentra los valores dejará un mensaje y limpiará los campos...
-                            jLabel_Anwser.setText("¡Datos de acceso incorrectos!");
-
-                            jTextField1.setText("");
-                            jTextField1.requestFocus();
-                            jPasswordField1.setText("");
-
-                        }
-
-                    }
-
-                    validateIsEmpty = 1;
+                    this.dispose();
+                    Dashboard window = new Dashboard();
+                    window.setVisible(true);
 
                 } else {
 
-                    if (flag < 2) {
-                        
-                        flag += 1;
+                    jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 22));
+                    jLabel_Anwser.setForeground(Color.red);
+                    jLabel_Anwser.setText("¡Usuario inactivo! contacte a un Administrador...");
 
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                    } else {
-                        
-                        validateIsEmpty = 1;
-                        
-                    }
+                    jTextField1.setText("");
+                    jTextField1.requestFocus();
+                    jPasswordField1.setText("");
 
                 }
 
-            } while (validateIsEmpty == 0);
+            } else {
+
+                jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 24));
+                jLabel_Anwser.setForeground(new Color(240, 240, 240));
+                jLabel_Anwser.setText("¡Datos de acceso incorrectos!");
+
+                jTextField1.setText("");
+                jTextField1.requestFocus();
+                jPasswordField1.setText("");
+
+            }
 
         } else {
 
@@ -253,9 +241,6 @@ public class Login extends javax.swing.JFrame {
             jLabel_Anwser.setText("¡Debes llenar todos los campos!");
 
         }
-        
-        
-
 
     }//GEN-LAST:event_jButton_AccederMousePressed
 
@@ -273,6 +258,156 @@ public class Login extends javax.swing.JFrame {
 
         jPanel_Exit.setBackground(new java.awt.Color(9, 53, 69));
     }//GEN-LAST:event_jLabel4MouseExited
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            //Obtención de los datos ingresados por el usuario...
+            String user2 = jTextField1.getText().trim();
+            String pass2 = jPasswordField1.getText().trim();
+
+            User_Login user_Login = new User_Login();
+
+            //Validación de que todos los campos estén llenos.
+            if (!user2.equals("") && !pass2.equals("")) {
+
+                //Instancia para encriptar la contraseña...
+                pass2 = encryptPassword.ecnode("@BBCompany.ca", pass2);
+
+                try {
+
+                    user_Login = user_Login.Compare_Login(user2, pass2);
+
+                } catch (InterruptedException ex) {
+
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+
+                if (user_Login != null) {
+
+                    if (user_Login.getStatus().equals("Activo")) {
+
+                        ID_User = user_Login.getID();
+                        user = user_Login.getUsername();
+                        type_account = user_Login.getPermission();
+                        direction = user_Login.getDirection();
+                        name = user_Login.getName();
+
+                        this.dispose();
+                        Dashboard window = new Dashboard();
+                        window.setVisible(true);
+
+                    } else {
+
+                        jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 22));
+                        jLabel_Anwser.setForeground(Color.red);
+                        jLabel_Anwser.setText("¡Usuario inactivo! contacte a un Administrador...");
+
+                        jTextField1.setText("");
+                        jTextField1.requestFocus();
+                        jPasswordField1.setText("");
+
+                    }
+
+                } else {
+
+                    jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 24));
+                    jLabel_Anwser.setForeground(new Color(240, 240, 240));
+                    jLabel_Anwser.setText("¡Datos de acceso incorrectos!");
+
+                    jTextField1.setText("");
+                    jTextField1.requestFocus();
+                    jPasswordField1.setText("");
+
+                }
+
+            } else {
+
+                //Mensaje en dado caso que alguno de los campos esté vacio...
+                jLabel_Anwser.setText("¡Debes llenar todos los campos!");
+
+            }
+
+        }
+
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            //Obtención de los datos ingresados por el usuario...
+            String user2 = jTextField1.getText().trim();
+            String pass2 = jPasswordField1.getText().trim();
+
+            User_Login user_Login = new User_Login();
+
+            //Validación de que todos los campos estén llenos.
+            if (!user2.equals("") && !pass2.equals("")) {
+
+                //Instancia para encriptar la contraseña...
+                pass2 = encryptPassword.ecnode("@BBCompany.ca", pass2);
+
+                try {
+
+                    user_Login = user_Login.Compare_Login(user2, pass2);
+
+                } catch (InterruptedException ex) {
+
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+
+                if (user_Login != null) {
+
+                    if (user_Login.getStatus().equals("Activo")) {
+
+                        ID_User = user_Login.getID();
+                        user = user_Login.getUsername();
+                        type_account = user_Login.getPermission();
+                        direction = user_Login.getDirection();
+                        name = user_Login.getName();
+
+                        this.dispose();
+                        Dashboard window = new Dashboard();
+                        window.setVisible(true);
+
+                    } else {
+
+                        jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 22));
+                        jLabel_Anwser.setForeground(Color.red);
+                        jLabel_Anwser.setText("¡Usuario inactivo! contacte a un Administrador...");
+
+                        jTextField1.setText("");
+                        jTextField1.requestFocus();
+                        jPasswordField1.setText("");
+
+                    }
+
+                } else {
+
+                    jLabel_Anwser.setFont(new java.awt.Font("Roboto", 0, 24));
+                    jLabel_Anwser.setForeground(new Color(240, 240, 240));
+                    jLabel_Anwser.setText("¡Datos de acceso incorrectos!");
+
+                    jTextField1.setText("");
+                    jTextField1.requestFocus();
+                    jPasswordField1.setText("");
+
+                }
+
+            } else {
+
+                //Mensaje en dado caso que alguno de los campos esté vacio...
+                jLabel_Anwser.setText("¡Debes llenar todos los campos!");
+
+            }
+
+        }
+
+    }//GEN-LAST:event_jPasswordField1KeyPressed
 
     /**
      * @param args the command line arguments

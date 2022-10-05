@@ -97,7 +97,7 @@ public class Client {
 
                 if (count < 3) {
 
-                    count = +1;
+                    count =+ 1;
 
                     Thread.sleep(1000);
 
