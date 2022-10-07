@@ -75,6 +75,7 @@ public class Information_Notification extends javax.swing.JPanel {
             jLabel_Read.setFont(new java.awt.Font("Roboto", 0, 12));
 
             //Envia el ID de la notificación para ser marcada como leída.
+            Request_Notifications.updateViewNotification(notification);
             UpdateViewNotifications updateViewNotifications = new UpdateViewNotifications(notification.getID());
             Thread thread = new Thread(updateViewNotifications);
             thread.start();
