@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static view.Dashboard.jLabel_NumberNotification;
 import login.Login;
 
@@ -14,7 +16,7 @@ public class Request_Notifications implements Runnable {
     int numberNotification = 0;
 
     public static ArrayList<Notification> noficationList = new ArrayList<>();
-    
+
     BD_Connection connection = new BD_Connection();
 
     @Override
@@ -22,7 +24,13 @@ public class Request_Notifications implements Runnable {
 
         while (true) {
 
-           // Consult_Notifications();
+            Consult_Notifications();
+
+            try {
+                Thread.sleep(60000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Request_Notifications.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
 
@@ -81,6 +89,8 @@ public class Request_Notifications implements Runnable {
 
             }
 
+            System.out.println("Consultó...");
+
             cn.close();
 
         } catch (SQLException e) {
@@ -91,7 +101,7 @@ public class Request_Notifications implements Runnable {
 
     }
 
-    public boolean ValidateRequest(int numberNotification) {
+    private boolean ValidateRequest(int numberNotification) {
 
         boolean flag = false;
         int aux = 0;
@@ -105,6 +115,42 @@ public class Request_Notifications implements Runnable {
 
         return flag;
 
+    }
+
+    public static void updateViewNotification(Notification notification) {
+
+        for (int i = 0; i < noficationList.size(); i++) {
+
+            if (noficationList.get(i) == notification) {
+
+                noficationList.get(i).setStatus_notification("read");
+                
+                setNewNumberNotification();
+
+                break;
+
+            }
+
+        }
+
+    }
+    
+    private static void setNewNumberNotification(){
+        
+        int numberNotification;
+        
+        numberNotification = Integer.parseInt(jLabel_NumberNotification.getText()) - 1;
+        
+        if (numberNotification != 0) {
+            
+            jLabel_NumberNotification.setText(String.valueOf(numberNotification));
+            
+        } else {
+            
+           jLabel_NumberNotification.setText("");
+            
+        }
+        
     }
 
 }
