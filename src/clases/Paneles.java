@@ -11,11 +11,11 @@ import static view.Dashboard.jPanel_Content_Menu;
 import view.Equipos;
 import view.History;
 import warranty.Warranty;
-import view.Menu_Mod_Adm;
-import view.Menu_Seller;
-import view.Menu_Tecnico;
+import menu.Menu_Mod_Adm;
+import menu.Menu_Seller;
+import menu.Menu_Tecnico;
 import view.Movimientos;
-import notifications.Contain_Notification;
+import notifications.Container_Notification;
 import view.Preliminar_History;
 import warranty.Preliminar_Warranty;
 import view.Principal;
@@ -25,7 +25,7 @@ import view.Register_User;
 import view.Reset_Password;
 import view.Review_Technical;
 import warranty.SentWarranty;
-import view.Solicitudes;
+import request.Container_Solicitudes;
 import view.Table_Technical;
 import view.Update_Client;
 import view.Update_Equipo;
@@ -335,7 +335,7 @@ public class Paneles {
     //Panel para las solicitudes de las garantìas...
     public void Panel_Solicitudes() {
 
-        Solicitudes solicitudes = new Solicitudes();
+        Container_Solicitudes solicitudes = new Container_Solicitudes();
         solicitudes.setSize(WidthPanel, HeigthPanel);
         solicitudes.setLocation(0, 0);
 
@@ -405,7 +405,7 @@ public class Paneles {
     //Panel para mostrar las notificaciones...
     public void Panel_Notifications() {
 
-        Contain_Notification notifications = new Contain_Notification();
+        Container_Notification notifications = new Container_Notification();
         notifications.setSize(400, 400);
         notifications.setLocation(235, 35);
 
