@@ -5,19 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import view.Login;
+import login.Login;
 import static view.Menu_Tecnico.jLabel_Index;
 
 public class Consut_Notification extends Thread {
 
-    public static int index = 0;
+    public static int indexSolicitudes = 0;
+    
+    BD_Connection connection = new BD_Connection();
 
     @Override
     public void run() {
 
         while (true) {
 
-            getNotification();
+            getSolicitudes();
 
             try {
 
@@ -33,11 +35,11 @@ public class Consut_Notification extends Thread {
 
     }
 
-    public void getNotification() {
+    public void getSolicitudes() {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select id_warranty from warranty where id_technical = '" + Login.ID_User + "' "
                     + "and status = '" + "Solicitud Enviada - En Espera" + "'");
@@ -46,20 +48,20 @@ public class Consut_Notification extends Thread {
 
             while (rs.next()) {
 
-                index++;
+                indexSolicitudes++;
 
             }
 
-            if (index != 0) {
+            if (indexSolicitudes != 0) {
 
-                jLabel_Index.setText(String.valueOf(index));
+                jLabel_Index.setText(String.valueOf(indexSolicitudes));
 
-                index = 0;
+                indexSolicitudes = 0;
 
             } else {
 
                 jLabel_Index.setText("");
-                index = 0;
+                indexSolicitudes = 0;
 
             }
 
@@ -74,5 +76,7 @@ public class Consut_Notification extends Thread {
         }
 
     }
+    
+    
 
 }

@@ -1,5 +1,6 @@
 package view;
 
+import warranty.Register_Warranty;
 import clases.BD_Connection;
 import clases.Paneles;
 import java.awt.event.KeyEvent;
@@ -17,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 public class CodeEquipos extends javax.swing.JPanel {
 
     DefaultTableModel model = new DefaultTableModel();
+    
+    BD_Connection connection = new BD_Connection();
 
     Paneles paneles = new Paneles();
     
@@ -122,7 +125,7 @@ public class CodeEquipos extends javax.swing.JPanel {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(query);
 
                 ResultSet rs = pst.executeQuery();
@@ -210,7 +213,7 @@ public class CodeEquipos extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select id_equipo, code, brand, model, color, day_warranty from equipo");
 

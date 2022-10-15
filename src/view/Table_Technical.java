@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import clases.Paneles;
 
 public class Table_Technical extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     DefaultTableModel model = new DefaultTableModel();
     
@@ -90,7 +92,7 @@ public class Table_Technical extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select id_user, name_user, username, telephone, direction from user where type_account = '" + "Tecnico" + "' and "
                     + "status = '" + "Activo" + "'");

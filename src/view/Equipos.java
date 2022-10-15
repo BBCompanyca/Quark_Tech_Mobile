@@ -1,5 +1,6 @@
 package view;
 
+import login.Login;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.TextPrompt;
@@ -16,6 +17,8 @@ public final class Equipos extends javax.swing.JPanel {
     Paneles paneles = new Paneles();
 
     DefaultTableModel model = new DefaultTableModel();
+    
+    BD_Connection connection = new BD_Connection();
 
     public Equipos() {
         initComponents();
@@ -242,7 +245,7 @@ public final class Equipos extends javax.swing.JPanel {
 
                 try {
 
-                    Connection cn = BD_Connection.connection();
+                    Connection cn = connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
                             "delete from equipo where code = '" + code + "'");
 
@@ -303,7 +306,7 @@ public final class Equipos extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select code, brand, model, color, day_warranty from equipo");
 

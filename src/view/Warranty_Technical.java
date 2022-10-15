@@ -1,5 +1,6 @@
 package view;
 
+import login.Login;
 import clases.BD_Connection;
 import clases.Paneles;
 import java.awt.event.MouseAdapter;
@@ -13,6 +14,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class Warranty_Technical extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     DefaultTableModel model = new DefaultTableModel();
     
@@ -400,7 +403,7 @@ public class Warranty_Technical extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.shop from warranty w join equipo e on "
                             + "w.id_equipo = e.id_equipo and w.id_technical = '" + Login.ID_User + "' and w.status = '" + 

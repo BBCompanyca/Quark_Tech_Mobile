@@ -8,12 +8,15 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import clases.Paneles;
 import clases.Date;
+import clases.Register_Notification;
 import static view.Menu_Tecnico.jLabel_Index;
 
 public class Information_Solicitudes extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
-    int id_warranty_consult;
-    int id_warranty;
+    String message;
+    int id_warranty_consult, id_warranty, id_registered_by, id_equipo;
 
     Paneles paneles = new Paneles();
 
@@ -37,9 +40,9 @@ public class Information_Solicitudes extends javax.swing.JPanel {
         jLabel_Equipo = new javax.swing.JLabel();
         jLabel_Color = new javax.swing.JLabel();
         jLabel_Serial = new javax.swing.JLabel();
-        jLabel_Falla = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel_Falla = new javax.swing.JLabel();
         jButton_Rechazar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -76,11 +79,6 @@ public class Information_Solicitudes extends javax.swing.JPanel {
         jLabel_Serial.setText("Serial:");
         add(jLabel_Serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 115, 500, -1));
 
-        jLabel_Falla.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel_Falla.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_Falla.setText("Falla:");
-        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 500, -1));
-
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -100,6 +98,11 @@ public class Information_Solicitudes extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTextArea1);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 185, 450, 45));
+
+        jLabel_Falla.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel_Falla.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_Falla.setText("Falla:");
+        add(jLabel_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 500, -1));
 
         jButton_Rechazar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Rechazar btn dark.png"))); // NOI18N
         jButton_Rechazar.setBorder(null);
@@ -154,7 +157,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select status from warranty where id_warranty = '" + id_warranty + "'");
 
@@ -168,10 +171,10 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                     try {
 
-                        Connection cn2 = BD_Connection.connection();
+                        Connection cn2 = connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "update warranty set status = ?, date_received_technical = ?, date_format_acepted = ?"
-                                        + " where id_warranty = '" + id_warranty + "'");
+                                + " where id_warranty = '" + id_warranty + "'");
 
                         pst2.setString(1, "En Revisión");
                         pst2.setString(2, date.DateToDay());
@@ -192,6 +195,12 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                         }
 
+                        //Registra una notificación de que el equipo fue aceptado...
+                        message = "ha aceptado tu solicitud del equipo:";
+                        Register_Notification notification = new Register_Notification(id_registered_by, id_warranty, id_equipo, message);
+                        Thread t = new Thread(notification);
+                        t.start();
+                        
                         JOptionPane.showMessageDialog(null, "Equipo aceptado con exito...");
 
                         paneles.Panel_Solicitudes();
@@ -233,7 +242,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select status from warranty where id_warranty = '" + id_warranty + "'");
 
@@ -247,11 +256,11 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                     try {
 
-                        Connection cn2 = BD_Connection.connection();
+                        Connection cn2 = connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "update warranty set status = ?, date_received_technical = ? where id_warranty = '" + id_warranty + "'");
 
-                        pst2.setString(1, "En Tienda");
+                        pst2.setString(1, "Nuevo Ingreso");
                         pst2.setString(2, " ");
 
                         pst2.executeUpdate();
@@ -270,6 +279,12 @@ public class Information_Solicitudes extends javax.swing.JPanel {
                         }
 
                         JOptionPane.showMessageDialog(null, "Equipo rechazado con exito...");
+                        
+                        //Registra una notificación de que el equipo fue rechazado...
+                        message = "ha rechazado tu solicitud del equipo:";
+                        Register_Notification notification = new Register_Notification(id_registered_by, id_warranty, id_equipo, message);
+                        Thread t = new Thread(notification);
+                        t.start();
 
                         paneles.Panel_Solicitudes();
 
@@ -328,9 +343,11 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.received from warranty w join equipo e "
+                    "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.received, "
+                    + "w.id_registered_by, w.id_equipo "
+                    + "from warranty w join equipo e "
                     + "on w.id_warranty = '" + id_warranty_consult + "' and e.id_equipo = w.id_equipo");
 
             ResultSet rs = pst.executeQuery();
@@ -344,6 +361,8 @@ public class Information_Solicitudes extends javax.swing.JPanel {
                 jLabel_Serial.setText("Serial: " + rs.getString(5));
                 jLabel_Falla.setText("Falla: " + rs.getString(6));
                 jTextArea1.setText(rs.getString(7));
+                id_registered_by = rs.getInt(8);
+                id_equipo = rs.getInt(9);
 
             }
 
@@ -354,7 +373,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
         }
 
     }
-    
+
     private String DateFormat() {
 
         String dateFormat = date.DateToDay().substring(6, 10) + "-" + date.DateToDay().substring(3, 5) + "-" + date.DateToDay().substring(0, 2);

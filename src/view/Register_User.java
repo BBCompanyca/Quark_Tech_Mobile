@@ -1,5 +1,6 @@
 package view;
 
+import login.Login;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.TextPrompt;
@@ -10,6 +11,8 @@ import clases.EncryptPassword;
 import clases.Register_Movimiento;
 
 public class Register_User extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     String username_user, type_Account, direction_login;
 
@@ -272,7 +275,7 @@ public class Register_User extends javax.swing.JPanel {
                     //Algoritmo para validar que el nombre usuario sea valido...
                     try {
 
-                        Connection cn = BD_Connection.connection();
+                        Connection cn = connection.connection();
                         PreparedStatement pst = cn.prepareStatement(
                                 "select username from user where username = '" + username + "'");
 
@@ -299,7 +302,7 @@ public class Register_User extends javax.swing.JPanel {
 
                                 unformat_telphone = formatText.unFormatText(telephone);
 
-                                Connection cn2 = BD_Connection.connection();
+                                Connection cn2 = connection.connection();
                                 PreparedStatement pst2 = cn2.prepareStatement(
                                         "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -391,7 +394,7 @@ public class Register_User extends javax.swing.JPanel {
                 //Algoritmo para validar que el nombre usuario sea valido...
                 try {
 
-                    Connection cn = BD_Connection.connection();
+                    Connection cn = connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
                             "select username from user where username = '" + username + "'");
 
@@ -419,7 +422,7 @@ public class Register_User extends javax.swing.JPanel {
                             unformat_telphone = formatText.unFormatText(telephone);
                             System.out.println(unformat_telphone);
 
-                            Connection cn2 = BD_Connection.connection();
+                            Connection cn2 = connection.connection();
                             PreparedStatement pst2 = cn2.prepareStatement(
                                     "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 

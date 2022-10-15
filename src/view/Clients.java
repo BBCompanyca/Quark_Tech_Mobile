@@ -1,5 +1,6 @@
 package view;
 
+import login.Login;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.Paneles;
@@ -18,6 +19,8 @@ public class Clients extends javax.swing.JPanel {
     DefaultTableModel model = new DefaultTableModel();
 
     Paneles paneles = new Paneles();
+
+    BD_Connection connection = new BD_Connection();
 
     public static int ID;
 
@@ -255,7 +258,7 @@ public class Clients extends javax.swing.JPanel {
 
                 try {
 
-                    Connection cn = BD_Connection.connection();
+                    Connection cn = connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
                             "delete from client where id_client = '" + ID + "'");
 
@@ -329,7 +332,7 @@ public class Clients extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select c.id_client, c.name_client, c.telephone_client, c.identity_card_client, c.direction_client, u.name_user from client c left join user u "
                     + "on c.registered_by = u.id_user");

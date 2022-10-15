@@ -1,18 +1,18 @@
 package view;
 
+import login.Login;
 import java.awt.Color;
 import java.time.LocalDate;
-import java.sql.*;
-import clases.BD_Connection;
-import javax.swing.JOptionPane;
+import notifications.Request_Notifications;
 import clases.Paneles;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class Dashboard extends javax.swing.JFrame {
 
     //Objeto para llamar a la clase que tiene todo los paneles...
     Paneles paneles = new Paneles();
 
-    String user, type_Account;
     int xMouse, yMouse;
 
     public Dashboard() {
@@ -22,10 +22,6 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setSize(1100, 700);
-
-        //Nombre de usuario y tipo de cuenta del usuario que ha iniciado sesión...
-        user = Login.user;
-        type_Account = Login.type_account;
 
         //Los siguientes metodos están al final de está clase...
         //Método para obtener la fecha actual...
@@ -37,8 +33,27 @@ public class Dashboard extends javax.swing.JFrame {
         //Método para llamar al menu correspondiente a quien inició sesión...
         PanelMenuStart();
 
-        //Método para consultar la información del usuario que ha iniciado sesión...
-        BD_Consult();
+        Print_Info_user();
+
+        Request_Notifications request_notification = new Request_Notifications();
+        Thread hilo2 = new Thread(request_notification);
+        hilo2.start();
+
+        if (Login.type_account.equals("Tecnico")) {
+
+            jLabel_NumberNotification.setText("");
+            jLabel_IconNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("")));
+
+        }
+
+    }
+
+    @Override
+    public Image getIconImage() {
+
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/LOGO BBC64.png"));
+
+        return retValue;
 
     }
 
@@ -55,7 +70,10 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Type_Account = new javax.swing.JLabel();
         jLabel_Fecha = new javax.swing.JLabel();
         jLabel_ID = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel_NumberNotification = new javax.swing.JLabel();
+        jLabel_IconNotification = new javax.swing.JLabel();
+        jPanel_Min = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel_Exit = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel_Content = new javax.swing.JPanel();
@@ -64,6 +82,7 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         setUndecorated(true);
 
         jPanel_Background.setBackground(new java.awt.Color(9, 53, 69));
@@ -110,19 +129,51 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Fecha.setForeground(new java.awt.Color(240, 240, 240));
         jLabel_Fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Fecha.setText("Fecha:");
-        jPanel_Head.add(jLabel_Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 340, 40));
+        jPanel_Head.add(jLabel_Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 400, 40));
 
         jLabel_ID.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel_ID.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel_ID.setText("N°");
-        jPanel_Head.add(jLabel_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 55, -1, -1));
+        jLabel_ID.setText("ID User:");
+        jPanel_Head.add(jLabel_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 55, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel3.setText("ID User:");
-        jPanel_Head.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 55, -1, -1));
+        jLabel_NumberNotification.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel_NumberNotification.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel_NumberNotification.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel_Head.add(jLabel_NumberNotification, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 50, 20, 20));
+
+        jLabel_IconNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/notification_24px.png"))); // NOI18N
+        jLabel_IconNotification.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_IconNotification.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel_IconNotificationMousePressed(evt);
+            }
+        });
+        jPanel_Head.add(jLabel_IconNotification, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 55, -1, 30));
 
         jPanel_Background.add(jPanel_Head, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 35, 890, 100));
+
+        jPanel_Min.setBackground(new java.awt.Color(9, 53, 69));
+        jPanel_Min.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel_Min.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("><");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel5MouseExited(evt);
+            }
+        });
+        jPanel_Min.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
+
+        jPanel_Background.add(jPanel_Min, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 2, 30, 30));
 
         jPanel_Exit.setBackground(new java.awt.Color(9, 53, 69));
         jPanel_Exit.setForeground(new java.awt.Color(255, 255, 255));
@@ -259,6 +310,30 @@ public class Dashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel1MousePressed
 
+    private void jLabel_IconNotificationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_IconNotificationMousePressed
+
+        paneles.Panel_Notifications();
+
+    }//GEN-LAST:event_jLabel_IconNotificationMousePressed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        
+        this.setState(Dashboard.ICONIFIED);
+                
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
+        
+        jPanel_Min.setBackground(Color.red);
+        
+    }//GEN-LAST:event_jLabel5MouseEntered
+
+    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
+        
+        jPanel_Min.setBackground(new java.awt.Color(9, 53, 69));
+        
+    }//GEN-LAST:event_jLabel5MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -296,12 +371,14 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel_Fecha;
     private javax.swing.JLabel jLabel_Footer;
-    public javax.swing.JLabel jLabel_ID;
+    private javax.swing.JLabel jLabel_ID;
+    private javax.swing.JLabel jLabel_IconNotification;
     public javax.swing.JLabel jLabel_Name;
+    public static javax.swing.JLabel jLabel_NumberNotification;
     public javax.swing.JLabel jLabel_Type_Account;
     public javax.swing.JLabel jLabel_Username;
     private javax.swing.JLabel jLabel_background_Down;
@@ -310,6 +387,7 @@ public class Dashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel jPanel_Content_Menu;
     private javax.swing.JPanel jPanel_Exit;
     private javax.swing.JPanel jPanel_Head;
+    private javax.swing.JPanel jPanel_Min;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
@@ -320,7 +398,7 @@ public class Dashboard extends javax.swing.JFrame {
         int year = now.getYear();
         int dia = now.getDayOfMonth();
         int month = now.getMonthValue();
-        String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", " ;Septiembre",
+        String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
             "Octubre", "Noviembre", "Diciemrbre"};
         jLabel_Fecha.setText("Fecha: " + dia + " de " + meses[month - 1] + " de " + year);
 
@@ -331,7 +409,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         try {
 
-            if (type_Account.equals("Moderador") || type_Account.equals("Administrador")) {
+            if (Login.type_account.equals("Moderador") || Login.type_account.equals("Administrador")) {
 
                 paneles.PanelMenu_Mod_Admin();
 
@@ -345,7 +423,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         try {
 
-            if (type_Account.equals("Vendedor")) {
+            if (Login.type_account.equals("Vendedor")) {
 
                 paneles.PanelMenu_Seller();
 
@@ -359,7 +437,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         try {
 
-            if (type_Account.equals("Tecnico")) {
+            if (Login.type_account.equals("Tecnico")) {
 
                 paneles.PanelMenu_Tecnico();
 
@@ -373,37 +451,13 @@ public class Dashboard extends javax.swing.JFrame {
 
     }
 
-    //Método para consultar la información del usuario que inició sesión...
-    private void BD_Consult() {
+    private void Print_Info_user() {
 
-        try {
+        jLabel_Username.setText(Login.user);
+        jLabel_Type_Account.setText(Login.type_account);
+        jLabel_Name.setText(Login.name);
+        jLabel_ID.setText("ID User: " + Login.ID_User);
 
-            //Conexión y consulta a la BD...
-            Connection cn = BD_Connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select id_user, name_user, type_account from user where username = '" + user + "'");
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-
-                //Llenado de los campos con la información del usuario...
-                jLabel_Username.setText(user);
-                jLabel_Type_Account.setText(rs.getString("type_account"));
-                jLabel_Name.setText(rs.getString("name_user"));
-                jLabel_ID.setText(rs.getString("id_user"));
-
-            }
-
-            cn.close();
-
-        } catch (SQLException e) {
-
-            //Alerta de que algo no funciona en la consulta de la información del usuario...
-            System.err.println("¡Error al consultar la información del usuario! " + e);
-            JOptionPane.showMessageDialog(null, "¡Error al consultar la información del usuario!", "¡Error!",
-                    JOptionPane.OK_CANCEL_OPTION);
-
-        }
     }
+
 }

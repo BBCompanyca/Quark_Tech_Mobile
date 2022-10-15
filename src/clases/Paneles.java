@@ -4,26 +4,27 @@ import java.awt.BorderLayout;
 import view.Acerca_De;
 import view.Clients;
 import view.CodeEquipos;
-import view.Consult_Cl_Client;
+import warranty.Consult_Cl_Client;
 import view.CreateCodeEquipo;
 import static view.Dashboard.jPanel_Content;
 import static view.Dashboard.jPanel_Content_Menu;
 import view.Equipos;
 import view.History;
-import view.Warranty;
+import warranty.Warranty;
 import view.Menu_Mod_Adm;
 import view.Menu_Seller;
 import view.Menu_Tecnico;
 import view.Movimientos;
+import notifications.Contain_Notification;
 import view.Preliminar_History;
-import view.Preliminar_Warranty;
+import warranty.Preliminar_Warranty;
 import view.Principal;
 import view.Register_Client;
-import view.Register_Warranty;
+import warranty.Register_Warranty;
 import view.Register_User;
 import view.Reset_Password;
 import view.Review_Technical;
-import view.SentWarranty;
+import warranty.SentWarranty;
 import view.Solicitudes;
 import view.Table_Technical;
 import view.Update_Client;
@@ -396,6 +397,20 @@ public class Paneles {
 
         jPanel_Content.removeAll();
         jPanel_Content.add(acerca_De, BorderLayout.CENTER);
+        jPanel_Content.revalidate();
+        jPanel_Content.repaint();
+
+    }
+    
+    //Panel para mostrar las notificaciones...
+    public void Panel_Notifications() {
+
+        Contain_Notification notifications = new Contain_Notification();
+        notifications.setSize(400, 400);
+        notifications.setLocation(235, 35);
+
+        jPanel_Content.removeAll();
+        jPanel_Content.add(notifications, BorderLayout.CENTER);
         jPanel_Content.revalidate();
         jPanel_Content.repaint();
 

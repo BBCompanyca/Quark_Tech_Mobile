@@ -11,6 +11,8 @@ import clases.Date;
 import clases.Paneles;
 
 public class sentWarranty_Technical extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     Date date = new Date();
 
@@ -145,7 +147,7 @@ public class sentWarranty_Technical extends javax.swing.JPanel {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "update warranty set delivery_shop = ?, date_sent_shop = ?, date_received_shop = ?, status = ? where id_warranty = '"
                         + Warranty_Technical.ID_Warranty + "'");
@@ -206,7 +208,7 @@ public class sentWarranty_Technical extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.shop from warranty w join equipo e "
                     + "on w.id_warranty = '" + Warranty_Technical.ID_Warranty + "' and w.id_equipo = e.id_equipo");

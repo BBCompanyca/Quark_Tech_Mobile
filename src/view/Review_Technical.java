@@ -7,18 +7,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import clases.Paneles;
+import clases.Register_Notification;
 import javax.swing.BorderFactory;
 
 public class Review_Technical extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     Paneles paneles = new Paneles();
+
+    int registeredID, equipoID;
+    private String message;
 
     public Review_Technical() {
         initComponents();
 
         getInformation();
-        
-        jTextArea_Coment_Technical.setBorder(BorderFactory.createCompoundBorder(jTextArea_Coment_Technical.getBorder(), 
+
+        jTextArea_Coment_Technical.setBorder(BorderFactory.createCompoundBorder(jTextArea_Coment_Technical.getBorder(),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
     }
@@ -203,6 +209,11 @@ public class Review_Technical extends javax.swing.JPanel {
 
         UpdateInformation("Guardar");
 
+        message = "ha agregado nuevos comentarios a tu equipo:";
+        Register_Notification notification = new Register_Notification(registeredID, Warranty_Technical.ID_Warranty, equipoID, message);
+        Thread hilo = new Thread(notification);
+        hilo.start();
+
     }//GEN-LAST:event_jButton_GuardarMousePressed
 
     private void jButton_SentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SentMousePressed
@@ -219,6 +230,11 @@ public class Review_Technical extends javax.swing.JPanel {
         } else {
 
             UpdateInformation("Enviar");
+
+            message = "te ha enviado tu equipo:";
+            Register_Notification notification = new Register_Notification(registeredID, Warranty_Technical.ID_Warranty, equipoID, message);
+            Thread hilo = new Thread(notification);
+            hilo.start();
 
         }
 
@@ -252,11 +268,11 @@ public class Review_Technical extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.shop, w.comments_technical, "
-                            + "w.status_technical from warranty w join equipo e on w.id_warranty = '" 
-                            + Warranty_Technical.ID_Warranty + "' and w.id_equipo = e.id_equipo");
+                    + "w.status_technical, w.id_equipo, w.id_registered_by from warranty w join equipo e on w.id_warranty = '"
+                    + Warranty_Technical.ID_Warranty + "' and w.id_equipo = e.id_equipo");
 
             ResultSet rs = pst.executeQuery();
 
@@ -268,6 +284,9 @@ public class Review_Technical extends javax.swing.JPanel {
                 jTextField_Tienda.setText(rs.getString("w.shop"));
                 jTextArea_Coment_Technical.setText(rs.getString("w.comments_technical"));
                 jComboBox_Status.setSelectedItem(rs.getString("w.status_technical"));
+
+                equipoID = rs.getInt(10);
+                registeredID = rs.getInt(11);
 
             }
 
@@ -296,7 +315,7 @@ public class Review_Technical extends javax.swing.JPanel {
 
                 try {
 
-                    Connection cn = BD_Connection.connection();
+                    Connection cn = connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
                             "update warranty set comments_technical = ?, status_technical = ? where "
                             + "id_warranty = '" + Warranty_Technical.ID_Warranty + "'");
@@ -338,7 +357,7 @@ public class Review_Technical extends javax.swing.JPanel {
 
                 try {
 
-                    Connection cn = BD_Connection.connection();
+                    Connection cn = connection.connection();
                     PreparedStatement pst = cn.prepareStatement(
                             "update warranty set comments_technical = ?, status_technical = ? where "
                             + "id_warranty = '" + Warranty_Technical.ID_Warranty + "'");

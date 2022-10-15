@@ -1,5 +1,6 @@
 package view;
 
+import login.Login;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
@@ -14,6 +15,8 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
     FormatText formatText = new FormatText();
 
     Paneles paneles = new Paneles();
+    
+    BD_Connection connection = new BD_Connection();
 
     public CreateCodeEquipo() {
         initComponents();
@@ -210,7 +213,7 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
 
             try {
 
-                Connection cn = BD_Connection.connection();
+                Connection cn = connection.connection();
                 PreparedStatement pst = cn.prepareStatement(
                         "select brand, model, color, capacity from equipo where brand = '" + brand + "' "
                         + "and model = '" + model + "' and color = '" + color + "' and "
@@ -235,7 +238,7 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
 
                     try {
 
-                        Connection cn2 = BD_Connection.connection();
+                        Connection cn2 = connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement("select code from equipo where code = '" + generateCode() + "'");
 
                         ResultSet rs2 = pst2.executeQuery();
@@ -257,7 +260,7 @@ public class CreateCodeEquipo extends javax.swing.JPanel {
 
                             try {
 
-                                Connection cn3 = BD_Connection.connection();
+                                Connection cn3 = connection.connection();
                                 PreparedStatement pst3 = cn3.prepareStatement(
                                         "insert into equipo values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
 

@@ -1,5 +1,6 @@
 package view;
 
+import login.Login;
 import clases.TextPrompt;
 import java.sql.*;
 import clases.BD_Connection;
@@ -10,6 +11,8 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class Update_User extends javax.swing.JPanel {
+    
+    BD_Connection connection = new BD_Connection();
 
     //Objeto para llamar los paneles...
     Paneles paneles = new Paneles();
@@ -314,7 +317,7 @@ public class Update_User extends javax.swing.JPanel {
 
                     try {
 
-                        Connection cn = BD_Connection.connection();
+                        Connection cn = connection.connection();
                         PreparedStatement pst = cn.prepareStatement(
                                 "select username from user where username = '" + username + "' "
                                 + "and not id_user = '" + ID + "'");
@@ -340,7 +343,7 @@ public class Update_User extends javax.swing.JPanel {
 
                                 String unformat_telephone_user = formattext.unFormatText(telephone);
 
-                                Connection cn2 = BD_Connection.connection();
+                                Connection cn2 = connection.connection();
                                 PreparedStatement pst2 = cn2.prepareStatement(
                                         "update user set name_user = ?, telephone = ?, unformat_telephone_user = ?, "
                                         + "username = ?, last_modification = ?, direction = ?, type_account = ?, status = ? "
@@ -466,7 +469,7 @@ public class Update_User extends javax.swing.JPanel {
 
         try {
 
-            Connection cn = BD_Connection.connection();
+            Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                     "select name_user, telephone, username, direction, status, type_account, "
                     + "last_modification from user where id_user = '" + ID + "'");
