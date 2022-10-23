@@ -6,6 +6,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import static view.Dashboard.jPanel_Content;
 import clases.Consut_Notification;
+import view.Principal;
 
 public class Menu_Tecnico extends javax.swing.JPanel {
 

@@ -5,14 +5,14 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
-import clases.Register_Movimiento;
+import moviments.Register_Movimiento;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import java.util.Date;
 import javax.swing.BorderFactory;
-import view.CodeEquipos;
+import equipo.infrastructure.CodeEquipos;
 import view.Register_Client;
 
 public class Register_Warranty extends javax.swing.JPanel {
