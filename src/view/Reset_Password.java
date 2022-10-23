@@ -8,7 +8,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import clases.EncryptPassword;
 import clases.Paneles;
-import clases.Register_Movimiento;
+import moviments.Register_Movimiento;
 
 public class Reset_Password extends javax.swing.JPanel {
     

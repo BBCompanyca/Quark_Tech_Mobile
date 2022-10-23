@@ -3,12 +3,12 @@ package clases;
 import java.awt.BorderLayout;
 import view.Acerca_De;
 import view.Clients;
-import view.CodeEquipos;
+import equipo.infrastructure.CodeEquipos;
 import warranty.Consult_Cl_Client;
-import view.CreateCodeEquipo;
+import equipo.infrastructure.ViewRegisterEquipo;
 import static view.Dashboard.jPanel_Content;
 import static view.Dashboard.jPanel_Content_Menu;
-import view.Equipos;
+import equipo.infrastructure.TableEquipos;
 import view.History;
 import warranty.Warranty;
 import view.Menu_Mod_Adm;
@@ -28,7 +28,7 @@ import warranty.SentWarranty;
 import view.Solicitudes;
 import view.Table_Technical;
 import view.Update_Client;
-import view.Update_Equipo;
+import equipo.infrastructure.UpdateEquipo;
 import view.Update_User;
 import view.Users;
 import view.Warranty_Technical;
@@ -153,7 +153,7 @@ public class Paneles {
     //Panel con la tabla de los equipos registrados en el sistema...
     public void PanelEquipos() {
 
-        Equipos equipos = new Equipos();
+        TableEquipos equipos = new TableEquipos();
         equipos.setSize(WidthPanel, HeigthPanel);
         equipos.setLocation(0, 0);
 
@@ -167,7 +167,7 @@ public class Paneles {
     //Panel para mostrar la información para modificar equipos...
     public void Panel_Update_Equipo() {
 
-        Update_Equipo update_Equipo = new Update_Equipo();
+        UpdateEquipo update_Equipo = new UpdateEquipo();
         update_Equipo.setSize(890, 600);
         update_Equipo.setLocation(0, 0);
 
@@ -195,7 +195,7 @@ public class Paneles {
     //Panel para registrar nuevos equipos...
     public void PanelCreateCodeEquipo() {
 
-        CreateCodeEquipo createCodeEquipo = new CreateCodeEquipo();
+        ViewRegisterEquipo createCodeEquipo = new ViewRegisterEquipo();
         createCodeEquipo.setSize(WidthPanel, HeigthPanel);
         createCodeEquipo.setLocation(0, 0);
 

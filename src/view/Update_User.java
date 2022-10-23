@@ -6,7 +6,7 @@ import java.sql.*;
 import clases.BD_Connection;
 import clases.FormatText;
 import clases.Paneles;
-import clases.Register_Movimiento;
+import moviments.Register_Movimiento;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 

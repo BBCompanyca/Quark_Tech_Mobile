@@ -5,7 +5,7 @@ import clases.TextPrompt;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.Paneles;
-import clases.Register_Movimiento;
+import moviments.Register_Movimiento;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
