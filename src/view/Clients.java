@@ -4,7 +4,7 @@ import login.Login;
 import java.sql.*;
 import clases.BD_Connection;
 import clases.Paneles;
-import clases.Register_Movimiento;
+import moviments.Register_Movimiento;
 import clases.TextPrompt;
 import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;

@@ -8,7 +8,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import clases.FormatText;
 import clases.EncryptPassword;
-import clases.Register_Movimiento;
+import moviments.Register_Movimiento;
 
 public class Register_User extends javax.swing.JPanel {
     
