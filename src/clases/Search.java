@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import static warranty.Warranty.jScrollPane_W;
+import static warranty.infrastructure.Warranty.jScrollPane_W;
 import login.Login;
 import static view.Clients.jTable_Client;
 import static view.Clients.jScrollPane_C;

@@ -47,9 +47,6 @@ public class Register_Movimiento implements Runnable {
 
             cn.close();
 
-            System.out.println(fecha_format());
-            System.out.println("Registrado con exito.!!");
-
         } catch (SQLException e) {
 
             System.out.println("Error: " + e);

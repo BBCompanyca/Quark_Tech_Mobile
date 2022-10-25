@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import static view.Dashboard.jPanel_Content;
-import request.Request_Solicitudes;
+import request.application.Request_Solicitudes;
 import view.Principal;
 
 public class Menu_Tecnico extends javax.swing.JPanel {

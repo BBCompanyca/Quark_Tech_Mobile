@@ -1,6 +1,6 @@
 package equipo.infrastructure;
 
-import warranty.Register_Warranty;
+import warranty.infrastructure.Register_Warranty;
 import clases.BD_Connection;
 import clases.Paneles;
 import java.awt.event.KeyEvent;

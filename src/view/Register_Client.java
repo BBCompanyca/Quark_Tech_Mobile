@@ -1,7 +1,7 @@
 package view;
 
-import warranty.Consult_Cl_Client;
-import warranty.Register_Warranty;
+import warranty.infrastructure.Consult_Cl_Client;
+import warranty.infrastructure.Register_Warranty;
 import login.Login;
 import java.sql.*;
 import clases.BD_Connection;
