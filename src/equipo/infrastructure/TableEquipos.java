@@ -2,9 +2,9 @@ package equipo.infrastructure;
 
 import login.Login;
 import java.sql.*;
-import clases.BD_Connection;
-import clases.TextPrompt;
-import clases.Paneles;
+import OtherClass.BD_Connection;
+import OtherClass.TextPrompt;
+import OtherClass.Paneles;
 import moviments.Register_Movimiento;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;

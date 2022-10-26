@@ -1,9 +1,9 @@
 package equipo.infrastructure;
 
-import clases.BD_Connection;
-import clases.FormatText;
-import clases.Paneles;
-import clases.TextPrompt;
+import OtherClass.BD_Connection;
+import OtherClass.FormatText;
+import OtherClass.Paneles;
+import OtherClass.TextPrompt;
 import equipo.application.RegisterEquipo;
 import equipo.application.getCodeEquipos;
 
@@ -200,7 +200,7 @@ public class ViewRegisterEquipo extends javax.swing.JPanel {
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
-        String brand, model, color, capacity, code, daywarranty;
+        String brand, model, color, capacity, daywarranty;
 
         brand = jTextField_Brand.getText().trim();
         model = jTextField_Model.getText().trim();

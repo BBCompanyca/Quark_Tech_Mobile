@@ -1,6 +1,6 @@
 package equipo.application;
 
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import equipo.domain.Equipos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +26,7 @@ public class getCodeEquipos implements Runnable {
         try {
 
             Connection cn = connection.connection();
-            PreparedStatement pst = cn.prepareStatement("select code from equipo");
+            PreparedStatement pst = cn.prepareStatement("select code, id_equipo from equipo");
 
             ResultSet rs = pst.executeQuery();
             
@@ -34,7 +34,7 @@ public class getCodeEquipos implements Runnable {
 
             while (rs.next()) {
 
-                Equipos equipos = new Equipos(rs.getString(1));
+                Equipos equipos = new Equipos(rs.getString(1), rs.getInt(2));
                 
                 codeEquipoList.add(equipos);
                 

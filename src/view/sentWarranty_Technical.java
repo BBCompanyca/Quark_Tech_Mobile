@@ -1,14 +1,14 @@
 package view;
 
-import clases.BD_Connection;
-import clases.TextPrompt;
+import OtherClass.BD_Connection;
+import OtherClass.TextPrompt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import clases.Date;
-import clases.Paneles;
+import OtherClass.Date;
+import OtherClass.Paneles;
 
 public class sentWarranty_Technical extends javax.swing.JPanel {
     

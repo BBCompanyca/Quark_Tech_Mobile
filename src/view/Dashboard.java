@@ -4,7 +4,7 @@ import login.Login;
 import java.awt.Color;
 import java.time.LocalDate;
 import notifications.Request_Notifications;
-import clases.Paneles;
+import OtherClass.Paneles;
 import java.awt.Image;
 import java.awt.Toolkit;
 

@@ -2,12 +2,12 @@ package view;
 
 import login.Login;
 import java.sql.*;
-import clases.BD_Connection;
-import clases.TextPrompt;
+import OtherClass.BD_Connection;
+import OtherClass.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import clases.FormatText;
-import clases.EncryptPassword;
+import OtherClass.FormatText;
+import OtherClass.EncryptPassword;
 import moviments.Register_Movimiento;
 
 public class Register_User extends javax.swing.JPanel {
