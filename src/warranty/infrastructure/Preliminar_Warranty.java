@@ -3,13 +3,13 @@ package warranty.infrastructure;
 import warranty.infrastructure.Warranty;
 import login.Login;
 import java.sql.*;
-import clases.BD_Connection;
-import clases.ReportsPDF;
+import OtherClass.BD_Connection;
+import OtherClass.ReportsPDF;
 import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import clases.Paneles;
+import OtherClass.Paneles;
 import javax.swing.BorderFactory;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {

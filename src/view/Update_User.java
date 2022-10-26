@@ -1,11 +1,11 @@
 package view;
 
 import login.Login;
-import clases.TextPrompt;
+import OtherClass.TextPrompt;
 import java.sql.*;
-import clases.BD_Connection;
-import clases.FormatText;
-import clases.Paneles;
+import OtherClass.BD_Connection;
+import OtherClass.FormatText;
+import OtherClass.Paneles;
 import moviments.Register_Movimiento;
 import java.awt.Color;
 import javax.swing.JOptionPane;

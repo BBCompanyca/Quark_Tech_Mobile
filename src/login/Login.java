@@ -1,7 +1,7 @@
 package login;
 
 import java.awt.Color;
-import clases.EncryptPassword;
+import OtherClass.EncryptPassword;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;

@@ -1,6 +1,6 @@
 package equipo.application;
 
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import equipo.domain.Equipos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

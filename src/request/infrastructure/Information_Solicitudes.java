@@ -1,15 +1,15 @@
 package request.infrastructure;
 
 import request.domain.Request;
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import clases.Paneles;
-import clases.Date;
-import clases.Register_Notification;
+import OtherClass.Paneles;
+import OtherClass.Date;
+import OtherClass.Register_Notification;
 import static menu.Menu_Tecnico.jLabel_Index;
 
 public class Information_Solicitudes extends javax.swing.JPanel {

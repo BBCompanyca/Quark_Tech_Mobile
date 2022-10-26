@@ -1,8 +1,8 @@
 package equipo.infrastructure;
 
-import clases.BD_Connection;
-import clases.FormatText;
-import clases.Paneles;
+import OtherClass.BD_Connection;
+import OtherClass.FormatText;
+import OtherClass.Paneles;
 import equipo.application.UpdateEquipo;
 import equipo.application.getCodeEquipos;
 import static equipo.infrastructure.ViewRegisterEquipo.jTextField_Capacity;

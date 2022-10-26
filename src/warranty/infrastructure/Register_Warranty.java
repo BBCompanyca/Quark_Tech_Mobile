@@ -3,9 +3,9 @@ package warranty.infrastructure;
 import warranty.application.Request_Serial_On;
 import login.Login;
 import java.sql.*;
-import clases.BD_Connection;
-import clases.FormatText;
-import clases.Paneles;
+import OtherClass.BD_Connection;
+import OtherClass.FormatText;
+import OtherClass.Paneles;
 import moviments.Register_Movimiento;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import java.util.Date;
 import javax.swing.BorderFactory;
 import equipo.infrastructure.CodeEquipos;
-import view.Register_Client;
+import client.infrastructure.VIewRegisterClient;
 
 public class Register_Warranty extends javax.swing.JPanel {
 
@@ -322,7 +322,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     private void jButton_RegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RegisterMousePressed
 
-        clases.Date date = new clases.Date();
+        OtherClass.Date date = new OtherClass.Date();
         Request_Serial_On request_Serial_On = new Request_Serial_On();
 
         String date_purchase;
@@ -573,7 +573,7 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     // Método para calcular cuantos días de garantías tiene un equipo...
     private int dayWarranty() {
-        
+
         int time_Warranty = 0;
 
         int day = 0, month = 0, year = 0;
@@ -752,7 +752,12 @@ public class Register_Warranty extends javax.swing.JPanel {
 
         if (flag_AddressRegisterAndConsult == 1) {
 
-            getInformationClient();
+            RequestClient requestClient = new RequestClient();
+            Thread thread = new Thread(requestClient);
+            thread.start();
+
+            name_client = VIewRegisterClient.name_client;
+            jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
 
         } else if (flag_AddressRegisterAndConsult == 2) {
 
@@ -782,20 +787,17 @@ public class Register_Warranty extends javax.swing.JPanel {
 
     public void getInformationClient() {
 
-        name_client = Register_Client.name_client;
-
         try {
 
             Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("select id_client from client where "
-                    + "unformat_identity_card_client = '" + Register_Client.identity_card_client + "'");
+                    + "unformat_identity_card_client = '" + VIewRegisterClient.identity_card_client + "'");
 
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
 
                 id_client = rs.getInt("id_client");
-                jLabel_Title.setText("Nueva Garantía - Cliente: " + name_client);
 
             }
 
@@ -851,6 +853,17 @@ public class Register_Warranty extends javax.swing.JPanel {
         public void run() {
 
             getInformationEquipo();
+
+        }
+
+    }
+
+    public class RequestClient implements Runnable {
+
+        @Override
+        public void run() {
+
+            getInformationClient();
 
         }
 

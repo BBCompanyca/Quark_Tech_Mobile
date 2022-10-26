@@ -3,7 +3,7 @@ package menu;
 import warranty.infrastructure.Consult_Cl_Client;
 import java.awt.Color;
 import javax.swing.JPanel;
-import clases.Paneles;
+import OtherClass.Paneles;
 
 public class Menu_Mod_Adm extends javax.swing.JPanel {
 

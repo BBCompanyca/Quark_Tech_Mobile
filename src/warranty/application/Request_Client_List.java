@@ -1,7 +1,7 @@
 package warranty.application;
 
 import java.util.ArrayList;
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

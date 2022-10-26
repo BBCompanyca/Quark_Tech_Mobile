@@ -2,12 +2,12 @@ package view;
 
 import login.Login;
 import java.sql.*;
-import clases.BD_Connection;
-import clases.TextPrompt;
+import OtherClass.BD_Connection;
+import OtherClass.TextPrompt;
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import clases.EncryptPassword;
-import clases.Paneles;
+import OtherClass.EncryptPassword;
+import OtherClass.Paneles;
 import moviments.Register_Movimiento;
 
 public class Reset_Password extends javax.swing.JPanel {
