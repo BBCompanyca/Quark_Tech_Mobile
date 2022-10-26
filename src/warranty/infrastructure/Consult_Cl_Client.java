@@ -2,10 +2,10 @@ package warranty.infrastructure;
 
 import warranty.application.Request_Client_List;
 import warranty.infrastructure.Register_Warranty;
-import clases.BD_Connection;
-import clases.FormatText;
-import clases.Paneles;
-import clases.TextPrompt;
+import OtherClass.BD_Connection;
+import OtherClass.FormatText;
+import OtherClass.Paneles;
+import OtherClass.TextPrompt;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;

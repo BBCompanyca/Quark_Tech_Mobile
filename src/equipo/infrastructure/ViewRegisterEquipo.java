@@ -1,9 +1,9 @@
 package equipo.infrastructure;
 
-import clases.BD_Connection;
-import clases.FormatText;
-import clases.Paneles;
-import clases.TextPrompt;
+import OtherClass.BD_Connection;
+import OtherClass.FormatText;
+import OtherClass.Paneles;
+import OtherClass.TextPrompt;
 import equipo.application.RegisterEquipo;
 import equipo.application.getCodeEquipos;
 

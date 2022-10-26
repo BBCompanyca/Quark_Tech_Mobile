@@ -2,15 +2,15 @@ package warranty.infrastructure;
 
 import login.Login;
 import java.sql.*;
-import clases.BD_Connection;
-import clases.TextPrompt;
-import clases.Paneles;
+import OtherClass.BD_Connection;
+import OtherClass.TextPrompt;
+import OtherClass.Paneles;
 import moviments.Register_Movimiento;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import clases.Search;
+import OtherClass.Search;
 
 public final class Warranty extends javax.swing.JPanel {
     

@@ -1,6 +1,6 @@
 package notifications;
 
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

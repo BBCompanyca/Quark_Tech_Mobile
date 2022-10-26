@@ -1,6 +1,6 @@
 package moviments;
 
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 

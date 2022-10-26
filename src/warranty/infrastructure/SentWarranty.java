@@ -1,15 +1,15 @@
 package warranty.infrastructure;
 
 import warranty.infrastructure.Warranty;
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import clases.TextPrompt;
-import clases.Date;
-import clases.Paneles;
+import OtherClass.TextPrompt;
+import OtherClass.Date;
+import OtherClass.Paneles;
 import view.Table_Technical;
 
 public class SentWarranty extends javax.swing.JPanel {

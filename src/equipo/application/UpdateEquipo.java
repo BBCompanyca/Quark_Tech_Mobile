@@ -1,7 +1,7 @@
 package equipo.application;
 
-import clases.BD_Connection;
-import clases.Paneles;
+import OtherClass.BD_Connection;
+import OtherClass.Paneles;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
