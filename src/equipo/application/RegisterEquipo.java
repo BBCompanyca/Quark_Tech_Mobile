@@ -1,7 +1,7 @@
 package equipo.application;
 
-import clases.BD_Connection;
-import clases.Paneles;
+import OtherClass.BD_Connection;
+import OtherClass.Paneles;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,9 +12,9 @@ import moviments.Register_Movimiento;
 public class RegisterEquipo {
 
     BD_Connection connection = new BD_Connection();
-    
+
     Paneles paneles = new Paneles();
-    
+
     String brand, model, color, capacity, daywarranty;
 
     public RegisterEquipo(String brand, String model, String color, String capacity, String daywarranty) {
@@ -29,12 +29,6 @@ public class RegisterEquipo {
     private String generateCode() {
 
         String code;
-
-        if (capacity.length() < 3 && capacity.length() > 4) {
-
-            capacity = "N/A";
-
-        }
 
         code = brand.substring(0, 3)
                 + model + capacity + "-" + color.substring(0, 1);
@@ -75,13 +69,7 @@ public class RegisterEquipo {
                 pst3.setString(3, brand);
                 pst3.setString(4, model);
                 pst3.setString(5, color);
-                
-                if (capacity.length() < 3 || capacity.length() > 4) {
-                    pst3.setString(6, "N/A");
-                } else {
-                    pst3.setString(6, capacity + "GB");
-                }
-                
+                pst3.setString(6, capacity);
                 pst3.setString(7, daywarranty);
                 pst3.setString(8, Login.user);
                 pst3.setString(9, "");
@@ -107,11 +95,11 @@ public class RegisterEquipo {
 
             }
 
-        } else{
-            
+        } else {
+
             JOptionPane.showMessageDialog(null, "¡Este equipo ya está registrado en el sistema!", "¡Acceso Denegado!",
-                        JOptionPane.OK_OPTION);
-            
+                    JOptionPane.OK_OPTION);
+
         }
 
     }

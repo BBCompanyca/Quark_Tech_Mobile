@@ -1,13 +1,13 @@
 package view;
 
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import clases.Paneles;
-import clases.Register_Notification;
+import OtherClass.Paneles;
+import OtherClass.Register_Notification;
 import javax.swing.BorderFactory;
 
 public class Review_Technical extends javax.swing.JPanel {

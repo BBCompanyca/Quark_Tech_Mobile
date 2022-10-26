@@ -2,10 +2,12 @@ package equipo.domain;
 
 public class Equipos {
 
+    private int equipoID;
     private String codeEquipo;
 
-    public Equipos(String codeEquipo) {
+    public Equipos(String codeEquipo, int equipoID) {
         this.codeEquipo = codeEquipo;
+        this.equipoID = equipoID;
     }
 
     public String getCodeEquipo() {
@@ -16,4 +18,11 @@ public class Equipos {
         this.codeEquipo = codeEquipo;
     }
 
+    public int getEquipoID() {
+        return equipoID;
+    }
+
+    public void setEquipoID(int equipoID) {
+        this.equipoID = equipoID;
+    }
 }

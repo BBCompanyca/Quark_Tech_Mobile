@@ -1,6 +1,6 @@
 package moviments;
 
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 
@@ -46,9 +46,6 @@ public class Register_Movimiento implements Runnable {
             pst.executeUpdate();
 
             cn.close();
-
-            System.out.println(fecha_format());
-            System.out.println("Registrado con exito.!!");
 
         } catch (SQLException e) {
 

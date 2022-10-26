@@ -1,6 +1,6 @@
 package view;
 
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import clases.Paneles;
+import OtherClass.Paneles;
 
 public class Table_Technical extends javax.swing.JPanel {
     

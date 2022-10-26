@@ -1,8 +1,8 @@
 package view;
 
 import login.Login;
-import clases.BD_Connection;
-import clases.Paneles;
+import OtherClass.BD_Connection;
+import OtherClass.Paneles;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;

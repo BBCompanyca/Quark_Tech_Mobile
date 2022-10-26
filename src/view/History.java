@@ -1,12 +1,12 @@
 package view;
 
-import clases.TextPrompt;
-import clases.Search;
+import OtherClass.TextPrompt;
+import OtherClass.Search;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
-import clases.Paneles;
+import OtherClass.Paneles;
 import javax.swing.JTextField;
 
 public class History extends javax.swing.JPanel {

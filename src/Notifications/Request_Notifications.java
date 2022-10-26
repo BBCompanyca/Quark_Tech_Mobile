@@ -1,6 +1,6 @@
 package notifications;
 
-import clases.BD_Connection;
+import OtherClass.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -89,8 +89,6 @@ public class Request_Notifications implements Runnable {
 
             }
 
-            System.out.println("Consultó...");
-
             cn.close();
 
         } catch (SQLException e) {
@@ -124,7 +122,7 @@ public class Request_Notifications implements Runnable {
             if (noficationList.get(i) == notification) {
 
                 noficationList.get(i).setStatus_notification("read");
-                
+
                 setNewNumberNotification();
 
                 break;
@@ -134,23 +132,23 @@ public class Request_Notifications implements Runnable {
         }
 
     }
-    
-    private static void setNewNumberNotification(){
-        
+
+    private static void setNewNumberNotification() {
+
         int numberNotification;
-        
+
         numberNotification = Integer.parseInt(jLabel_NumberNotification.getText()) - 1;
-        
+
         if (numberNotification != 0) {
-            
+
             jLabel_NumberNotification.setText(String.valueOf(numberNotification));
-            
+
         } else {
-            
-           jLabel_NumberNotification.setText("");
-            
+
+            jLabel_NumberNotification.setText("");
+
         }
-        
+
     }
 
 }

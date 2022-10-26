@@ -1,8 +1,8 @@
 package equipo.infrastructure;
 
-import warranty.Register_Warranty;
-import clases.BD_Connection;
-import clases.Paneles;
+import warranty.infrastructure.Register_Warranty;
+import OtherClass.BD_Connection;
+import OtherClass.Paneles;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
