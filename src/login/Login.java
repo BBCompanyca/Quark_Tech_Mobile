@@ -208,8 +208,7 @@ public class Login extends javax.swing.JFrame {
                     name = user_Login.getName();
 
                     this.dispose();
-                    Dashboard window = new Dashboard();
-                    window.setVisible(true);
+                    Dashboard.getInstance().setVisible(true);
 
                 } else {
 
@@ -296,8 +295,7 @@ public class Login extends javax.swing.JFrame {
                         name = user_Login.getName();
 
                         this.dispose();
-                        Dashboard window = new Dashboard();
-                        window.setVisible(true);
+                        Dashboard.getInstance().setVisible(true);
 
                     } else {
 
@@ -371,8 +369,7 @@ public class Login extends javax.swing.JFrame {
                         name = user_Login.getName();
 
                         this.dispose();
-                        Dashboard window = new Dashboard();
-                        window.setVisible(true);
+                        Dashboard.getInstance().setVisible(true);
 
                     } else {
 
