@@ -70,7 +70,7 @@ public class Acerca_De extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel7.setText("@NeiferJesus14");
+        jLabel7.setText("@BBCOMPANY12");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, 30));
 
         jLabel_Wallpaper2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
