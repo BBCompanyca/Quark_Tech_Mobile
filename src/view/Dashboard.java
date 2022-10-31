@@ -13,6 +13,8 @@ public class Dashboard extends javax.swing.JFrame {
     //Objeto para llamar a la clase que tiene todo los paneles...
     Paneles paneles = new Paneles();
 
+    private static Dashboard dashboard;
+
     int xMouse, yMouse;
 
     public Dashboard() {
@@ -79,7 +81,6 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel_Content = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel_Username = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -159,7 +160,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("><");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/minimize_white_26px.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
@@ -171,9 +172,9 @@ public class Dashboard extends javax.swing.JFrame {
                 jLabel5MouseExited(evt);
             }
         });
-        jPanel_Min.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
+        jPanel_Min.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, 30, -1));
 
-        jPanel_Background.add(jPanel_Min, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 2, 30, 30));
+        jPanel_Background.add(jPanel_Min, new org.netbeans.lib.awtextra.AbsoluteConstraints(1038, 3, 30, 30));
 
         jPanel_Exit.setBackground(new java.awt.Color(9, 53, 69));
         jPanel_Exit.setForeground(new java.awt.Color(255, 255, 255));
@@ -182,7 +183,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("X");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close_white_26px.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -194,9 +195,9 @@ public class Dashboard extends javax.swing.JFrame {
                 jLabel4MouseExited(evt);
             }
         });
-        jPanel_Exit.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
+        jPanel_Exit.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, 30, -1));
 
-        jPanel_Background.add(jPanel_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1068, 2, 30, 30));
+        jPanel_Background.add(jPanel_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1068, 3, 30, 30));
         jPanel_Exit.getAccessibleContext().setAccessibleName("");
 
         jPanel_Content.setBackground(new java.awt.Color(9, 53, 69));
@@ -224,7 +225,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jLabel1MousePressed(evt);
             }
         });
-        jPanel_Background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 30));
+        jPanel_Background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 30));
 
         jLabel_Username.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel_Username.setForeground(new java.awt.Color(240, 240, 240));
@@ -240,8 +241,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jLabel_UsernameMousePressed(evt);
             }
         });
-        jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 2, 850, 30));
-        jPanel_Background.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel_Background.add(jLabel_Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 2, 820, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -317,21 +317,21 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_IconNotificationMousePressed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        
+
         this.setState(Dashboard.ICONIFIED);
-                
+
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
-        
+
         jPanel_Min.setBackground(Color.red);
-        
+
     }//GEN-LAST:event_jLabel5MouseEntered
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
-        
+
         jPanel_Min.setBackground(new java.awt.Color(9, 53, 69));
-        
+
     }//GEN-LAST:event_jLabel5MouseExited
 
     /**
@@ -388,7 +388,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Exit;
     private javax.swing.JPanel jPanel_Head;
     private javax.swing.JPanel jPanel_Min;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
     //Método para obtener la fecha actual...
@@ -457,6 +456,22 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel_Type_Account.setText(Login.type_account);
         jLabel_Name.setText(Login.name);
         jLabel_ID.setText("ID User: " + Login.ID_User);
+
+    }
+
+    public static void setDashboard(Dashboard dashboard) {
+        Dashboard.dashboard = dashboard;
+    }
+
+    public static Dashboard getInstance() {
+
+        if (dashboard == null) {
+
+            dashboard = new Dashboard();
+
+        }
+
+        return dashboard;
 
     }
 
