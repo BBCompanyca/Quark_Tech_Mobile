@@ -54,7 +54,7 @@ public class ReportsPDF implements Runnable {
             PdfWriter.getInstance(document, new FileOutputStream(ruta + ".pdf"));
 
             com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\BannerPDF2.jpg");
-            header.scaleToFit(600, 700);
+            header.scaleToFit(500, 600);
             header.setAlignment(Chunk.ALIGN_CENTER);
 
             Paragraph fechaActual = new Paragraph();
