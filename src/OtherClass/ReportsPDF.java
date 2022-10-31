@@ -1,7 +1,6 @@
 package OtherClass;
 
 import java.sql.*;
-import OtherClass.BD_Connection;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Chunk;
@@ -12,7 +11,6 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import OtherClass.Date;
 import javax.swing.JOptionPane;
 
 public class ReportsPDF implements Runnable {
@@ -56,7 +54,7 @@ public class ReportsPDF implements Runnable {
             PdfWriter.getInstance(document, new FileOutputStream(ruta + ".pdf"));
 
             com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\BannerPDF2.jpg");
-            header.scaleToFit(600, 700);
+            header.scaleToFit(500, 600);
             header.setAlignment(Chunk.ALIGN_CENTER);
 
             Paragraph fechaActual = new Paragraph();
@@ -183,7 +181,7 @@ public class ReportsPDF implements Runnable {
                     Paragraph ParagraphTimeWarranty = new Paragraph();
                     ParagraphTimeWarranty.setAlignment(Paragraph.ALIGN_LEFT);
                     ParagraphTimeWarranty.setFont(FontFactory.getFont("Arial", 12, Font.BOLD, BaseColor.BLACK));
-                    ParagraphTimeWarranty.add("\n               TIEMPO DE GARANTÍA " + "(" + day_warrantyEquipo + " DIAS): ");
+                    ParagraphTimeWarranty.add("\nTIEMPO DE GARANTÍA " + "(" + day_warrantyEquipo + " DIAS): ");
                     ParagraphTimeWarranty.setFont(FontFactory.getFont("Arial", 12, Font.NORMAL, BaseColor.BLACK));
                     ParagraphTimeWarranty.add(time);
                     document.add(ParagraphTimeWarranty);
