@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
+            <file>file:/C:/Users/Almacen/Documents/NetBeansProjects/Quark_Tech_Mobile/src/report/pdf/ReportPDF.java</file>
             <file>file:/C:/Users/Almacen/Documents/NetBeansProjects/Quark_Tech_Mobile/src/OtherClass/BD_Connection.java</file>
-            <file>file:/C:/Users/Almacen/Documents/NetBeansProjects/Quark_Tech_Mobile/src/view/Acerca_De.java</file>
-            <file>file:/C:/Users/Almacen/Documents/NetBeansProjects/Quark_Tech_Mobile/src/OtherClass/ReportsPDF.java</file>
-=======
-            <file>file:/C:/Users/Almacen/Documents/NetBeansProjects/Quark_Tech_Mobile/src/view/Acerca_De.java</file>
->>>>>>> developer
+            <file>file:/C:/Users/Almacen/Documents/NetBeansProjects/Quark_Tech_Mobile/src/report/pdf/PDF.java</file>
+            <file>file:/C:/Users/Almacen/Documents/NetBeansProjects/Quark_Tech_Mobile/src/report/pdf/getInfoPDF.java</file>
         </group>
     </open-files>
 </project-private>

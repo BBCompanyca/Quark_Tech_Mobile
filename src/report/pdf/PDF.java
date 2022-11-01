@@ -3,9 +3,9 @@ package report.pdf;
 public class PDF {
     
     private String brand, model, color, serial, received, falla, commentsTechnical, statusTechnical, 
-            nameClient, identityClient, directionClient, telephoneClient, datePurchase, dayWarranty; 
+            nameClient, identityClient, directionClient, telephoneClient, datePurchase, dayWarranty, shop; 
 
-    public PDF(String brand, String model, String color, String serial, String received, String falla, String commentsTechnical, String statusTechnical, String nameClient, String identityClient, String directionClient, String telephoneClient, String datePurchase, String dayWarranty) {
+    public PDF(String brand, String model, String color, String serial, String received, String falla, String commentsTechnical, String statusTechnical, String nameClient, String identityClient, String directionClient, String telephoneClient, String datePurchase, String dayWarranty, String shop) {
         this.brand = brand;
         this.model = model;
         this.color = color;
@@ -20,6 +20,7 @@ public class PDF {
         this.telephoneClient = telephoneClient;
         this.datePurchase = datePurchase;
         this.dayWarranty = dayWarranty;
+        this.shop = shop;
     }
 
     public String getBrand() {
@@ -78,5 +79,8 @@ public class PDF {
         return telephoneClient;
     }
 
+    public String getShop() {
+        return shop;
+    }
     
 }

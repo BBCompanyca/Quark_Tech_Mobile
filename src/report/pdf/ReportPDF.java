@@ -2,6 +2,7 @@ package report.pdf;
 
 import OtherClass.BD_Connection;
 import OtherClass.Date;
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Chunk;
@@ -41,9 +42,7 @@ public class ReportPDF {
 
             PdfWriter.getInstance(document, new FileOutputStream(ruta + ".pdf"));
 
-            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\BannerPDF2.jpg");
-            header.scaleToFit(500, 600);
-            header.setAlignment(Chunk.ALIGN_CENTER);
+            validateAddresImage();
 
             Paragraph fechaActual = new Paragraph();
             fechaActual.setAlignment(Paragraph.ALIGN_RIGHT);
@@ -56,7 +55,7 @@ public class ReportPDF {
             title.add("REPORTE DE REVISIÓN \n \n");
 
             document.open();
-            document.add(header);
+            document.add(validateAddresImage());
             document.add(fechaActual);
             document.add(title);
 
@@ -86,6 +85,13 @@ public class ReportPDF {
             ParagraphAtencion.add(" DIRECCIÓN:");
             informationClient.addCell(ParagraphAtencion);
             informationClient.addCell(" " + pdf.getDirectionClient());
+            
+            Paragraph ParagraphTelephone = new Paragraph();
+            ParagraphTelephone.setAlignment(Paragraph.ALIGN_RIGHT);
+            ParagraphTelephone.setFont(FontFactory.getFont("Times New Roman", 12, Font.BOLD, BaseColor.BLACK));
+            ParagraphTelephone.add(" TELÉFONO:");
+            informationClient.addCell(ParagraphTelephone);
+            informationClient.addCell(" " + pdf.getTelephoneClient());
 
             Paragraph ParagraphDatePurchase = new Paragraph();
             ParagraphDatePurchase.setAlignment(Paragraph.ALIGN_RIGHT);
@@ -164,6 +170,34 @@ public class ReportPDF {
             JOptionPane.showMessageDialog(null, "Error Al Generar Reporte.", "¡Error!", JOptionPane.OK_OPTION);
 
         }
+
+    }
+
+    private com.itextpdf.text.Image validateAddresImage() throws BadElementException, IOException {
+
+        com.itextpdf.text.Image header = null;
+
+        if (pdf.getShop().equals("Almacen")) {
+
+            header = com.itextpdf.text.Image.getInstance(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\QTM.jpg");
+
+        }
+        if (pdf.getShop().equals("Caricuao")) {
+
+            header = com.itextpdf.text.Image.getInstance(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\ZOO.jpg");
+
+        }
+        
+        if (pdf.getShop().equals("City Market")) {
+
+            header = com.itextpdf.text.Image.getInstance(System.getProperty("user.home") + "\\Desktop\\quark_tech_mobile\\images\\CM.jpg");
+
+        }
+
+        header.scaleToFit(550, 500);
+        header.setAlignment(Chunk.ALIGN_CENTER);
+
+        return header;
 
     }
 }

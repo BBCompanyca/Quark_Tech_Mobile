@@ -17,7 +17,7 @@ public class BD_Connection {
 
             Connection cn = DriverManager.getConnection(
                     //Base De Datos para desarrollo...
-                   /* "jdbc:mysql://quarktechmobileccs.online:3306/u972055873_developerqtm",
+                   /*"jdbc:mysql://quarktechmobileccs.online:3306/u972055873_developerqtm",
                     "u972055873_developer",
                     "V3]gdibBdFjw"); */
                     
