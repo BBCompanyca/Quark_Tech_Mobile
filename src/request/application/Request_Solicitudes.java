@@ -24,7 +24,7 @@ public class Request_Solicitudes extends Thread {
 
             try {
 
-                sleep(10000);
+                sleep(30000);
 
             } catch (InterruptedException e) {
 
