@@ -47,6 +47,8 @@ public class Register_Notification implements Runnable {
             pst.setString(7, "unread");
             pst.setString(8, date.DateToDay());
             pst.executeUpdate();
+            
+            System.out.println("Registro de movimiento...");
 
         } catch (SQLException e) {
 

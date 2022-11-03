@@ -52,7 +52,13 @@ public class Request {
     public String getReceived() {
         return received;
     }
-    
-    
+
+    public int getWarrantyID() {
+        return warrantyID;
+    }
+
+    public int getEquipoID() {
+        return equipoID;
+    }
     
 }

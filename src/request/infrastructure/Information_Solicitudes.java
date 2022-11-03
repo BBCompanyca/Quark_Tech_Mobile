@@ -11,6 +11,7 @@ import OtherClass.Paneles;
 import OtherClass.Date;
 import OtherClass.Register_Notification;
 import static menu.Menu_Tecnico.jLabel_Index;
+import request.application.Request_Solicitudes;
 
 public class Information_Solicitudes extends javax.swing.JPanel {
 
@@ -28,8 +29,6 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
         this.request = request;
         
-        System.out.println(request.getRequestID());
-
         setDataRequest();
 
     }
@@ -177,7 +176,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
                         Connection cn2 = connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "update warranty set status = ?, date_received_technical = ?, date_format_acepted = ?"
-                                + " where id_warranty = '" + id_warranty + "'");
+                                + " where id_warranty = '" + request.getRequestID() + "'");
 
                         pst2.setString(1, "En Revisión");
                         pst2.setString(2, date.DateToDay());
@@ -200,9 +199,11 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                         //Registra una notificación de que el equipo fue aceptado...
                         message = "ha aceptado tu solicitud del equipo:";
-                        Register_Notification notification = new Register_Notification(id_registered_by, id_warranty, id_equipo, message);
+                        Register_Notification notification = new Register_Notification(request.getRegisteredID(), request.getRequestID(), request.getEquipoID(), message);
                         Thread t = new Thread(notification);
                         t.start();
+                        
+                        deleteRequest();
                         
                         JOptionPane.showMessageDialog(null, "Equipo aceptado con exito...");
 
@@ -247,7 +248,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
             Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select status from warranty where id_warranty = '" + id_warranty + "'");
+                    "select status from warranty where id_warranty = '" + request.getWarrantyID() + "'");
 
             ResultSet rs = pst.executeQuery();
 
@@ -261,7 +262,7 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                         Connection cn2 = connection.connection();
                         PreparedStatement pst2 = cn2.prepareStatement(
-                                "update warranty set status = ?, date_received_technical = ? where id_warranty = '" + id_warranty + "'");
+                                "update warranty set status = ?, date_received_technical = ? where id_warranty = '" + request.getWarrantyID() + "'");
 
                         pst2.setString(1, "Nuevo Ingreso");
                         pst2.setString(2, " ");
@@ -281,11 +282,13 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
                         }
 
+                        deleteRequest();
+                        
                         JOptionPane.showMessageDialog(null, "Equipo rechazado con exito...");
 
                         //Registra una notificación de que el equipo fue rechazado...
                         message = "ha rechazado tu solicitud del equipo:";
-                        Register_Notification notification = new Register_Notification(id_registered_by, id_warranty, id_equipo, message);
+                        Register_Notification notification = new Register_Notification(request.getRegisteredID(), request.getRequestID(), request.getEquipoID(), message);
                         Thread t = new Thread(notification);
                         t.start();
 
@@ -351,36 +354,6 @@ public class Information_Solicitudes extends javax.swing.JPanel {
         jLabel_Falla.setText("Falla: " + request.getFalla());
         jTextArea1.setText(request.getReceived());
 
-        /* try {
-
-            Connection cn = connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select w.id_warranty, e.brand, e.model, e.color, w.serial, w.falla, w.received, "
-                    + "w.id_registered_by, w.id_equipo "
-                    + "from warranty w join equipo e "
-                    + "on w.id_warranty = '" + id_warranty_consult + "' and e.id_equipo = w.id_equipo");
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-
-                id_warranty = rs.getInt(1);
-                jLabel_Equipo.setText("Equipo: " + rs.getString(2));
-                jLabel_Model.setText("Módelo: " + rs.getString(3));
-                jLabel_Color.setText("Color: " + rs.getString(4));
-                jLabel_Serial.setText("Serial: " + rs.getString(5));
-                jLabel_Falla.setText("Falla: " + rs.getString(6));
-                jTextArea1.setText(rs.getString(7));
-                id_registered_by = rs.getInt(8);
-                id_equipo = rs.getInt(9);
-
-            }
-
-        } catch (SQLException e) {
-
-            System.err.println("¡Error al consultar la información de la garantía! " + e);
-
-        } */
     }
 
     private String DateFormat() {
@@ -389,6 +362,20 @@ public class Information_Solicitudes extends javax.swing.JPanel {
 
         return dateFormat;
 
+    }
+    
+    private void deleteRequest(){
+        
+        for (int i = 0; i < Request_Solicitudes.requestList.size(); i++) {
+            
+            if (Request_Solicitudes.requestList.get(i).getRequestID() == this.request.getRequestID()) {
+                
+                Request_Solicitudes.requestList.remove(request);
+                
+            }
+            
+        }
+        
     }
 
 }

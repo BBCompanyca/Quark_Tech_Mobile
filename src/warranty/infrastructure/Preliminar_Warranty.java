@@ -191,8 +191,8 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextField_FallaKeyReleased(evt);
             }
         });
-        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 250, 20));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 250, -1));
+        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 340, 20));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 340, -1));
 
         jTextField_Calendar.setEditable(false);
         jTextField_Calendar.setBackground(new java.awt.Color(9, 53, 69));
@@ -403,7 +403,7 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
         int seleccion = fc.showSaveDialog(this);
 
         if (seleccion == JFileChooser.APPROVE_OPTION) {
-            
+
             validatePDFIsEmpty();
 
             File fichero = fc.getSelectedFile();
@@ -462,7 +462,8 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
                 } else {
 
-                    JOptionPane.showMessageDialog(null, "El equipo fue aceptado, llama al técnico para que devuelva el equipo",
+                    JOptionPane.showMessageDialog(null, "Este equipo fue aceptado o rechazado, por favor "
+                            + "\ncontacta al tecnico para solucionarlo...",
                             "¡Acceso Denegado!", JOptionPane.OK_OPTION);
 
                     paneles.Panel_PreliminarWarranty();
