@@ -1,7 +1,7 @@
 package moviments;
 
 import login.Login;
-import OtherClass.ReportsExcel;
+import report.excel.ReportsExcel;
 import java.awt.event.KeyEvent;
 import OtherClass.Search;
 import OtherClass.TextPrompt;

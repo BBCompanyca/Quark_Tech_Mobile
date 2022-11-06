@@ -1,5 +1,6 @@
-package OtherClass;
+package report.excel;
 
+import OtherClass.BD_Connection;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

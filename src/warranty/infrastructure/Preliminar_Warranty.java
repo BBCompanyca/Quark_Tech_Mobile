@@ -1,19 +1,20 @@
 package warranty.infrastructure;
 
-import warranty.infrastructure.Warranty;
 import login.Login;
 import java.sql.*;
 import OtherClass.BD_Connection;
-import OtherClass.ReportsPDF;
+import report.pdf.ReportPDF;
 import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import OtherClass.Paneles;
 import javax.swing.BorderFactory;
+import report.pdf.PDF;
+import report.pdf.getInfoPDF;
 
 public class Preliminar_Warranty extends javax.swing.JPanel {
-    
+
     BD_Connection connection = new BD_Connection();
 
     String status = "", status_technical = "", brand = "", model = "", color = "", serial = "", falla = "", date_register = "",
@@ -42,6 +43,10 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         jTextArea_Comments_Technical.setBorder(BorderFactory.createCompoundBorder(jTextArea_Comments_Technical.getBorder(),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+
+        getInfoPDF infoPDF = new getInfoPDF(Warranty.ID);
+        Thread thread = new Thread(infoPDF);
+        thread.start();
 
     }
 
@@ -186,8 +191,8 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
                 jTextField_FallaKeyReleased(evt);
             }
         });
-        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 250, 20));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 250, -1));
+        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 340, 20));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 340, -1));
 
         jTextField_Calendar.setEditable(false);
         jTextField_Calendar.setBackground(new java.awt.Color(9, 53, 69));
@@ -393,32 +398,19 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
     private void jButton_Dowload_ReportMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Dowload_ReportMousePressed
 
-        String time = jLabel_Warranty.getText();
-
-        if (time.equals("Este equipo no cumple con el tiempo de garantía...")) {
-
-            time = "NO CUMPLE CON EL TIEMPO DE GARANTÍA.";
-
-        } else {
-
-            time = "CUMPLE CON EL TIEMPO DE GARANTÍA.";
-
-        }
-
         JFileChooser fc = new JFileChooser();
 
         int seleccion = fc.showSaveDialog(this);
 
         if (seleccion == JFileChooser.APPROVE_OPTION) {
 
+            validatePDFIsEmpty();
+
             File fichero = fc.getSelectedFile();
-            
-            ReportsPDF reports = new ReportsPDF(fichero, Warranty.ID, brand, model, serial, received, falla, time, comments_technical, status_technical);
-            Thread hilo = new Thread(reports);
-            hilo.start();
-            
-            JOptionPane.showMessageDialog(null, "¡Se está generando el reporte!", "Por favor espere", JOptionPane.WARNING_MESSAGE);
-            
+
+            ReportPDF reports = new ReportPDF(fichero, getInfoPDF.getPdf(), validateTimeWarranty());
+            reports.ReportWarranty();
+
         }
 
     }//GEN-LAST:event_jButton_Dowload_ReportMousePressed
@@ -470,7 +462,8 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
                 } else {
 
-                    JOptionPane.showMessageDialog(null, "El equipo fue aceptado, llama al técnico para que devuelva el equipo",
+                    JOptionPane.showMessageDialog(null, "Este equipo fue aceptado o rechazado, por favor "
+                            + "\ncontacta al tecnico para solucionarlo...",
                             "¡Acceso Denegado!", JOptionPane.OK_OPTION);
 
                     paneles.Panel_PreliminarWarranty();
@@ -642,7 +635,9 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
 
             Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("select c.name_client, e.brand, e.model, e.color, w.serial, w.falla, w.date_register, w.received, w.comments_technical, "
-                    + "w.status, w.status_technical, w.day_warranty, w.date_purchase, w.id_registered_by from warranty w join client c on w.id_client = c.id_client and w.id_warranty = '" + Warranty.ID + "' "
+                    + "w.status, w.status_technical, w.day_warranty, w.date_purchase, w.id_registered_by "
+                    + "from warranty w "
+                    + "join client c on w.id_client = c.id_client and w.id_warranty = '" + Warranty.ID + "' "
                     + "join equipo e on w.id_equipo = e.id_equipo and w.id_warranty = '" + Warranty.ID + "'");
 
             ResultSet rs = pst.executeQuery();
@@ -811,6 +806,40 @@ public class Preliminar_Warranty extends javax.swing.JPanel {
             jButton_Save.setVisible(true);
 
         }
+
+    }
+
+    private String validateTimeWarranty() {
+
+        String time = jLabel_Warranty.getText();
+
+        if (time.equals("Este equipo no cumple con el tiempo de garantía...")) {
+
+            time = "NO CUMPLE CON EL TIEMPO DE GARANTÍA.";
+
+        } else {
+
+            time = "CUMPLE CON EL TIEMPO DE GARANTÍA.";
+
+        }
+
+        return time;
+
+    }
+
+    private void validatePDFIsEmpty() {
+
+        int flag = 0;
+
+        do {
+
+            if (getInfoPDF.getPdf() != null) {
+
+                flag = 1;
+
+            }
+
+        } while (flag != 1);
 
     }
 

@@ -3,7 +3,10 @@ package menu;
 import warranty.infrastructure.Consult_Cl_Client;
 import OtherClass.Paneles;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import login.Login;
+import view.Dashboard;
 
 public class Menu_Seller extends javax.swing.JPanel {
 
@@ -37,6 +40,9 @@ public class Menu_Seller extends javax.swing.JPanel {
         Btn_About_Me = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        Btn_Close_Session = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(42, 104, 100));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -199,6 +205,31 @@ public class Menu_Seller extends javax.swing.JPanel {
         Btn_About_Me.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
         add(Btn_About_Me, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 425, 210, 50));
+
+        Btn_Close_Session.setBackground(new java.awt.Color(78, 120, 121));
+        Btn_Close_Session.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Btn_Close_SessionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Btn_Close_SessionMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Btn_Close_SessionMousePressed(evt);
+            }
+        });
+        Btn_Close_Session.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Cerrar Sesión");
+        Btn_Close_Session.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 30));
+
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close_session_white_24px.png"))); // NOI18N
+        Btn_Close_Session.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+
+        add(Btn_Close_Session, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 210, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_MainMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_MainMouseEntered
@@ -403,10 +434,51 @@ public class Menu_Seller extends javax.swing.JPanel {
         
     }//GEN-LAST:event_Btn_About_MeMousePressed
 
+    private void Btn_Close_SessionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Close_SessionMouseEntered
+
+        if (Btn_Close_Session.getBackground().getRGB() == -11634567) {
+
+            setColor(Btn_Close_Session);
+
+        }
+    }//GEN-LAST:event_Btn_Close_SessionMouseEntered
+
+    private void Btn_Close_SessionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Close_SessionMouseExited
+
+        if (Btn_Main.getBackground().getRGB() != -11634567
+            || Btn_Clients.getBackground().getRGB() != -11634567 || Btn_Warranty.getBackground().getRGB() != -11634567
+            || Btn_Equipos.getBackground().getRGB() != -11634567 || Btn_About_Me.getBackground().getRGB() != -11634567
+            || Btn_Historico.getBackground().getRGB() != -11634567) {
+
+            resetColor(Btn_Close_Session);
+
+        }
+    }//GEN-LAST:event_Btn_Close_SessionMouseExited
+
+    private void Btn_Close_SessionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Close_SessionMousePressed
+
+        int closeSession = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesión?", "¡Cerrar Sesión!",
+            JOptionPane.YES_NO_OPTION);
+
+        if (closeSession == 0) {
+
+            Dashboard dashboard = null;
+
+            Dashboard.getInstance().dispose();
+            Dashboard.setDashboard(dashboard);
+
+            Login login = new Login();
+            login.setVisible(true);
+
+        }
+
+    }//GEN-LAST:event_Btn_Close_SessionMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Btn_About_Me;
     private javax.swing.JPanel Btn_Clients;
+    private javax.swing.JPanel Btn_Close_Session;
     private javax.swing.JPanel Btn_Equipos;
     private javax.swing.JPanel Btn_Historico;
     public static javax.swing.JPanel Btn_Main;
@@ -421,6 +493,8 @@ public class Menu_Seller extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

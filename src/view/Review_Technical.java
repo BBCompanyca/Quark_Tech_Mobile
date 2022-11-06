@@ -106,8 +106,8 @@ public class Review_Technical extends javax.swing.JPanel {
                 jTextField_FallaActionPerformed(evt);
             }
         });
-        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 210, 20));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 210, -1));
+        add(jTextField_Falla, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 350, 20));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 350, -1));
 
         jLabel_Title.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         jLabel_Title.setForeground(new java.awt.Color(240, 240, 240));
