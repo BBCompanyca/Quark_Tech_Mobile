@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 public class LicenseRequest {
 
     BD_Connection connection = new BD_Connection();
-    License license = new License();
 
     public LicenseRequest() {
         RequestLicense();
@@ -29,8 +28,8 @@ public class LicenseRequest {
 
             if (rs.next()) {
                 
-                license.setLicense(rs.getString(1));
-                license.setDateExpiration(rs.getString(2));
+                License.getInstance().setLicense(rs.getString(1));
+                License.getInstance().setDateExpiration(rs.getString(2));
 
             }
 
@@ -48,9 +47,9 @@ public class LicenseRequest {
         
         Calendar dateExpirationCalendar = Calendar.getInstance();
         
-        int year = Integer.parseInt(license.getDateExpiration().substring(0, 4));
-        int month = Integer.parseInt(license.getDateExpiration().substring(5,7));
-        int day = Integer.parseInt(license.getDateExpiration().substring(8,10));
+        int year = Integer.parseInt(License.getInstance().getDateExpiration().substring(0, 4));
+        int month = Integer.parseInt(License.getInstance().getDateExpiration().substring(5,7));
+        int day = Integer.parseInt(License.getInstance().getDateExpiration().substring(8,10));
         
         dateExpirationCalendar.set(year, month - 1, day);
         
@@ -78,6 +77,8 @@ public class LicenseRequest {
             dayExpiration = - 3;
 
         }
+        
+        License.getInstance().setDaysFromExpirate(dayExpiration);
 
         return dayExpiration;
 
