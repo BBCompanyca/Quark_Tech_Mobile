@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import validateIp.IpRequest;
+import validatelicense.LicenseRequest;
 import view.Dashboard;
 
 public class Login extends javax.swing.JFrame {
