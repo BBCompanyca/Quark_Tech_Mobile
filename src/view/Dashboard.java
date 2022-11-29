@@ -7,6 +7,7 @@ import notifications.Request_Notifications;
 import OtherClass.Paneles;
 import java.awt.Image;
 import java.awt.Toolkit;
+import validatelicense.LicenseRequest;
 
 public class Dashboard extends javax.swing.JFrame {
 
@@ -47,6 +48,9 @@ public class Dashboard extends javax.swing.JFrame {
             jLabel_IconNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("")));
 
         }
+        
+        LicenseRequest licenseRequest = new LicenseRequest();
+        licenseRequest.validateDayEpiration();
 
     }
 
