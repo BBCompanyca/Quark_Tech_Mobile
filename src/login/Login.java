@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import validateIp.IpRequest;
+import validateIp.ComputerRequest;
 import validatelicense.LicenseRequest;
 import view.Dashboard;
 
@@ -44,7 +44,7 @@ public class Login extends javax.swing.JFrame {
         Thread hilo = new Thread(request_User_Login);
         hilo.start();
 
-        IpRequest serialRequest = new IpRequest();
+        ComputerRequest serialRequest = new ComputerRequest();
         Thread thread = new Thread(serialRequest);
         thread.start();
 

@@ -119,14 +119,15 @@ public class Acerca_De extends javax.swing.JPanel {
     private void InformationLicense() {
         
         jLabel_License.setText(License.getInstance().getLicense());
-        jLabel_daysLicense.setText("Expira en (" + License.getInstance().getDaysFromExpirate() + ") días");
         jLabel_dateExpiration.setText(dateOfExpiration());
+        jLabel_daysLicense.setText("Expira en (" + License.getInstance().getDaysFromExpirate() + ") días" + " (Licencia de prueba)");
+        
     }
     
     private String dateOfExpiration() {
         
         String[] months = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
-            "Octubre", "Noviembre", "Diciemrbre"};
+            "Octubre", "Noviembre", "Diciembre"};
         
         int year = Integer.parseInt(License.getInstance().getDateExpiration().substring(0, 4));
         int month = Integer.parseInt(License.getInstance().getDateExpiration().substring(5, 7));
