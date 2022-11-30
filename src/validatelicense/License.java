@@ -4,7 +4,15 @@ public class License {
     
     private static License licenseinstance;
 
-    private String license, dateExpiration;
+    private String license, dateExpiration, typeLicense;
+
+    public String getTypeLicense() {
+        return typeLicense;
+    }
+
+    public void setTypeLicense(String typeLicense) {
+        this.typeLicense = typeLicense;
+    }
     private int daysFromExpirate;
 
     public String getLicense() {
@@ -40,13 +48,10 @@ public class License {
     }
     
     public static License getInstance(){
-        
+
         if (licenseinstance == null) {
-            
             licenseinstance = new License();
-            
         }
-        
         return licenseinstance;
         
     }

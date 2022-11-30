@@ -120,7 +120,8 @@ public class Acerca_De extends javax.swing.JPanel {
         
         jLabel_License.setText(License.getInstance().getLicense());
         jLabel_dateExpiration.setText(dateOfExpiration());
-        jLabel_daysLicense.setText("Expira en (" + License.getInstance().getDaysFromExpirate() + ") días" + " (Licencia de prueba)");
+        jLabel_daysLicense.setText("Expira en (" + License.getInstance().getDaysFromExpirate() + ") días" 
+                + " (" + License.getInstance().getTypeLicense() + ")");
         
     }
     

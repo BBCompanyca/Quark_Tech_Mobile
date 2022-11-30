@@ -22,7 +22,7 @@ public class LicenseRequest {
 
             Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
-                    "select license, expiration_date from license");
+                    "select license, expiration_date, type_license from license");
 
             ResultSet rs = pst.executeQuery();
 
@@ -30,6 +30,7 @@ public class LicenseRequest {
                 
                 License.getInstance().setLicense(rs.getString(1));
                 License.getInstance().setDateExpiration(rs.getString(2));
+                License.getInstance().setTypeLicense(rs.getString(3));
 
             }
 
