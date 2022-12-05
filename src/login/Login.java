@@ -5,10 +5,13 @@ import OtherClass.EncryptPassword;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.net.InetAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import validateIp.ComputerRequest;
+import validatelicense.LicenseRequest;
 import view.Dashboard;
 
 public class Login extends javax.swing.JFrame {
@@ -40,6 +43,10 @@ public class Login extends javax.swing.JFrame {
         Request_User_Login request_User_Login = new Request_User_Login();
         Thread hilo = new Thread(request_User_Login);
         hilo.start();
+
+        ComputerRequest serialRequest = new ComputerRequest();
+        Thread thread = new Thread(serialRequest);
+        thread.start();
 
     }
 

@@ -7,6 +7,7 @@ import notifications.Request_Notifications;
 import OtherClass.Paneles;
 import java.awt.Image;
 import java.awt.Toolkit;
+import validatelicense.LicenseRequest;
 
 public class Dashboard extends javax.swing.JFrame {
 
@@ -47,6 +48,9 @@ public class Dashboard extends javax.swing.JFrame {
             jLabel_IconNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("")));
 
         }
+        
+        LicenseRequest licenseRequest = new LicenseRequest();
+        licenseRequest.validateDayEpiration();
 
     }
 
@@ -398,7 +402,7 @@ public class Dashboard extends javax.swing.JFrame {
         int dia = now.getDayOfMonth();
         int month = now.getMonthValue();
         String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
-            "Octubre", "Noviembre", "Diciemrbre"};
+            "Octubre", "Noviembre", "Diciembre"};
         jLabel_Fecha.setText("Fecha: " + dia + " de " + meses[month - 1] + " de " + year);
 
     }
