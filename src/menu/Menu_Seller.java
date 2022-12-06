@@ -1,6 +1,6 @@
 package menu;
 
-import warranty.infrastructure.Consult_Cl_Client;
+import warranty.Consult_Cl_Client;
 import OtherClass.Paneles;
 import java.awt.Color;
 import javax.swing.JOptionPane;

@@ -7,16 +7,16 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import static warranty.infrastructure.Warranty.jScrollPane_W;
+import static warranty.Warranty.jScrollPane_W;
 import login.Login;
-import static client.infrastructure.Clients.jTable_Client;
-import static client.infrastructure.Clients.jScrollPane_C;
+import static client.Clients.jTable_Client;
+import static client.Clients.jScrollPane_C;
 import static view.History.jScrollPane_H;
 import static view.History.jTable_History_H;
 import moviments.Movimientos;
 import static moviments.Movimientos.jScrollPane_M;
 import static moviments.Movimientos.jTable_Movimientos;
-import static warranty.infrastructure.Warranty.jTable_Warranty;
+import static warranty.Warranty.jTable_Warranty;
 
 public class Search {
 
