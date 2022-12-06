@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import OtherClass.Search;
 
 public final class Warranty extends javax.swing.JPanel {
-    
+
     BD_Connection connection = new BD_Connection();
 
     public static int ID;
@@ -235,6 +235,7 @@ public final class Warranty extends javax.swing.JPanel {
         if (fila_point > -1) {
 
             ID = (int) model.getValueAt(fila_point, columna_punt);
+            
             paneles.Panel_PreliminarWarranty();
 
         } else {
@@ -250,7 +251,7 @@ public final class Warranty extends javax.swing.JPanel {
 
         int fila_point = jTable_Warranty.getSelectedRow();
         int columna_point = 0;
-        String serial = "";
+        String serial;
 
         if (fila_point > -1) {
 
@@ -323,7 +324,7 @@ public final class Warranty extends javax.swing.JPanel {
 
     private void getWarranty() {
 
-        String query = "";
+        String query;
 
         if (Login.type_account.equals("Moderador")) {
 

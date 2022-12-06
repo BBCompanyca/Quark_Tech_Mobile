@@ -16,6 +16,7 @@ import static view.History.jTable_History_H;
 import moviments.Movimientos;
 import static moviments.Movimientos.jScrollPane_M;
 import static moviments.Movimientos.jTable_Movimientos;
+import static warranty.infrastructure.Warranty.jTable_Warranty;
 
 public class Search {
 
@@ -92,7 +93,7 @@ public class Search {
 
     public void SearchWarranty(String search) {
 
-        String query = "";
+        String query;
 
         if (Login.type_account.equals("Moderador")) {
 
@@ -154,8 +155,8 @@ public class Search {
 
             ResultSet rs = pst.executeQuery();
 
-            jTable_Client = new JTable(model);
-            jScrollPane_W.setViewportView(jTable_Client);
+            jTable_Warranty = new JTable(model);
+            jScrollPane_W.setViewportView(jTable_Warranty);
 
             model.setColumnCount(0);
             model.setRowCount(0);
