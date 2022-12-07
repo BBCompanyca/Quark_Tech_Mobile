@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import OtherClass.Paneles;
 import javax.swing.JOptionPane;
 import login.Login;
-import view.Dashboard;
+import dashboard.Dashboard;
 
 public class Menu_Mod_Adm extends javax.swing.JPanel {
 

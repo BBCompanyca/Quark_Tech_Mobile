@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import login.Login;
-import static warranty.Warranty.jScrollPane_W;
-import static warranty.Warranty.jTable_Warranty;
+import static warranty.ViewWarranty.jScrollPane_W;
+import static warranty.ViewWarranty.jTable_Warranty;
 
 public class FilterRequestWarranty {
     
@@ -79,21 +79,21 @@ public class FilterRequestWarranty {
 
             ResultSet rs = pst.executeQuery();
 
-            jTable_Warranty = new JTable(Warranty.getInstanceWarranty());
+            jTable_Warranty = new JTable(ViewWarranty.getInstanceWarranty());
             jScrollPane_W.setViewportView(jTable_Warranty);
 
-            Warranty.getInstanceWarranty().setColumnCount(0);
-            Warranty.getInstanceWarranty().setRowCount(0);
+            ViewWarranty.getInstanceWarranty().setColumnCount(0);
+            ViewWarranty.getInstanceWarranty().setRowCount(0);
 
             if (Login.type_account.equals("Moderador")) {
 
-                Warranty.getInstanceWarranty().addColumn("ID");
-                Warranty.getInstanceWarranty().addColumn("Marca");
-                Warranty.getInstanceWarranty().addColumn("Módelo");
-                Warranty.getInstanceWarranty().addColumn("Serial");
-                Warranty.getInstanceWarranty().addColumn("Cliente");
-                Warranty.getInstanceWarranty().addColumn("Rif");
-                Warranty.getInstanceWarranty().addColumn("Tienda");
+                ViewWarranty.getInstanceWarranty().addColumn("ID");
+                ViewWarranty.getInstanceWarranty().addColumn("Marca");
+                ViewWarranty.getInstanceWarranty().addColumn("Módelo");
+                ViewWarranty.getInstanceWarranty().addColumn("Serial");
+                ViewWarranty.getInstanceWarranty().addColumn("Cliente");
+                ViewWarranty.getInstanceWarranty().addColumn("Rif");
+                ViewWarranty.getInstanceWarranty().addColumn("Tienda");
 
                 while (rs.next()) {
 
@@ -104,19 +104,19 @@ public class FilterRequestWarranty {
 
                     }
 
-                    Warranty.getInstanceWarranty().addRow(fila);
+                    ViewWarranty.getInstanceWarranty().addRow(fila);
 
                 }
 
             } else {
 
-                Warranty.getInstanceWarranty().addColumn("ID");
-                Warranty.getInstanceWarranty().addColumn("Marca");
-                Warranty.getInstanceWarranty().addColumn("Módelo");
-                Warranty.getInstanceWarranty().addColumn("Serial");
-                Warranty.getInstanceWarranty().addColumn("Cliente");
-                Warranty.getInstanceWarranty().addColumn("Rif");
-                Warranty.getInstanceWarranty().addColumn("Estatus");
+                ViewWarranty.getInstanceWarranty().addColumn("ID");
+                ViewWarranty.getInstanceWarranty().addColumn("Marca");
+                ViewWarranty.getInstanceWarranty().addColumn("Módelo");
+                ViewWarranty.getInstanceWarranty().addColumn("Serial");
+                ViewWarranty.getInstanceWarranty().addColumn("Cliente");
+                ViewWarranty.getInstanceWarranty().addColumn("Rif");
+                ViewWarranty.getInstanceWarranty().addColumn("Estatus");
 
                 while (rs.next()) {
 
@@ -127,7 +127,7 @@ public class FilterRequestWarranty {
 
                     }
 
-                    Warranty.getInstanceWarranty().addRow(fila);
+                    ViewWarranty.getInstanceWarranty().addRow(fila);
 
                 }
 

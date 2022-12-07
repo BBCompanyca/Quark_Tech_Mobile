@@ -18,14 +18,14 @@ public class BD_Connection {
             Connection cn = DriverManager.getConnection(
                     
                     //Base de Datos De Desarrollo...
-                    "jdbc:mysql://127.0.0.1/quarktechmobile",
+                    /*"jdbc:mysql://127.0.0.1/quarktechmobile",
                     "root",
-                    "");
+                    "");*/
                     
                     //Base De Datos De Producción...
-                   /* "jdbc:mysql://quarktechmobileccs.online:3306/u972055873_quarktech",
+                    "jdbc:mysql://quarktechmobileccs.online:3306/u972055873_quarktech",
                     "u972055873_globalpayment",
-                    "~8d$:Vn7CdR");*/
+                    "~8d$:Vn7CdR");
 
             setFlag(0);
 

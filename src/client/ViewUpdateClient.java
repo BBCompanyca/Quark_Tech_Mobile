@@ -267,7 +267,7 @@ public class ViewUpdateClient extends javax.swing.JPanel {
             Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement(
                 "select unformat_identity_card_client from client where unformat_identity_card_client = '" + ci + "' and not id_client = '"
-                + Clients.ID + "'");
+                + ViewClients.ID + "'");
 
             ResultSet rs = pst.executeQuery();
 
@@ -297,7 +297,7 @@ public class ViewUpdateClient extends javax.swing.JPanel {
                         "update client set name_client = ?, telephone_client = ?, unformat_telephone_client = ?, "
                         + "identity_card_client = ?, unformat_identity_card_client = ?,"
                         + "direction_client = ?, direction_tienda = ?, last_modification = ? "
-                        + "where id_client = '" + Clients.ID + "'");
+                        + "where id_client = '" + ViewClients.ID + "'");
 
                     pst2.setString(1, name);
                     pst2.setString(2, telephone);
@@ -405,7 +405,7 @@ public class ViewUpdateClient extends javax.swing.JPanel {
             Connection cn = connection.connection();
             PreparedStatement pst = cn.prepareStatement("select c.name_client, c.telephone_client, "
                     + "c.direction_client, c.unformat_identity_card_client, u.username from client c join "
-                    + "user u on id_client = '" + Clients.ID + "'");
+                    + "user u on id_client = '" + ViewClients.ID + "'");
 
             ResultSet rs = pst.executeQuery();
 

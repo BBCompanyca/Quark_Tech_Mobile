@@ -6,7 +6,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import login.Login;
-import view.Dashboard;
+import dashboard.Dashboard;
 
 public class Menu_Seller extends javax.swing.JPanel {
 
