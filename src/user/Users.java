@@ -188,7 +188,10 @@ public final class Users extends javax.swing.JPanel {
 
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
-       
+        String search = jTextField_Search_User.getText().trim();
+        FilterRequestUser filterRequestUser = new FilterRequestUser();
+        filterRequestUser.filterRequestUser(search);
+        jTextField_Search_User.setText("");
 
     }//GEN-LAST:event_jButton_Search_UserMousePressed
 
@@ -350,7 +353,7 @@ public final class Users extends javax.swing.JPanel {
                 //Diseño de la tabla...
                 jTable_User = new JTable(getInstanceUser());
                 jScrollPane.setViewportView(jTable_User);
-                
+
                 getInstanceUser().setColumnCount(0);
                 getInstanceUser().setRowCount(0);
 
@@ -402,7 +405,7 @@ public final class Users extends javax.swing.JPanel {
 
                 getInstanceUser().setColumnCount(0);
                 getInstanceUser().setRowCount(0);
-                
+
                 getInstanceUser().addColumn("ID");
                 getInstanceUser().addColumn("Nombre");
                 getInstanceUser().addColumn("Nombre De Usuario");
@@ -437,13 +440,13 @@ public final class Users extends javax.swing.JPanel {
     }
 
     public static DefaultTableModel getInstanceUser() {
-        
+
         if (model == null) {
             model = new DefaultTableModel();
         }
-        
+
         return model;
-        
+
     }
 
 }

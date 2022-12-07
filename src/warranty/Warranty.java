@@ -17,13 +17,9 @@ public final class Warranty extends javax.swing.JPanel {
     BD_Connection connection = new BD_Connection();
 
     public static int ID;
+    private static DefaultTableModel model;
     String direction, type_Account, permission;
-
     Paneles paneles = new Paneles();
-
-    Search searchClass = new Search();
-
-    DefaultTableModel model = new DefaultTableModel();
 
     public Warranty() {
         initComponents();
@@ -192,9 +188,8 @@ public final class Warranty extends javax.swing.JPanel {
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
         String search = jTextField_Search_Warranty.getText().trim();
-
-        searchClass.SearchWarranty(search);
-
+        FilterRequestWarranty filterRequestWarranty = new FilterRequestWarranty();
+        filterRequestWarranty.filterRequestWarranty(search);
         jTextField_Search_Warranty.setText("");
 
     }//GEN-LAST:event_jButton_Search_UserMousePressed
@@ -204,9 +199,8 @@ public final class Warranty extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
             String search = jTextField_Search_Warranty.getText().trim();
-
-            searchClass.SearchWarranty(search);
-
+            FilterRequestWarranty filterRequestWarranty = new FilterRequestWarranty();
+            filterRequestWarranty.filterRequestWarranty(search);
             jTextField_Search_Warranty.setText("");
 
         }
@@ -235,7 +229,7 @@ public final class Warranty extends javax.swing.JPanel {
         if (fila_point > -1) {
 
             ID = (int) model.getValueAt(fila_point, columna_punt);
-            
+
             paneles.Panel_PreliminarWarranty();
 
         } else {
@@ -255,8 +249,8 @@ public final class Warranty extends javax.swing.JPanel {
 
         if (fila_point > -1) {
 
-            ID = (int) model.getValueAt(fila_point, columna_point);
-            serial = (String) model.getValueAt(fila_point, 3);
+            ID = (int) getInstanceWarranty().getValueAt(fila_point, columna_point);
+            serial = (String) getInstanceWarranty().getValueAt(fila_point, 3);
 
             int value = JOptionPane.showConfirmDialog(null, "¿Desea eliminar esta Garantía?", "¡Selección!",
                     JOptionPane.YES_NO_OPTION);
@@ -275,12 +269,9 @@ public final class Warranty extends javax.swing.JPanel {
                     Thread hilo = new Thread(register_Movimiento);
                     hilo.start();
 
-                    model.setRowCount(0);
-                    model.setColumnCount(0);
+                    getInstanceWarranty().removeRow(fila_point);
 
                     JOptionPane.showMessageDialog(null, "Garantía eliminada.");
-
-                    getWarranty();
 
                     cn.close();
 
@@ -291,12 +282,6 @@ public final class Warranty extends javax.swing.JPanel {
                             JOptionPane.OK_OPTION);
 
                 }
-
-            } else {
-
-                model.setRowCount(0);
-                model.setColumnCount(0);
-                getWarranty();
 
             }
 
@@ -352,18 +337,21 @@ public final class Warranty extends javax.swing.JPanel {
 
             ResultSet rs = pst.executeQuery();
 
-            jTable_Warranty = new JTable(model);
+            jTable_Warranty = new JTable(getInstanceWarranty());
             jScrollPane_W.setViewportView(jTable_Warranty);
+            
+            getInstanceWarranty().setColumnCount(0);
+            getInstanceWarranty().setRowCount(0);
 
             if (Login.type_account.equals("Moderador")) {
 
-                model.addColumn("ID");
-                model.addColumn("Marca");
-                model.addColumn("Módelo");
-                model.addColumn("Serial");
-                model.addColumn("Cliente");
-                model.addColumn("Rif");
-                model.addColumn("Tienda");
+                getInstanceWarranty().addColumn("ID");
+                getInstanceWarranty().addColumn("Marca");
+                getInstanceWarranty().addColumn("Módelo");
+                getInstanceWarranty().addColumn("Serial");
+                getInstanceWarranty().addColumn("Cliente");
+                getInstanceWarranty().addColumn("Rif");
+                getInstanceWarranty().addColumn("Tienda");
 
                 while (rs.next()) {
 
@@ -374,19 +362,19 @@ public final class Warranty extends javax.swing.JPanel {
 
                     }
 
-                    model.addRow(fila);
+                    getInstanceWarranty().addRow(fila);
 
                 }
 
             } else {
 
-                model.addColumn("ID");
-                model.addColumn("Marca");
-                model.addColumn("Módelo");
-                model.addColumn("Serial");
-                model.addColumn("Cliente");
-                model.addColumn("Rif");
-                model.addColumn("Estatus");
+                getInstanceWarranty().addColumn("ID");
+                getInstanceWarranty().addColumn("Marca");
+                getInstanceWarranty().addColumn("Módelo");
+                getInstanceWarranty().addColumn("Serial");
+                getInstanceWarranty().addColumn("Cliente");
+                getInstanceWarranty().addColumn("Rif");
+                getInstanceWarranty().addColumn("Estatus");
 
                 while (rs.next()) {
 
@@ -397,7 +385,7 @@ public final class Warranty extends javax.swing.JPanel {
 
                     }
 
-                    model.addRow(fila);
+                    getInstanceWarranty().addRow(fila);
 
                 }
 
@@ -420,13 +408,20 @@ public final class Warranty extends javax.swing.JPanel {
         if (!Login.type_account.equals("Moderador") && !Login.type_account.equals("Administrador")) {
 
             jButton_Delete_User.setVisible(false);
-
             add(jButton_Preliminar_Warranty, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 100, 35));
-
             add(jButton_New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 100, 35));
 
         }
 
     }
 
+    public static DefaultTableModel getInstanceWarranty() {
+
+        if (model == null) {
+            model = new DefaultTableModel();
+        }
+
+        return model;
+
+    }
 }
