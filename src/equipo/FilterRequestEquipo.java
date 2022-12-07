@@ -9,31 +9,18 @@ import static equipo.TableEquipos.jTable_Equipo;
 import static equipo.TableEquipos.jScrollPane;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 public class FilterRequestEquipo {
 
     BD_Connection connection = new BD_Connection();
 
-    DefaultTableModel model = new DefaultTableModel();
-
-    private String search;
-
-    public String getSearch() {
-        return search;
-    }
-
-    public void setSearch(String search) {
-        this.search = search;
-    }
-
-    public void RequestEquipo() {
+    public void RequestEquipo(String search) {
 
         String query;
 
         try {
 
-            if (getSearch().equals("")) {
+            if (search.equals("")) {
                 query = "select code, brand, model, color, day_warranty from equipo";
             } else {
 
@@ -47,18 +34,18 @@ public class FilterRequestEquipo {
             PreparedStatement pst = cn.prepareStatement(query);
 
             ResultSet rs = pst.executeQuery();
-
-            jTable_Equipo = new JTable(model);
+            
+            jTable_Equipo = new JTable(TableEquipos.getInstace());
             jScrollPane.setViewportView(jTable_Equipo);
+            
+            TableEquipos.getInstace().setColumnCount(0);
+            TableEquipos.getInstace().setRowCount(0);
 
-            model.setColumnCount(0);
-            model.setRowCount(0);
-
-            model.addColumn("Código");
-            model.addColumn("Marca");
-            model.addColumn("Modelo");
-            model.addColumn("Color");
-            model.addColumn("Días de garantía");
+            TableEquipos.getInstace().addColumn("Código");
+            TableEquipos.getInstace().addColumn("Marca");
+            TableEquipos.getInstace().addColumn("Modelo");
+            TableEquipos.getInstace().addColumn("Color");
+            TableEquipos.getInstace().addColumn("Días de garantía");
 
             while (rs.next()) {
 
@@ -69,7 +56,7 @@ public class FilterRequestEquipo {
 
                 }
 
-                model.addRow(fila);
+                TableEquipos.getInstace().addRow(fila);
 
             }
 
