@@ -1,38 +1,38 @@
 package OtherClass;
 
 import java.awt.BorderLayout;
-import view.Acerca_De;
-import client.Clients;
+import acerca_de.Acerca_De;
+import client.ViewClients;
 import equipo.CodeEquipos;
 import warranty.Consult_Cl_Client;
 import equipo.ViewRegisterEquipo;
-import static view.Dashboard.jPanel_Content;
-import static view.Dashboard.jPanel_Content_Menu;
+import static dashboard.Dashboard.jPanel_Content;
+import static dashboard.Dashboard.jPanel_Content_Menu;
 import equipo.TableEquipos;
-import view.History;
-import warranty.Warranty;
+import history.History;
+import warranty.ViewWarranty;
 import menu.Menu_Mod_Adm;
 import menu.Menu_Seller;
 import menu.Menu_Tecnico;
 import moviments.Movimientos;
 import notifications.Container_Notification;
-import view.Preliminar_History;
+import history.Preliminar_History;
 import warranty.Preliminar_Warranty;
-import view.Principal;
+import principal.Principal;
 import client.VIewRegisterClient;
 import warranty.Register_Warranty;
-import view.Register_User;
-import view.Reset_Password;
-import view.Review_Technical;
+import user.Register_User;
+import user.Reset_Password;
+import technical.Review_Technical;
 import warranty.SentWarranty;
 import request.Container_Solicitudes;
-import view.Table_Technical;
+import technical.Table_Technical;
 import client.ViewUpdateClient;
 import equipo.ViewUpdateEquipo;
-import view.Update_User;
-import view.Users;
-import view.Warranty_Technical;
-import view.sentWarranty_Technical;
+import user.Update_User;
+import user.Users;
+import warranty.Warranty_Technical;
+import warranty.sentWarranty_Technical;
 
 public class Paneles {
 
@@ -97,7 +97,7 @@ public class Paneles {
     //Panel con la tabla de los clientes registrados...
     public void PanelClients() {
 
-        Clients clients = new Clients();
+        ViewClients clients = new ViewClients();
         clients.setSize(WidthPanel, HeigthPanel);
         clients.setLocation(0, 0);
 
@@ -223,7 +223,7 @@ public class Paneles {
     //Panel con la tabla de las garantías...
     public void PanelWarranty() {
 
-        Warranty warranty = new Warranty();
+        ViewWarranty warranty = new ViewWarranty();
         warranty.setSize(WidthPanel, HeigthPanel);
         warranty.setLocation(0, 0);
 

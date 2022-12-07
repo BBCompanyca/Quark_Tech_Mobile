@@ -16,8 +16,7 @@ public final class TableEquipos extends javax.swing.JPanel {
     public static String code;
 
     Paneles paneles = new Paneles();
-
-    DefaultTableModel model = new DefaultTableModel();
+    private static DefaultTableModel model;
 
     BD_Connection connection = new BD_Connection();
 
@@ -190,10 +189,7 @@ public final class TableEquipos extends javax.swing.JPanel {
     private void jButton_Search_UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_Search_UserMousePressed
 
         String search = jTextField_Search_Equipo.getText().trim();
-
-        filterRequestEquipo.setSearch(search);
-        filterRequestEquipo.RequestEquipo();
-
+        filterRequestEquipo.RequestEquipo(search);
         jTextField_Search_Equipo.setText("");
 
     }//GEN-LAST:event_jButton_Search_UserMousePressed
@@ -203,10 +199,7 @@ public final class TableEquipos extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
             String search = jTextField_Search_Equipo.getText().trim();
-
-            filterRequestEquipo.setSearch(search);
-            filterRequestEquipo.RequestEquipo();
-
+            filterRequestEquipo.RequestEquipo(search);
             jTextField_Search_Equipo.setText("");
 
         }
@@ -274,13 +267,9 @@ public final class TableEquipos extends javax.swing.JPanel {
                     Thread hilo = new Thread(register_Movimiento);
                     hilo.start();
 
-                    model.setRowCount(0);
-                    model.setColumnCount(0);
+                    getInstace().removeRow(fila_point);
 
                     JOptionPane.showMessageDialog(null, "Equipo eliminado.");
-
-                    getEquipos();
-
                     cn.close();
 
                 } catch (SQLException e) {
@@ -290,12 +279,6 @@ public final class TableEquipos extends javax.swing.JPanel {
                             JOptionPane.OK_OPTION);
 
                 }
-
-            } else {
-
-                model.setRowCount(0);
-                model.setColumnCount(0);
-                getEquipos();
 
             }
 
@@ -331,14 +314,17 @@ public final class TableEquipos extends javax.swing.JPanel {
 
             ResultSet rs = pst.executeQuery();
 
-            jTable_Equipo = new JTable(model);
+            jTable_Equipo = new JTable(getInstace());
             jScrollPane.setViewportView(jTable_Equipo);
 
-            model.addColumn("Código");
-            model.addColumn("Marca");
-            model.addColumn("Modelo");
-            model.addColumn("Color");
-            model.addColumn("Días de garantías");
+            getInstace().setColumnCount(0);
+            getInstace().setRowCount(0);
+
+            getInstace().addColumn("Código");
+            getInstace().addColumn("Marca");
+            getInstace().addColumn("Modelo");
+            getInstace().addColumn("Color");
+            getInstace().addColumn("Días de garantías");
 
             while (rs.next()) {
                 Object[] fila = new Object[5];
@@ -349,7 +335,7 @@ public final class TableEquipos extends javax.swing.JPanel {
 
                 }
 
-                model.addRow(fila);
+                getInstace().addRow(fila);
 
             }
 
@@ -377,5 +363,12 @@ public final class TableEquipos extends javax.swing.JPanel {
         }
 
     }   
+
+    public static DefaultTableModel getInstace() {
+        if (model == null) {
+            model = new DefaultTableModel();
+        }
+        return model;
+    }
 
 }

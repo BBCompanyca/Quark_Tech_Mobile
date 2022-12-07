@@ -12,7 +12,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import validateIp.ComputerRequest;
 import validatelicense.LicenseRequest;
-import view.Dashboard;
+import dashboard.Dashboard;
 
 public class Login extends javax.swing.JFrame {
 

@@ -3,7 +3,7 @@ package moviments;
 import login.Login;
 import report.excel.ReportsExcel;
 import java.awt.event.KeyEvent;
-import OtherClass.Search;
+import history.FilterRequestHistory;
 import OtherClass.TextPrompt;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -14,8 +14,6 @@ public class Movimientos extends javax.swing.JPanel {
 
     public static String searchpublic, shoppubblic, desdepublic, hastapublic;
     public static int flag = 0;
-
-    Search searchMovimientos = new Search();
 
     public Movimientos() {
         initComponents();
@@ -65,7 +63,7 @@ public class Movimientos extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("Hasta:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 90, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 25, 90, -1));
 
         jTextField_Search_Movimiento.setBackground(new java.awt.Color(9, 53, 69));
         jTextField_Search_Movimiento.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -108,7 +106,7 @@ public class Movimientos extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(240, 240, 240));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Desde:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 90, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 25, 90, -1));
 
         jTable_Movimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -240,8 +238,9 @@ public class Movimientos extends javax.swing.JPanel {
                 shoppubblic = shop;
                 desdepublic = desde;
                 hastapublic = hasta;
-
-                searchMovimientos.SearchMovimiento(search, shop, desde, hasta);
+                
+                FilterRequestMovimients filterRequestMovimients = new FilterRequestMovimients();
+                filterRequestMovimients.filterRequestMovimients(search, shop, desde, hasta);
 
                 jTextField_Search_Movimiento.setText("");
                 jTextField_Search_Movimiento.requestFocus();

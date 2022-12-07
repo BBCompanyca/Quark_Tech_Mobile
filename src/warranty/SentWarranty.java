@@ -1,6 +1,5 @@
 package warranty;
 
-import warranty.Warranty;
 import OtherClass.BD_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +9,7 @@ import javax.swing.JOptionPane;
 import OtherClass.TextPrompt;
 import OtherClass.Date;
 import OtherClass.Paneles;
-import view.Table_Technical;
+import technical.Table_Technical;
 
 public class SentWarranty extends javax.swing.JPanel {
     
@@ -176,8 +175,7 @@ public class SentWarranty extends javax.swing.JPanel {
             try {
 
                 Connection cn = connection.connection();
-                PreparedStatement pst = cn.prepareStatement(
-                        "update warranty set id_technical = ?, date_sent_technical = ?, delivery_technical = ?, status = ? where id_warranty = '" + Warranty.ID + "'");
+                PreparedStatement pst = cn.prepareStatement("update warranty set id_technical = ?, date_sent_technical = ?, delivery_technical = ?, status = ? where id_warranty = '" + ViewWarranty.ID + "'");
 
                 pst.setInt(1, Table_Technical.ID_Technical);
                 pst.setString(2, date.DateToDay());
@@ -254,9 +252,8 @@ public class SentWarranty extends javax.swing.JPanel {
         try {
 
             Connection cn = connection.connection();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select e.brand, e.model, e.color, w.serial, w.falla from warranty w join equipo e on w.id_equipo = e.id_equipo and "
-                            + "w.id_warranty = '" + Warranty.ID + "'");
+            PreparedStatement pst = cn.prepareStatement("select e.brand, e.model, e.color, w.serial, w.falla from warranty w join equipo e on w.id_equipo = e.id_equipo and "
+                            + "w.id_warranty = '" + ViewWarranty.ID + "'");
 
             ResultSet rs = pst.executeQuery();
 

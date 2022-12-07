@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static view.Dashboard.jLabel_NumberNotification;
+import static dashboard.Dashboard.jLabel_NumberNotification;
 import login.Login;
 
 public class Request_Notifications implements Runnable {

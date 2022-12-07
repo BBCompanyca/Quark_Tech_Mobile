@@ -6,10 +6,11 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import login.Login;
-import static view.Dashboard.jPanel_Content;
+import static dashboard.Dashboard.jPanel_Content;
 import request.Request_Solicitudes;
-import view.Dashboard;
-import view.Principal;
+import dashboard.Dashboard;
+import principal.Principal;
+
 
 public class Menu_Tecnico extends javax.swing.JPanel {
 
